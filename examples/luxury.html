@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MAISON AURÉL — Quiet Luxury</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0a0908;
+    --ink: #f3ece1;
+    --muted: #9c948a;
+    --gold: #c5a572;
+    --gold-soft: #d8c4a0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: var(--bg); color: var(--ink); }
+  body {
+    font-family: 'Jost', sans-serif; font-weight: 300;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  .serif { font-family: 'Cormorant Garamond', serif; }
+  ::selection { background: var(--gold); color: #0a0908; }
+
+  /* ---------- WebGL canvas (shader background) ---------- */
+  #gl { position: fixed; inset: 0; z-index: 0; width: 100vw; height: 100vh; }
+  .vignette { position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    background: radial-gradient(130% 130% at 50% 40%, rgba(10,9,8,0.55) 0%, rgba(10,9,8,0.88) 100%); }
+  .grain { position: fixed; inset: 0; z-index: 2; pointer-events: none; opacity: 0.06; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+  /* ---------- preloader ---------- */
+  .loader { position: fixed; inset: 0; z-index: 60; background: #0a0908; display: grid; place-items: center; }
+  .loader .count { font-family: 'Cormorant Garamond', serif; font-size: clamp(80px, 18vw, 220px); font-weight: 300; color: var(--gold); line-height: 1; }
+  .loader .lbl { position: absolute; bottom: 48px; left: 48px; font-size: 12px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--muted); }
+
+  /* ---------- cursor ---------- */
+  .cur { position: fixed; z-index: 90; pointer-events: none; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); transform: translate(-50%,-50%); }
+  .ring { position: fixed; z-index: 90; pointer-events: none; width: 40px; height: 40px; border: 1px solid rgba(197,165,114,0.5); border-radius: 50%; transform: translate(-50%,-50%); transition: width .4s cubic-bezier(.16,1,.3,1), height .4s cubic-bezier(.16,1,.3,1); }
+  .ring.grow { width: 84px; height: 84px; }
+
+  /* ---------- scroll progress ---------- */
+  .progress { position: fixed; top: 0; left: 0; height: 2px; width: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-soft)); z-index: 50; transform: scaleX(0); transform-origin: left; }
+
+  .wrap { position: relative; z-index: 3; max-width: 1280px; margin: 0 auto; padding: 0 40px; }
+
+  /* ---------- nav ---------- */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 40; display: flex; justify-content: space-between; align-items: center; padding: 30px 48px; }
+  .brand { font-family: 'Cormorant Garamond', serif; font-size: 22px; letter-spacing: 0.32em; }
+  .nav-r { display: flex; gap: 36px; }
+  .nav-r a { color: var(--ink); text-decoration: none; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; position: relative; }
+  .nav-r a::after { content:''; position: absolute; left: 0; bottom: -6px; width: 100%; height: 1px; background: var(--gold); transform: scaleX(0); transform-origin: right; transition: transform .5s cubic-bezier(.16,1,.3,1); }
+  .nav-r a:hover::after { transform: scaleX(1); transform-origin: left; }
+  @media(max-width:680px){ .nav-r{ display:none; } }
+
+  /* ---------- hero ---------- */
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+  .eyebrow { font-size: 12px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 34px; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(54px, 11vw, 168px); line-height: 0.95; letter-spacing: -0.01em; }
+  h1 em { font-style: italic; color: var(--gold-soft); }
+  .line { overflow: hidden; display: block; }
+  .line > span { display: block; will-change: transform; }
+  .hero-foot { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 60px; }
+  .hero-foot p { max-width: 360px; color: var(--muted); font-size: 15px; line-height: 1.7; }
+  .scroll-cue { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); }
+
+  /* ---------- statement ---------- */
+  .statement { padding: 220px 0; }
+  .statement h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(30px, 4.5vw, 64px); line-height: 1.25; max-width: 18ch; }
+  .statement .w { opacity: 0.16; transition: opacity .2s; }
+
+  /* ---------- pinned horizontal gallery ---------- */
+  .h-scroll { height: 100vh; overflow: hidden; }
+  .h-track { display: flex; height: 100vh; align-items: center; gap: 60px; padding: 0 48px; will-change: transform; }
+  .slide { position: relative; flex: 0 0 auto; width: 380px; }
+  .slide .frame { width: 380px; height: 520px; overflow: hidden; border-radius: 2px; }
+  .slide img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.04) brightness(1.0) saturate(0.96); transition: filter 1.2s cubic-bezier(.16,1,.3,1), transform 1.2s cubic-bezier(.16,1,.3,1); will-change: transform; }
+  .slide:hover img { filter: contrast(1.06) saturate(1.05); transform: scale(1.06); }
+  .slide .cap { display: flex; justify-content: space-between; align-items: baseline; margin-top: 18px; }
+  .slide .cap .t { font-family: 'Cormorant Garamond', serif; font-size: 24px; }
+  .slide .cap .n { font-size: 12px; letter-spacing: 0.2em; color: var(--gold-soft); }
+  .gallery-intro { display: flex; flex-direction: column; justify-content: center; flex: 0 0 auto; width: 320px; }
+  .gallery-intro span { font-size: 12px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 18px; }
+  .gallery-intro h3 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 48px; line-height: 1.05; }
+
+  /* ---------- CTA ---------- */
+  .cta { text-align: center; padding: 220px 0 180px; }
+  .cta p { font-size: 12px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 30px; }
+  .cta h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(48px, 9vw, 140px); line-height: 1; }
+  .cta h2 em { font-style: italic; color: var(--gold-soft); }
+  .magnetic { display: inline-block; margin-top: 60px; }
+  .btn { display: inline-block; padding: 20px 52px; border: 1px solid var(--gold); border-radius: 999px; color: var(--ink); text-decoration: none; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; will-change: transform; transition: background .5s, color .5s; }
+  .btn:hover { background: var(--gold); color: #0a0908; }
+
+  footer { display: flex; justify-content: space-between; padding: 50px 48px; color: var(--muted); font-size: 12px; letter-spacing: 0.1em; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 3; }
+
+  /* ---------- curved-path heritage section ---------- */
+  .path-sec { position: relative; padding: 150px 0 180px; }
+  .path-head { text-align: center; max-width: 640px; margin: 0 auto 30px; position: relative; z-index: 2; }
+  .path-head .k { font-size: 12px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 18px; }
+  .path-head h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(32px, 5vw, 64px); line-height: 1.05; }
+  .path-head h2 em { font-style: italic; color: var(--gold-soft); }
+  .path-line { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+  .path-line svg { width: 100%; height: 100%; }
+  .path-line path { fill: none; stroke: var(--gold); stroke-width: 1.6; vector-effect: non-scaling-stroke; opacity: 0.85; }
+  .path-inner { position: relative; z-index: 2; max-width: 1080px; margin: 0 auto; padding: 60px 24px 0; display: flex; flex-direction: column; gap: 130px; }
+  .path-item { display: flex; }
+  .path-item.left { justify-content: flex-start; }
+  .path-item.right { justify-content: flex-end; }
+  .path-item .pcard { width: min(400px, 78%); }
+  .path-item .pframe { overflow: hidden; border-radius: 2px; border: 1px solid rgba(197,165,114,0.28); box-shadow: 0 30px 70px rgba(0,0,0,0.5); }
+  .path-item img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; filter: contrast(1.04) saturate(0.96); transition: transform 1.1s cubic-bezier(.16,1,.3,1); will-change: transform; }
+  .path-item:hover img { transform: scale(1.05); }
+  .path-item .pcap { display: flex; justify-content: space-between; align-items: baseline; margin-top: 16px; }
+  .path-item .pcap .t { font-family: 'Cormorant Garamond', serif; font-size: 22px; }
+  .path-item .pcap .n { font-size: 12px; letter-spacing: 0.2em; color: var(--gold-soft); }
+  @media(max-width:680px){ .path-item{ justify-content:center !important; } .path-item .pcard{ width:88%; } .path-inner{ gap:80px; } }
+</style>
+</head>
+<body>
+  <canvas id="gl"></canvas>
+  <div class="vignette"></div>
+  <div class="grain"></div>
+  <div class="progress" id="progress"></div>
+
+  <div class="loader" id="loader"><div class="count" id="count">0</div><div class="lbl">Maison Aurél — Est. 1926</div></div>
+
+  <nav>
+    <div class="brand">AURÉL</div>
+    <div class="nav-r"><a href="#" data-h>Collection</a><a href="#" data-h>Maison</a><a href="#" data-h>Journal</a><a href="#" data-h>Contact</a></div>
+  </nav>
+
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">The Art of Quiet Luxury</div>
+      <h1>
+        <span class="line"><span>Crafted in</span></span>
+        <span class="line"><span><em>silence,</em></span></span>
+        <span class="line"><span>worn for life.</span></span>
+      </h1>
+      <div class="hero-foot">
+        <p>A maison devoted to the slow craft of timeless objects — each piece shaped by hand, restraint, and a century of intention.</p>
+        <div class="scroll-cue">Scroll to explore ↓</div>
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <section class="statement">
+      <h2 id="stmt">We believe true luxury is not seen, but felt — in the weight of a thing, the silence of its making, the years it outlives us.</h2>
+    </section>
+  </div>
+
+  <section class="path-sec">
+    <div class="path-head"><div class="k">The Maison</div><h2>A century,<br><em>woven by hand.</em></h2></div>
+    <div class="path-line">
+      <svg viewBox="0 0 1000 2000" preserveAspectRatio="none" aria-hidden="true">
+        <path id="curvePath" d="M500 20 C 880 280, 120 560, 500 840 C 880 1120, 120 1400, 500 1680 C 760 1860, 360 1960, 500 1990"/>
+      </svg>
+    </div>
+    <div class="path-inner">
+      <div class="path-item left"><div class="pcard"><div class="pframe"><img src="assets/aurel-6.jpg" alt=""></div><div class="pcap"><span class="t serif">The Atelier</span><span class="n">1926</span></div></div></div>
+      <div class="path-item right"><div class="pcard"><div class="pframe"><img src="assets/aurel-4.jpg" alt=""></div><div class="pcap"><span class="t serif">Tailoring</span><span class="n">1948</span></div></div></div>
+      <div class="path-item left"><div class="pcard"><div class="pframe"><img src="assets/aurel-1.jpg" alt=""></div><div class="pcap"><span class="t serif">The Gown</span><span class="n">1972</span></div></div></div>
+      <div class="path-item right"><div class="pcard"><div class="pframe"><img src="assets/aurel-3.jpg" alt=""></div><div class="pcap"><span class="t serif">Joaillerie</span><span class="n">1994</span></div></div></div>
+      <div class="path-item left"><div class="pcard"><div class="pframe"><img src="assets/aurel-2.jpg" alt=""></div><div class="pcap"><span class="t serif">Maison Today</span><span class="n">2026</span></div></div></div>
+    </div>
+  </section>
+
+  <section class="h-scroll">
+    <div class="h-track" id="track">
+      <div class="gallery-intro"><span>The Collection</span><h3>Pieces<br>without<br>season.</h3></div>
+      <div class="slide" data-h><div class="frame"><img src="assets/aurel-1.jpg" alt=""></div><div class="cap"><span class="t serif">Maison Silk</span><span class="n">01</span></div></div>
+      <div class="slide" data-h><div class="frame"><img src="assets/aurel-2.jpg" alt=""></div><div class="cap"><span class="t serif">Atelier Couture</span><span class="n">02</span></div></div>
+      <div class="slide" data-h><div class="frame"><img src="assets/aurel-3.jpg" alt=""></div><div class="cap"><span class="t serif">Gold Series</span><span class="n">03</span></div></div>
+      <div class="slide" data-h><div class="frame"><img src="assets/aurel-4.jpg" alt=""></div><div class="cap"><span class="t serif">Heritage Wool</span><span class="n">04</span></div></div>
+      <div class="slide" data-h><div class="frame"><img src="assets/aurel-5.jpg" alt=""></div><div class="cap"><span class="t serif">Les Parfums</span><span class="n">05</span></div></div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="cta">
+      <p>Enter the Maison</p>
+      <h2>Own something<br><em>eternal.</em></h2>
+      <div class="magnetic" id="mag"><a href="#" class="btn" data-h>Request an Invitation</a></div>
+    </section>
+  </div>
+
+  <footer><span>© 2026 Maison Aurél</span><span>Paris · Tokyo · New York</span><span>Three.js · GSAP · Lenis</span></footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    /* ---------- WebGL silk/marble shader ---------- */
+    const canvas = document.getElementById('gl');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    const scene = new THREE.Scene();
+    const camera = new THREE.Camera();
+    const uniforms = {
+      uTime: { value: 0 },
+      uRes:  { value: new THREE.Vector2() },
+      uMouse:{ value: new THREE.Vector2(0.5, 0.5) }
+    };
+    const frag = `
+      precision highp float;
+      varying vec2 vUv;
+      uniform float uTime; uniform vec2 uMouse;
+      float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5453); }
+      float noise(vec2 p){ vec2 i=floor(p), f=fract(p);
+        float a=hash(i), b=hash(i+vec2(1.,0.)), c=hash(i+vec2(0.,1.)), d=hash(i+vec2(1.,1.));
+        vec2 u=f*f*(3.-2.*f);
+        return mix(a,b,u.x)+(c-a)*u.y*(1.-u.x)+(d-b)*u.x*u.y; }
+      float fbm(vec2 p){ float v=0.,a=0.5; for(int i=0;i<6;i++){ v+=a*noise(p); p*=2.0; a*=0.5; } return v; }
+      void main(){
+        vec2 uv=vUv; vec2 p=uv*3.0; float t=uTime*0.05;
+        vec2 q=vec2(fbm(p+t), fbm(p+vec2(5.2,1.3)-t));
+        vec2 r=vec2(fbm(p+4.0*q+vec2(1.7,9.2)+t*0.4), fbm(p+4.0*q+vec2(8.3,2.8)));
+        float f=fbm(p+4.0*r);
+        float m=smoothstep(0.55,0.0,distance(uv,uMouse));
+        f+=m*0.12;
+        vec3 black=vec3(0.03,0.026,0.022);
+        vec3 gold=vec3(0.62,0.50,0.32);
+        vec3 cream=vec3(0.80,0.74,0.62);
+        vec3 col=mix(black, gold, smoothstep(0.45,0.92,f));
+        col=mix(col, cream, smoothstep(0.86,1.0,f)*0.3);
+        gl_FragColor=vec4(col*0.5, 1.0);
+      }`;
+    const vert = `varying vec2 vUv; void main(){ vUv=uv; gl_Position=vec4(position,1.0); }`;
+    const mat = new THREE.ShaderMaterial({ uniforms, vertexShader: vert, fragmentShader: frag });
+    scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), mat));
+    function resize(){ renderer.setSize(innerWidth, innerHeight); uniforms.uRes.value.set(innerWidth, innerHeight); }
+    resize(); addEventListener('resize', resize);
+    renderer.setAnimationLoop((t) => { uniforms.uTime.value = t * 0.001; renderer.render(scene, camera); });
+
+    /* ---------- Lenis ---------- */
+    const lenis = new Lenis({ duration: 1.4, smoothWheel: true, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0);
+
+    /* ---------- native cursor kept; shader still tracks the mouse ---------- */
+    addEventListener('mousemove', e => { uniforms.uMouse.value.set(e.clientX/innerWidth, 1.0 - e.clientY/innerHeight); });
+
+    /* ---------- preloader ---------- */
+    const count = document.getElementById('count');
+    const tl = gsap.timeline();
+    tl.to({ v: 0 }, { v: 100, duration: 2.2, ease: 'power2.inOut', onUpdate: function(){ count.textContent = Math.round(this.targets()[0].v); } })
+      .to('#loader .count', { opacity: 0, duration: 0.5 }, '-=0.2')
+      .to('#loader', { yPercent: -100, duration: 1.1, ease: 'expo.inOut' }, '-=0.1')
+      // hero reveal
+      .set('.line > span', { yPercent: 110 })
+      .to('.line > span', { yPercent: 0, duration: 1.4, ease: 'expo.out', stagger: 0.12 }, '-=0.6')
+      .from('.eyebrow, .hero-foot', { opacity: 0, y: 20, duration: 1, stagger: 0.15 }, '-=0.9');
+
+    /* ---------- scroll progress ---------- */
+    gsap.to('#progress', { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: 0.3 } });
+
+    /* ---------- statement word reveal ---------- */
+    const stmt = document.getElementById('stmt');
+    stmt.innerHTML = stmt.textContent.split(' ').map(w => `<span class="w">${w}&nbsp;</span>`).join('');
+    gsap.to('#stmt .w', { opacity: 1, ease: 'none', stagger: 0.4,
+      scrollTrigger: { trigger: '#stmt', start: 'top 78%', end: 'top 25%', scrub: true } });
+
+    /* ---------- pinned horizontal gallery ---------- */
+    const track = document.getElementById('track');
+    gsap.to(track, { x: () => -(track.scrollWidth - innerWidth), ease: 'none',
+      scrollTrigger: { trigger: '.h-scroll', start: 'top top', end: () => '+=' + (track.scrollWidth - innerWidth),
+        scrub: 1, pin: true, invalidateOnRefresh: true } });
+
+    /* ---------- magnetic button ---------- */
+    const mag = document.getElementById('mag'), btn = mag.querySelector('.btn');
+    mag.addEventListener('mousemove', e => { const r = mag.getBoundingClientRect();
+      gsap.to(btn, { x: (e.clientX - r.left - r.width/2) * 0.5, y: (e.clientY - r.top - r.height/2) * 0.5, duration: 0.5 }); });
+    mag.addEventListener('mouseleave', () => gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1,0.4)' }));
+
+    /* ---------- curved path draws on scroll, images reveal from each side ---------- */
+    const curve = document.getElementById('curvePath');
+    if (curve) {
+      const len = curve.getTotalLength();
+      curve.style.strokeDasharray = len;
+      curve.style.strokeDashoffset = len;
+      gsap.to(curve, { strokeDashoffset: 0, ease: 'none',
+        scrollTrigger: { trigger: '.path-sec', start: 'top 72%', end: 'bottom bottom', scrub: true } });
+      gsap.utils.toArray('.path-item').forEach(it => {
+        gsap.from(it, { opacity: 0, x: it.classList.contains('left') ? -80 : 80, y: 40, duration: 1.1, ease: 'power3.out',
+          scrollTrigger: { trigger: it, start: 'top 84%' } });
+      });
+    }
+
+    /* ---------- CTA reveal ---------- */
+    gsap.from('.cta h2', { y: 60, opacity: 0, duration: 1.3, ease: 'expo.out',
+      scrollTrigger: { trigger: '.cta', start: 'top 75%' } });
+  </script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FabChain — The Place to Ape</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --navy:#08193b; --navy2:#020315; --panel:#0c1f44;
+    --ink:#eaf1ff; --muted:#7d9ab2; --blue:#0086ff; --blue2:#4785fc;
+    --line:rgba(125,154,178,0.18);
+    --rainbow:linear-gradient(275deg,#a281ff 10%,#eb8280 30%,#ebbf9a 57%,#89d0ff 78%);
+    --rainbow45:linear-gradient(45deg,#a281ff 10%,#eb8280 33%,#ebbf9a 66%,#89d0ff 90%);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{background:var(--navy2);color:var(--ink);}
+  body{font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.5;}
+  .anton{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:0.01em;}
+  .mono{font-family:'DM Mono',monospace;}
+  ::selection{background:#a281ff;color:#08193b;}
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  .rainbow-text{background:var(--rainbow);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 28px;}
+  @media(max-width:600px){.wrap{padding:0 18px;}}
+  .progress{position:fixed;top:0;left:0;height:3px;width:100%;background:var(--rainbow45);transform:scaleX(0);transform-origin:left;z-index:60;}
+
+  /* top ticker */
+  .ticker{background:var(--rainbow45);color:#08193b;overflow:hidden;white-space:nowrap;padding:9px 0;font-family:'DM Mono',monospace;font-size:13px;font-weight:500;}
+  .ticker .run{display:inline-block;animation:slide 28s linear infinite;}
+  .ticker span{padding:0 22px;}
+  @keyframes slide{to{transform:translateX(-50%);}}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:40;background:rgba(2,3,21,0.7);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+  .nav-in{max-width:1240px;margin:0 auto;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;}
+  .brand{font-family:'Anton',sans-serif;font-size:24px;letter-spacing:0.02em;text-transform:uppercase;}
+  .nav-links{display:flex;gap:30px;font-size:14px;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;font-weight:500;}
+  .nav-links a:hover{color:var(--ink);}
+  .btn{display:inline-block;border-radius:999px;font-weight:700;font-size:14px;padding:12px 24px;transition:transform .2s,box-shadow .2s,opacity .2s;}
+  .btn.grad{background:var(--rainbow45);color:#08193b;}
+  .btn.grad:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(162,129,255,0.4);}
+  .btn.blue{background:var(--blue);color:#fff;}
+  .btn.blue:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,134,255,0.5);}
+  .btn.ghost{border:1px solid var(--line);color:var(--ink);}
+  .btn.ghost:hover{border-color:var(--ink);}
+  @media(max-width:860px){.nav-links{display:none;}}
+
+  /* hero */
+  .hero{position:relative;text-align:center;padding:80px 0 70px;}
+  .blobs{position:absolute;top:-12%;left:50%;transform:translateX(-50%);width:100vw;height:135%;z-index:0;filter:blur(110px);opacity:.5;pointer-events:none;}
+  .blobs span{position:absolute;border-radius:50%;}
+  .b1{width:38vw;height:38vw;background:#a281ff;top:-5%;left:-5%;animation:fl1 17s ease-in-out infinite;}
+  .b2{width:32vw;height:32vw;background:#eb8280;top:10%;right:-5%;animation:fl2 21s ease-in-out infinite;}
+  .b3{width:30vw;height:30vw;background:#89d0ff;bottom:-10%;left:30%;animation:fl1 24s ease-in-out infinite;}
+  @keyframes fl1{50%{transform:translate(8vw,6vh) scale(1.15);}}
+  @keyframes fl2{50%{transform:translate(-7vw,9vh) scale(.85);}}
+  .hero>*{position:relative;z-index:2;}
+  .pill{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:13px;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:7px 16px;margin-bottom:30px;background:rgba(125,154,178,0.08);}
+  .pill .d{width:7px;height:7px;border-radius:50%;background:#98fff9;box-shadow:0 0 10px #98fff9;}
+  .hero h1{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(54px,13vw,170px);line-height:0.88;letter-spacing:0.005em;}
+  .hero .orb{width:clamp(180px,30vw,340px);margin:10px auto;}
+  .hero .orb img{animation:floaty 6s ease-in-out infinite;will-change:transform;}
+  @keyframes floaty{0%,100%{transform:translateY(0) rotate(-2.5deg);}50%{transform:translateY(-22px) rotate(2.5deg);}}
+  @media(prefers-reduced-motion:reduce){.hero .orb img{animation:none;}}
+  .hero p{max-width:540px;margin:22px auto 0;font-size:19px;color:var(--muted);}
+  .hero-cta{display:flex;gap:14px;justify-content:center;margin-top:36px;flex-wrap:wrap;}
+  .hero-cta .btn{padding:15px 30px;font-size:15px;}
+
+  /* stats */
+  .stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .stats-in{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);}
+  @media(max-width:760px){.stats-in{grid-template-columns:repeat(2,1fr);}}
+  .stat{padding:36px 24px;text-align:center;border-right:1px solid var(--line);}
+  .stat:last-child{border-right:none;}
+  .stat .n{font-family:'Anton',sans-serif;font-size:clamp(32px,4vw,52px);}
+  .stat .l{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:6px;}
+
+  /* sections */
+  .sec{padding:120px 0;}
+  .sec-head{text-align:center;max-width:680px;margin:0 auto 60px;}
+  .sec-head .k{font-family:'DM Mono',monospace;font-size:13px;color:#a281ff;text-transform:uppercase;letter-spacing:0.18em;margin-bottom:18px;}
+  .sec-head h2{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(34px,6vw,72px);line-height:0.95;}
+  .sec-head p{color:var(--muted);margin-top:18px;font-size:17px;}
+
+  .feat{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  @media(max-width:860px){.feat{grid-template-columns:1fr;}}
+  .f{position:relative;border:1px solid var(--line);border-radius:20px;padding:34px 28px;background:linear-gradient(180deg,rgba(12,31,68,0.6),rgba(8,25,59,0.3));overflow:hidden;transition:transform .35s,border-color .35s;}
+  .f:hover{transform:translateY(-6px);border-color:rgba(162,129,255,0.55);}
+  .f .ic{font-family:'Anton',sans-serif;font-size:30px;width:58px;height:58px;border-radius:14px;display:grid;place-items:center;background:var(--rainbow45);color:#08193b;margin-bottom:22px;}
+  .f h3{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:24px;margin-bottom:10px;}
+  .f p{color:var(--muted);font-size:15px;line-height:1.6;}
+
+  /* ecosystem marquee */
+  .eco{padding:30px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap;}
+  .eco .track{display:inline-block;will-change:transform;}
+  .eco span{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:34px;padding:0 30px;color:var(--muted);}
+  .eco .g{color:transparent;background:var(--rainbow);-webkit-background-clip:text;background-clip:text;}
+
+  /* ecosystem apps marquee (light) */
+  .apps{position:relative;background:linear-gradient(180deg,#ffffff 0%,#d9ecff 100%);padding:80px 0;overflow:hidden;}
+  .apps .heading{text-align:center;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:0.2em;text-transform:uppercase;color:#3e6674;margin-bottom:40px;}
+  .apps .rows{display:flex;flex-direction:column;gap:16px;}
+  .apps .row{display:flex;align-items:center;gap:26px;width:max-content;will-change:transform;}
+  .apps .row.r1{animation:mqL 44s linear infinite;}
+  .apps .row.r2{animation:mqR 52s linear infinite;}
+  @keyframes mqL{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  @keyframes mqR{from{transform:translateX(-50%);}to{transform:translateX(0);}}
+  .apps .word{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(38px,6.5vw,90px);color:#08193b;line-height:1;white-space:nowrap;}
+  .apps .ico{width:clamp(54px,7vw,84px);height:clamp(54px,7vw,84px);border-radius:20px;flex:0 0 auto;box-shadow:0 10px 24px rgba(8,25,59,0.18);}
+  .apps .browse{display:flex;justify-content:center;margin-top:54px;position:relative;z-index:2;}
+  .apps .browse a{font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.12em;font-size:14px;color:#fff;background:linear-gradient(180deg,#0a93ff,#0054fa);padding:16px 36px;border-radius:999px;box-shadow:0 12px 30px rgba(0,84,250,0.4);transition:transform .2s,box-shadow .2s;}
+  .apps .browse a:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,84,250,0.55);}
+  @media(prefers-reduced-motion:reduce){.apps .row{animation:none;}}
+
+  /* showcase */
+  .showcase{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+  @media(max-width:860px){.showcase{grid-template-columns:1fr;}}
+  .showcase .vis{border-radius:24px;overflow:hidden;border:1px solid var(--line);}
+  .showcase .vis img{width:100%;display:block;will-change:transform;}
+  .showcase h2{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(34px,5vw,64px);line-height:0.95;}
+  .showcase p{color:var(--muted);margin-top:18px;font-size:17px;line-height:1.6;}
+  .showcase .btn{margin-top:26px;}
+
+  /* big cta */
+  .final{position:relative;text-align:center;padding:120px 28px;border-radius:28px;overflow:hidden;margin:0 28px;background:var(--rainbow45);}
+  .final h2{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(40px,8vw,120px);line-height:0.88;color:#08193b;}
+  .final p{color:rgba(8,25,59,0.7);margin-top:14px;font-size:18px;font-weight:500;}
+  .final .btn{margin-top:30px;background:#08193b;color:#fff;padding:16px 34px;font-size:16px;}
+
+  footer{padding:70px 0 50px;}
+  .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;}
+  .foot .col h5{font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.08em;font-size:12px;color:var(--muted);margin-bottom:14px;}
+  .foot .col a{display:block;font-size:14px;color:var(--ink);opacity:.8;margin-bottom:9px;}
+  .foot .col a:hover{opacity:1;}
+  .foot-bot{margin-top:46px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);}
+  .reveal{opacity:0;transform:translateY(30px);}
+  /* featured dApps — 3D tilt cards */
+  .dapps{padding:120px 0;}
+  .dapp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;perspective:1200px;margin-top:50px;}
+  @media(max-width:860px){.dapp-grid{grid-template-columns:1fr;}}
+  .dapp{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--line);transform-style:preserve-3d;transition:transform .18s ease-out, box-shadow .4s;will-change:transform;}
+  .dapp:hover{box-shadow:0 34px 80px rgba(162,129,255,0.35);}
+  .dapp img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+  .dapp .ov{position:absolute;inset:0;background:linear-gradient(0deg,rgba(2,3,21,0.9),transparent 58%);}
+  .dapp .info{position:absolute;left:26px;right:26px;bottom:24px;transform:translateZ(45px);}
+  .dapp .info .tag{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#89d0ff;}
+  .dapp .info h3{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:30px;margin-top:6px;}
+  .dapp .info p{font-size:13.5px;color:var(--muted);margin-top:6px;}
+</style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <div class="ticker"><div class="run">
+    <span>● $FAB $1.42 ▲ 6.2%</span><span>● 1.2B+ TRANSACTIONS</span><span>● SUB-CENT FEES</span><span>● 300+ DAPPS LIVE</span><span>● THE PLACE TO APE</span>
+    <span>● $FAB $1.42 ▲ 6.2%</span><span>● 1.2B+ TRANSACTIONS</span><span>● SUB-CENT FEES</span><span>● 300+ DAPPS LIVE</span><span>● THE PLACE TO APE</span>
+  </div></div>
+
+  <nav>
+    <div class="nav-in">
+      <div class="brand">FABCHAIN</div>
+      <div class="nav-links"><a href="#why">Chain</a><a href="#eco">Ecosystem</a><a href="#">Bridge</a><a href="#">Docs</a></div>
+      <a href="#start" class="btn grad">Connect Wallet</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <section class="hero">
+      <div class="blobs"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
+      <span class="pill">Now live on mainnet</span>
+      <h1>The place<br><span class="rainbow-text">to ape</span></h1>
+      <div class="orb"><img src="assets/ape-blob.png" alt="" /></div>
+      <p>The home chain for culture, gaming, and onchain communities — blazing fast, dirt cheap, built for everyone.</p>
+      <div class="hero-cta">
+        <a href="#start" class="btn grad">Start building</a>
+        <a href="#why" class="btn ghost">Explore the chain</a>
+      </div>
+    </section>
+  </div>
+
+  <div class="stats">
+    <div class="stats-in">
+      <div class="stat"><div class="n" data-count="1" data-suffix="B+">0</div><div class="l">Transactions</div></div>
+      <div class="stat"><div class="n">&lt;$0.01</div><div class="l">Avg fee</div></div>
+      <div class="stat"><div class="n" data-count="300" data-suffix="+">0</div><div class="l">dApps</div></div>
+      <div class="stat"><div class="n" data-count="2" data-suffix="M+">0</div><div class="l">Wallets</div></div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <section class="sec" id="why">
+      <div class="sec-head reveal"><div class="k">Why FabChain</div><h2>Built to move<br>at culture speed</h2><p>Everything a community needs to build, play, and transact onchain — without the friction.</p></div>
+      <div class="feat">
+        <div class="f"><div class="ic">⚡</div><h3>Lightning fast</h3><p>Near-instant finality so apps feel as smooth as web2. No more waiting on confirmations.</p></div>
+        <div class="f"><div class="ic">¢</div><h3>Sub-cent fees</h3><p>Transact for fractions of a penny. Built for millions of users, not whales only.</p></div>
+        <div class="f"><div class="ic">◆</div><h3>Yield native</h3><p>Idle balances earn automatically through native yield baked into the chain itself.</p></div>
+        <div class="f"><div class="ic">⛓</div><h3>EVM compatible</h3><p>Deploy your existing Solidity contracts in minutes. All your favorite tools, ready to go.</p></div>
+        <div class="f"><div class="ic">▲</div><h3>Powered by $FAB</h3><p>One token for gas, governance, and the entire ecosystem economy.</p></div>
+        <div class="f"><div class="ic">✦</div><h3>Culture first</h3><p>Home to the biggest communities, games, and creators in the space.</p></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <section class="dapps" id="dapps">
+      <div class="sec-head reveal"><div class="k">Featured on FabChain</div><h2>Worlds worth<br>entering</h2></div>
+      <div class="dapp-grid">
+        <a class="dapp reveal" data-tilt><img src="assets/fab-gaming.jpg" alt=""><div class="ov"></div><div class="info"><div class="tag">Gaming</div><h3>Apex Arena</h3><p>On-chain battle worlds, fully owned by players.</p></div></a>
+        <a class="dapp reveal" data-tilt><img src="assets/fab-art.jpg" alt=""><div class="ov"></div><div class="info"><div class="tag">Collectibles</div><h3>Prism Gallery</h3><p>Mint, trade and showcase living digital art.</p></div></a>
+        <a class="dapp reveal" data-tilt><img src="assets/fab-defi.jpg" alt=""><div class="ov"></div><div class="info"><div class="tag">DeFi</div><h3>Yield Lab</h3><p>Native yield and lending, built for everyone.</p></div></a>
+      </div>
+    </section>
+  </div>
+
+  <section class="apps" id="eco">
+    <div class="heading">One chain, every category</div>
+    <div class="rows">
+      <div class="row r1">
+        <span class="word">Games</span><span class="ico" style="background:#0a1838 url('assets/fab-gem.jpg') center/cover"></span>
+        <span class="word">Collectibles</span><span class="ico" style="background:#0a1838 url('assets/fab-coin.jpg') center/cover"></span>
+        <span class="word">Intellectual Property</span><span class="ico" style="background:#0a1838 url('assets/fab-cube.jpg') center/cover"></span>
+        <span class="word">Infrastructure</span><span class="ico" style="background:#0a1838 url('assets/fab-coin.jpg') center/cover"></span>
+        <span class="word">Games</span><span class="ico" style="background:#0a1838 url('assets/fab-gem.jpg') center/cover"></span>
+        <span class="word">Collectibles</span><span class="ico" style="background:#0a1838 url('assets/fab-coin.jpg') center/cover"></span>
+        <span class="word">Intellectual Property</span><span class="ico" style="background:#0a1838 url('assets/fab-cube.jpg') center/cover"></span>
+        <span class="word">Infrastructure</span><span class="ico" style="background:#0a1838 url('assets/fab-coin.jpg') center/cover"></span>
+      </div>
+      <div class="row r2">
+        <span class="word">DeFi</span><span class="ico" style="background:#0a1838 url('assets/fab-cube.jpg') center/cover"></span>
+        <span class="word">Social</span><span class="ico" style="background:#0a1838 url('assets/fab-gem.jpg') center/cover"></span>
+        <span class="word">Identity</span><span class="ico" style="background:#0a1838 url('assets/fab-coin.jpg') center/cover"></span>
+        <span class="word">Gaming</span><span class="ico" style="background:#0a1838 url('assets/fab-cube.jpg') center/cover"></span>
+        <span class="word">DeFi</span><span class="ico" style="background:#0a1838 url('assets/fab-cube.jpg') center/cover"></span>
+        <span class="word">Social</span><span class="ico" style="background:#0a1838 url('assets/fab-gem.jpg') center/cover"></span>
+        <span class="word">Identity</span><span class="ico" style="background:#0a1838 url('assets/fab-coin.jpg') center/cover"></span>
+        <span class="word">Gaming</span><span class="ico" style="background:#0a1838 url('assets/fab-cube.jpg') center/cover"></span>
+      </div>
+    </div>
+    <div class="browse"><a href="#">Browse all apps</a></div>
+  </section>
+
+  <div class="wrap">
+    <section class="sec">
+      <div class="showcase">
+        <div class="vis reveal"><img data-par src="assets/ape-wave.jpg" alt="" /></div>
+        <div class="reveal">
+          <div class="sec-head" style="text-align:left;margin:0 0 0;max-width:none"><div class="k">$FAB Token</div></div>
+          <h2 class="rainbow-text">One token,<br>one ecosystem</h2>
+          <p>$FAB powers gas, governance, staking, and native yield across every app on FabChain. Bridge in seconds and put it to work.</p>
+          <a href="#" class="btn grad">Get $FAB</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section style="padding-bottom:120px">
+    <div class="final" id="start">
+      <h2>Time to ape</h2>
+      <p>Join the chain built for culture. Your wallet is the only ticket.</p>
+      <div><a href="#" class="btn">Connect Wallet →</a></div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <footer>
+      <div class="foot">
+        <div class="col" style="max-width:240px"><div class="brand" style="font-size:28px;margin-bottom:12px">FABCHAIN</div><p style="font-size:14px;color:var(--muted)">The home chain for culture, gaming, and onchain communities.</p></div>
+        <div class="col"><h5>Chain</h5><a href="#">Bridge</a><a href="#">Explorer</a><a href="#">Staking</a><a href="#">Status</a></div>
+        <div class="col"><h5>Build</h5><a href="#">Docs</a><a href="#">Faucet</a><a href="#">Grants</a><a href="#">GitHub</a></div>
+        <div class="col"><h5>Community</h5><a href="#">X</a><a href="#">Discord</a><a href="#">Forum</a><a href="#">Blog</a></div>
+      </div>
+      <div class="foot-bot"><span>© 2026 FabChain</span><span>The Place to Ape</span></div>
+    </footer>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+    const lenis=new Lenis({duration:1.1,smoothWheel:true,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t))});
+    lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);
+    document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();lenis.scrollTo(t,{offset:-60});}}));
+
+    gsap.from('.hero .pill,.hero h1,.hero .orb,.hero p,.hero-cta',{opacity:0,y:26,duration:0.9,ease:'power3.out',stagger:0.1,delay:0.15});
+    gsap.utils.toArray('.reveal').forEach(el=>gsap.to(el,{opacity:1,y:0,duration:0.9,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%'}}));
+    gsap.to('#progress',{scaleX:1,ease:'none',scrollTrigger:{start:0,end:'max',scrub:0.3}});
+    gsap.from('.f',{opacity:0,y:64,scale:0.95,duration:0.8,ease:'power3.out',stagger:0.1,scrollTrigger:{trigger:'.feat',start:'top 82%'}});
+    gsap.from('.stat',{opacity:0,y:34,duration:0.7,ease:'power3.out',stagger:0.1,scrollTrigger:{trigger:'.stats',start:'top 90%'}});
+    gsap.to('#ecoTrack',{xPercent:-50,ease:'none',scrollTrigger:{trigger:'.eco',start:'top bottom',end:'bottom top',scrub:1}});
+    gsap.utils.toArray('[data-par]').forEach(img=>gsap.fromTo(img,{yPercent:-8},{yPercent:8,ease:'none',scrollTrigger:{trigger:img,start:'top bottom',end:'bottom top',scrub:true}}));
+    gsap.utils.toArray('[data-count]').forEach(el=>{const end=+el.dataset.count,suf=el.dataset.suffix||'';ScrollTrigger.create({trigger:el,start:'top 92%',once:true,onEnter:()=>{gsap.to({v:0},{v:end,duration:1.6,ease:'power2.out',onUpdate:function(){el.textContent=Math.round(this.targets()[0].v)+suf;}});}});});
+
+    /* 3D tilt on featured dApp cards */
+    document.querySelectorAll('[data-tilt]').forEach(card=>{
+      card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();const px=(e.clientX-r.left)/r.width-0.5,py=(e.clientY-r.top)/r.height-0.5;card.style.transform=`rotateY(${px*12}deg) rotateX(${-py*12}deg) translateZ(12px)`;});
+      card.addEventListener('mouseleave',()=>{card.style.transform='rotateY(0deg) rotateX(0deg)';});
+    });
+  </script>
+</body>
+</html>

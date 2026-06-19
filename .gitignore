@@ -1,0 +1,12 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+
+# scratch files from token extraction (see docs/02)
+*.scratch.html
+*.scratch.css
+
+# deploy / tooling
+.netlify/
+node_modules/

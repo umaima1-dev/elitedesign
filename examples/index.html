@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Design Gallery — Previews</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Cormorant+Garamond:ital@1&display=swap" rel="stylesheet" />
+<style>
+  :root { --bg:#08090a; --surface:#0e0f11; --border:rgba(255,255,255,0.09); --text:#f4f5f6; --muted:#8a8f98; --accent:#6e79d6; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; min-height:100vh; }
+  .glow { position:fixed; inset:0; z-index:0; pointer-events:none;
+    background: radial-gradient(700px 400px at 50% -10%, rgba(110,121,214,0.18), transparent 70%); }
+  .wrap { position:relative; z-index:1; max-width:1080px; margin:0 auto; padding:80px 32px 100px; }
+  header { margin-bottom:60px; }
+  .eyebrow { font-size:12px; letter-spacing:0.3em; text-transform:uppercase; color:var(--accent); margin-bottom:18px; }
+  h1 { font-size:clamp(36px,6vw,60px); font-weight:600; letter-spacing:-0.03em; line-height:1.05; }
+  header p { color:var(--muted); margin-top:18px; max-width:520px; font-size:16px; line-height:1.6; }
+  .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
+  @media(max-width:720px){ .grid{ grid-template-columns:1fr; } }
+  .card { display:block; text-decoration:none; color:inherit; border:1px solid var(--border); border-radius:16px;
+    background:var(--surface); overflow:hidden; transition:transform .3s cubic-bezier(.16,1,.3,1), border-color .3s, box-shadow .3s; }
+  .card:hover { transform:translateY(-4px); border-color:rgba(255,255,255,0.22); box-shadow:0 24px 60px rgba(0,0,0,0.5); }
+  .thumb { height:200px; position:relative; overflow:hidden; display:grid; place-items:center; }
+  .t1 { background:radial-gradient(500px 300px at 50% 0%, rgba(110,121,214,0.4), #0b0c0d 70%); }
+  .t2 { background:linear-gradient(120deg, #ff5e7a, #7b5cff 50%, #2fd6c6); }
+  .t3 { background:radial-gradient(400px 300px at 50% 40%, #3a2f1c, #0a0908 75%); }
+  .thumb .tag { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:34px; color:rgba(255,255,255,0.92); }
+  .meta { padding:22px 24px; }
+  .meta h3 { font-size:18px; font-weight:600; letter-spacing:-0.01em; }
+  .meta .stack { font-size:13px; color:var(--muted); margin-top:6px; }
+  .meta .arrow { float:right; color:var(--muted); transition:transform .3s, color .3s; }
+  .card:hover .arrow { transform:translateX(4px); color:var(--text); }
+  footer { margin-top:70px; color:var(--muted); font-size:13px; border-top:1px solid var(--border); padding-top:26px; }
+</style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="wrap">
+    <header>
+      <div class="eyebrow">Internal · Design Previews</div>
+      <h1>Design Gallery</h1>
+      <p>Live previews of our front-end concepts. Click any card to open the full interactive page. New designs get added here as we build them.</p>
+    </header>
+
+    <div class="grid">
+      <a class="card" href="luxury.html">
+        <div class="thumb" style="background:linear-gradient(rgba(10,9,8,0.30),rgba(10,9,8,0.55)),url('assets/aurel-1.jpg') center 18%/cover;"><span class="tag" style="text-shadow:0 2px 14px rgba(0,0,0,0.7);">Maison Aurél</span></div>
+        <div class="meta"><h3>01 — Quiet Luxury <span class="arrow">→</span></h3><div class="stack">AI couture · curved-path scroll · Three.js</div></div>
+      </a>
+      <a class="card" href="amara-reed.html">
+        <div class="thumb" style="background:linear-gradient(rgba(8,22,20,0.30),rgba(8,22,20,0.55)),url('assets/amara-1.jpg') center 20%/cover;"><span class="tag" style="color:#fff;text-shadow:0 2px 12px rgba(0,0,0,0.6);">Amara Reed</span></div>
+        <div class="meta"><h3>02 — Personal Brand <span class="arrow">→</span></h3><div class="stack">AI portraits · scatter-scroll · teal + gold</div></div>
+      </a>
+      <a class="card" href="prisma-studio.html">
+        <div class="thumb" style="background:conic-gradient(from 0deg,hsl(0 90% 60%),hsl(60 90% 60%),hsl(120 90% 50%),hsl(200 90% 55%),hsl(280 80% 60%),hsl(340 90% 60%),hsl(0 90% 60%));"><span class="tag" style="font-style:normal;font-family:Inter;font-weight:800;letter-spacing:-0.02em;color:#141414;">PRISMA✳</span></div>
+        <div class="meta"><h3>03 — Creative Studio <span class="arrow">→</span></h3><div class="stack">AI imagery · image trail · rainbow · GSAP</div></div>
+      </a>
+      <a class="card" href="vessel.html">
+        <div class="thumb" style="background:linear-gradient(rgba(8,8,8,0.45),rgba(8,8,8,0.55)),url('assets/vessel-1.jpg') center 25%/cover;"><span class="tag" style="font-family:'Cormorant Garamond',Georgia,serif;font-style:normal;color:#f0f0f0;text-shadow:0 2px 12px rgba(0,0,0,0.7);">Ves<span style="color:#e8645a;font-style:italic;">sel</span></span></div>
+        <div class="meta"><h3>04 — Dark Editorial <span class="arrow">→</span></h3><div class="stack">AI fine-art · horizontal gallery · Bodoni</div></div>
+      </a>
+      <a class="card" href="apechain.html">
+        <div class="thumb" style="background:#020315;"><span class="tag" style="font-family:'Anton',Inter,sans-serif;font-style:normal;font-weight:400;letter-spacing:0.02em;text-transform:uppercase;background:linear-gradient(45deg,#a281ff,#eb8280,#ebbf9a,#89d0ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">FABCHAIN</span></div>
+        <div class="meta"><h3>05 — Web3 / Crypto <span class="arrow">→</span></h3><div class="stack">AI imagery · 3D tilt · rainbow · GSAP</div></div>
+      </a>
+    </div>
+
+    <footer>Design Gallery · updated as we go · share the link, not the files</footer>
+  </div>
+</body>
+</html>
