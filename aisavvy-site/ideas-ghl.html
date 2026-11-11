@@ -1,0 +1,71 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@900&family=Instrument+Serif:ital@1&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+.clone-your-ideas-were-never-the-problem{
+  --deep:#2a0e12;--peach:#ffb285;--cream:#fdf6ee;--body:#ded3cc;
+  width:100%;max-width:100%;box-sizing:border-box;overflow:hidden;
+  position:relative;isolation:isolate;padding:110px 0;
+  background-color:var(--deep);
+  background-image:linear-gradient(rgba(253,246,238,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(253,246,238,.035) 1px,transparent 1px),radial-gradient(120% 90% at 30% 40%,#6a1a26 0%,#50131d 45%,#2a0e12 100%);
+  background-size:64px 64px,64px 64px,cover;
+  color:var(--body);font:400 16px/1.75 'Open Sans',sans-serif;-webkit-font-smoothing:antialiased;
+}
+.clone-your-ideas-were-never-the-problem *{box-sizing:border-box}
+.clone-your-ideas-were-never-the-problem::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='grain' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='.7'/%3E%3C/svg%3E") repeat;
+  opacity:.19;mix-blend-mode:soft-light;
+}
+.clone-your-ideas-were-never-the-problem .ideas-wrap{width:min(1240px,calc(100% - 96px));margin-inline:auto}
+.clone-your-ideas-were-never-the-problem .ideas-h2{
+  margin:0;max-width:760px;font-family:'Inter Tight',Inter,sans-serif;font-weight:900;
+  font-size:clamp(30px,3.3vw,47px);line-height:1.06;letter-spacing:-.035em;
+  text-transform:uppercase;text-wrap:balance;color:var(--cream);
+}
+.clone-your-ideas-were-never-the-problem .ideas-it{
+  font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;
+  text-transform:none;letter-spacing:-.02em;font-size:1.22em;line-height:1.02;
+  display:inline-block;padding-right:.06em;margin-left:.05em;color:var(--peach);
+}
+.clone-your-ideas-were-never-the-problem .ideas-cols3{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:54px;
+  margin-top:52px;padding-top:36px;border-top:1px solid #ffffff20;
+}
+.clone-your-ideas-were-never-the-problem .ideas-col p{margin:0;font-size:15.5px;color:var(--body);text-wrap:pretty}
+.clone-your-ideas-were-never-the-problem .ideas-col strong{color:#fff;font-weight:700}
+
+@media(min-width:1600px){.clone-your-ideas-were-never-the-problem .ideas-wrap{width:min(1320px,calc(100% - 160px))}}
+@media(max-width:1100px){
+  .clone-your-ideas-were-never-the-problem{padding:88px 0}
+  .clone-your-ideas-were-never-the-problem .ideas-wrap{width:calc(100% - 64px)}
+  .clone-your-ideas-were-never-the-problem .ideas-cols3{gap:36px}
+}
+@media(max-width:800px){
+  .clone-your-ideas-were-never-the-problem .ideas-wrap{width:calc(100% - 48px)}
+  .clone-your-ideas-were-never-the-problem .ideas-h2{font-size:clamp(29px,8.4vw,36px)}
+  .clone-your-ideas-were-never-the-problem .ideas-cols3{grid-template-columns:1fr;gap:20px;margin-top:34px;padding-top:30px}
+}
+@media(max-width:540px){
+  .clone-your-ideas-were-never-the-problem{padding:66px 0}
+  .clone-your-ideas-were-never-the-problem .ideas-wrap{width:calc(100% - 40px)}
+}
+</style>
+
+<section class="clone-your-ideas-were-never-the-problem">
+  <div class="ideas-wrap">
+    <h2 class="ideas-h2">Your ideas were never <span class="ideas-it">the problem.</span></h2>
+    <div class="ideas-cols3">
+      <div class="ideas-col">
+        <p>The problem is that every idea needs your hands on it. You can only write so much, design so much and research so much before the day runs out. So the urgent things get done and the interesting ideas wait for a quiet week that never comes.</p>
+      </div>
+      <div class="ideas-col">
+        <p><strong>AI fluent people work differently.</strong> They have an idea, hand it to Claude with the right context and get back a first version to shape. Then they're onto the next one.</p>
+      </div>
+      <div class="ideas-col">
+        <p>This is happening in every field right now. The student finishes the research in an evening, the employee's report is ready before the meeting, and the creator posts every day without burning out. They aren't smarter than you, and most of them aren't technical. They just learned to operate the tool everyone else is still chatting with.</p>
+      </div>
+    </div>
+  </div>
+</section>
