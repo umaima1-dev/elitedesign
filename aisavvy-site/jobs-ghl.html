@@ -1,0 +1,79 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@900&family=Instrument+Serif:ital@1&family=Manrope:wght@700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+.clone-jobs{
+  --ink:#1c1412;--maroon:#7a1f2b;--rust:#d36b48;--peach:#ffb285;--cream:#fdf6ee;--body:#ded3cc;--warm:#584940;
+  width:100%;max-width:100%;box-sizing:border-box;overflow:hidden;
+  padding:110px 0;background:var(--cream);color:var(--warm);
+  font:400 16px/1.75 'Open Sans',sans-serif;-webkit-font-smoothing:antialiased;
+}
+.clone-jobs *{box-sizing:border-box}
+.clone-jobs .wrap{width:min(1240px,calc(100% - 96px));margin-inline:auto}
+.clone-jobs h2,.clone-jobs p,.clone-jobs figure{margin:0}
+.clone-jobs .split{display:grid;grid-template-columns:1.05fr .9fr;gap:90px;align-items:center}
+.clone-jobs h2{font-family:'Inter Tight',Inter,sans-serif;font-weight:900;font-size:clamp(30px,3.3vw,47px);line-height:1.06;letter-spacing:-.035em;text-transform:uppercase;text-wrap:balance;color:var(--ink);margin-bottom:28px}
+.clone-jobs .it{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.02em;font-size:1.22em;line-height:1.02;display:inline-block;padding-right:.06em;margin-left:.05em;color:var(--maroon)}
+.clone-jobs .split p{font-size:15.5px;text-wrap:pretty}
+.clone-jobs .split p+p{margin-top:20px}
+.clone-jobs .strong-copy{color:var(--maroon);font-weight:700}
+
+/* stat card */
+.clone-jobs .gcard{position:relative;isolation:isolate;overflow:hidden;border-radius:14px;color:var(--body);background:radial-gradient(120% 90% at 30% 30%,#6a1a26 0%,#50131d 45%,#2a0e12 100%);border:1px solid rgba(255,214,190,.16);box-shadow:0 24px 50px rgba(42,14,18,.28)}
+.clone-jobs .gcard::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='grain' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='.7'/%3E%3C/svg%3E") repeat;opacity:.19;mix-blend-mode:soft-light}
+.clone-jobs .stat-card{padding:38px 40px;transform:rotate(1.5deg)}
+.clone-jobs .stat-card .label{display:block;max-width:300px;font:700 10px/1.7 Manrope,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--peach)}
+.clone-jobs .rings{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:22px}
+.clone-jobs .ring svg{width:100%;max-width:176px;display:block}
+.clone-jobs .ring .track{fill:none;stroke:rgba(255,214,190,.14);stroke-width:13}
+.clone-jobs .ring .arc{fill:none;stroke:var(--peach);stroke-width:13;stroke-linecap:round}
+.clone-jobs .ring:nth-child(2) .arc{stroke:var(--rust)}
+.clone-jobs .ring text{font:900 34px 'Inter Tight',Inter,sans-serif;letter-spacing:-1.5px;fill:var(--cream)}
+.clone-jobs .ring figcaption{font-size:14px;line-height:1.55;margin-top:16px;color:var(--body)}
+.clone-jobs .stat-lead{display:block;margin:0 0 12px;font:600 13px/1.75 'Open Sans',sans-serif;color:var(--peach)}
+
+@media(min-width:1600px){.clone-jobs .wrap{width:min(1320px,calc(100% - 160px))}}
+@media(max-width:1100px){
+  .clone-jobs{padding:88px 0}
+  .clone-jobs .wrap{width:calc(100% - 64px)}
+  .clone-jobs .split{gap:50px}
+}
+@media(max-width:800px){
+  .clone-jobs .wrap{width:calc(100% - 48px)}
+  .clone-jobs .split{grid-template-columns:1fr;gap:34px}
+  .clone-jobs h2{font-size:clamp(29px,8.4vw,36px)}
+  .clone-jobs .stat-card{max-width:480px;width:96%;justify-self:center}
+}
+@media(max-width:540px){
+  .clone-jobs{padding:66px 0}
+  .clone-jobs .wrap{width:calc(100% - 40px)}
+  .clone-jobs .stat-card{padding:28px 26px}
+}
+</style>
+
+<section class="clone-jobs">
+  <div class="wrap split">
+    <div>
+      <h2>Job descriptions are changing <span class="it">faster than most people notice.</span></h2>
+      <p>"Experience with AI tools" used to be a nice extra at the bottom of a job post. Now it's moving into the requirements.</p>
+      <p>You can be excellent at what you do. You can have the degree, the experience and the reputation. In 2027, the most valuable person in the room will be the one who's great at their work <em>and</em> knows how to hand part of it to AI.</p>
+      <p class="strong-copy">That's the priority now. You don't need to work harder. You need to know how to make AI do some of the work with you.</p>
+    </div>
+    <aside class="gcard stat-card">
+      <span class="label">When Microsoft and LinkedIn surveyed 31,000 people across 31 countries</span>
+      <div class="rings">
+        <figure class="ring">
+          <span class="stat-lead" aria-hidden="true">&nbsp;</span>
+          <svg viewBox="0 0 140 140" role="img" aria-label="66%"><circle class="track" cx="70" cy="70" r="52"/><circle class="arc" cx="70" cy="70" r="52" stroke-dasharray="215.6 326.7" transform="rotate(-90 70 70)"/><text x="70" y="82" text-anchor="middle">66%</text></svg>
+          <figcaption>of leaders said they wouldn't hire someone without AI skills.</figcaption>
+        </figure>
+        <figure class="ring">
+          <span class="stat-lead">Even more telling,</span>
+          <svg viewBox="0 0 140 140" role="img" aria-label="71%"><circle class="track" cx="70" cy="70" r="52"/><circle class="arc" cx="70" cy="70" r="52" stroke-dasharray="232 326.7" transform="rotate(-90 70 70)"/><text x="70" y="82" text-anchor="middle">71%</text></svg>
+          <figcaption>said they'd choose a less experienced candidate with AI skills over a more experienced one without them.</figcaption>
+        </figure>
+      </div>
+    </aside>
+  </div>
+</section>
