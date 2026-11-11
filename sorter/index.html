@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Date Sorter</title>
+<style>
+:root{--ink:#14090b;--panel:#231115;--line:#3a1f25;--cream:#f6ead8;--muted:#b89a93;--rust:#e0552b;--peach:#f7c9a8;--ok:#7bd88f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--cream);font:16px/1.5 Inter,system-ui,sans-serif;
+ background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:48px 48px;min-height:100vh}
+main{max-width:1100px;margin:0 auto;padding:32px 16px 80px}
+h1{font-weight:900;text-transform:uppercase;font-size:clamp(28px,6vw,52px);line-height:1.05;margin:0 0 8px;letter-spacing:-.01em}
+h1 em{font-style:normal;color:var(--rust)}
+p.sub{color:var(--muted);margin:0 0 24px;max-width:60ch}
+.bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:20px}
+button{font:inherit;font-weight:800;border:0;border-radius:10px;padding:12px 20px;cursor:pointer;background:var(--rust);color:#fff}
+button.ghost{background:transparent;border:1px solid var(--line);color:var(--cream)}
+button:disabled{opacity:.4;cursor:not-allowed}
+label{display:flex;gap:6px;align-items:center;font-size:14px;color:var(--peach)}
+select,input[type=checkbox]{accent-color:var(--rust)}
+select{background:var(--ink);color:var(--cream);border:1px solid var(--line);border-radius:8px;padding:8px}
+.stage{display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:start}
+@media(max-width:700px){.stage{grid-template-columns:1fr}}
+.source{position:sticky;top:16px;background:var(--cream);color:var(--ink);border-radius:14px;padding:18px;text-align:center}
+.source b{display:block;font-size:44px;font-weight:900;line-height:1}
+.source small{font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:11px}
+.pile{font-size:28px;margin-bottom:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.bucket{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;position:relative;transition:transform .2s,border-color .2s}
+.bucket.hit{transform:scale(1.06);border-color:var(--rust)}
+.bucket h3{margin:0 0 4px;font-size:15px;font-weight:900}
+.bucket .n{font-size:30px;font-weight:900;color:var(--rust);line-height:1}
+.bucket .k{font-size:12px;color:var(--muted)}
+.bucket .done{position:absolute;top:10px;right:12px;color:var(--ok);font-weight:900;opacity:0}
+.bucket.full .done{opacity:1}
+.chip{position:fixed;z-index:50;pointer-events:none;width:34px;height:34px;border-radius:8px;display:grid;place-items:center;background:var(--peach);color:var(--ink);font-size:18px;box-shadow:0 6px 18px #0008}
+#log{margin-top:20px;color:var(--muted);font-size:14px}
+.empty{color:var(--muted);padding:40px;border:1px dashed var(--line);border-radius:14px;text-align:center}
+@media(prefers-reduced-motion:reduce){.bucket{transition:none}}
+</style>
+</head>
+<body>
+<main>
+ <h1>Folder → <em>Date Sorter</em></h1>
+ <p class="sub">Pick a folder of photos, reels and videos. Everything gets sorted into date folders on your own device. Nothing is uploaded anywhere.</p>
+
+ <div class="bar">
+  <button id="pick">1. Choose folder</button>
+  <label>Group by
+   <select id="grp"><option value="day">Day</option><option value="month">Month</option><option value="year">Year</option></select></label>
+  <label><input type="checkbox" id="fname" checked> Use date in filename first</label>
+  <label><input type="checkbox" id="sub" checked> Include subfolders</label>
+  <label>Mode
+   <select id="mode"><option value="copy">Copy (safe)</option><option value="move">Move</option></select></label>
+  <button id="go" disabled>2. Sort now</button>
+ </div>
+
+ <div id="stage"><div class="empty">No folder yet. Click “Choose folder”. Works in Chrome or Edge on desktop.</div></div>
+ <div id="log"></div>
+</main>
+
+<script>
+const $=id=>document.getElementById(id);
+const OUT='Sorted-by-date';
+const IMG=/\.(jpe?g|png|gif|webp|heic|heif|avif|bmp|tiff?)$/i, VID=/\.(mp4|mov|m4v|avi|mkv|webm|3gp)$/i;
+let root=null, items=[];
+
+const icon=k=>k==='image'?'🖼️':k==='video'?'🎬':'📄';
+const pad=n=>String(n).padStart(2,'0');
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+
+function fileDate(f){
+  if($('fname').checked){
+    const m=f.name.match(/(20\d{2})[-_.]?(0[1-9]|1[0-2])[-_.]?(0[1-9]|[12]\d|3[01])/);
+    if(m) return new Date(+m[1],+m[2]-1,+m[3]);
+  }
+  return new Date(f.lastModified);
+}
+function keyOf(d){
+  const g=$('grp').value, y=d.getFullYear(), m=pad(d.getMonth()+1);
+  return g==='year'?`${y}`:g==='month'?`${y}-${m}`:`${y}-${m}-${pad(d.getDate())}`;
+}
+
+async function scan(dir,parent,out,deep){
+  for await(const [name,h] of dir.entries()){
+    if(h.kind==='directory'){
+      if(deep && name!==OUT) await scan(h,dir,out,true);
+      continue;
+    }
+    const file=await h.getFile();
+    out.push({name,file,parent:dir,kind:IMG.test(name)?'image':VID.test(name)?'video':'other'});
+  }
+}
+
+function render(){
+  const groups={};
+  for(const it of items){ (groups[it.key=keyOf(it.date)]??=[]).push(it); }
+  const keys=Object.keys(groups).sort();
+  $('stage').innerHTML=`<div class="stage">
+    <div class="source" id="src"><div class="pile">📂</div><b id="left">${items.length}</b><small>files waiting</small></div>
+    <div class="grid">${keys.map(k=>{
+      const g=groups[k],c=t=>g.filter(i=>i.kind===t).length;
+      return `<div class="bucket" data-k="${k}"><span class="done">✓</span><h3>${k}</h3><div class="k">of ${g.length}</div>
+        <div class="n">0</div>
+        <div class="k">🖼️ ${c('image')} · 🎬 ${c('video')} · 📄 ${c('other')}</div></div>`}).join('')}</div></div>`;
+  $('go').disabled=!items.length;
+}
+
+$('pick').onclick=async()=>{
+  if(!window.showDirectoryPicker){ $('log').textContent='This browser cannot write to folders. Please use Chrome or Edge on desktop.'; return; }
+  try{ root=await showDirectoryPicker({mode:'readwrite'}); }catch{ return; }
+  $('log').textContent='Reading folder…';
+  const raw=[]; await scan(root,null,raw,$('sub').checked);
+  items=raw.map(r=>({...r,date:fileDate(r.file)}));
+  $('log').textContent=`Found ${items.length} files in “${root.name}”.`;
+  render();
+};
+['grp','fname'].forEach(id=>$(id).onchange=()=>{ if(items.length){ items.forEach(i=>i.date=fileDate(i.file)); render(); }});
+
+function fly(from,to,emoji){
+  const a=from.getBoundingClientRect(), b=to.getBoundingClientRect();
+  const el=document.createElement('div'); el.className='chip'; el.textContent=emoji;
+  el.style.left=a.left+a.width/2-17+'px'; el.style.top=a.top+a.height/2-17+'px';
+  document.body.appendChild(el);
+  const dx=b.left+b.width/2-(a.left+a.width/2), dy=b.top+b.height/2-(a.top+a.height/2);
+  const rand=(Math.random()-.5)*120;
+  const anim=el.animate([
+    {transform:'translate(0,0) scale(1) rotate(0)',opacity:1},
+    {transform:`translate(${dx/2+rand}px,${dy/2-60}px) scale(1.2) rotate(180deg)`,opacity:1,offset:.5},
+    {transform:`translate(${dx}px,${dy}px) scale(.4) rotate(360deg)`,opacity:.2}
+  ],{duration:600,easing:'cubic-bezier(.4,0,.2,1)'});
+  anim.onfinish=()=>el.remove();
+  return anim.finished;
+}
+
+async function uniqueName(dir,name){
+  let n=name,i=1;
+  const dot=name.lastIndexOf('.'), base=dot>0?name.slice(0,dot):name, ext=dot>0?name.slice(dot):'';
+  while(true){
+    try{ await dir.getFileHandle(n); n=`${base}-${i++}${ext}`; }catch{ return n; }
+  }
+}
+
+async function copyOne(it,dest){
+  const name=await uniqueName(dest,it.name);
+  const w=await (await dest.getFileHandle(name,{create:true})).createWritable();
+  await it.file.stream().pipeTo(w);
+  if($('mode').value==='move') await it.parent.removeEntry(it.name);
+}
+
+$('go').onclick=async()=>{
+  if(!root||!items.length) return;
+  $('go').disabled=$('pick').disabled=true;
+  const outDir=await root.getDirectoryHandle(OUT,{create:true});
+  const dirs={}; let left=items.length, failed=0;
+  const total={}; items.forEach(i=>total[i.key]=(total[i.key]||0)+1);
+  const got={};
+  const pending=[];
+  for(const it of items){
+    const bucket=document.querySelector(`.bucket[data-k="${it.key}"]`);
+    bucket.scrollIntoView({block:'nearest',behavior:'smooth'});
+    const flight=fly($('src'),bucket,icon(it.kind)).then(()=>{
+      bucket.classList.add('hit'); setTimeout(()=>bucket.classList.remove('hit'),150);
+      got[it.key]=(got[it.key]||0)+1;
+      bucket.querySelector('.n').textContent=got[it.key];
+      if(got[it.key]===total[it.key]) bucket.classList.add('full');
+    });
+    try{
+      dirs[it.key]??=await outDir.getDirectoryHandle(it.key,{create:true});
+      await copyOne(it,dirs[it.key]);
+    }catch(e){ failed++; console.error(it.name,e); }
+    $('left').textContent=--left;
+    pending.push(flight);
+    await sleep(40);
+  }
+  await Promise.all(pending);
+  $('log').textContent=`Done. ${items.length-failed} files sorted into “${OUT}” inside “${root.name}”.`+(failed?` ${failed} failed (see console).`:'');
+  $('pick').disabled=false;
+};
+</script>
+</body>
+</html>
