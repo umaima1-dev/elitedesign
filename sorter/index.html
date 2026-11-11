@@ -34,10 +34,23 @@ select{background:var(--ink);color:var(--cream);border:1px solid var(--line);bor
 .bucket .k{font-size:12px;color:var(--muted)}
 .bucket .done{position:absolute;top:10px;right:12px;color:var(--ok);font-weight:900;opacity:0}
 .bucket.full .done{opacity:1}
-.chip{position:fixed;z-index:50;pointer-events:none;width:34px;height:34px;border-radius:8px;display:grid;place-items:center;background:var(--peach);color:var(--ink);font-size:18px;box-shadow:0 6px 18px #0008}
+.chip{position:fixed;z-index:50;pointer-events:none;width:64px;height:64px;border-radius:12px;overflow:hidden;display:grid;place-items:center;background:var(--peach);color:var(--ink);font-size:30px;border:3px solid var(--cream);box-shadow:0 0 0 2px var(--rust),0 14px 34px #000a,0 0 30px #e0552b88}
+.chip img,.chip video{width:100%;height:100%;object-fit:cover;display:block}
+.spark{position:fixed;z-index:51;pointer-events:none;width:8px;height:8px;border-radius:50%}
+.bucket{overflow:hidden;opacity:0;animation:rise .55s cubic-bezier(.2,.9,.3,1.2) forwards;animation-delay:calc(var(--i)*35ms)}
+@keyframes rise{from{opacity:0;transform:translateY(40px) scale(.8) rotate(-4deg)}to{opacity:1;transform:none}}
+.bucket .bar2{position:absolute;left:0;bottom:0;height:5px;width:0;background:linear-gradient(90deg,var(--rust),var(--peach));transition:width .3s}
+.bucket.full{border-color:var(--ok);box-shadow:0 0 22px #7bd88f55}
+.bucket.full .done{animation:pop .5s cubic-bezier(.2,1.8,.4,1)}
+@keyframes pop{from{transform:scale(0) rotate(-90deg)}to{transform:scale(1)}}
+.source.fire{animation:thump .25s}
+@keyframes thump{50%{transform:scale(.93) rotate(-1.5deg)}}
+.source{transition:background .4s}
+.source.done2{background:var(--ok)}
+.confetti{position:fixed;z-index:60;pointer-events:none;width:10px;height:16px;top:-20px}
 #log{margin-top:20px;color:var(--muted);font-size:14px}
 .empty{color:var(--muted);padding:40px;border:1px dashed var(--line);border-radius:14px;text-align:center}
-@media(prefers-reduced-motion:reduce){.bucket{transition:none}}
+@media(prefers-reduced-motion:reduce){.bucket{transition:none;animation:none;opacity:1}.chip,.spark,.confetti{display:none}}
 </style>
 </head>
 <body>
@@ -122,7 +135,7 @@ function render(){
     <div class="source" id="src"><div class="pile">📂</div><b id="left">${items.length}</b><small>files waiting</small></div>
     <div class="grid">${keys.map(k=>{
       const g=groups[k],c=t=>g.filter(i=>i.kind===t).length;
-      return `<div class="bucket" data-k="${k}"><span class="done">✓</span><h3>${dayName(k)}</h3><div class="k">planned ${g.length}</div>
+      return `<div class="bucket" data-k="${k}" style="--i:${keys.indexOf(k)}"><div class="bar2"></div><span class="done">✓</span><h3>${dayName(k)}</h3><div class="k">planned ${g.length}</div>
         <div class="n">0</div>
         <div class="k">🖼️ ${c('image')} · 🎬 ${c('video')} · 📄 ${c('other')}</div></div>`}).join('')}</div></div>`;
   $('go').disabled=!items.length||!keys.length;
@@ -139,19 +152,45 @@ $('pick').onclick=async()=>{
 };
 ['d1','d2','ord','wk'].forEach(id=>$(id).onchange=()=>{ if(items.length) render(); });
 
-function fly(from,to,emoji){
+const COLORS=['#e0552b','#f7c9a8','#f6ead8','#7bd88f','#ffb703'];
+function burst(x,y,n=10){
+  for(let i=0;i<n;i++){
+    const el=document.createElement('div'); el.className='spark';
+    el.style.cssText+=`left:${x}px;top:${y}px;background:${COLORS[i%COLORS.length]}`;
+    document.body.appendChild(el);
+    const ang=Math.PI*2*i/n+Math.random()*.5, r=30+Math.random()*40;
+    el.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:`translate(${Math.cos(ang)*r}px,${Math.sin(ang)*r}px) scale(0)`,opacity:0}],{duration:520,easing:'ease-out'}).onfinish=()=>el.remove();
+  }
+}
+function confetti(){
+  for(let i=0;i<120;i++){
+    const el=document.createElement('div'); el.className='confetti';
+    el.style.left=Math.random()*100+'vw'; el.style.background=COLORS[i%COLORS.length];
+    document.body.appendChild(el);
+    el.animate([{transform:'translateY(0) rotate(0)',opacity:1},{transform:`translate(${(Math.random()-.5)*200}px,${innerHeight+40}px) rotate(${Math.random()*900}deg)`,opacity:1}],
+      {duration:1800+Math.random()*1600,delay:Math.random()*500,easing:'cubic-bezier(.3,.1,.6,1)',fill:'both'}).onfinish=()=>el.remove();
+  }
+}
+function fly(from,to,it){
   const a=from.getBoundingClientRect(), b=to.getBoundingClientRect();
-  const el=document.createElement('div'); el.className='chip'; el.textContent=emoji;
-  el.style.left=a.left+a.width/2-17+'px'; el.style.top=a.top+a.height/2-17+'px';
+  const el=document.createElement('div'); el.className='chip';
+  let url=null;
+  if(it.kind==='image'||it.kind==='video'){
+    url=URL.createObjectURL(it.file);
+    el.innerHTML=it.kind==='image'?`<img src="${url}">`:`<video src="${url}#t=0.3" muted preload="metadata"></video>`;
+  } else el.textContent=icon(it.kind);
+  const sx=a.left+a.width/2-32, sy=a.top+a.height/2-32;
+  el.style.left=sx+'px'; el.style.top=sy+'px';
   document.body.appendChild(el);
-  const dx=b.left+b.width/2-(a.left+a.width/2), dy=b.top+b.height/2-(a.top+a.height/2);
-  const rand=(Math.random()-.5)*120;
+  const tx=b.left+b.width/2, ty=b.top+b.height/2;
+  const dx=tx-(sx+32), dy=ty-(sy+32), side=(Math.random()-.5)*260;
   const anim=el.animate([
-    {transform:'translate(0,0) scale(1) rotate(0)',opacity:1},
-    {transform:`translate(${dx/2+rand}px,${dy/2-60}px) scale(1.2) rotate(180deg)`,opacity:1,offset:.5},
-    {transform:`translate(${dx}px,${dy}px) scale(.4) rotate(360deg)`,opacity:.2}
-  ],{duration:600,easing:'cubic-bezier(.4,0,.2,1)'});
-  anim.onfinish=()=>el.remove();
+    {transform:'translate(0,0) scale(.3) rotate(0)',opacity:0,offset:0},
+    {transform:`translate(${side*.4}px,-90px) scale(1.25) rotate(${side/8}deg)`,opacity:1,offset:.25},
+    {transform:`translate(${dx*.6+side}px,${dy*.5-70}px) scale(1) rotate(${-side/6}deg)`,opacity:1,offset:.6},
+    {transform:`translate(${dx}px,${dy}px) scale(.35) rotate(${side/3}deg)`,opacity:.9,offset:1}
+  ],{duration:800,easing:'cubic-bezier(.45,.05,.3,1)'});
+  anim.onfinish=()=>{ el.remove(); url&&URL.revokeObjectURL(url); burst(tx,ty); };
   return anim.finished;
 }
 
@@ -181,10 +220,12 @@ $('go').onclick=async()=>{
   for(const it of items){
     const bucket=document.querySelector(`.bucket[data-k="${it.key}"]`);
     bucket.scrollIntoView({block:'nearest',behavior:'smooth'});
-    const flight=fly($('src'),bucket,icon(it.kind)).then(()=>{
-      bucket.classList.add('hit'); setTimeout(()=>bucket.classList.remove('hit'),150);
+    $('src').classList.remove('fire'); void $('src').offsetWidth; $('src').classList.add('fire');
+    const flight=fly($('src'),bucket,it).then(()=>{
+      bucket.classList.add('hit'); setTimeout(()=>bucket.classList.remove('hit'),180);
       got[it.key]=(got[it.key]||0)+1;
       bucket.querySelector('.n').textContent=got[it.key];
+      bucket.querySelector('.bar2').style.width=(got[it.key]/total[it.key]*100)+'%';
       if(got[it.key]===total[it.key]) bucket.classList.add('full');
     });
     try{
@@ -193,9 +234,10 @@ $('go').onclick=async()=>{
     }catch(e){ failed++; console.error(it.name,e); }
     $('left').textContent=--left;
     pending.push(flight);
-    await sleep(40);
+    await sleep(Math.max(60,Math.min(350,2500/items.length)));
   }
   await Promise.all(pending);
+  $('src').classList.add('done2'); $('src').querySelector('small').textContent='all planned'; $('src').querySelector('.pile').textContent='🎉'; confetti();
   $('log').textContent=`Done. ${items.length-failed} files planned into “${OUT}” inside “${root.name}”.`+(failed?` ${failed} failed (see console).`:'');
   $('pick').disabled=false;
 };
