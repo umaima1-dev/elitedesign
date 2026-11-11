@@ -1,0 +1,78 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@800;900&family=Instrument+Serif:ital@1&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+.clone-is-this-for-you{
+  --ink:#1c1412;--deep:#2a0e12;--maroon:#7a1f2b;--peach:#ffb285;--cream:#fdf6ee;--body:#ded3cc;--warm:#584940;
+  width:100%;max-width:100%;box-sizing:border-box;overflow:hidden;
+  position:relative;isolation:isolate;padding:110px 0;
+  background-color:var(--deep);
+  background-image:linear-gradient(rgba(253,246,238,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(253,246,238,.035) 1px,transparent 1px),radial-gradient(120% 90% at 30% 40%,#6a1a26 0%,#50131d 45%,#2a0e12 100%);
+  background-size:64px 64px,64px 64px,cover;
+  color:var(--body);font:400 16px/1.75 'Open Sans',sans-serif;-webkit-font-smoothing:antialiased;
+}
+.clone-is-this-for-you *{box-sizing:border-box}
+.clone-is-this-for-you::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='grain' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='.7'/%3E%3C/svg%3E") repeat;
+  opacity:.19;mix-blend-mode:soft-light;
+}
+.clone-is-this-for-you .wrap{width:min(1240px,calc(100% - 96px));margin-inline:auto}
+.clone-is-this-for-you .title{
+  margin:0;font-family:'Inter Tight',Inter,sans-serif;font-weight:900;
+  font-size:clamp(30px,3.3vw,47px);line-height:1.06;letter-spacing:-.035em;
+  text-transform:uppercase;text-wrap:balance;color:var(--cream);
+}
+.clone-is-this-for-you .title .it{
+  font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;
+  text-transform:none;letter-spacing:-.02em;font-size:1.22em;line-height:1.02;
+  display:inline-block;padding-right:.06em;margin-left:.05em;color:var(--peach);
+}
+.clone-is-this-for-you .fit-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:48px}
+.clone-is-this-for-you .fit{border-radius:12px;padding:34px 36px 38px;font-size:16px;line-height:1.75}
+.clone-is-this-for-you .fit.yes{background:var(--cream);color:var(--warm)}
+.clone-is-this-for-you .fit.yes strong{color:var(--maroon)}
+.clone-is-this-for-you .fit.no{border:1px solid #ffffff2b;background:rgba(253,246,238,.04);color:var(--body)}
+.clone-is-this-for-you .fit p{margin:0}
+.clone-is-this-for-you .fit .icon{
+  display:block;width:30px;height:30px;margin-bottom:22px;
+  stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;
+}
+.clone-is-this-for-you .fit.yes .icon{color:var(--maroon)}
+.clone-is-this-for-you .fit.no .icon{color:var(--peach)}
+.clone-is-this-for-you .fit strong{font:800 19px 'Inter Tight',Inter,sans-serif;letter-spacing:-.01em}
+.clone-is-this-for-you .fit.no strong{color:#fff}
+
+@media(min-width:1600px){.clone-is-this-for-you .wrap{width:min(1320px,calc(100% - 160px))}}
+@media(max-width:1100px){
+  .clone-is-this-for-you{padding:88px 0}
+  .clone-is-this-for-you .wrap{width:calc(100% - 64px)}
+  .clone-is-this-for-you .fit-grid{grid-template-columns:1fr}
+}
+@media(max-width:800px){
+  .clone-is-this-for-you .wrap{width:calc(100% - 48px)}
+  .clone-is-this-for-you .title{font-size:clamp(29px,8.4vw,36px)}
+}
+@media(max-width:540px){
+  .clone-is-this-for-you{padding:66px 0}
+  .clone-is-this-for-you .wrap{width:calc(100% - 40px)}
+  .clone-is-this-for-you .fit{padding:28px 26px 30px;font-size:15px}
+}
+</style>
+
+<section class="clone-is-this-for-you">
+  <div class="wrap">
+    <h2 class="title">Is this <span class="it">for you?</span></h2>
+    <div class="fit-grid">
+      <div class="fit yes">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>
+        <p><strong>This is for you if</strong> you have more ideas than time, if you use AI but know you're only scratching the surface, or if you want to be the person at work, at school or in your field who knows how to make it actually do things.</p>
+      </div>
+      <div class="fit no">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        <p><strong>This isn't for you if</strong> you want a course to watch and never act on, or if you're looking for a coding bootcamp.</p>
+      </div>
+    </div>
+  </div>
+</section>
