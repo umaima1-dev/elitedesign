@@ -42,14 +42,16 @@ select{background:var(--ink);color:var(--cream);border:1px solid var(--line);bor
 </head>
 <body>
 <main>
- <h1>Folder → <em>Date Sorter</em></h1>
- <p class="sub">Pick a folder of photos, reels and videos. Everything gets sorted into date folders on your own device. Nothing is uploaded anywhere.</p>
+ <h1>Content → <em>Day Planner</em></h1>
+ <p class="sub">Pick a folder of photos, reels and videos. It spreads them across the upcoming days of this month, one folder per posting day, on your own device. Nothing is uploaded anywhere.</p>
 
  <div class="bar">
   <button id="pick">1. Choose folder</button>
-  <label>Group by
-   <select id="grp"><option value="day">Day</option><option value="month">Month</option><option value="year">Year</option></select></label>
-  <label><input type="checkbox" id="fname" checked> Use date in filename first</label>
+  <label>From <input type="date" id="d1"></label>
+  <label>To <input type="date" id="d2"></label>
+  <label>Order
+   <select id="ord"><option value="mix">Mix photos &amp; reels</option><option value="name">By file name</option><option value="old">Oldest first</option><option value="rand">Random</option></select></label>
+  <label><input type="checkbox" id="wk"> Skip weekends</label>
   <label><input type="checkbox" id="sub" checked> Include subfolders</label>
   <label>Mode
    <select id="mode"><option value="copy">Copy (safe)</option><option value="move">Move</option></select></label>
@@ -62,7 +64,7 @@ select{background:var(--ink);color:var(--cream);border:1px solid var(--line);bor
 
 <script>
 const $=id=>document.getElementById(id);
-const OUT='Sorted-by-date';
+const OUT='Content-Plan';
 const IMG=/\.(jpe?g|png|gif|webp|heic|heif|avif|bmp|tiff?)$/i, VID=/\.(mp4|mov|m4v|avi|mkv|webm|3gp)$/i;
 let root=null, items=[];
 
@@ -70,16 +72,34 @@ const icon=k=>k==='image'?'🖼️':k==='video'?'🎬':'📄';
 const pad=n=>String(n).padStart(2,'0');
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 
-function fileDate(f){
-  if($('fname').checked){
-    const m=f.name.match(/(20\d{2})[-_.]?(0[1-9]|1[0-2])[-_.]?(0[1-9]|[12]\d|3[01])/);
-    if(m) return new Date(+m[1],+m[2]-1,+m[3]);
+const iso=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const dayName=k=>new Date(k+'T00:00').toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'});
+(()=>{const t=new Date(); $('d1').value=iso(t); $('d2').value=iso(new Date(t.getFullYear(),t.getMonth()+1,0));})();
+
+function planDays(){
+  const days=[]; const a=new Date($('d1').value+'T00:00'), z=new Date($('d2').value+'T00:00');
+  for(let d=new Date(a); d<=z; d.setDate(d.getDate()+1)){
+    if($('wk').checked && [0,6].includes(d.getDay())) continue;
+    days.push(iso(d));
   }
-  return new Date(f.lastModified);
+  return days;
 }
-function keyOf(d){
-  const g=$('grp').value, y=d.getFullYear(), m=pad(d.getMonth()+1);
-  return g==='year'?`${y}`:g==='month'?`${y}-${m}`:`${y}-${m}-${pad(d.getDate())}`;
+function orderItems(list){
+  const o=$('ord').value, l=[...list];
+  if(o==='rand') return l.sort(()=>Math.random()-.5);
+  if(o==='old') return l.sort((x,y)=>x.file.lastModified-y.file.lastModified);
+  l.sort((x,y)=>x.name.localeCompare(y.name,undefined,{numeric:true}));
+  if(o==='name') return l;
+  const q={image:[],video:[],other:[]}; l.forEach(i=>q[i.kind].push(i));
+  const out=[]; while(q.image.length||q.video.length||q.other.length)
+    for(const k of ['video','image','other']) if(q[k].length) out.push(q[k].shift());
+  return out;
+}
+function plan(){
+  const days=planDays();
+  if(!days.length||!items.length){ items.forEach(i=>i.key=null); return; }
+  const list=orderItems(items), n=list.length, D=days.length;
+  list.forEach((it,i)=>{ it.key=days[Math.min(D-1,Math.floor(i*D/n))]; });
 }
 
 async function scan(dir,parent,out,deep){
@@ -94,17 +114,18 @@ async function scan(dir,parent,out,deep){
 }
 
 function render(){
-  const groups={};
-  for(const it of items){ (groups[it.key=keyOf(it.date)]??=[]).push(it); }
-  const keys=Object.keys(groups).sort();
+  plan();
+  const groups={}; planDays().forEach(d=>groups[d]=[]);
+  items.forEach(it=>it.key&&groups[it.key].push(it));
+  const keys=Object.keys(groups);
   $('stage').innerHTML=`<div class="stage">
     <div class="source" id="src"><div class="pile">📂</div><b id="left">${items.length}</b><small>files waiting</small></div>
     <div class="grid">${keys.map(k=>{
       const g=groups[k],c=t=>g.filter(i=>i.kind===t).length;
-      return `<div class="bucket" data-k="${k}"><span class="done">✓</span><h3>${k}</h3><div class="k">of ${g.length}</div>
+      return `<div class="bucket" data-k="${k}"><span class="done">✓</span><h3>${dayName(k)}</h3><div class="k">planned ${g.length}</div>
         <div class="n">0</div>
         <div class="k">🖼️ ${c('image')} · 🎬 ${c('video')} · 📄 ${c('other')}</div></div>`}).join('')}</div></div>`;
-  $('go').disabled=!items.length;
+  $('go').disabled=!items.length||!keys.length;
 }
 
 $('pick').onclick=async()=>{
@@ -112,11 +133,11 @@ $('pick').onclick=async()=>{
   try{ root=await showDirectoryPicker({mode:'readwrite'}); }catch{ return; }
   $('log').textContent='Reading folder…';
   const raw=[]; await scan(root,null,raw,$('sub').checked);
-  items=raw.map(r=>({...r,date:fileDate(r.file)}));
+  items=raw;
   $('log').textContent=`Found ${items.length} files in “${root.name}”.`;
   render();
 };
-['grp','fname'].forEach(id=>$(id).onchange=()=>{ if(items.length){ items.forEach(i=>i.date=fileDate(i.file)); render(); }});
+['d1','d2','ord','wk'].forEach(id=>$(id).onchange=()=>{ if(items.length) render(); });
 
 function fly(from,to,emoji){
   const a=from.getBoundingClientRect(), b=to.getBoundingClientRect();
@@ -175,7 +196,7 @@ $('go').onclick=async()=>{
     await sleep(40);
   }
   await Promise.all(pending);
-  $('log').textContent=`Done. ${items.length-failed} files sorted into “${OUT}” inside “${root.name}”.`+(failed?` ${failed} failed (see console).`:'');
+  $('log').textContent=`Done. ${items.length-failed} files planned into “${OUT}” inside “${root.name}”.`+(failed?` ${failed} failed (see console).`:'');
   $('pick').disabled=false;
 };
 </script>
