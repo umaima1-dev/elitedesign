@@ -1,0 +1,79 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@800;900&family=Instrument+Serif:ital@1&family=Manrope:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+.clone-built-around-your-life{
+  --ink:#1c1412;--deep:#2a0e12;--maroon:#7a1f2b;--peach:#ffb285;--cream:#fdf6ee;--body:#ded3cc;--warm:#584940;
+  width:100%;max-width:100%;box-sizing:border-box;overflow:hidden;
+  position:relative;isolation:isolate;padding:110px 0;
+  background-color:var(--deep);
+  background-image:linear-gradient(rgba(253,246,238,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(253,246,238,.035) 1px,transparent 1px),radial-gradient(120% 90% at 30% 40%,#6a1a26 0%,#50131d 45%,#2a0e12 100%);
+  background-size:64px 64px,64px 64px,cover;
+  color:var(--body);font:400 16px/1.75 'Open Sans',sans-serif;-webkit-font-smoothing:antialiased;
+}
+.clone-built-around-your-life *{box-sizing:border-box}
+.clone-built-around-your-life::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='grain' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='.7'/%3E%3C/svg%3E") repeat;
+  opacity:.19;mix-blend-mode:soft-light;
+}
+.clone-built-around-your-life-wrap{width:min(1240px,calc(100% - 96px));margin-inline:auto}
+
+.clone-built-around-your-life-head{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:end}
+.clone-built-around-your-life-title{
+  margin:0;font-family:'Inter Tight',Inter,sans-serif;font-weight:900;
+  font-size:clamp(30px,3.3vw,47px);line-height:1.06;letter-spacing:-.035em;
+  text-transform:uppercase;text-wrap:balance;color:var(--cream);
+}
+.clone-built-around-your-life-it{
+  font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;
+  text-transform:none;letter-spacing:-.02em;font-size:1.22em;line-height:1.02;
+  display:inline-block;padding-right:.06em;margin-left:.05em;color:var(--peach);
+}
+.clone-built-around-your-life-desc{margin:0;font-size:16px;color:var(--body);text-wrap:pretty}
+
+.clone-built-around-your-life-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:52px}
+.clone-built-around-your-life-card{background:var(--cream);color:var(--warm);border-radius:12px;padding:26px 26px 30px}
+.clone-built-around-your-life-label{display:block;font:700 10px/1.5 Manrope,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--maroon)}
+.clone-built-around-your-life-card-title{
+  margin:44px 0 0;font-family:'Inter Tight',Inter,sans-serif;font-size:25px;font-weight:900;
+  line-height:1.22;text-transform:uppercase;letter-spacing:-.03em;color:var(--ink);
+}
+.clone-built-around-your-life-card-desc{margin:10px 0 0;font-size:14.5px;line-height:1.65;color:var(--warm)}
+
+@media(min-width:1600px){.clone-built-around-your-life-wrap{width:min(1320px,calc(100% - 160px))}}
+@media(max-width:1100px){
+  .clone-built-around-your-life{padding:88px 0}
+  .clone-built-around-your-life-wrap{width:calc(100% - 64px)}
+  .clone-built-around-your-life-head{gap:56px}
+  .clone-built-around-your-life-grid{grid-template-columns:1fr 1fr}
+  .clone-built-around-your-life-card-title{margin-top:30px}
+}
+@media(max-width:800px){
+  .clone-built-around-your-life-wrap{width:calc(100% - 48px)}
+  .clone-built-around-your-life-head{grid-template-columns:1fr;gap:34px}
+  .clone-built-around-your-life-title{font-size:clamp(29px,8.4vw,36px)}
+}
+@media(max-width:540px){
+  .clone-built-around-your-life{padding:66px 0}
+  .clone-built-around-your-life-wrap{width:calc(100% - 40px)}
+  .clone-built-around-your-life-grid{grid-template-columns:1fr}
+  .clone-built-around-your-life-card-title{margin-top:22px}
+}
+</style>
+
+<section class="clone-built-around-your-life">
+  <div class="clone-built-around-your-life-wrap">
+    <div class="clone-built-around-your-life-head">
+      <h2 class="clone-built-around-your-life-title">Built around <span class="clone-built-around-your-life-it">your life.</span></h2>
+      <p class="clone-built-around-your-life-desc">You choose a track on Day 1 and every challenge is shaped around it.</p>
+    </div>
+    <div class="clone-built-around-your-life-grid">
+      <article class="clone-built-around-your-life-card"><span class="clone-built-around-your-life-label">Track 01</span><h3 class="clone-built-around-your-life-card-title">Students</h3><p class="clone-built-around-your-life-card-desc">Study guides, research and presentations</p></article>
+      <article class="clone-built-around-your-life-card"><span class="clone-built-around-your-life-label">Track 02</span><h3 class="clone-built-around-your-life-card-title">Professionals</h3><p class="clone-built-around-your-life-card-desc">Reports, briefings and the admin that eats your afternoons</p></article>
+      <article class="clone-built-around-your-life-card"><span class="clone-built-around-your-life-label">Track 03</span><h3 class="clone-built-around-your-life-card-title">Business owners</h3><p class="clone-built-around-your-life-card-desc">Leads, outreach, content and systems</p></article>
+      <article class="clone-built-around-your-life-card"><span class="clone-built-around-your-life-label">Track 04</span><h3 class="clone-built-around-your-life-card-title">Creators</h3><p class="clone-built-around-your-life-card-desc">Scripts, carousels and editing</p></article>
+    </div>
+  </div>
+</section>
