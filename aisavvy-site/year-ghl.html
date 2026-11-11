@@ -1,0 +1,69 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@900&family=Instrument+Serif:ital@1&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+.clone-year-2027{
+  --deep:#2a0e12;--peach:#ffb285;--cream:#fdf6ee;--body:#ded3cc;
+  width:100%;max-width:100%;box-sizing:border-box;overflow:hidden;
+  position:relative;isolation:isolate;padding:110px 0;
+  background-color:var(--deep);
+  background-image:linear-gradient(rgba(253,246,238,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(253,246,238,.035) 1px,transparent 1px),radial-gradient(120% 90% at 30% 40%,#6a1a26 0%,#50131d 45%,#2a0e12 100%);
+  background-size:64px 64px,64px 64px,cover;
+  color:var(--body);font:400 16px/1.75 'Open Sans',sans-serif;-webkit-font-smoothing:antialiased;
+}
+.clone-year-2027 *{box-sizing:border-box}
+.clone-year-2027::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='grain' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='.7'/%3E%3C/svg%3E") repeat;
+  opacity:.19;mix-blend-mode:soft-light;
+}
+.clone-year-2027 .clone-year-wrap{width:min(1240px,calc(100% - 96px));margin-inline:auto}
+.clone-year-2027 .clone-year-split{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:start}
+.clone-year-2027 .clone-year-heading{
+  margin:0 0 6px;font-family:'Inter Tight',Inter,sans-serif;font-weight:900;
+  font-size:clamp(30px,3.3vw,47px);line-height:1.06;letter-spacing:-.035em;
+  text-transform:uppercase;text-wrap:balance;color:var(--cream);
+}
+.clone-year-2027 .clone-year-it{
+  font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;
+  text-transform:none;letter-spacing:-.02em;font-size:1.22em;line-height:1.02;
+  display:inline-block;padding-right:.06em;margin-left:.05em;color:var(--peach);
+}
+.clone-year-2027 .clone-year-copy p{margin:0;font-size:15.5px;color:var(--body);text-wrap:pretty}
+.clone-year-2027 .clone-year-copy p+p{margin-top:20px}
+.clone-year-2027 .clone-year-footer{
+  margin:64px 0 0;padding:30px 0 0;border-top:1px solid #ffffff20;
+  font:600 15px/1.75 'Open Sans',sans-serif;color:var(--peach);
+}
+
+@media(min-width:1600px){.clone-year-2027 .clone-year-wrap{width:min(1320px,calc(100% - 160px))}}
+@media(max-width:1100px){
+  .clone-year-2027{padding:88px 0}
+  .clone-year-2027 .clone-year-wrap{width:calc(100% - 64px)}
+  .clone-year-2027 .clone-year-split{gap:56px}
+}
+@media(max-width:800px){
+  .clone-year-2027 .clone-year-wrap{width:calc(100% - 48px)}
+  .clone-year-2027 .clone-year-split{grid-template-columns:1fr;gap:34px}
+  .clone-year-2027 .clone-year-heading{font-size:clamp(29px,8.4vw,36px)}
+}
+@media(max-width:540px){
+  .clone-year-2027{padding:66px 0}
+  .clone-year-2027 .clone-year-wrap{width:calc(100% - 40px)}
+}
+</style>
+
+<section class="clone-year-2027">
+  <div class="clone-year-wrap">
+    <div class="clone-year-split">
+      <h2 class="clone-year-heading">2027 can look completely different <span class="clone-year-it">if you start now.</span></h2>
+      <div class="clone-year-copy">
+        <p>Most people will spend next year saying &ldquo;I really need to learn AI properly.&rdquo; A few will have already done it.</p>
+        <p>Those few become the most valuable person in the room. They&rsquo;re the one the team asks when nobody knows how to automate something, the student who finishes the research in an evening, and the freelancer who delivers faster than an agency. They&rsquo;re the person who gets considered first for the promotion, because they can do what the others are still googling.</p>
+        <p>Most people still use AI like a search box. Learning to command it and build with it puts you in the top 1% of your field. The skill isn&rsquo;t hard to learn. Hardly anyone has sat down and learned it properly.</p>
+      </div>
+    </div>
+    <p class="clone-year-footer">Fourteen days from now, you can be one of the few who has.</p>
+  </div>
+</section>
