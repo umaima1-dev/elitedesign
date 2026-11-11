@@ -1,0 +1,77 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Inter+Tight:wght@900&family=Instrument+Serif:ital@1&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+.clone-closing{
+  --ink:#1c1412;--deep:#2a0e12;--peach:#ffb285;--cream:#fdf6ee;--button:#d97757;--body:#ded3cc;--ease:cubic-bezier(.23,1,.32,1);
+  width:100%;max-width:100%;box-sizing:border-box;overflow:hidden;
+  position:relative;isolation:isolate;padding:96px 0;
+  background-color:var(--deep);
+  background-image:linear-gradient(rgba(253,246,238,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(253,246,238,.035) 1px,transparent 1px),radial-gradient(120% 90% at 30% 40%,#6a1a26 0%,#50131d 45%,#2a0e12 100%);
+  background-size:64px 64px,64px 64px,cover;
+  color:var(--body);font:400 16px/1.75 'Open Sans',sans-serif;-webkit-font-smoothing:antialiased;
+}
+.clone-closing *{box-sizing:border-box}
+.clone-closing::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='grain' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='.7'/%3E%3C/svg%3E") repeat;
+  opacity:.19;mix-blend-mode:soft-light;
+}
+.clone-closing-wrap{
+  width:min(1240px,calc(100% - 96px));margin-inline:auto;
+  display:flex;justify-content:space-between;align-items:center;gap:70px;
+}
+.clone-closing-h2{
+  margin:0;font-family:'Inter Tight',Inter,sans-serif;font-weight:900;
+  font-size:clamp(34px,4vw,56px);line-height:1.06;letter-spacing:-.035em;
+  text-transform:uppercase;text-wrap:balance;color:var(--cream);
+}
+.clone-closing-h2 .it{
+  font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;
+  text-transform:none;letter-spacing:-.02em;font-size:1.22em;line-height:1.02;
+  display:inline-block;padding-right:.06em;margin-left:.05em;color:var(--peach);
+}
+.clone-closing-p{max-width:620px;margin:24px 0 0;font-size:15.5px;color:var(--body);text-wrap:pretty}
+.clone-closing-p + .clone-closing-p{margin-top:14px}
+.clone-closing-btn{
+  display:inline-flex;justify-content:center;align-items:center;gap:22px;flex-shrink:0;
+  min-height:60px;padding:17px 26px;background:var(--button);color:var(--ink);
+  border:0;border-radius:6px;font:700 16px/1.3 Inter,sans-serif;text-align:center;text-decoration:none;cursor:pointer;
+  transition:background .18s ease,transform .16s var(--ease);
+}
+.clone-closing-btn:active{transform:scale(.97)}
+.clone-closing-btn .icon{
+  width:21px;height:21px;stroke:currentColor;stroke-width:1.7;fill:none;
+  stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;transition:transform .2s var(--ease);
+}
+.clone-closing-btn:focus-visible{outline:3px solid var(--peach);outline-offset:5px}
+@media(hover:hover) and (pointer:fine){
+  .clone-closing-btn:hover{background:#e78b6c}
+  .clone-closing-btn:hover .icon{transform:translateX(3px)}
+}
+@media(min-width:1600px){.clone-closing-wrap{width:min(1320px,calc(100% - 160px))}}
+@media(max-width:1100px){.clone-closing-wrap{width:calc(100% - 64px)}}
+@media(max-width:800px){
+  .clone-closing-wrap{width:calc(100% - 48px);flex-direction:column;align-items:flex-start;gap:30px}
+}
+@media(max-width:540px){
+  .clone-closing{padding:64px 0}
+  .clone-closing-wrap{width:calc(100% - 40px)}
+  .clone-closing-btn{width:100%}
+}
+</style>
+
+<section class="clone-closing">
+  <div class="clone-closing-wrap">
+    <div>
+      <h2 class="clone-closing-h2">Give yourself<br><span class="it">the head start.</span></h2>
+      <p class="clone-closing-p">In 14 days you'll know how to command AI, operate it and build with it. You'll have your own agents, your own Skills and your own number for the hours you got back.</p>
+      <p class="clone-closing-p">The people who learn this now will be the ones everyone else turns to next year. You can be one of them.</p>
+    </div>
+    <a class="clone-closing-btn" href="https://aisavvy-ai-fluent.netlify.app/#offer">
+      Become AI Fluent
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
