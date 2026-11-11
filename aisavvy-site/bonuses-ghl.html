@@ -1,0 +1,95 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@900&family=Instrument+Serif:ital@1&family=Manrope:wght@500;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+.clone-what-comes{
+  --ink:#1c1412;--maroon:#7a1f2b;--peach:#ffb285;--cream:#fdf6ee;--body:#ded3cc;--warm:#584940;
+  width:100%;max-width:100%;box-sizing:border-box;overflow:hidden;
+  padding:110px 0;background:var(--cream);color:var(--warm);
+  font:400 16px/1.75 'Open Sans',sans-serif;-webkit-font-smoothing:antialiased;
+}
+.clone-what-comes *{box-sizing:border-box}
+.clone-what-comes .clone-what-comes-wrap{width:min(1240px,calc(100% - 96px));margin-inline:auto}
+
+.clone-what-comes .clone-what-comes-title{
+  margin:0;font-family:'Inter Tight',Inter,sans-serif;font-weight:900;
+  font-size:clamp(30px,3.3vw,47px);line-height:1.06;letter-spacing:-.035em;
+  text-transform:uppercase;text-wrap:balance;color:var(--ink);
+}
+.clone-what-comes .clone-what-comes-it{
+  font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;
+  text-transform:none;letter-spacing:-.02em;font-size:1.22em;line-height:1.02;
+  display:inline-block;padding-right:.06em;margin-left:.05em;color:var(--maroon);
+}
+.clone-what-comes .clone-what-comes-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:52px}
+
+/* burgundy card */
+.clone-what-comes .clone-what-comes-card{
+  position:relative;isolation:isolate;overflow:hidden;border-radius:14px;color:var(--body);
+  padding:34px 36px 38px;
+  background:radial-gradient(120% 90% at 30% 30%,#6a1a26 0%,#50131d 45%,#2a0e12 100%);
+  border:1px solid rgba(255,214,190,.16);box-shadow:0 24px 50px rgba(42,14,18,.28);
+}
+.clone-what-comes .clone-what-comes-card::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='grain' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='.7'/%3E%3C/svg%3E") repeat;
+  opacity:.19;mix-blend-mode:soft-light;
+}
+.clone-what-comes .clone-what-comes-top{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.clone-what-comes .clone-what-comes-label{font:700 10px/1.5 Manrope,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#e6cfc6}
+.clone-what-comes .clone-what-comes-chip{
+  border:1px solid rgba(255,178,133,.5);border-radius:6px;padding:6px 12px;color:var(--peach);
+  font:700 12px Manrope,sans-serif;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;
+}
+.clone-what-comes .clone-what-comes-card-title{
+  margin:40px 0 0;max-width:430px;font-family:'Inter Tight',Inter,sans-serif;
+  color:var(--cream);font-size:27px;font-weight:900;text-transform:uppercase;letter-spacing:-.03em;line-height:1.08;
+}
+.clone-what-comes .clone-what-comes-card-desc{margin:14px 0 0;max-width:460px;font-size:15px;color:var(--body)}
+
+@media(min-width:1600px){.clone-what-comes .clone-what-comes-wrap{width:min(1320px,calc(100% - 160px))}}
+@media(max-width:1100px){
+  .clone-what-comes{padding:88px 0}
+  .clone-what-comes .clone-what-comes-wrap{width:calc(100% - 64px)}
+  .clone-what-comes .clone-what-comes-grid{grid-template-columns:1fr}
+}
+@media(max-width:800px){
+  .clone-what-comes .clone-what-comes-wrap{width:calc(100% - 48px)}
+  .clone-what-comes .clone-what-comes-title{font-size:clamp(29px,8.4vw,36px)}
+  .clone-what-comes .clone-what-comes-card{padding:28px 26px 30px}
+  .clone-what-comes .clone-what-comes-card-title{font-size:24px;margin-top:28px}
+}
+@media(max-width:540px){
+  .clone-what-comes{padding:66px 0}
+  .clone-what-comes .clone-what-comes-wrap{width:calc(100% - 40px)}
+}
+</style>
+
+<section class="clone-what-comes">
+  <div class="clone-what-comes-wrap">
+    <h2 class="clone-what-comes-title">What comes <span class="clone-what-comes-it">with it.</span></h2>
+    <div class="clone-what-comes-grid">
+      <article class="clone-what-comes-card">
+        <div class="clone-what-comes-top"><span class="clone-what-comes-label">Bonus course</span><span class="clone-what-comes-chip">$97 value</span></div>
+        <h3 class="clone-what-comes-card-title">Edit Your Reels With Claude</h3>
+        <p class="clone-what-comes-card-desc">My full reel editing course, for when Day 11 leaves you wanting more.</p>
+      </article>
+      <article class="clone-what-comes-card">
+        <div class="clone-what-comes-top"><span class="clone-what-comes-label">Finished agent</span><span class="clone-what-comes-chip">$17 value</span></div>
+        <h3 class="clone-what-comes-card-title">The Email Strategist Agent</h3>
+        <p class="clone-what-comes-card-desc">A finished agent you can take apart and learn from after Day 10. If you send emails or newsletters, it also audits them and tells you what to fix first.</p>
+      </article>
+      <article class="clone-what-comes-card">
+        <div class="clone-what-comes-top"><span class="clone-what-comes-label">Library</span><span class="clone-what-comes-chip">Included</span></div>
+        <h3 class="clone-what-comes-card-title">70+ Guides And SOPs</h3>
+        <p class="clone-what-comes-card-desc">My whole library, mapped to the day you'll need each one.</p>
+      </article>
+      <article class="clone-what-comes-card">
+        <div class="clone-what-comes-top"><span class="clone-what-comes-label">Support</span><span class="clone-what-comes-chip">$97 value</span></div>
+        <h3 class="clone-what-comes-card-title">21 Days Of Slack Support</h3>
+        <p class="clone-what-comes-card-desc">You can ask questions while you build and get help from people who've done it.</p>
+      </article>
+    </div>
+  </div>
+</section>
