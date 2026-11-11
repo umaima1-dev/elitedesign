@@ -1,0 +1,172 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&family=Inter+Tight:wght@900&family=Instrument+Serif:ital@1&family=Manrope:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+.clone-add-it-all-up{
+  --ink:#1c1412;--deep:#2a0e12;--maroon:#7a1f2b;--peach:#ffb285;--cream:#fdf6ee;--button:#d97757;--line:#dfd0c5;--ease:cubic-bezier(.23,1,.32,1);
+  width:100%;max-width:100%;box-sizing:border-box;overflow:hidden;
+  position:relative;isolation:isolate;padding:110px 0;
+  background-color:var(--deep);
+  background-image:linear-gradient(rgba(253,246,238,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(253,246,238,.035) 1px,transparent 1px),radial-gradient(120% 90% at 30% 40%,#6a1a26 0%,#50131d 45%,#2a0e12 100%);
+  background-size:64px 64px,64px 64px,cover;
+  color:#ded3cc;font:400 16px/1.75 'Open Sans',sans-serif;-webkit-font-smoothing:antialiased;
+}
+.clone-add-it-all-up *{box-sizing:border-box}
+.clone-add-it-all-up::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='grain' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='.7'/%3E%3C/svg%3E") repeat;
+  opacity:.19;mix-blend-mode:soft-light;
+}
+.clone-add-it-all-up .wrap{width:min(1240px,calc(100% - 96px));margin-inline:auto}
+.clone-add-it-all-up .offer-layout{display:grid;grid-template-columns:1.25fr .8fr;gap:96px;align-items:start}
+
+/* heading */
+.clone-add-it-all-up .offer-title{
+  margin:0 0 36px;font-family:'Inter Tight',Inter,sans-serif;font-weight:900;
+  font-size:clamp(30px,3.3vw,47px);line-height:1.06;letter-spacing:-.035em;
+  text-transform:uppercase;text-wrap:balance;color:var(--cream);
+}
+.clone-add-it-all-up .it{
+  font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;
+  text-transform:none;letter-spacing:-.02em;font-size:1.22em;line-height:1.02;
+  display:inline-block;padding-right:.06em;margin-left:.05em;
+}
+.clone-add-it-all-up .offer-title .it{color:var(--peach)}
+
+/* table */
+.clone-add-it-all-up .stack{width:100%;border-collapse:collapse}
+.clone-add-it-all-up .stack th{text-align:left;font:700 10px Manrope,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#d9bfb5;padding:0 0 14px}
+.clone-add-it-all-up .stack th:last-child,.clone-add-it-all-up .stack td:last-child{text-align:right;white-space:nowrap;padding-left:24px}
+.clone-add-it-all-up .stack td{padding:17px 0;border-top:1px solid #ffffff18;font-size:15px;line-height:1.55;color:#fff;font-weight:600;vertical-align:top}
+.clone-add-it-all-up .stack td:last-child{color:var(--peach);font:700 15px Inter,sans-serif}
+.clone-add-it-all-up .stack tfoot td{border-top:1px solid var(--peach);font:900 22px 'Inter Tight',Inter,sans-serif;text-transform:uppercase;letter-spacing:-.02em;padding-top:22px;color:var(--cream)}
+.clone-add-it-all-up .stack tfoot td:last-child{font:900 26px 'Inter Tight',Inter,sans-serif;color:var(--peach)}
+
+/* purchase panel */
+.clone-add-it-all-up .purchase-panel{background:var(--cream);padding:34px;border-radius:12px;color:var(--ink);position:sticky;top:120px;box-shadow:0 30px 60px #12050860}
+.clone-add-it-all-up .product-mark{display:flex;align-items:center;justify-content:space-between;gap:10px;color:var(--maroon);font:700 9px Manrope,sans-serif;letter-spacing:.12em}
+.clone-add-it-all-up .icon{width:24px;height:24px;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.clone-add-it-all-up .product-mark>.icon{width:28px;height:28px}
+.clone-add-it-all-up .purchase-panel h3{margin:30px 0 0;font-family:'Inter Tight',Inter,sans-serif;text-transform:uppercase;font-size:46px;line-height:1;font-weight:900;letter-spacing:-.04em;color:var(--ink)}
+.clone-add-it-all-up .purchase-panel h3 .it{color:var(--maroon);font-size:1.3em}
+.clone-add-it-all-up .was{margin:26px 0 0;font:700 11px Manrope,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#745e51}
+.clone-add-it-all-up .was s{color:var(--maroon);text-decoration-thickness:1.5px;font:800 17px Inter,sans-serif;letter-spacing:0;margin-left:.3em}
+.clone-add-it-all-up .price{font:900 104px/1 'Inter Tight',Inter,sans-serif;letter-spacing:-.06em;margin-top:6px;color:var(--maroon)}
+.clone-add-it-all-up .price>span{font-size:50px;vertical-align:top;display:inline-block;margin-top:10px;margin-right:3px;letter-spacing:0}
+.clone-add-it-all-up .price-caption{margin:10px 0 0;font:700 10px Manrope,sans-serif;letter-spacing:.12em;color:#745e51}
+.clone-add-it-all-up .purchase-rule{height:1px;background:var(--line);margin:26px 0}
+.clone-add-it-all-up .purchase-note{margin:16px 0 0;font-size:12px;line-height:1.7;color:#6c564b}
+
+/* button */
+.clone-add-it-all-up .purchase-button{
+  display:inline-flex;justify-content:center;align-items:center;gap:12px;width:100%;
+  min-height:60px;padding:17px 14px;background:var(--button);color:var(--ink);
+  border:0;border-radius:6px;font:700 15px/1.3 Inter,sans-serif;text-align:center;text-decoration:none;cursor:pointer;
+  transition:background .18s ease,transform .16s var(--ease);
+}
+.clone-add-it-all-up .purchase-button:active{transform:scale(.97)}
+.clone-add-it-all-up .purchase-button .icon{width:21px;height:21px;transition:transform .2s var(--ease)}
+.clone-add-it-all-up .purchase-button:focus-visible{outline:3px solid var(--maroon);outline-offset:5px}
+@media(hover:hover) and (pointer:fine){
+  .clone-add-it-all-up .purchase-button:hover{background:#e78b6c}
+  .clone-add-it-all-up .purchase-button:hover .icon{transform:translateX(3px)}
+}
+
+/* "checkout not open yet" dialog (shown only when no checkout URL is set) */
+.clone-add-it-all-up dialog{width:min(460px,calc(100% - 40px));background:var(--cream);color:var(--ink);border:0;border-radius:12px;padding:38px}
+.clone-add-it-all-up dialog::backdrop{background:#120508c9}
+.clone-add-it-all-up dialog form{position:relative;margin:0}
+.clone-add-it-all-up dialog h2{margin:8px 0 0;font:900 32px/1.06 'Inter Tight',Inter,sans-serif;letter-spacing:-.035em;text-transform:uppercase;color:var(--ink)}
+.clone-add-it-all-up dialog p{margin:18px 0 26px;font-size:15px;color:#584940}
+.clone-add-it-all-up .dialog-close{position:absolute;right:-16px;top:-23px;width:44px;height:44px;border:0;background:none;font-size:30px;cursor:pointer;color:var(--maroon)}
+.clone-add-it-all-up dialog .purchase-button{width:100%}
+
+@media(min-width:1600px){.clone-add-it-all-up .wrap{width:min(1320px,calc(100% - 160px))}}
+@media(max-width:1100px){
+  .clone-add-it-all-up{padding:88px 0}
+  .clone-add-it-all-up .wrap{width:calc(100% - 64px)}
+  .clone-add-it-all-up .offer-layout{gap:50px}
+  .clone-add-it-all-up .purchase-panel{padding:26px}
+  .clone-add-it-all-up .purchase-panel h3{font-size:40px}
+}
+@media(max-width:800px){
+  .clone-add-it-all-up .wrap{width:calc(100% - 48px)}
+  .clone-add-it-all-up .offer-layout{grid-template-columns:1fr;gap:34px}
+  .clone-add-it-all-up .offer-title{font-size:clamp(29px,8.4vw,36px)}
+  .clone-add-it-all-up .stack td{font-size:14px}
+  .clone-add-it-all-up .stack tfoot td{font-size:18px}
+  .clone-add-it-all-up .stack tfoot td:last-child{font-size:22px}
+  .clone-add-it-all-up .purchase-panel{position:relative;top:auto;padding:26px}
+  .clone-add-it-all-up .purchase-panel h3{font-size:42px}
+  .clone-add-it-all-up .price{font-size:92px}
+  .clone-add-it-all-up .purchase-button{font-size:14px;gap:8px}
+}
+@media(max-width:540px){
+  .clone-add-it-all-up{padding:66px 0}
+  .clone-add-it-all-up .wrap{width:calc(100% - 40px)}
+}
+</style>
+
+<section class="clone-add-it-all-up" id="offer" aria-labelledby="offer-title">
+  <div class="wrap offer-layout">
+    <div class="offer-content">
+      <h2 class="offer-title" id="offer-title">Add it <span class="it">all up.</span></h2>
+      <table class="stack">
+        <thead><tr><th scope="col">What you get</th><th scope="col">Value</th></tr></thead>
+        <tbody>
+          <tr><td>14 recorded lessons + every template, file, prompt and agent template (lifetime access)</td><td>$997+</td></tr>
+          <tr><td>21 days of Slack support</td><td>$97</td></tr>
+          <tr><td>Edit Your Reels With Claude</td><td>$97</td></tr>
+          <tr><td>Email Strategist Agent</td><td>$17</td></tr>
+          <tr><td>70+ guides and SOPs</td><td>Included</td></tr>
+          <tr><td>Certificate of completion</td><td>Included</td></tr>
+          <tr><td>A community of people building alongside you</td><td>Priceless</td></tr>
+        </tbody>
+        <tfoot><tr><td>Total value</td><td>$1,208+</td></tr></tfoot>
+      </table>
+    </div>
+    <aside class="purchase-panel">
+      <div class="product-mark">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        <span>AI SAVVY FOUNDERS</span>
+      </div>
+      <h3>AI<br><span class="it">Fluent.</span></h3>
+      <p class="was">Total value <s>$1,208+</s></p>
+      <div class="price"><span>$</span>97</div>
+      <p class="price-caption">YOUR PRICE</p>
+      <div class="purchase-rule"></div>
+      <button class="purchase-button" type="button" data-cn-checkout>Give Yourself The Head Start <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
+      <p class="purchase-note">Recorded lessons, start the day you join. No code needed.</p>
+    </aside>
+  </div>
+
+  <dialog id="cn-checkout-dialog" aria-labelledby="cn-checkout-title">
+    <form method="dialog">
+      <button class="dialog-close" aria-label="Close checkout information">&times;</button>
+      <h2 id="cn-checkout-title">Doors open<br>soon.</h2>
+      <p>Checkout isn't open on this page yet.</p>
+      <button class="purchase-button">Back to the page <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
+    </form>
+  </dialog>
+</section>
+
+<script>
+(function () {
+  /* EDIT THIS: final HTTPS checkout link. Leave blank to show the "Doors open soon" popup. */
+  var CHECKOUT_URL = "";
+  var dialog = document.getElementById('cn-checkout-dialog');
+  var valid = false;
+  try { valid = new URL(CHECKOUT_URL).protocol === 'https:'; } catch (e) {}
+  document.querySelectorAll('[data-cn-checkout]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (valid) window.location.assign(CHECKOUT_URL);
+      else if (dialog && dialog.showModal) dialog.showModal();
+    });
+  });
+  if (dialog) dialog.addEventListener('click', function (e) {
+    var r = dialog.getBoundingClientRect();
+    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) dialog.close();
+  });
+})();
+</script>
