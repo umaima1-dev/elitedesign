@@ -1,0 +1,108 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@800;900&family=Instrument+Serif:ital@1&family=Manrope:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+.clone-what-you-build{
+  --ink:#1c1412;--maroon:#7a1f2b;--peach:#ffb285;--cream:#fdf6ee;--body:#ded3cc;--line:#dfd0c5;--warm:#584940;
+  width:100%;max-width:100%;box-sizing:border-box;overflow:hidden;
+  padding:110px 0;background:var(--cream);color:var(--warm);
+  font:400 16px/1.75 'Open Sans',sans-serif;-webkit-font-smoothing:antialiased;
+}
+.clone-what-you-build *{box-sizing:border-box}
+.clone-what-you-build .wrap{width:min(1240px,calc(100% - 96px));margin-inline:auto}
+.clone-what-you-build h2,.clone-what-you-build h3,.clone-what-you-build p{margin:0}
+.clone-what-you-build h2,.clone-what-you-build h3{font-family:'Inter Tight',Inter,sans-serif;color:var(--ink)}
+.clone-what-you-build h2{font-weight:900;font-size:clamp(30px,3.3vw,47px);line-height:1.06;letter-spacing:-.035em;text-transform:uppercase;text-wrap:balance}
+.clone-what-you-build h3{font-size:21px;font-weight:800;line-height:1.22;letter-spacing:-.02em}
+.clone-what-you-build p{text-wrap:pretty}
+.clone-what-you-build .it{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.02em;font-size:1.22em;line-height:1.02;display:inline-block;padding-right:.06em;margin-left:.05em;color:var(--maroon)}
+
+.clone-what-you-build .cur-head{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:end;margin-bottom:64px}
+.clone-what-you-build .cur-head p{font-size:16px;max-width:520px}
+.clone-what-you-build .block{display:grid;grid-template-columns:300px 1fr;gap:64px;padding:44px 0;border-top:1px solid var(--line)}
+
+.clone-what-you-build .gcard{position:relative;isolation:isolate;overflow:hidden;border-radius:14px;color:var(--body);background:radial-gradient(120% 90% at 30% 30%,#6a1a26 0%,#50131d 45%,#2a0e12 100%);border:1px solid rgba(255,214,190,.16);box-shadow:0 24px 50px rgba(42,14,18,.28)}
+.clone-what-you-build .gcard::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='grain' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='.7'/%3E%3C/svg%3E") repeat;opacity:.19;mix-blend-mode:soft-light}
+.clone-what-you-build .block-card{padding:28px 28px 30px;position:sticky;top:120px;align-self:start}
+.clone-what-you-build .label{display:block;font:700 10px/1.5 Manrope,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--peach)}
+.clone-what-you-build .block-card h3{color:var(--cream);font-size:27px;font-weight:900;line-height:1.05;text-transform:uppercase;letter-spacing:-.03em;margin-top:14px}
+.clone-what-you-build .block-card .days{display:block;margin-top:34px;padding-top:16px;border-top:1px solid rgba(255,214,190,.18);font:600 11px Manrope,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#e6cfc6}
+
+.clone-what-you-build .day{display:grid;grid-template-columns:74px 1fr;gap:18px;padding:22px 0;border-top:1px solid var(--line)}
+.clone-what-you-build .day:first-child{border-top:0;padding-top:4px}
+.clone-what-you-build .day-num{font:900 40px/1 'Inter Tight',Inter,sans-serif;letter-spacing:-.045em;color:var(--maroon)}
+.clone-what-you-build .day p{font-size:15px;margin-top:8px;max-width:640px;color:var(--warm)}
+
+@media(min-width:1600px){.clone-what-you-build .wrap{width:min(1320px,calc(100% - 160px))}}
+@media(max-width:1100px){
+  .clone-what-you-build{padding:88px 0}
+  .clone-what-you-build .wrap{width:calc(100% - 64px)}
+  .clone-what-you-build .cur-head{gap:56px}
+  .clone-what-you-build .block{grid-template-columns:240px 1fr;gap:40px}
+}
+@media(max-width:800px){
+  .clone-what-you-build .wrap{width:calc(100% - 48px)}
+  .clone-what-you-build h2{font-size:clamp(29px,8.4vw,36px)}
+  .clone-what-you-build .cur-head{grid-template-columns:1fr;gap:34px}
+  .clone-what-you-build .block{grid-template-columns:1fr;gap:26px;padding:36px 0}
+  .clone-what-you-build .block-card{position:relative;top:auto}
+  .clone-what-you-build .block-card .days{margin-top:20px}
+  .clone-what-you-build .day{grid-template-columns:54px 1fr;gap:12px}
+  .clone-what-you-build .day-num{font-size:31px}
+  .clone-what-you-build .day h3{font-size:19px}
+  .clone-what-you-build .block-card h3{font-size:24px}
+}
+@media(max-width:540px){
+  .clone-what-you-build{padding:66px 0}
+  .clone-what-you-build .wrap{width:calc(100% - 40px)}
+}
+</style>
+
+<section class="clone-what-you-build" id="curriculum">
+  <div class="wrap">
+    <div class="cur-head">
+      <h2>What you build, <span class="it">day by day.</span></h2>
+      <p>Every lesson follows the same rhythm. You learn the idea, watch me build it, then build your own version using your real work.</p>
+    </div>
+
+      <div class="block">
+        <div class="gcard block-card"><span class="label">Section One</span><h3>Foundations</h3><span class="days">Days 01 to 02</span></div>
+        <div>
+          <article class="day"><span class="day-num">01</span><div><h3>Claude Fundamentals</h3><p>Where everything lives, which model to use for which job, and why long chats go off the rails. Then the part people don't expect: Claude using your computer for you. You finish with your setup done and a time audit of your week, which becomes the number you measure everything against.</p></div></article>
+          <article class="day"><span class="day-num">02</span><div><h3>Your Context System</h3><p>You build an organised folder system on your own computer, so Claude knows who you are, how you work and what every project is about. This is the day you stop explaining yourself from scratch.</p></div></article>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="gcard block-card"><span class="label">Section Two</span><h3>Claude In Real Work</h3><span class="days">Days 03 to 07</span></div>
+        <div>
+          <article class="day"><span class="day-num">03</span><div><h3>Writing In Your Voice</h3><p>Your own writing becomes a voice Skill, so every email, essay and post after this sounds like you wrote it on a good day.</p></div></article>
+          <article class="day"><span class="day-num">04</span><div><h3>Claude For Design</h3><p>Your style becomes a design system Skill. You build a carousel, a page and a slide deck that all look like they belong together.</p></div></article>
+          <article class="day"><span class="day-num">05</span><div><h3>Content</h3><p>Hooks, scripts and captions, plus how one idea becomes a week of posts.</p></div></article>
+          <article class="day"><span class="day-num">06</span><div><h3>Your Tools, Data And Documents</h3><p>Claude connected to your inbox, calendar and Drive. The 40-page PDF you've been avoiding gets summarised, compared with last year's version and turned into a chart.</p></div></article>
+          <article class="day"><span class="day-num">07</span><div><h3>Growth</h3><p>Finding the right people, researching them and writing messages that mention what they actually do. You can use it for clients, job applications, networking or research.</p></div></article>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="gcard block-card"><span class="label">Section Three</span><h3>Claude Code And AI Agents</h3><span class="days">Days 08 to 11</span></div>
+        <div>
+          <article class="day"><span class="day-num">08</span><div><h3>Claude Code Foundations</h3><p>It looks intimidating for about ten minutes. You learn the two habits that make it easy. Claude interviews you before it starts anything, and it shows you a plan before it touches a single file.</p></div></article>
+          <article class="day"><span class="day-num">09</span><div><h3>Anatomy Of An AI Agent</h3><p>Every agent has the same seven parts. Once you can see them, agents stop feeling like magic and become something you can design.</p></div></article>
+          <article class="day"><span class="day-num">10</span><div><h3>Build Your First Agent</h3><p>You build a real agent for a real task from your own week. It only gets the access it needs, it asks before anything goes out, and it runs on a schedule while you sleep.</p></div></article>
+          <article class="day"><span class="day-num">11</span><div><h3>Creative Work With Claude Code</h3><p>You edit a short video with captions and motion graphics in your own colours, without opening editing software.</p></div></article>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="gcard block-card"><span class="label">Section Four</span><h3>Build Your Own AI Toolkit</h3><span class="days">Days 12 to 14</span></div>
+        <div>
+          <article class="day"><span class="day-num">12</span><div><h3>Your Skills Library</h3><p>Every task you repeat becomes a Skill, so Claude does it your way every time.</p></div></article>
+          <article class="day"><span class="day-num">13</span><div><h3>Your Own Apps And Dashboards</h3><p>You describe a tracker or a dashboard in plain English, and by the end of the lesson you're using it.</p></div></article>
+          <article class="day"><span class="day-num">14</span><div><h3>Capstone And Scorecard</h3><p>You finish your final project, then audit your week again and compare it with Day 1. You leave with your own number for the hours you got back, plus a certificate.</p></div></article>
+        </div>
+      </div>
+
+  </div>
+</section>
