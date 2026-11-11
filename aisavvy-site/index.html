@@ -1,0 +1,831 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- This site is hosted on Netlify. Anyone can build and deploy a site
+     like this one for free: https://netlify.new/?utm_campaign=loops&utm_source=ai-legible&utm_medium=owned&utm_content=comment&utm_id=8f1c89d3-786e-4471-91a1-6463f3d43992
+     Netlify hosting facts for this site: static/SSR served via Netlify Edge. -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2A0E12">
+<meta name="description" content="Become AI fluent in 14 days. Command, operate and put AI to work with one recorded lesson a day, real builds and no code.">
+<title>AI Fluent | AI Savvy Founders</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&family=Inter+Tight:wght@700;800;900&family=Instrument+Serif:ital@1&family=Open+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<script>
+/* ============ EDIT THESE BEFORE GOING LIVE ============ */
+window.AI_FLUENT_CONFIG = {
+  checkoutUrl: "",          // final HTTPS checkout link. Blank = buttons scroll to the offer.
+  startDate:   "3 December",       // text shown in the top bar, e.g. "1 December"
+  doorsClose:  "2026-12-03T00:00:00+04:00"        // countdown target, e.g. "2026-11-30T23:59:00+04:00"
+};
+</script>
+
+<style>
+:root{--ink:#1c1412;--deep:#2a0e12;--maroon:#7a1f2b;--wine:#50131d;--rust:#d36b48;--button:#d97757;--peach:#ffb285;--cream:#fdf6ee;--body:#ded3cc;--line:#dfd0c5;--warm:#584940;--ease:cubic-bezier(.23,1,.32,1);--header-height:84px;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+body{margin:0;background:var(--deep);color:var(--body);font:400 16px/1.75 'Open Sans',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body:has(dialog[open]){overflow:hidden}
+a{color:inherit;text-decoration:none}button{font:inherit}img{max-width:100%;display:block}
+h1,h2,h3,p,figure,blockquote{margin:0}
+h1,h2,h3{font-family:'Inter Tight',Inter,sans-serif;color:var(--ink)}
+h1,h2{font-weight:900;line-height:1.06;letter-spacing:-.035em;text-transform:uppercase;text-wrap:balance}
+h2{font-size:clamp(30px,3.3vw,47px)}
+h3{font-size:21px;font-weight:800;line-height:1.22;letter-spacing:-.02em}
+p{text-wrap:pretty}p+p{margin-top:20px}strong{font-weight:700}
+.wrap{width:min(1240px,calc(100% - 96px));margin-inline:auto}
+.section{padding:110px 0}
+.icon{width:24px;height:24px;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.icon-definitions{position:absolute;width:0;height:0;overflow:hidden}
+:focus-visible{outline:3px solid var(--peach);outline-offset:5px}
+.light :focus-visible,.peach-band :focus-visible,.purchase-panel :focus-visible{outline-color:var(--maroon)}
+.skip-link{position:fixed;top:10px;left:10px;padding:12px 20px;background:var(--cream);color:var(--ink);z-index:60;transform:translateY(-200%)}
+.skip-link:focus{transform:translateY(0)}
+
+/* the accent: one italic serif phrase per headline */
+.it{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.02em;font-size:1.22em;line-height:1.02;display:inline-block;padding-right:.06em;margin-left:.05em}
+.dark .it{color:var(--peach)}
+.light .it,.peach-band .it{color:var(--maroon)}
+
+/* grounds */
+.dark,.header,.footer{isolation:isolate;position:relative;background-color:var(--deep);
+  background-image:linear-gradient(rgba(253,246,238,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(253,246,238,.035) 1px,transparent 1px),radial-gradient(120% 90% at 30% 40%,#6a1a26 0%,#50131d 45%,#2a0e12 100%);
+  background-size:64px 64px,64px 64px,cover}
+.dark::before,.header::before,.footer::before,.gcard::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:url('assets/grain.svg') repeat;opacity:.19;mix-blend-mode:soft-light}
+.header{background-image:radial-gradient(120% 90% at 30% 40%,#46131c 0%,#351016 60%,#2a0e12 100%);background-size:cover}
+.footer{background-image:radial-gradient(120% 90% at 30% 40%,#50131d 0%,#351016 60%,#2a0e12 100%);background-size:cover}
+.dark h2{color:var(--cream)}
+.dark strong{color:#fff}
+.light{background:var(--cream);color:var(--warm);color-scheme:light}
+.peach-band{background:var(--peach);color:var(--ink);color-scheme:light;padding:78px 0}
+/* the burgundy card */
+.gcard{position:relative;isolation:isolate;overflow:hidden;border-radius:14px;color:var(--body);background:radial-gradient(120% 90% at 30% 30%,#6a1a26 0%,#50131d 45%,#2a0e12 100%);border:1px solid rgba(255,214,190,.16);box-shadow:0 24px 50px rgba(42,14,18,.28)}
+
+.eyebrow,.label{font:700 11px/1.5 Manrope,sans-serif;letter-spacing:.16em;text-transform:uppercase}
+.eyebrow{color:var(--peach)}
+.light .eyebrow{color:var(--maroon)}
+.tbc{outline:1px dashed currentColor;outline-offset:1px;padding:0 .3em;margin:0 .25em;border-radius:3px;white-space:nowrap}
+
+.button{display:inline-flex;justify-content:center;align-items:center;gap:22px;min-height:60px;padding:17px 26px;background:var(--button);color:var(--ink);border:0;border-radius:6px;font:700 16px/1.3 Inter,sans-serif;cursor:pointer;transition:background .18s ease,transform .16s var(--ease);text-align:center}
+.button .icon{width:21px;height:21px;transition:transform .2s var(--ease)}
+.button:active{transform:scale(.97)}
+.button-small{min-height:44px;font-size:13px;padding:12px 17px;gap:10px}
+
+/* announcement */
+.announce{background:var(--peach);color:var(--ink);font:600 13px/1.4 Manrope,sans-serif;letter-spacing:.04em;text-align:center;padding:10px 20px}
+.announce b{font:800 14px Inter,sans-serif;font-variant-numeric:tabular-nums;margin-left:.3em}
+.announce .sep{opacity:.45;margin:0 .7em}
+.announce small{font:700 10px Manrope,sans-serif;letter-spacing:.14em;margin-left:.25em}
+
+/* header */
+.header{position:sticky;top:0;z-index:20;border-bottom:1px solid #ffffff15}
+.nav{display:flex;align-items:center;justify-content:space-between;height:var(--header-height);gap:25px}
+.brand img{width:172px;height:auto}
+.nav-links{display:flex;align-items:center;gap:30px;font:500 13px 'Open Sans',sans-serif}
+.nav-links a{padding:12px 0;color:#e5d8d0;transition:color .15s}
+
+/* hero */
+.hero{padding-top:70px;overflow:hidden}
+.hero-layout{display:grid;grid-template-columns:1fr 1.12fr;gap:56px;align-items:center;padding-bottom:70px}
+.hero h1{color:var(--cream);font-size:clamp(46px,5.5vw,80px);line-height:1;letter-spacing:-.04em;margin-top:22px}
+.hero h1 .it{font-size:1.2em;line-height:1.06;margin-top:.04em}
+.hero-lead{font-size:19px;font-weight:600;color:#fff;line-height:1.55;margin-top:28px;max-width:520px}
+.hero-description{font-size:15px;margin-top:18px;max-width:540px}
+.hero-description+.hero-description{margin-top:14px;color:#fff;font-weight:600}
+.hero-copy>.button{margin-top:30px}
+.hero-note{font-size:13px;font-style:italic;color:#d9c3ba;margin-top:16px}
+.hero-art{position:relative;min-width:0;margin:0 -30px 0 -10px}
+.hero-art svg{display:block;width:100%;height:auto;overflow:visible}
+.hero-art .sh{filter:drop-shadow(0 22px 26px rgba(14,3,5,.55))}
+.hero-art .sh-s{filter:drop-shadow(0 12px 16px rgba(14,3,5,.5))}
+.hero-art .doodle path,.robot *{fill:none;stroke:var(--peach);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.robot .fill{fill:var(--peach);stroke:none}
+.hero-art .doodle text{font:italic 400 31px 'Instrument Serif',Georgia,serif;fill:var(--peach);stroke:none}
+.animate-intro .float{animation:art-in .7s var(--ease) both}
+.animate-intro .float:nth-of-type(2){animation-duration:.85s;animation-delay:0s}.animate-intro .float:nth-of-type(1){animation-delay:.14s}
+.animate-intro .float:nth-of-type(3){animation-delay:.3s}.animate-intro .float:nth-of-type(4){animation-delay:.22s}.animate-intro .float:nth-of-type(5){animation-delay:.38s}
+.animate-intro .doodle{animation:fade-in .6s .7s ease both}
+@keyframes art-in{from{opacity:0;translate:0 22px}to{opacity:1;translate:0 0}}
+@keyframes fade-in{from{opacity:0}to{opacity:1}}
+
+/* five tiles */
+.tiles{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid #ffffff20}
+.tile{padding:26px 22px 30px 0}
+.tile+.tile{padding-left:22px;border-left:1px solid #ffffff14}
+.tile strong{display:block;font:900 20px/1.15 'Inter Tight',Inter,sans-serif;text-transform:uppercase;letter-spacing:-.02em;color:var(--cream)}
+.tile span{display:block;font-size:13px;line-height:1.55;margin-top:8px;color:#d9c8c0}
+
+/* shared layouts */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:start}
+.split p,.cols3 p,.band-copy p,.lede-copy p{font-size:15.5px}
+.strong-copy{color:var(--maroon);font-weight:700}
+.dark .strong-copy{color:var(--peach)}
+
+/* jobs */
+.jobs .split{grid-template-columns:1.05fr .9fr;gap:90px;align-items:center}
+.jobs h2{margin-bottom:28px}
+.stat-card{padding:38px 40px;transform:rotate(1.5deg)}
+.stat-card .label{color:var(--peach);font-size:10px;line-height:1.7;display:block;max-width:300px}
+.stat{font:900 clamp(56px,6vw,84px)/1 'Inter Tight',Inter,sans-serif;letter-spacing:-.045em;color:var(--cream);margin-top:22px}
+.stat-text{font-size:15px;line-height:1.6;color:var(--body);margin-top:8px;max-width:340px}
+.rings{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:22px}
+.ring{margin:0}.ring svg{width:100%;max-width:176px;display:block}
+.ring .track{fill:none;stroke:rgba(255,214,190,.14);stroke-width:13}
+.ring .arc{fill:none;stroke:var(--peach);stroke-width:13;stroke-linecap:round}
+.ring:nth-child(2) .arc{stroke:var(--rust)}
+.ring text{font:900 34px 'Inter Tight',Inter,sans-serif;letter-spacing:-1.5px;fill:var(--cream)}
+.ring figcaption{font-size:14px;line-height:1.55;margin-top:16px;color:var(--body)}
+.ring .stat-lead{display:block;margin:0 0 12px}
+.stat-rule{height:1px;background:rgba(255,214,190,.18);margin:26px 0 0}
+.stat-lead{font:600 13px 'Open Sans',sans-serif;color:var(--peach);margin-top:22px}
+.stat-lead+.stat{margin-top:6px}
+
+/* ideas */
+.ideas h2{max-width:760px}
+.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:54px;margin-top:52px;padding-top:36px;border-top:1px solid #ffffff20}
+.cols3 p{margin:0}
+
+/* band */
+.band-layout{display:grid;grid-template-columns:1.05fr 1fr;gap:90px;align-items:center}
+.band-copy{border-left:1px solid #7a1f2b45;padding-left:46px}
+.band-copy p.band-lead{font:800 23px/1.35 'Inter Tight',Inter,sans-serif;letter-spacing:-.015em;color:var(--ink)}
+
+/* how i use it */
+.how .split{grid-template-columns:.9fr 1.1fr}
+.split p.how-lead{font:800 clamp(24px,2.5vw,34px)/1.2 'Inter Tight',Inter,sans-serif;letter-spacing:-.025em;color:var(--ink);margin-top:26px}
+
+/* 2027 */
+.year h2{margin-bottom:6px}
+.year-footer{margin-top:64px;padding:30px 0 0;border-top:1px solid #ffffff20;font:600 15px 'Open Sans',sans-serif;color:var(--peach)}
+
+/* founder */
+.founder-layout{display:grid;grid-template-columns:.86fr 1.05fr;gap:96px;align-items:center}
+.founder-photo{position:relative;border-radius:12px;height:580px;isolation:isolate}
+.founder-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;border-radius:12px}
+.photo-tint{position:absolute;inset:0;border-radius:12px;background:linear-gradient(0deg,rgba(28,20,18,.85),transparent 42%);pointer-events:none}
+.founder-photo figcaption{position:absolute;bottom:27px;left:30px;color:#fff;display:flex;flex-direction:column;gap:4px}
+.founder-photo figcaption strong{font:800 24px 'Inter Tight',Inter,sans-serif}
+.founder-photo figcaption span{font:500 11px Manrope,sans-serif;letter-spacing:.05em}
+.founder-copy h2{font-size:clamp(34px,3.9vw,52px);margin-bottom:28px}
+.founder-lead{font-size:18px;font-weight:600;color:var(--ink);line-height:1.6}
+.founder-copy p:not(.founder-lead){font-size:15.5px}
+.signoff{border-top:1px solid var(--line);padding-top:24px;margin-top:30px;font:800 25px 'Inter Tight',Inter,sans-serif;letter-spacing:-.035em;color:var(--maroon)}
+
+/* testimonials */
+.quotes{display:grid;grid-template-columns:1.12fr 1fr;gap:34px;margin-top:50px;align-items:start}
+.quote{background:var(--cream);color:var(--warm);border-radius:14px;padding:38px 38px 32px;box-shadow:0 24px 50px #12050855;color-scheme:light}
+.quote:nth-child(2){margin-top:46px}
+.quote-mark{font:400 76px/.6 'Instrument Serif',Georgia,serif;font-style:italic;color:var(--rust);display:block;height:34px}
+.quote blockquote p{font-size:15.5px;line-height:1.8}
+.quote blockquote p:first-child{color:var(--ink);font-weight:600;font-size:17px;line-height:1.65}
+.quote-by{display:flex;align-items:center;gap:14px;margin-top:28px;padding-top:22px;border-top:1px solid var(--line)}
+.avatar{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 30% 30%,#8f3a49,#50131d);color:var(--cream);font:800 15px Inter,sans-serif;flex-shrink:0}
+.quote-by strong{display:block;font:800 16px 'Inter Tight',Inter,sans-serif;color:var(--ink)}
+.quote-by div span{font:700 10px Manrope,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--maroon)}
+.center-cta{display:flex;justify-content:center;margin-top:56px}
+
+/* curriculum */
+.cur-head{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:end;margin-bottom:64px}
+.cur-head p{font-size:16px;max-width:520px}
+.block{display:grid;grid-template-columns:300px 1fr;gap:64px;padding:44px 0;border-top:1px solid var(--line)}
+.block-card{padding:28px 28px 30px;position:sticky;top:120px;align-self:start}
+.block-card .label{color:var(--peach);font-size:10px}
+.block-card h3{color:var(--cream);font-size:27px;font-weight:900;line-height:1.05;text-transform:uppercase;letter-spacing:-.03em;margin-top:14px}
+.block-card .days{display:block;margin-top:34px;padding-top:16px;border-top:1px solid rgba(255,214,190,.18);font:600 11px Manrope,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#e6cfc6}
+.day{display:grid;grid-template-columns:74px 1fr;gap:18px;padding:22px 0;border-top:1px solid var(--line)}
+.day:first-child{border-top:0;padding-top:4px}
+.day-num{font:900 40px/1 'Inter Tight',Inter,sans-serif;letter-spacing:-.045em;color:var(--maroon)}
+.day h3{font-size:21px}
+.day p{font-size:15px;margin-top:8px;max-width:640px}
+
+/* tracks */
+.tracks-head{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:end}
+.tracks-head p{font-size:16px}
+.track-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:52px}
+.track{background:var(--cream);color:var(--warm);border-radius:12px;padding:26px 26px 30px;color-scheme:light}
+.track .label{color:var(--maroon);font-size:10px}
+.track h3{font-size:25px;font-weight:900;text-transform:uppercase;letter-spacing:-.03em;margin-top:44px}
+.track p{font-size:14.5px;line-height:1.65;margin-top:10px}
+
+/* bonuses */
+.bonus-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:52px}
+.bonus{padding:34px 36px 38px}
+.bonus-top{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.bonus-top .label{color:#e6cfc6;font-size:10px}
+.chip{border:1px solid rgba(255,178,133,.5);border-radius:6px;padding:6px 12px;color:var(--peach);font:700 12px Manrope,sans-serif;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.bonus h3{color:var(--cream);font-size:27px;font-weight:900;text-transform:uppercase;letter-spacing:-.03em;line-height:1.08;margin-top:40px;max-width:430px}
+.bonus p{font-size:15px;margin-top:14px;max-width:460px}
+
+/* offer */
+.offer-layout{display:grid;grid-template-columns:1.25fr .8fr;gap:96px;align-items:start}
+.offer-content h2{margin-bottom:36px}
+.stack{width:100%;border-collapse:collapse}
+.stack th{text-align:left;font:700 10px Manrope,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#d9bfb5;padding:0 0 14px}
+.stack th:last-child,.stack td:last-child{text-align:right;white-space:nowrap;padding-left:24px}
+.stack td{padding:17px 0;border-top:1px solid #ffffff18;font-size:15px;line-height:1.55;color:#fff;font-weight:600;vertical-align:top}
+.stack td:last-child{color:var(--peach);font:700 15px Inter,sans-serif}
+.stack tfoot td{border-top:1px solid var(--peach);font:900 22px 'Inter Tight',Inter,sans-serif;text-transform:uppercase;letter-spacing:-.02em;padding-top:22px;color:var(--cream)}
+.stack tfoot td:last-child{font:900 26px 'Inter Tight',Inter,sans-serif;color:var(--peach)}
+.purchase-panel{background:var(--cream);padding:34px;border-radius:12px;color:var(--ink);position:sticky;top:120px;color-scheme:light;box-shadow:0 30px 60px #12050860}
+.product-mark{display:flex;align-items:center;justify-content:space-between;gap:10px;color:var(--maroon);font:700 9px Manrope,sans-serif;letter-spacing:.12em}
+.product-mark>.icon{width:28px;height:28px}
+.purchase-panel h3{text-transform:uppercase;font-size:46px;line-height:1;font-weight:900;letter-spacing:-.04em;margin-top:30px}
+.purchase-panel h3 .it{color:var(--maroon);font-size:1.3em}
+.was{margin-top:26px;font:700 11px Manrope,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#745e51}
+.was s{color:var(--maroon);text-decoration-thickness:1.5px;font:800 17px Inter,sans-serif;letter-spacing:0;margin-left:.3em}
+.price{font:900 104px/1 'Inter Tight',Inter,sans-serif;letter-spacing:-.06em;margin-top:6px;color:var(--maroon)}
+.price>span{font-size:50px;vertical-align:top;display:inline-block;margin-top:10px;margin-right:3px;letter-spacing:0}
+.price-caption{font:700 10px Manrope,sans-serif;letter-spacing:.12em;margin-top:10px;color:#745e51}
+.purchase-rule{height:1px;background:var(--line);margin:26px 0}
+.purchase-button{width:100%;font-size:15px;padding-inline:14px;gap:12px}
+.purchase-note{font-size:12px;line-height:1.7;margin-top:16px;color:#6c564b}
+
+/* for you */
+.fit-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:48px}
+.fit{border-radius:12px;padding:34px 36px 38px;font-size:16px;line-height:1.75}
+.fit.yes{background:var(--cream);color:var(--warm);color-scheme:light}
+.fit.yes strong{color:var(--maroon)}
+.fit.no{border:1px solid #ffffff2b;background:rgba(253,246,238,.04)}
+.fit .icon{width:30px;height:30px;margin-bottom:22px}
+.fit.yes .icon{color:var(--maroon)}.fit.no .icon{color:var(--peach)}
+.fit strong{font:800 19px 'Inter Tight',Inter,sans-serif;letter-spacing:-.01em}
+
+/* faq */
+.faq-layout{display:grid;grid-template-columns:.7fr 1.3fr;gap:90px}
+.faq-list details{border-bottom:1px solid var(--line)}
+.faq-list details:first-child{border-top:1px solid var(--line)}
+summary{padding:24px 0;display:flex;align-items:center;justify-content:space-between;gap:20px;cursor:pointer;list-style:none;font:700 17px/1.5 Inter,sans-serif;color:var(--ink)}
+summary::-webkit-details-marker{display:none}
+summary>.icon{width:20px;height:20px;color:var(--maroon);transition:transform .2s var(--ease)}
+details[open] summary>.icon{transform:rotate(45deg)}
+.faq-answer{padding:0 40px 26px 0;font-size:15px;line-height:1.8}
+
+/* closing + footer */
+.closing{padding:96px 0}
+.closing-layout{display:flex;justify-content:space-between;align-items:center;gap:70px}
+.closing h2{font-size:clamp(34px,4vw,56px)}
+.closing p{max-width:620px;font-size:15.5px;margin-top:24px}
+.closing p+p{margin-top:14px}
+.closing .button{flex-shrink:0}
+.footer{border-top:1px solid #ffffff18;padding:30px 0}
+.footer-layout{display:flex;justify-content:space-between;align-items:center;gap:25px;font-size:12px}
+.footer .brand img{width:147px}
+.footer-layout>a:last-child{color:var(--peach)}
+.mobile-offer{display:none}
+dialog{width:min(460px,calc(100% - 40px));background:var(--cream);color:var(--ink);border:0;border-radius:12px;padding:38px;color-scheme:light}
+dialog::backdrop{background:#120508c9}
+dialog form{position:relative}
+dialog h2{font-size:32px;margin-top:8px}
+dialog p{font-size:15px;margin-top:18px;margin-bottom:26px}
+.dialog-close{position:absolute;right:-16px;top:-23px;width:44px;height:44px;border:0;background:none;font-size:30px;cursor:pointer;color:var(--maroon)}
+dialog .button{width:100%}
+
+/* one load-in, hero only */
+
+@media(hover:hover) and (pointer:fine){.button:hover{background:#e78b6c}.button:hover .icon{transform:translateX(3px)}.nav-links a:hover{color:var(--peach)}summary:hover{color:var(--maroon)}}
+@media(min-width:1600px){.wrap{width:min(1320px,calc(100% - 160px))}}
+@media(max-width:1100px){
+  .wrap{width:calc(100% - 64px)}.section{padding:88px 0}
+  .hero-layout{gap:40px}.split,.cur-head,.tracks-head{gap:56px}.jobs .split{gap:50px}.band-layout{gap:50px}
+  .founder-layout{gap:60px}.founder-photo{height:520px}.offer-layout{gap:50px}.faq-layout{gap:50px}
+  .cols3{gap:36px}.block{grid-template-columns:240px 1fr;gap:40px}
+  .track-grid{grid-template-columns:1fr 1fr}.track h3{margin-top:30px}
+  .tiles{grid-template-columns:repeat(3,1fr)}.tile:nth-child(4){padding-left:0;border-left:0}.tile:nth-child(n+4){border-top:1px solid #ffffff14}
+  .purchase-panel{padding:26px}.purchase-panel h3{font-size:40px}.nav-links{gap:20px}
+}
+@media(max-width:800px){
+  :root{--header-height:72px}html{scroll-padding-top:92px}.wrap{width:calc(100% - 48px)}
+  .nav-links{display:none}
+  .hero{padding-top:44px}.hero-layout{grid-template-columns:1fr;gap:20px;padding-bottom:56px}
+  .hero-art{max-width:560px;width:100%;justify-self:center;margin:26px 0 0}
+  .split,.jobs .split,.how .split,.band-layout,.cur-head,.tracks-head,.founder-layout,.offer-layout,.faq-layout{grid-template-columns:1fr;gap:34px}
+  .stat-card{max-width:480px;width:96%;justify-self:center}
+  .cols3{grid-template-columns:1fr;gap:20px;margin-top:34px;padding-top:30px}
+  .band-copy{border-left:0;padding-left:0;border-top:1px solid #7a1f2b45;padding-top:28px}
+  .founder-photo{width:min(480px,94%);height:540px}.founder-layout{gap:44px}
+  .quotes{grid-template-columns:1fr;gap:22px}.quote:nth-child(2){margin-top:0}
+  .block{grid-template-columns:1fr;gap:26px;padding:36px 0}.block-card{position:relative;top:auto}.block-card .days{margin-top:20px}
+  .bonus-grid,.fit-grid{grid-template-columns:1fr}
+  .purchase-panel{position:relative;top:auto;width:min(480px,100%);justify-self:center;padding:32px}
+  .closing-layout{flex-direction:column;align-items:flex-start;gap:30px}
+  .footer{padding-bottom:104px}.footer-layout{flex-wrap:wrap}
+  .mobile-offer{position:fixed;bottom:0;left:0;right:0;background:var(--cream);color:var(--ink);padding:12px 24px calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--line);z-index:25;display:flex;align-items:center;justify-content:space-between;gap:16px;transform:translateY(110%);visibility:hidden;transition:transform .25s var(--ease),visibility .25s}
+  .mobile-offer.is-visible{transform:translateY(0);visibility:visible}
+  .mobile-offer>span{font-size:11px}.mobile-offer strong{font:800 22px Inter,sans-serif;color:var(--maroon);margin-right:4px}
+}
+@media(max-width:540px){
+  .wrap{width:calc(100% - 40px)}.section{padding:66px 0}.peach-band{padding:56px 0}
+  .announce{font-size:11px;padding:9px 14px}.announce b{font-size:12px}.announce .sep{display:block;height:2px;overflow:hidden;margin:0}
+  .nav{gap:12px}.nav .brand img{width:134px}.nav .button-small{padding:10px 12px;font-size:11px}.nav .button-small>.icon{display:none}
+  .hero{padding-top:34px}.hero h1{font-size:clamp(38px,11.6vw,58px);margin-top:16px}
+  .hero-lead{font-size:17px;margin-top:22px}.hero-description{font-size:14.5px}
+  .hero-copy>.button{width:100%;margin-top:24px}
+  .hero-art{margin:18px -8px 0;width:auto;max-width:none;justify-self:stretch}
+  .tiles{grid-template-columns:1fr 1fr}.tile,.tile+.tile{padding:20px 14px 22px 0;border-left:0;border-top:1px solid #ffffff14}.tile:nth-child(-n+2){border-top:0}.tile:nth-child(even){padding-left:16px;border-left:1px solid #ffffff14}.tile:last-child{grid-column:1/-1}
+  .tile strong{font-size:18px}
+  h2{font-size:clamp(29px,8.4vw,36px)}
+  .stat-card{padding:28px 26px}.stat{font-size:64px}
+  .founder-photo{height:440px;width:94%}
+  .quote{padding:28px 24px 26px}
+  .day{grid-template-columns:54px 1fr;gap:12px}.day-num{font-size:31px}.day h3{font-size:19px}
+  .track-grid{grid-template-columns:1fr}.track h3{margin-top:22px}
+  .bonus{padding:28px 26px 30px}.bonus h3{font-size:24px;margin-top:28px}
+  .stack td{font-size:14px}.stack tfoot td{font-size:18px}.stack tfoot td:last-child{font-size:22px}
+  .purchase-panel{padding:26px}.purchase-panel h3{font-size:42px}.price{font-size:92px}.purchase-button{font-size:14px;gap:8px}
+  .fit{padding:28px 26px 30px;font-size:15px}
+  summary{font-size:15.5px;padding:21px 0}.faq-answer{padding-right:10px}
+  .closing{padding:64px 0}.closing .button{width:100%}
+  .footer-layout>.brand{width:100%}
+  .mobile-offer{padding-inline:20px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+  <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+  <symbol id="check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+  <symbol id="cross" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="spark" viewBox="0 0 24 24"><path d="M12 3v6m0 6v6M3 12h6m6 0h6"/></symbol>
+  <symbol id="play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m10 8.5 5.5 3.5-5.5 3.5Z"/></symbol>
+  <symbol id="grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+</defs></svg>
+
+<div class="announce" role="status">
+  AI Fluent starts <span class="tbc" data-start>[DATE]</span><span class="sep">·</span>Begins in
+  <b data-d>--</b><small>DAYS</small> <b data-h>--</b><small>HRS</small> <b data-m>--</b><small>MIN</small>
+</div>
+
+<header class="header">
+  <nav class="wrap nav" aria-label="Main navigation">
+    <a class="brand" href="#" aria-label="AI Savvy Founders home"><img src="assets/logo.png" alt="AI Savvy Founders" width="172" height="37"></a>
+    <div class="nav-links"><a href="#curriculum">What you build</a><a href="#umaima">Meet Umaima</a><a href="#faqs">Questions</a></div>
+    <a class="button button-small" href="#offer">Become AI Fluent <svg aria-hidden="true" class="icon"><use href="#arrow"/></svg></a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero dark">
+    <div class="wrap hero-layout">
+      <div class="hero-copy">
+        <h1>Become<br>AI Fluent<br><span class="it">in 14 days.</span></h1>
+        <p class="hero-lead">Command, operate and put AI to work. The most valuable skill you can learn right now.</p>
+        <p class="hero-description">For most people, the gap between having an idea and getting it done is weeks.</p>
+        <p class="hero-description">AI fluent people close that gap in an afternoon. In 14 days, you'll be one of them.</p>
+        <a class="button" href="#offer">Give Yourself The Head Start <svg aria-hidden="true" class="icon"><use href="#arrow"/></svg></a>
+        <p class="hero-note">Recorded lessons, start the day you join. No code needed.</p>
+      </div>
+      <div class="hero-art">
+        <svg viewBox="0 0 960 740" role="img" aria-label="A laptop that reads Become AI Fluent in 14 days, with what comes with it around it: agent templates on paper, a robot for building your first AI agent, 21 days of Slack support and your own dashboards">
+          <defs>
+  <linearGradient id="hb-alu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f4f6"/><stop offset=".18" stop-color="#d6d7db"/><stop offset=".8" stop-color="#b3b5ba"/><stop offset="1" stop-color="#7d7f85"/></linearGradient>
+  <linearGradient id="hb-alu-edge" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8a8c91"/><stop offset=".5" stop-color="#d9dadd"/><stop offset="1" stop-color="#8a8c91"/></linearGradient>
+  <radialGradient id="hb-wine" cx=".3" cy=".35" r="1"><stop offset="0" stop-color="#7a1f2b"/><stop offset=".5" stop-color="#50131d"/><stop offset="1" stop-color="#2a0e12"/></radialGradient>
+  <linearGradient id="hb-glare" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".1"/><stop offset=".35" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  <linearGradient id="hb-paper" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#f1ebe4"/></linearGradient>
+  <pattern id="hb-grid" width="34" height="34" patternUnits="userSpaceOnUse"><path d="M34 0H0V34" fill="none" stroke="#fdf6ee" stroke-opacity=".05"/></pattern>
+  <clipPath id="hb-scr"><rect x="82" y="14" width="536" height="338" rx="7"/></clipPath>
+
+  <!-- laptop shell, 700 x 420 -->
+  <g id="hb-shell-top"><rect x="68" y="0" width="564" height="374" rx="20" fill="url(#hb-alu-edge)"/><rect x="70" y="2" width="560" height="372" rx="18" fill="#0b0b0d"/><circle cx="350" cy="8" r="2" fill="#2b2d33"/></g>
+  <g id="hb-shell-base">
+    <rect x="82" y="14" width="536" height="338" rx="7" fill="url(#hb-glare)"/>
+    <ellipse cx="350" cy="408" rx="330" ry="9" fill="#0e0305" opacity=".45"/>
+    <path d="M0 374h700v7c0 15-18 21-44 21H44c-26 0-44-6-44-21Z" fill="url(#hb-alu)"/>
+    <path d="M0 374h700v2H0Z" fill="#fff" opacity=".7"/>
+    <path d="M288 374h124v3c0 6-5 8-11 8H299c-6 0-11-2-11-8Z" fill="#8f9197"/>
+  </g>
+  <!-- cream screen -->
+  <g id="hb-lapC"><use href="#hb-shell-top"/>
+    <g clip-path="url(#hb-scr)"><rect x="82" y="14" width="536" height="338" fill="#fdf6ee"/>
+      <text x="120" y="62" font-family="Manrope" font-weight="800" font-size="11" letter-spacing="2.4" fill="#7a1f2b">AI SAVVY FOUNDERS</text>
+      <text x="118" y="156" font-family="Inter Tight" font-weight="900" font-size="64" letter-spacing="-2.6" fill="#1c1412">BECOME</text>
+      <text x="118" y="218" font-family="Inter Tight" font-weight="900" font-size="64" letter-spacing="-2.6" fill="#1c1412">AI FLUENT</text>
+      <text x="116" y="296" font-family="Instrument Serif" font-style="italic" font-size="84" letter-spacing="-1.5" fill="#7a1f2b">in 14 days.</text>
+    </g><use href="#hb-shell-base"/></g>
+
+  <!-- slack app icon, 170 x 170 -->
+  <g id="hb-slack">
+    <rect x="0" y="22" width="146" height="146" rx="34" fill="#fff"/>
+    <g transform="translate(33 55) scale(.652)">
+      <path d="M25.8 77.6c0 7.1-5.8 12.9-12.9 12.9S0 84.7 0 77.6s5.8-12.9 12.9-12.9h12.9v12.9zm6.5 0c0-7.1 5.8-12.9 12.9-12.9s12.9 5.8 12.9 12.9v32.3c0 7.1-5.8 12.9-12.9 12.9s-12.9-5.8-12.9-12.9V77.6z" fill="#e01e5a"/>
+      <path d="M45.2 25.8c-7.1 0-12.9-5.8-12.9-12.9S38.1 0 45.2 0s12.9 5.8 12.9 12.9v12.9H45.2zm0 6.5c7.1 0 12.9 5.8 12.9 12.9s-5.8 12.9-12.9 12.9H12.9C5.8 58.1 0 52.3 0 45.2s5.8-12.9 12.9-12.9h32.3z" fill="#36c5f0"/>
+      <path d="M97 45.2c0-7.1 5.8-12.9 12.9-12.9s12.9 5.8 12.9 12.9-5.8 12.9-12.9 12.9H97V45.2zm-6.5 0c0 7.1-5.8 12.9-12.9 12.9s-12.9-5.8-12.9-12.9V12.9C64.7 5.8 70.5 0 77.6 0s12.9 5.8 12.9 12.9v32.3z" fill="#2eb67d"/>
+      <path d="M77.6 97c7.1 0 12.9 5.8 12.9 12.9s-5.8 12.9-12.9 12.9-12.9-5.8-12.9-12.9V97h12.9zm0-6.5c-7.1 0-12.9-5.8-12.9-12.9s5.8-12.9 12.9-12.9h32.3c7.1 0 12.9 5.8 12.9 12.9s-5.8 12.9-12.9 12.9H77.6z" fill="#ecb22e"/>
+    </g>
+    <circle cx="140" cy="28" r="24" fill="#e5352b" stroke="#fff" stroke-width="3"/>
+    <text x="140" y="36" text-anchor="middle" font-family="Inter" font-weight="800" font-size="22" fill="#fff">21</text>
+  </g>
+
+  <!-- paper templates, 250 x 300 -->
+  <g id="hb-papers">
+    <g transform="rotate(-9 110 150)"><rect x="14" y="26" width="196" height="256" rx="3" fill="#e9e1d8"/></g>
+    <g transform="rotate(7 130 150)"><rect x="34" y="20" width="196" height="256" rx="3" fill="#f6f0e9"/><rect x="54" y="48" width="70" height="8" fill="#d9cdc2"/><rect x="54" y="70" width="150" height="5" fill="#e4d9cf"/></g>
+    <g transform="rotate(-2 120 150)">
+      <path d="M22 16h168l28 28v230H22Z" fill="url(#hb-paper)"/><path d="M190 16v28h28Z" fill="#d9cfc5"/>
+      <rect x="42" y="42" width="96" height="16" rx="3" fill="#d36b48"/><text x="49" y="53.5" font-family="Manrope" font-weight="800" font-size="8.5" letter-spacing="1.3" fill="#fff">AGENT TEMPLATE</text>
+      <text x="42" y="86" font-family="Inter Tight" font-weight="800" font-size="19" letter-spacing="-.4" fill="#1c1412">Chief of Staff Agent</text>
+      <g font-family="Manrope" font-weight="800" font-size="7.5" letter-spacing="1.2" fill="#7a1f2b"><text x="42" y="112">ROLE</text><text x="42" y="150">TOOLS</text><text x="42" y="188">SCHEDULE</text><text x="42" y="226">ASKS BEFORE SENDING</text></g>
+      <g fill="#d5c9be"><rect x="42" y="119" width="156" height="5" rx="2.5"/><rect x="42" y="129" width="118" height="5" rx="2.5"/><rect x="42" y="157" width="140" height="5" rx="2.5"/><rect x="42" y="167" width="92" height="5" rx="2.5"/><rect x="42" y="195" width="126" height="5" rx="2.5"/></g>
+      <rect x="42" y="234" width="13" height="13" rx="3" fill="#7a1f2b"/><path d="m45 240.5 3 3 5-6" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="62" y="238" width="80" height="5" rx="2.5" fill="#d5c9be"/>
+    </g>
+  </g>
+
+  <!-- robot doodle, 200 x 220 -->
+  <g id="hb-robot" class="robot">
+    <path d="M100 46c-1-9 1-16 0-24"/><circle cx="100" cy="15" r="6.5"/>
+    <path d="M52 50c28-6 72-5 98 0 5 20 4 46 0 62-30 5-68 5-98 0-5-20-4-44 0-62Z"/>
+    <path d="M46 70c-9 2-9 20 0 22M156 70c9 2 9 20 0 22"/>
+    <circle cx="80" cy="77" r="9"/><circle cx="122" cy="77" r="9"/><circle class="fill" cx="82" cy="78" r="3.6"/><circle class="fill" cx="124" cy="78" r="3.6"/>
+    <path d="M84 97c10 8 24 8 34 0"/>
+    <path d="M92 116v10M110 116v10"/>
+    <path d="M62 128c26-5 54-4 80 0 4 22 3 44-1 62-27 4-55 4-79 0-5-20-4-42 0-62Z"/>
+    <path d="M84 146h34v20H84ZM92 156h6m6 0h6"/><circle cx="76" cy="178" r="3"/><circle cx="128" cy="178" r="3"/>
+    <path d="M60 142c-16 6-24 18-26 32M27 174c1 11 13 11 13 0"/>
+    <path d="M144 140c16-6 24-18 26-32M163 107c0-11 14-10 13 1"/>
+    <path d="M82 192l-2 16M68 209h22M120 192l2 16M112 209h22"/>
+  </g>
+
+  <!-- dashboard window, 350 x 250 -->
+  <g id="hb-dash">
+    <rect width="350" height="250" rx="14" fill="#fff"/><path d="M0 14A14 14 0 0 1 14 0h322a14 14 0 0 1 14 14v18H0Z" fill="#f1ebe5"/>
+    <circle cx="18" cy="16" r="4.5" fill="#ec6a5e"/><circle cx="33" cy="16" r="4.5" fill="#f4bf4f"/><circle cx="48" cy="16" r="4.5" fill="#61c554"/>
+    <rect x="100" y="8" width="150" height="16" rx="8" fill="#fff"/><text x="175" y="19.5" text-anchor="middle" font-family="Inter" font-weight="500" font-size="8.5" fill="#8a7a70">my-week-dashboard</text>
+    <text x="22" y="58" font-family="Manrope" font-weight="800" font-size="8" letter-spacing="1.5" fill="#7a1f2b">DAY 14 SCORECARD</text>
+    <text x="22" y="104" font-family="Inter Tight" font-weight="900" font-size="46" letter-spacing="-2" fill="#1c1412">11.5<tspan font-size="20" letter-spacing="-.5" dx="5">hrs</tspan></text>
+    <text x="22" y="122" font-family="Inter" font-weight="500" font-size="10" fill="#78655a">back every week, vs Day 1</text>
+    <rect x="186" y="46" width="68" height="46" rx="8" fill="#fdf6ee"/><text x="196" y="68" font-family="Inter Tight" font-weight="900" font-size="19" fill="#7a1f2b">38</text><text x="196" y="82" font-family="Inter" font-weight="500" font-size="7.5" fill="#78655a">tasks handed off</text>
+    <rect x="262" y="46" width="68" height="46" rx="8" fill="#fdf6ee"/><text x="272" y="68" font-family="Inter Tight" font-weight="900" font-size="19" fill="#7a1f2b">4</text><text x="272" y="82" font-family="Inter" font-weight="500" font-size="7.5" fill="#78655a">agents running</text>
+    <rect x="186" y="100" width="144" height="24" rx="8" fill="#50131d"/><circle cx="200" cy="112" r="4" fill="#61c554"/><text x="210" y="115.5" font-family="Inter" font-weight="600" font-size="8.5" fill="#fdf6ee">Morning brief sent 6:30 am</text>
+    <path d="M22 218h308" stroke="#e7dcd2"/><path d="M22 186h308M22 154h308" stroke="#f1e9e1"/>
+    <g fill="#7a1f2b"><rect x="26" y="210" width="15" height="8" rx="2"/><rect x="48" y="206" width="15" height="12" rx="2"/><rect x="70" y="200" width="15" height="18" rx="2"/><rect x="92" y="202" width="15" height="16" rx="2"/><rect x="114" y="192" width="15" height="26" rx="2"/><rect x="136" y="186" width="15" height="32" rx="2"/><rect x="158" y="188" width="15" height="30" rx="2"/><rect x="180" y="176" width="15" height="42" rx="2"/><rect x="202" y="170" width="15" height="48" rx="2"/><rect x="224" y="164" width="15" height="54" rx="2"/><rect x="246" y="166" width="15" height="52" rx="2"/><rect x="268" y="154" width="15" height="64" rx="2"/><rect x="290" y="148" width="15" height="70" rx="2"/></g>
+    <rect x="312" y="140" width="15" height="78" rx="2" fill="#d36b48"/>
+    <g font-family="Inter" font-weight="500" font-size="7.5" fill="#9a897e"><text x="26" y="232">Day 1</text><text x="304" y="232">Day 14</text></g>
+  </g>
+</defs>
+          <g class="float sh-s"><use href="#hb-papers" transform="translate(-22 250) rotate(-5) scale(.98)"/></g>
+          <g class="float sh"><use href="#hb-lapC" transform="translate(150 130)"/></g>
+          <g class="float"><use href="#hb-robot" transform="translate(236 14) scale(.56)"/></g>
+          <g class="float sh-s"><use href="#hb-slack" transform="translate(742 60) rotate(9) scale(.9)"/></g>
+          <g class="float sh"><use href="#hb-dash" transform="translate(586 440) rotate(-2)"/></g>
+          <g class="doodle">
+            <text x="370" y="62">build your first AI agent</text><path d="M362 56c-8 6-14 8-22 6m7-10-7 10 11 6"/>
+            <text x="934" y="46" text-anchor="end">21 days of Slack</text><path d="M790 56c-5 12-1 22 11 30m-13-1 13 1 0-13"/>
+            <text x="40" y="640">agent templates</text><path d="M120 606c-4-10-2-18 6-26m-11 4 11-4 2 12"/>
+            <text x="560" y="712" text-anchor="end">your own dashboards</text><path d="M568 704c12-2 20-8 26-18m-12 5 12-5 3 13"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="wrap tiles">
+      <div class="tile"><strong>14 Days</strong><span>One recorded lesson a day, at your pace</span></div>
+      <div class="tile"><strong>Real Builds</strong><span>Every lesson ends with something you made</span></div>
+      <div class="tile"><strong>Every File</strong><span>Templates, prompts and agent templates included</span></div>
+      <div class="tile"><strong>21 Days Of Slack</strong><span>Support while you build</span></div>
+      <div class="tile"><strong>Lifetime</strong><span>Every lesson and file, yours to keep</span></div>
+    </div>
+  </section>
+
+  <!-- JOBS -->
+  <section class="light section jobs">
+    <div class="wrap split">
+      <div>
+        <h2>Job descriptions are changing <span class="it">faster than most people notice.</span></h2>
+        <p>"Experience with AI tools" used to be a nice extra at the bottom of a job post. Now it's moving into the requirements.</p>
+        <p>You can be excellent at what you do. You can have the degree, the experience and the reputation. In 2027, the most valuable person in the room will be the one who's great at their work <em>and</em> knows how to hand part of it to AI.</p>
+        <p class="strong-copy">That's the priority now. You don't need to work harder. You need to know how to make AI do some of the work with you.</p>
+      </div>
+      <aside class="gcard stat-card">
+        <span class="label">When Microsoft and LinkedIn surveyed 31,000 people across 31 countries</span>
+        <div class="rings">
+          <figure class="ring">
+            <span class="stat-lead" aria-hidden="true">&nbsp;</span>
+            <svg viewBox="0 0 140 140" role="img" aria-label="66%"><circle class="track" cx="70" cy="70" r="52"/><circle class="arc" cx="70" cy="70" r="52" stroke-dasharray="215.6 326.7" transform="rotate(-90 70 70)"/><text x="70" y="82" text-anchor="middle">66%</text></svg>
+            <figcaption>of leaders said they wouldn't hire someone without AI skills.</figcaption>
+          </figure>
+          <figure class="ring">
+            <span class="stat-lead">Even more telling,</span>
+            <svg viewBox="0 0 140 140" role="img" aria-label="71%"><circle class="track" cx="70" cy="70" r="52"/><circle class="arc" cx="70" cy="70" r="52" stroke-dasharray="232 326.7" transform="rotate(-90 70 70)"/><text x="70" y="82" text-anchor="middle">71%</text></svg>
+            <figcaption>said they'd choose a less experienced candidate with AI skills over a more experienced one without them.</figcaption>
+          </figure>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- IDEAS -->
+  <section class="dark section ideas">
+    <div class="wrap">
+      <h2>Your ideas were never <span class="it">the problem.</span></h2>
+      <div class="cols3">
+        <p>The problem is that every idea needs your hands on it. You can only write so much, design so much and research so much before the day runs out. So the urgent things get done and the interesting ideas wait for a quiet week that never comes.</p>
+        <p><strong>AI fluent people work differently.</strong> They have an idea, hand it to Claude with the right context and get back a first version to shape. Then they're onto the next one.</p>
+        <p>This is happening in every field right now. The student finishes the research in an evening, the employee's report is ready before the meeting, and the creator posts every day without burning out. They aren't smarter than you, and most of them aren't technical. They just learned to operate the tool everyone else is still chatting with.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOT CODE -->
+  <section class="peach-band">
+    <div class="wrap band-layout">
+      <h2>AI fluent doesn't mean <span class="it">you can code.</span></h2>
+      <div class="band-copy">
+        <p>Being AI fluent means you know how to make AI work for you. You know which tool to use for which job, and you give Claude enough context that it gets it right the first time. You build agents that keep working while you're busy with something else, and you decide exactly what AI is allowed to see, do and send.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW I USE IT -->
+  <section class="light section how">
+    <div class="wrap split">
+      <div>
+        <h2>How I <span class="it">use it.</span></h2>
+        <p class="how-lead">I use Claude for almost everything I do.</p>
+      </div>
+      <div class="lede-copy">
+        <p>It writes in my voice, designs in my brand and researches anything I'm curious about. My morning brief is ready before I've picked up my phone. When we launched our last program, the landing page was built in a few hours.</p>
+        <p>In my agency, it means we've taken on more clients without adding headcount or working longer hours.</p>
+        <p class="strong-copy">None of that happened because I learned to code. It happened because I learned to operate AI properly, and that's what I'm going to teach you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2027 -->
+  <section class="dark section year">
+    <div class="wrap">
+      <div class="split">
+        <h2>2027 can look completely different <span class="it">if you start now.</span></h2>
+        <div>
+          <p>Most people will spend next year saying "I really need to learn AI properly." A few will have already done it.</p>
+          <p>Those few become the most valuable person in the room. They're the one the team asks when nobody knows how to automate something, the student who finishes the research in an evening, and the freelancer who delivers faster than an agency. They're the person who gets considered first for the promotion, because they can do what the others are still googling.</p>
+          <p>Most people still use AI like a search box. Learning to command it and build with it puts you in the top 1% of your field. The skill isn't hard to learn. Hardly anyone has sat down and learned it properly.</p>
+        </div>
+      </div>
+      <p class="year-footer">Fourteen days from now, you can be one of the few who has.</p>
+    </div>
+  </section>
+
+  <!-- FOUNDER -->
+  <section id="umaima" class="light section founder">
+    <div class="wrap founder-layout">
+      <figure class="founder-photo">
+        <img src="assets/umaima.jpg" alt="Umaima, founder of AI Savvy Founders" width="1200" height="1600">
+        <div class="photo-tint"></div>
+        <figcaption><strong>Umaima</strong><span>Founder, AI Savvy Founders</span></figcaption>
+      </figure>
+      <div class="founder-copy">
+        <h2>Hi, I'm <span class="it">Umaima.</span></h2>
+        <p class="founder-lead">I studied engineering, worked in corporate, then built marketing systems for other people for years. Today I run a small agency in Dubai, and I'm a mum to two daughters.</p>
+        <p>When I started using Claude properly, I stopped thinking of it as a writing tool. It became the way I work, and my agency now takes on more clients with the same team and the same hours.</p>
+        <p>This year reminded me why that matters. There were weeks when I couldn't be at my desk, and things kept moving anyway, because the work that didn't need me was already handled. That gave me time back for what matters, and being a mum is at the top of that list.</p>
+        <p>That's what I want for you, wherever you're starting from. I don't mean a faster version of the same exhausting week. I mean a week where your ideas get done and some of your time comes back.</p>
+        <div class="signoff">Umaima</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="dark section">
+    <div class="wrap">
+      <h2>What people <span class="it">say.</span></h2>
+      <div class="quotes">
+        <figure class="quote">
+          <span class="quote-mark" aria-hidden="true">“</span>
+          <blockquote>
+            <p>Umaima has a great way of painting the vision of what is possible using AI to create more efficiency in your business. She shares transparently how she is using AI in her own business, and broke down definitions and terms in this complicated area so they actually made sense to me.</p>
+            <p>As a multi-passionate business owner and professional I see great potential for all of the skills, training, and tutorials she delivered in this cohort. I am so thankful to have her and her team to work with on this.</p>
+          </blockquote>
+          <figcaption class="quote-by"><span class="avatar" aria-hidden="true">CF</span><div><strong>Chelsea Fournier</strong><span>Trademarks with Chelsea</span></div></figcaption>
+        </figure>
+        <figure class="quote">
+          <span class="quote-mark" aria-hidden="true">“</span>
+          <blockquote>
+            <p>Everything from something as simple as our brand design skill inside Claude, all the way to building a lead generation AI agent, custom dashboards we now use for our own business AND our agency clients…</p>
+            <p>We now have the insights and knowledge on how to build really any type of AI agent that we need. If you have the chance to jump into anything she offers, do it. You won't regret it.</p>
+          </blockquote>
+          <figcaption class="quote-by"><span class="avatar" aria-hidden="true">GT</span><div><strong>Ginna Tassanelli</strong><span>HYPE Media</span></div></figcaption>
+        </figure>
+      </div>
+      <div class="center-cta"><a class="button" href="#offer">Become AI Fluent <svg aria-hidden="true" class="icon"><use href="#arrow"/></svg></a></div>
+    </div>
+  </section>
+
+  <!-- CURRICULUM -->
+  <section id="curriculum" class="light section">
+    <div class="wrap">
+      <div class="cur-head">
+        <h2>What you build, <span class="it">day by day.</span></h2>
+        <p>Every lesson follows the same rhythm. You learn the idea, watch me build it, then build your own version using your real work.</p>
+      </div>
+
+      <div class="block">
+        <div class="gcard block-card"><span class="label">Section One</span><h3>Foundations</h3><span class="days">Days 01 to 02</span></div>
+        <div>
+          <article class="day"><span class="day-num">01</span><div><h3>Claude Fundamentals</h3><p>Where everything lives, which model to use for which job, and why long chats go off the rails. Then the part people don't expect: Claude using your computer for you. You finish with your setup done and a time audit of your week, which becomes the number you measure everything against.</p></div></article>
+          <article class="day"><span class="day-num">02</span><div><h3>Your Context System</h3><p>You build an organised folder system on your own computer, so Claude knows who you are, how you work and what every project is about. This is the day you stop explaining yourself from scratch.</p></div></article>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="gcard block-card"><span class="label">Section Two</span><h3>Claude In Real Work</h3><span class="days">Days 03 to 07</span></div>
+        <div>
+          <article class="day"><span class="day-num">03</span><div><h3>Writing In Your Voice</h3><p>Your own writing becomes a voice Skill, so every email, essay and post after this sounds like you wrote it on a good day.</p></div></article>
+          <article class="day"><span class="day-num">04</span><div><h3>Claude For Design</h3><p>Your style becomes a design system Skill. You build a carousel, a page and a slide deck that all look like they belong together.</p></div></article>
+          <article class="day"><span class="day-num">05</span><div><h3>Content</h3><p>Hooks, scripts and captions, plus how one idea becomes a week of posts.</p></div></article>
+          <article class="day"><span class="day-num">06</span><div><h3>Your Tools, Data And Documents</h3><p>Claude connected to your inbox, calendar and Drive. The 40-page PDF you've been avoiding gets summarised, compared with last year's version and turned into a chart.</p></div></article>
+          <article class="day"><span class="day-num">07</span><div><h3>Growth</h3><p>Finding the right people, researching them and writing messages that mention what they actually do. You can use it for clients, job applications, networking or research.</p></div></article>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="gcard block-card"><span class="label">Section Three</span><h3>Claude Code And AI Agents</h3><span class="days">Days 08 to 11</span></div>
+        <div>
+          <article class="day"><span class="day-num">08</span><div><h3>Claude Code Foundations</h3><p>It looks intimidating for about ten minutes. You learn the two habits that make it easy. Claude interviews you before it starts anything, and it shows you a plan before it touches a single file.</p></div></article>
+          <article class="day"><span class="day-num">09</span><div><h3>Anatomy Of An AI Agent</h3><p>Every agent has the same seven parts. Once you can see them, agents stop feeling like magic and become something you can design.</p></div></article>
+          <article class="day"><span class="day-num">10</span><div><h3>Build Your First Agent</h3><p>You build a real agent for a real task from your own week. It only gets the access it needs, it asks before anything goes out, and it runs on a schedule while you sleep.</p></div></article>
+          <article class="day"><span class="day-num">11</span><div><h3>Creative Work With Claude Code</h3><p>You edit a short video with captions and motion graphics in your own colours, without opening editing software.</p></div></article>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="gcard block-card"><span class="label">Section Four</span><h3>Build Your Own AI Toolkit</h3><span class="days">Days 12 to 14</span></div>
+        <div>
+          <article class="day"><span class="day-num">12</span><div><h3>Your Skills Library</h3><p>Every task you repeat becomes a Skill, so Claude does it your way every time.</p></div></article>
+          <article class="day"><span class="day-num">13</span><div><h3>Your Own Apps And Dashboards</h3><p>You describe a tracker or a dashboard in plain English, and by the end of the lesson you're using it.</p></div></article>
+          <article class="day"><span class="day-num">14</span><div><h3>Capstone And Scorecard</h3><p>You finish your final project, then audit your week again and compare it with Day 1. You leave with your own number for the hours you got back, plus a certificate.</p></div></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRACKS -->
+  <section class="dark section">
+    <div class="wrap">
+      <div class="tracks-head">
+        <h2>Built around <span class="it">your life.</span></h2>
+        <p>You choose a track on Day 1 and every challenge is shaped around it.</p>
+      </div>
+      <div class="track-grid">
+        <article class="track"><span class="label">Track 01</span><h3>Students</h3><p>Study guides, research and presentations</p></article>
+        <article class="track"><span class="label">Track 02</span><h3>Professionals</h3><p>Reports, briefings and the admin that eats your afternoons</p></article>
+        <article class="track"><span class="label">Track 03</span><h3>Business owners</h3><p>Leads, outreach, content and systems</p></article>
+        <article class="track"><span class="label">Track 04</span><h3>Creators</h3><p>Scripts, carousels and editing</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- BONUSES -->
+  <section class="light section">
+    <div class="wrap">
+      <h2>What comes <span class="it">with it.</span></h2>
+      <div class="bonus-grid">
+        <article class="gcard bonus"><div class="bonus-top"><span class="label">Bonus course</span><span class="chip">$97 value</span></div><h3>Edit Your Reels With Claude</h3><p>My full reel editing course, for when Day 11 leaves you wanting more.</p></article>
+        <article class="gcard bonus"><div class="bonus-top"><span class="label">Finished agent</span><span class="chip">$17 value</span></div><h3>The Email Strategist Agent</h3><p>A finished agent you can take apart and learn from after Day 10. If you send emails or newsletters, it also audits them and tells you what to fix first.</p></article>
+        <article class="gcard bonus"><div class="bonus-top"><span class="label">Library</span><span class="chip">Included</span></div><h3>70+ Guides And SOPs</h3><p>My whole library, mapped to the day you'll need each one.</p></article>
+        <article class="gcard bonus"><div class="bonus-top"><span class="label">Support</span><span class="chip">$97 value</span></div><h3>21 Days Of Slack Support</h3><p>You can ask questions while you build and get help from people who've done it.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFER -->
+  <section id="offer" class="dark section" aria-labelledby="offer-title">
+    <div class="wrap offer-layout">
+      <div class="offer-content">
+        <h2 id="offer-title">Add it <span class="it">all up.</span></h2>
+        <table class="stack">
+          <thead><tr><th scope="col">What you get</th><th scope="col">Value</th></tr></thead>
+          <tbody>
+            <tr><td>14 recorded lessons + every template, file, prompt and agent template (lifetime access)</td><td>$997+</td></tr>
+            <tr><td>21 days of Slack support</td><td>$97</td></tr>
+            <tr><td>Edit Your Reels With Claude</td><td>$97</td></tr>
+            <tr><td>Email Strategist Agent</td><td>$17</td></tr>
+            <tr><td>70+ guides and SOPs</td><td>Included</td></tr>
+            <tr><td>Certificate of completion</td><td>Included</td></tr>
+            <tr><td>A community of people building alongside you</td><td>Priceless</td></tr>
+          </tbody>
+          <tfoot><tr><td>Total value</td><td>$1,208+</td></tr></tfoot>
+        </table>
+      </div>
+      <aside class="purchase-panel">
+        <div class="product-mark"><svg aria-hidden="true" class="icon"><use href="#grid"/></svg><span>AI SAVVY FOUNDERS</span></div>
+        <h3>AI<br><span class="it">Fluent.</span></h3>
+        <p class="was">Total value <s>$1,208+</s></p>
+        <div class="price"><span>$</span>97</div>
+        <p class="price-caption">YOUR PRICE</p>
+        <div class="purchase-rule"></div>
+        <button class="button purchase-button" type="button" data-checkout>Give Yourself The Head Start <svg aria-hidden="true" class="icon"><use href="#arrow"/></svg></button>
+        <p class="purchase-note">Recorded lessons, start the day you join. No code needed.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- HONEST -->
+  <section class="peach-band">
+    <div class="wrap band-layout">
+      <h2>This won't do the work <span class="it">for you.</span></h2>
+      <div class="band-copy">
+        <p>The lessons are short, but the builds take effort. Plan on <span class="tbc">45 to 60 minutes</span> a day. Some features need a paid Claude plan, and each lesson tells you which one. Some days your agent will do something odd and you'll have to fix it. That's part of learning to operate it.</p>
+        <p><strong>What I can promise is that every day ends with something you made, and by Day 14 you'll know how to turn an idea into a finished thing without waiting on anyone.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIT -->
+  <section class="dark section">
+    <div class="wrap">
+      <h2>Is this <span class="it">for you?</span></h2>
+      <div class="fit-grid">
+        <div class="fit yes"><svg aria-hidden="true" class="icon"><use href="#check"/></svg><p><strong>This is for you if</strong> you have more ideas than time, if you use AI but know you're only scratching the surface, or if you want to be the person at work, at school or in your field who knows how to make it actually do things.</p></div>
+        <div class="fit no"><svg aria-hidden="true" class="icon"><use href="#cross"/></svg><p><strong>This isn't for you if</strong> you want a course to watch and never act on, or if you're looking for a coding bootcamp.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faqs" class="light section">
+    <div class="wrap faq-layout">
+      <div><h2>Questions</h2></div>
+      <div class="faq-list">
+        <details><summary>Do I need to know how to code?<svg aria-hidden="true" class="icon"><use href="#plus"/></svg></summary><div class="faq-answer"><p>No. Even the agent days are taught in plain English. Claude writes the code and you tell it what you want.</p></div></details>
+        <details><summary>I'm not running a business. Is this for me?<svg aria-hidden="true" class="icon"><use href="#plus"/></svg></summary><div class="faq-answer"><p>Yes. You choose a track on Day 1 (student, professional, business owner or creator), and every challenge is built around your real work, studies or projects.</p></div></details>
+        <details><summary>Which Claude plan do I need?<svg aria-hidden="true" class="icon"><use href="#plus"/></svg></summary><div class="faq-answer"><p><span class="tbc">[CONFIRM PLAN.]</span> Each lesson says which features need which plan.</p></div></details>
+        <details><summary>What if I fall behind?<svg aria-hidden="true" class="icon"><use href="#plus"/></svg></summary><div class="faq-answer"><p>Everything is recorded and yours for life. You can take a weekend to catch up, and Slack is there when you get stuck.</p></div></details>
+        <details><summary>I already use Claude. Is this too basic?<svg aria-hidden="true" class="icon"><use href="#plus"/></svg></summary><div class="faq-answer"><p>The basics take one day. From Day 2 you're building systems most daily users have never touched.</p></div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing dark">
+    <div class="wrap closing-layout">
+      <div>
+        <h2>Give yourself<br><span class="it">the head start.</span></h2>
+        <p>In 14 days you'll know how to command AI, operate it and build with it. You'll have your own agents, your own Skills and your own number for the hours you got back.</p>
+        <p>The people who learn this now will be the ones everyone else turns to next year. You can be one of them.</p>
+      </div>
+      <a class="button" href="#offer">Become AI Fluent <svg aria-hidden="true" class="icon"><use href="#arrow"/></svg></a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer"><div class="wrap footer-layout"><a class="brand" href="#" aria-label="Back to top"><img src="assets/logo.png" alt="AI Savvy Founders" width="147" height="32" loading="lazy"></a><span>© <span id="year">2026</span> AI Savvy Founders</span><a href="#faqs">Questions? Start here <span aria-hidden="true">↗</span></a></div></footer>
+
+<div class="mobile-offer" aria-label="Quick access to offer"><span><strong>$97</strong> your price</span><a class="button button-small" href="#offer">Become AI Fluent <svg aria-hidden="true" class="icon"><use href="#arrow"/></svg></a></div>
+
+<dialog id="checkout-dialog" aria-labelledby="checkout-title"><form method="dialog"><button class="dialog-close" aria-label="Close checkout information">×</button><h2 id="checkout-title">Doors open<br>soon.</h2><p>Checkout isn't open on this page yet.</p><button class="button">Back to the page <svg aria-hidden="true" class="icon"><use href="#arrow"/></svg></button></form></dialog>
+
+<script>
+(() => {
+  const cfg = window.AI_FLUENT_CONFIG || {};
+  const dialog = document.getElementById('checkout-dialog');
+
+  /* checkout */
+  const url = (cfg.checkoutUrl || '').trim();
+  let valid = false;
+  if (url) { try { valid = new URL(url).protocol === 'https:'; } catch {} }
+  if (valid) document.querySelectorAll('a.button[href="#offer"]').forEach(a => { a.href = url; });
+  document.querySelectorAll('[data-checkout]').forEach(b => b.addEventListener('click', () => {
+    if (valid) window.location.assign(url); else dialog.showModal();
+  }));
+  dialog.addEventListener('click', e => {
+    const r = dialog.getBoundingClientRect();
+    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) dialog.close();
+  });
+
+  /* announcement bar */
+  const start = document.querySelector('[data-start]');
+  if ((cfg.startDate || '').trim()) { start.textContent = cfg.startDate.trim(); start.classList.remove('tbc'); }
+  const end = cfg.doorsClose ? new Date(cfg.doorsClose).getTime() : NaN;
+  if (!Number.isNaN(end)) {
+    const d = document.querySelector('[data-d]'), h = document.querySelector('[data-h]'), m = document.querySelector('[data-m]');
+    const pad = n => String(n).padStart(2, '0');
+    const tick = () => {
+      const left = Math.max(0, end - Date.now()), mins = Math.floor(left / 60000);
+      d.textContent = pad(Math.floor(mins / 1440)); h.textContent = pad(Math.floor(mins % 1440 / 60)); m.textContent = pad(mins % 60);
+    };
+    tick(); setInterval(tick, 30000);
+  }
+
+  /* mobile sticky offer: hidden while hero or offer is on screen */
+  const bar = document.querySelector('.mobile-offer'), hero = document.querySelector('.hero'), offer = document.getElementById('offer');
+  let heroOn = true, offerOn = false;
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.target === hero) heroOn = e.isIntersecting; if (e.target === offer) offerOn = e.isIntersecting; });
+    bar.classList.toggle('is-visible', !heroOn && !offerOn);
+  });
+  io.observe(hero); io.observe(offer);
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelector('.hero-art').classList.add('animate-intro');
+  document.getElementById('year').textContent = String(new Date().getFullYear());
+})();
+</script>
+</body>
+</html>
+<script async src="/.netlify/scripts/hud?variant=public" data-nf-variant="public" data-netlify-site-id="8f1c89d3-786e-4471-91a1-6463f3d43992" data-app-host="app.netlify.com" data-account-tier="free"></script>
