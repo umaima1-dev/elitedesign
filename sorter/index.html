@@ -3,60 +3,70 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Date Sorter</title>
+<title>Content Globe Planner</title>
 <style>
 :root{--ink:#14090b;--panel:#231115;--line:#3a1f25;--cream:#f6ead8;--muted:#b89a93;--rust:#e0552b;--peach:#f7c9a8;--ok:#7bd88f}
 *{box-sizing:border-box}
-body{margin:0;background:var(--ink);color:var(--cream);font:16px/1.5 Inter,system-ui,sans-serif;
- background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:48px 48px;min-height:100vh}
-main{max-width:1100px;margin:0 auto;padding:32px 16px 80px}
-h1{font-weight:900;text-transform:uppercase;font-size:clamp(28px,6vw,52px);line-height:1.05;margin:0 0 8px;letter-spacing:-.01em}
+body{margin:0;background:var(--ink);color:var(--cream);font:16px/1.5 Inter,system-ui,sans-serif;min-height:100vh;
+ background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:48px 48px}
+main{max-width:1280px;margin:0 auto;padding:28px 16px 80px}
+h1{font-weight:900;text-transform:uppercase;font-size:clamp(26px,5vw,46px);line-height:1.05;margin:0 0 6px}
 h1 em{font-style:normal;color:var(--rust)}
-p.sub{color:var(--muted);margin:0 0 24px;max-width:60ch}
-.bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:20px}
-button{font:inherit;font-weight:800;border:0;border-radius:10px;padding:12px 20px;cursor:pointer;background:var(--rust);color:#fff}
-button.ghost{background:transparent;border:1px solid var(--line);color:var(--cream)}
+p.sub{color:var(--muted);margin:0 0 20px;max-width:64ch}
+.bar{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:18px}
+button{font:inherit;font-weight:800;border:0;border-radius:10px;padding:11px 18px;cursor:pointer;background:var(--rust);color:#fff}
 button:disabled{opacity:.4;cursor:not-allowed}
 label{display:flex;gap:6px;align-items:center;font-size:14px;color:var(--peach)}
-select,input[type=checkbox]{accent-color:var(--rust)}
-select{background:var(--ink);color:var(--cream);border:1px solid var(--line);border-radius:8px;padding:8px}
-.stage{display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:start}
-@media(max-width:700px){.stage{grid-template-columns:1fr}}
-.source{position:sticky;top:16px;background:var(--cream);color:var(--ink);border-radius:14px;padding:18px;text-align:center}
-.source b{display:block;font-size:44px;font-weight:900;line-height:1}
-.source small{font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:11px}
-.pile{font-size:28px;margin-bottom:6px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
-.bucket{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;position:relative;transition:transform .2s,border-color .2s}
-.bucket.hit{transform:scale(1.06);border-color:var(--rust)}
-.bucket h3{margin:0 0 4px;font-size:15px;font-weight:900}
-.bucket .n{font-size:30px;font-weight:900;color:var(--rust);line-height:1}
-.bucket .k{font-size:12px;color:var(--muted)}
-.bucket .done{position:absolute;top:10px;right:12px;color:var(--ok);font-weight:900;opacity:0}
-.bucket.full .done{opacity:1}
-.chip{position:fixed;z-index:50;pointer-events:none;width:64px;height:64px;border-radius:12px;overflow:hidden;display:grid;place-items:center;background:var(--peach);color:var(--ink);font-size:30px;border:3px solid var(--cream);box-shadow:0 0 0 2px var(--rust),0 14px 34px #000a,0 0 30px #e0552b88}
-.chip img,.chip video{width:100%;height:100%;object-fit:cover;display:block}
-.spark{position:fixed;z-index:51;pointer-events:none;width:8px;height:8px;border-radius:50%}
-.bucket{overflow:hidden;opacity:0;animation:rise .55s cubic-bezier(.2,.9,.3,1.2) forwards;animation-delay:calc(var(--i)*35ms)}
-@keyframes rise{from{opacity:0;transform:translateY(40px) scale(.8) rotate(-4deg)}to{opacity:1;transform:none}}
-.bucket .bar2{position:absolute;left:0;bottom:0;height:5px;width:0;background:linear-gradient(90deg,var(--rust),var(--peach));transition:width .3s}
-.bucket.full{border-color:var(--ok);box-shadow:0 0 22px #7bd88f55}
-.bucket.full .done{animation:pop .5s cubic-bezier(.2,1.8,.4,1)}
-@keyframes pop{from{transform:scale(0) rotate(-90deg)}to{transform:scale(1)}}
-.source.fire{animation:thump .25s}
-@keyframes thump{50%{transform:scale(.93) rotate(-1.5deg)}}
-.source{transition:background .4s}
-.source.done2{background:var(--ok)}
-.confetti{position:fixed;z-index:60;pointer-events:none;width:10px;height:16px;top:-20px}
-#log{margin-top:20px;color:var(--muted);font-size:14px}
-.empty{color:var(--muted);padding:40px;border:1px dashed var(--line);border-radius:14px;text-align:center}
-@media(prefers-reduced-motion:reduce){.bucket{transition:none;animation:none;opacity:1}.chip,.spark,.confetti{display:none}}
+select,input[type=date]{background:var(--ink);color:var(--cream);border:1px solid var(--line);border-radius:8px;padding:7px;font:inherit;font-size:14px;color-scheme:dark}
+input[type=checkbox]{accent-color:var(--rust)}
+
+.stage{display:grid;grid-template-columns:minmax(300px,440px) 1fr;gap:18px;align-items:start}
+@media(max-width:900px){.stage{grid-template-columns:1fr}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px}
+.panel h2{margin:0 0 8px;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--peach);font-weight:800}
+
+/* globe */
+.globeWrap{position:relative;height:420px;perspective:1100px;display:grid;place-items:center;overflow:visible}
+.sphere{position:relative;width:0;height:0;transform-style:preserve-3d}
+.tile{position:absolute;left:0;top:0;background:#3a1f25 center/cover no-repeat;border-radius:5px;backface-visibility:hidden;
+ box-shadow:0 0 0 1px #0008;opacity:0;animation:tin .7s ease-out forwards;animation-delay:calc(var(--d)*1ms)}
+@keyframes tin{from{opacity:0;filter:brightness(2)}to{opacity:1}}
+.tile.gone{visibility:hidden}
+.glow{position:absolute;inset:12%;border-radius:50%;background:radial-gradient(circle,#e0552b33,transparent 70%);filter:blur(14px);pointer-events:none}
+.count{text-align:center;color:var(--muted);font-size:14px}
+.count b{color:var(--cream);font-size:26px;font-weight:900}
+
+/* calendar */
+.calHead{display:flex;justify-content:space-between;align-items:baseline}
+.calHead h3{margin:0;font-size:22px;font-weight:900}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.dow{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);text-align:center;padding:2px 0}
+.cell{min-height:92px;border-radius:10px;border:1px solid var(--line);background:#1b0d10;padding:6px;position:relative;overflow:hidden;transition:border-color .25s,box-shadow .25s,transform .2s}
+.cell.off{opacity:.3}
+.cell.blank{border:0;background:none}
+.cell.hit{transform:scale(1.07);border-color:var(--rust);box-shadow:0 0 18px #e0552b66;z-index:2}
+.cell.full{border-color:var(--ok)}
+.cell .num{font-size:12px;font-weight:800;color:var(--peach)}
+.cell .plan{position:absolute;right:6px;top:5px;font-size:11px;color:var(--muted)}
+.cell .badge{position:absolute;right:6px;bottom:5px;background:var(--rust);color:#fff;font-size:11px;font-weight:800;border-radius:99px;padding:0 7px;min-width:20px;text-align:center}
+.cell .mini{display:flex;flex-wrap:wrap;gap:2px;margin-top:4px;padding-right:2px}
+.cell .mini i{width:22px;height:22px;border-radius:4px;background:#3a1f25 center/cover no-repeat;display:grid;place-items:center;font-style:normal;font-size:12px;animation:pop .4s cubic-bezier(.2,1.8,.4,1)}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+@media(max-width:600px){.cell{min-height:64px;padding:3px}.cell .mini i{width:14px;height:14px}.cell .plan{display:none}}
+
+.chip{position:fixed;z-index:50;pointer-events:none;width:56px;height:56px;border-radius:10px;background:#3a1f25 center/cover no-repeat;display:grid;place-items:center;font-size:26px;
+ border:3px solid var(--cream);box-shadow:0 0 0 2px var(--rust),0 12px 30px #000a,0 0 28px #e0552b88}
+.spark,.confetti{position:fixed;z-index:51;pointer-events:none;border-radius:50%;width:8px;height:8px}
+.confetti{z-index:60;width:10px;height:16px;border-radius:2px;top:-20px}
+#log{margin-top:14px;color:var(--muted);font-size:14px;min-height:22px}
+.empty{color:var(--muted);padding:70px 20px;text-align:center}
+@media(prefers-reduced-motion:reduce){.tile{animation:none;opacity:1}.chip,.spark,.confetti{display:none}}
 </style>
 </head>
 <body>
 <main>
- <h1>Content → <em>Day Planner</em></h1>
- <p class="sub">Pick a folder of photos, reels and videos. It spreads them across the upcoming days of this month, one folder per posting day, on your own device. Nothing is uploaded anywhere.</p>
+ <h1>Content <em>Globe Planner</em></h1>
+ <p class="sub">Pick a folder of photos and reels. They gather into one big globe, then spread across the days of this month's calendar. Everything stays on your device.</p>
 
  <div class="bar">
   <button id="pick">1. Choose folder</button>
@@ -65,181 +75,209 @@ select{background:var(--ink);color:var(--cream);border:1px solid var(--line);bor
   <label>Order
    <select id="ord"><option value="mix">Mix photos &amp; reels</option><option value="name">By file name</option><option value="old">Oldest first</option><option value="rand">Random</option></select></label>
   <label><input type="checkbox" id="wk"> Skip weekends</label>
-  <label><input type="checkbox" id="sub" checked> Include subfolders</label>
-  <label>Mode
-   <select id="mode"><option value="copy">Copy (safe)</option><option value="move">Move</option></select></label>
-  <button id="go" disabled>2. Sort now</button>
+  <label><input type="checkbox" id="sub" checked> Subfolders</label>
+  <label><input type="checkbox" id="disk" checked> Create folders on disk</label>
+  <label>Mode <select id="mode"><option value="copy">Copy (safe)</option><option value="move">Move</option></select></label>
+  <button id="go" disabled>2. Sort into calendar</button>
  </div>
 
- <div id="stage"><div class="empty">No folder yet. Click “Choose folder”. Works in Chrome or Edge on desktop.</div></div>
+ <div class="stage">
+  <div class="panel"><h2>Your content</h2>
+   <div class="globeWrap" id="gw"><div class="glow"></div><div class="sphere" id="sphere"></div><div class="empty" id="empty">Choose a folder to build your globe.</div></div>
+   <div class="count"><b id="left">0</b> files</div>
+  </div>
+  <div class="panel"><div class="calHead"><h2>Calendar</h2><h3 id="month"></h3></div><div class="cal" id="cal"></div></div>
+ </div>
  <div id="log"></div>
 </main>
 
 <script>
 const $=id=>document.getElementById(id);
-const OUT='Content-Plan';
+const OUT='Content-Plan', MAXTILES=260;
 const IMG=/\.(jpe?g|png|gif|webp|heic|heif|avif|bmp|tiff?)$/i, VID=/\.(mp4|mov|m4v|avi|mkv|webm|3gp)$/i;
-let root=null, items=[];
-
-const icon=k=>k==='image'?'🖼️':k==='video'?'🎬':'📄';
-const pad=n=>String(n).padStart(2,'0');
-const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-
+const pad=n=>String(n).padStart(2,'0'), sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const iso=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-const dayName=k=>new Date(k+'T00:00').toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'});
-(()=>{const t=new Date(); $('d1').value=iso(t); $('d2').value=iso(new Date(t.getFullYear(),t.getMonth()+1,0));})();
+const icon=k=>k==='image'?'🖼️':k==='video'?'🎬':'📄';
+let root=null, items=[], running=false, spin={a:0,v:.12};
 
-function planDays(){
-  const days=[]; const a=new Date($('d1').value+'T00:00'), z=new Date($('d2').value+'T00:00');
-  for(let d=new Date(a); d<=z; d.setDate(d.getDate()+1)){
-    if($('wk').checked && [0,6].includes(d.getDay())) continue;
-    days.push(iso(d));
+/* default range: today → end of this month */
+(()=>{const t=new Date();$('d1').value=iso(t);$('d2').value=iso(new Date(t.getFullYear(),t.getMonth()+1,0));})();
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches; if(reduce) spin.v=0;
+
+/* ---------- scanning ---------- */
+async function scan(dir,out,deep){
+  for await(const [name,h] of dir.entries()){
+    if(h.kind==='directory'){ if(deep&&name!==OUT) await scan(h,out,true); continue; }
+    out.push({name,file:await h.getFile(),parent:dir,kind:IMG.test(name)?'image':VID.test(name)?'video':'other',thumb:null});
   }
+}
+
+/* ---------- thumbnails ---------- */
+function cover(src,w,h){const c=document.createElement('canvas');c.width=c.height=96;const x=c.getContext('2d');
+  const r=Math.max(96/w,96/h),dw=w*r,dh=h*r;x.drawImage(src,(96-dw)/2,(96-dh)/2,dw,dh);return c.toDataURL('image/jpeg',.72);}
+async function makeThumb(it){
+  if(it.thumb||it.kind==='other') return;
+  try{
+    if(it.kind==='image'){
+      const b=await createImageBitmap(it.file,{resizeWidth:160,resizeQuality:'low'});
+      it.thumb=cover(b,b.width,b.height); b.close&&b.close();
+    }else{
+      const url=URL.createObjectURL(it.file), v=document.createElement('video');
+      v.muted=true;v.preload='auto';v.src=url;
+      await new Promise((res,rej)=>{v.onloadeddata=()=>{v.currentTime=Math.min(.5,(v.duration||1)/2)};v.onseeked=res;v.onerror=rej;setTimeout(rej,5000);});
+      it.thumb=cover(v,v.videoWidth,v.videoHeight); URL.revokeObjectURL(url);
+    }
+  }catch{}
+}
+async function pool(list,n,fn,tick){let i=0,d=0;await Promise.all(Array.from({length:n},async()=>{while(i<list.length){const x=list[i++];await fn(x);tick&&tick(++d);}}));}
+
+/* ---------- plan ---------- */
+function monthRange(){
+  const a=new Date($('d1').value+'T00:00'); let z=new Date($('d2').value+'T00:00');
+  const eom=new Date(a.getFullYear(),a.getMonth()+1,0); if(z>eom||isNaN(z)) z=eom;
+  return {a,z,y:a.getFullYear(),m:a.getMonth()};
+}
+function planDays(){
+  const {a,z}=monthRange(),days=[];
+  for(let d=new Date(a);d<=z;d.setDate(d.getDate()+1)){ if($('wk').checked&&[0,6].includes(d.getDay())) continue; days.push(iso(d)); }
   return days;
 }
-function orderItems(list){
-  const o=$('ord').value, l=[...list];
+function ordered(){
+  const o=$('ord').value,l=[...items];
   if(o==='rand') return l.sort(()=>Math.random()-.5);
   if(o==='old') return l.sort((x,y)=>x.file.lastModified-y.file.lastModified);
   l.sort((x,y)=>x.name.localeCompare(y.name,undefined,{numeric:true}));
   if(o==='name') return l;
-  const q={image:[],video:[],other:[]}; l.forEach(i=>q[i.kind].push(i));
-  const out=[]; while(q.image.length||q.video.length||q.other.length)
-    for(const k of ['video','image','other']) if(q[k].length) out.push(q[k].shift());
+  const q={image:[],video:[],other:[]};l.forEach(i=>q[i.kind].push(i));const out=[];
+  while(q.image.length||q.video.length||q.other.length) for(const k of ['video','image','other']) if(q[k].length) out.push(q[k].shift());
   return out;
 }
 function plan(){
-  const days=planDays();
-  if(!days.length||!items.length){ items.forEach(i=>i.key=null); return; }
-  const list=orderItems(items), n=list.length, D=days.length;
-  list.forEach((it,i)=>{ it.key=days[Math.min(D-1,Math.floor(i*D/n))]; });
+  const days=planDays(),D=days.length,list=ordered(),n=list.length;
+  list.forEach((it,i)=>it.key=D?days[Math.min(D-1,Math.floor(i*D/n))]:null);
+  return list;
 }
 
-async function scan(dir,parent,out,deep){
-  for await(const [name,h] of dir.entries()){
-    if(h.kind==='directory'){
-      if(deep && name!==OUT) await scan(h,dir,out,true);
-      continue;
-    }
-    const file=await h.getFile();
-    out.push({name,file,parent:dir,kind:IMG.test(name)?'image':VID.test(name)?'video':'other'});
+/* ---------- calendar ---------- */
+function renderCal(){
+  const {y,m}=monthRange(), days=new Set(planDays());
+  $('month').textContent=new Date(y,m,1).toLocaleDateString(undefined,{month:'long',year:'numeric'});
+  const counts={}; items.forEach(i=>i.key&&(counts[i.key]=(counts[i.key]||0)+1));
+  let h=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(d=>`<div class="dow">${d}</div>`).join('');
+  const lead=(new Date(y,m,1).getDay()+6)%7; h+='<div class="cell blank"></div>'.repeat(lead);
+  for(let d=1;d<=new Date(y,m+1,0).getDate();d++){
+    const k=`${y}-${pad(m+1)}-${pad(d)}`, on=days.has(k);
+    h+=`<div class="cell${on?'':' off'}" data-k="${k}"><span class="num">${d}</span>${on&&counts[k]?`<span class="plan">${counts[k]} planned</span>`:''}<div class="mini"></div></div>`;
   }
+  $('cal').innerHTML=h;
 }
 
-function render(){
-  plan();
-  const groups={}; planDays().forEach(d=>groups[d]=[]);
-  items.forEach(it=>it.key&&groups[it.key].push(it));
-  const keys=Object.keys(groups);
-  $('stage').innerHTML=`<div class="stage">
-    <div class="source" id="src"><div class="pile">📂</div><b id="left">${items.length}</b><small>files waiting</small></div>
-    <div class="grid">${keys.map(k=>{
-      const g=groups[k],c=t=>g.filter(i=>i.kind===t).length;
-      return `<div class="bucket" data-k="${k}" style="--i:${keys.indexOf(k)}"><div class="bar2"></div><span class="done">✓</span><h3>${dayName(k)}</h3><div class="k">planned ${g.length}</div>
-        <div class="n">0</div>
-        <div class="k">🖼️ ${c('image')} · 🎬 ${c('video')} · 📄 ${c('other')}</div></div>`}).join('')}</div></div>`;
-  $('go').disabled=!items.length||!keys.length;
+/* ---------- globe ---------- */
+function buildGlobe(tileItems){
+  const sphere=$('sphere'); sphere.innerHTML=''; $('empty').style.display='none';
+  const n=tileItems.length, R=Math.max(90,Math.min(165,50+Math.sqrt(n)*11));
+  const s=Math.max(26,Math.min(64,Math.sqrt(4*Math.PI*R*R/n)*1.02));
+  const g=2.399963;
+  tileItems.forEach((it,i)=>{
+    const lat=Math.asin(1-(2*i+1)/n), lon=i*g, t=document.createElement('div');
+    t.className='tile'; t.style.cssText=`width:${s}px;height:${s}px;margin:${-s/2}px 0 0 ${-s/2}px;--d:${Math.random()*900};transform:rotateY(${lon}rad) rotateX(${-lat}rad) translateZ(${R}px);`+
+      (it.thumb?`background-image:url(${it.thumb})`:'');
+    if(!it.thumb) t.textContent=icon(it.kind), t.style.cssText+=';display:grid;place-items:center;font-size:'+s*.5+'px';
+    sphere.appendChild(t); it.tile=t;
+  });
+}
+(function loop(){ spin.a+=spin.v; $('sphere').style.transform=`rotateX(-16deg) rotateY(${spin.a}deg)`; requestAnimationFrame(loop); })();
+
+/* ---------- effects ---------- */
+const COL=['#e0552b','#f7c9a8','#f6ead8','#7bd88f','#ffb703'];
+function burst(x,y){for(let i=0;i<10;i++){const e=document.createElement('div');e.className='spark';e.style.cssText+=`left:${x}px;top:${y}px;background:${COL[i%5]}`;document.body.appendChild(e);
+  const a=Math.PI*2*i/10+Math.random()*.5,r=24+Math.random()*30;
+  e.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:`translate(${Math.cos(a)*r}px,${Math.sin(a)*r}px) scale(0)`,opacity:0}],{duration:480,easing:'ease-out'}).onfinish=()=>e.remove();}}
+function confetti(){for(let i=0;i<130;i++){const e=document.createElement('div');e.className='confetti';e.style.left=Math.random()*100+'vw';e.style.background=COL[i%5];document.body.appendChild(e);
+  e.animate([{transform:'translateY(0) rotate(0)'},{transform:`translate(${(Math.random()-.5)*220}px,${innerHeight+40}px) rotate(${Math.random()*900}deg)`}],{duration:1800+Math.random()*1600,delay:Math.random()*500,easing:'cubic-bezier(.3,.1,.6,1)',fill:'both'}).onfinish=()=>e.remove();}}
+
+function fly(it,cell){
+  const gw=$('gw').getBoundingClientRect();
+  const a=it.tile?it.tile.getBoundingClientRect():{left:gw.left+gw.width/2-20,top:gw.top+gw.height/2-20,width:40,height:40};
+  const sx=a.left+a.width/2-28, sy=a.top+a.height/2-28;
+  const e=document.createElement('div'); e.className='chip'; e.style.left=sx+'px'; e.style.top=sy+'px';
+  if(it.thumb) e.style.backgroundImage=`url(${it.thumb})`; else e.textContent=icon(it.kind);
+  document.body.appendChild(e);
+  if(it.tile) it.tile.classList.add('gone');
+  const b=cell.getBoundingClientRect(), tx=b.left+b.width/2, ty=b.top+b.height/2;
+  const dx=tx-(sx+28), dy=ty-(sy+28), side=(Math.random()-.5)*200;
+  const an=e.animate([
+    {transform:'translate(0,0) scale(.5)',opacity:.4,offset:0},
+    {transform:`translate(${dx*.15+side*.3}px,${dy*.1-80}px) scale(1.4) rotate(${side/10}deg)`,opacity:1,offset:.3},
+    {transform:`translate(${dx*.65+side*.5}px,${dy*.55-50}px) scale(1) rotate(${-side/8}deg)`,opacity:1,offset:.65},
+    {transform:`translate(${dx}px,${dy}px) scale(.4) rotate(${side/4}deg)`,opacity:.9,offset:1}
+  ],{duration:850,easing:'cubic-bezier(.45,.05,.3,1)'});
+  return an.finished.then(()=>{e.remove();burst(tx,ty);});
 }
 
-$('pick').onclick=async()=>{
-  if(!window.showDirectoryPicker){ $('log').textContent='This browser cannot write to folders. Please use Chrome or Edge on desktop.'; return; }
-  try{ root=await showDirectoryPicker({mode:'readwrite'}); }catch{ return; }
-  $('log').textContent='Reading folder…';
-  const raw=[]; await scan(root,null,raw,$('sub').checked);
-  items=raw;
-  $('log').textContent=`Found ${items.length} files in “${root.name}”.`;
-  render();
-};
-['d1','d2','ord','wk'].forEach(id=>$(id).onchange=()=>{ if(items.length) render(); });
-
-const COLORS=['#e0552b','#f7c9a8','#f6ead8','#7bd88f','#ffb703'];
-function burst(x,y,n=10){
-  for(let i=0;i<n;i++){
-    const el=document.createElement('div'); el.className='spark';
-    el.style.cssText+=`left:${x}px;top:${y}px;background:${COLORS[i%COLORS.length]}`;
-    document.body.appendChild(el);
-    const ang=Math.PI*2*i/n+Math.random()*.5, r=30+Math.random()*40;
-    el.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:`translate(${Math.cos(ang)*r}px,${Math.sin(ang)*r}px) scale(0)`,opacity:0}],{duration:520,easing:'ease-out'}).onfinish=()=>el.remove();
-  }
-}
-function confetti(){
-  for(let i=0;i<120;i++){
-    const el=document.createElement('div'); el.className='confetti';
-    el.style.left=Math.random()*100+'vw'; el.style.background=COLORS[i%COLORS.length];
-    document.body.appendChild(el);
-    el.animate([{transform:'translateY(0) rotate(0)',opacity:1},{transform:`translate(${(Math.random()-.5)*200}px,${innerHeight+40}px) rotate(${Math.random()*900}deg)`,opacity:1}],
-      {duration:1800+Math.random()*1600,delay:Math.random()*500,easing:'cubic-bezier(.3,.1,.6,1)',fill:'both'}).onfinish=()=>el.remove();
-  }
-}
-function fly(from,to,it){
-  const a=from.getBoundingClientRect(), b=to.getBoundingClientRect();
-  const el=document.createElement('div'); el.className='chip';
-  let url=null;
-  if(it.kind==='image'||it.kind==='video'){
-    url=URL.createObjectURL(it.file);
-    el.innerHTML=it.kind==='image'?`<img src="${url}">`:`<video src="${url}#t=0.3" muted preload="metadata"></video>`;
-  } else el.textContent=icon(it.kind);
-  const sx=a.left+a.width/2-32, sy=a.top+a.height/2-32;
-  el.style.left=sx+'px'; el.style.top=sy+'px';
-  document.body.appendChild(el);
-  const tx=b.left+b.width/2, ty=b.top+b.height/2;
-  const dx=tx-(sx+32), dy=ty-(sy+32), side=(Math.random()-.5)*260;
-  const anim=el.animate([
-    {transform:'translate(0,0) scale(.3) rotate(0)',opacity:0,offset:0},
-    {transform:`translate(${side*.4}px,-90px) scale(1.25) rotate(${side/8}deg)`,opacity:1,offset:.25},
-    {transform:`translate(${dx*.6+side}px,${dy*.5-70}px) scale(1) rotate(${-side/6}deg)`,opacity:1,offset:.6},
-    {transform:`translate(${dx}px,${dy}px) scale(.35) rotate(${side/3}deg)`,opacity:.9,offset:1}
-  ],{duration:800,easing:'cubic-bezier(.45,.05,.3,1)'});
-  anim.onfinish=()=>{ el.remove(); url&&URL.revokeObjectURL(url); burst(tx,ty); };
-  return anim.finished;
-}
-
-async function uniqueName(dir,name){
-  let n=name,i=1;
-  const dot=name.lastIndexOf('.'), base=dot>0?name.slice(0,dot):name, ext=dot>0?name.slice(dot):'';
-  while(true){
-    try{ await dir.getFileHandle(n); n=`${base}-${i++}${ext}`; }catch{ return n; }
-  }
-}
-
-async function copyOne(it,dest){
-  const name=await uniqueName(dest,it.name);
-  const w=await (await dest.getFileHandle(name,{create:true})).createWritable();
+/* ---------- disk writes ---------- */
+async function uniqueName(dir,name){let n=name,i=1;const d=name.lastIndexOf('.'),base=d>0?name.slice(0,d):name,ext=d>0?name.slice(d):'';
+  for(;;){try{await dir.getFileHandle(n);n=`${base}-${i++}${ext}`;}catch{return n;}}}
+async function writeOne(it,outDir,dirs){
+  dirs[it.key]??=await outDir.getDirectoryHandle(it.key,{create:true});
+  const name=await uniqueName(dirs[it.key],it.name);
+  const w=await (await dirs[it.key].getFileHandle(name,{create:true})).createWritable();
   await it.file.stream().pipeTo(w);
   if($('mode').value==='move') await it.parent.removeEntry(it.name);
 }
 
+/* ---------- main flow ---------- */
+function refresh(){ if(!items.length||running) return; plan(); renderCal(); }
+['d1','d2','ord','wk'].forEach(id=>$(id).onchange=refresh);
+
+$('pick').onclick=async()=>{
+  if(running) return;
+  if(!window.showDirectoryPicker){ $('log').textContent='Please use Chrome or Edge on desktop (needed to read and write folders).'; return; }
+  try{ root=await showDirectoryPicker({mode:'readwrite'}); }catch{ return; }
+  $('go').disabled=true; $('log').textContent='Reading folder…';
+  items=[]; await scan(root,items,$('sub').checked);
+  if(!items.length){ $('log').textContent='No files found in that folder.'; return; }
+  $('left').textContent=items.length;
+  const pick=[...items].sort(()=>Math.random()-.5).slice(0,MAXTILES);
+  await pool(pick,4,makeThumb,d=>$('log').textContent=`Preparing previews ${d}/${pick.length}…`);
+  buildGlobe(pick); spin.v=reduce?0:.12;
+  plan(); renderCal();
+  $('log').textContent=`${items.length} files ready. Press “Sort into calendar”.`;
+  $('go').disabled=false;
+  pool(items.filter(i=>!i.thumb),3,makeThumb); /* rest in background */
+};
+
 $('go').onclick=async()=>{
-  if(!root||!items.length) return;
-  $('go').disabled=$('pick').disabled=true;
-  const outDir=await root.getDirectoryHandle(OUT,{create:true});
-  const dirs={}; let left=items.length, failed=0;
-  const total={}; items.forEach(i=>total[i.key]=(total[i.key]||0)+1);
-  const got={};
-  const pending=[];
-  for(const it of items){
-    const bucket=document.querySelector(`.bucket[data-k="${it.key}"]`);
-    bucket.scrollIntoView({block:'nearest',behavior:'smooth'});
-    $('src').classList.remove('fire'); void $('src').offsetWidth; $('src').classList.add('fire');
-    const flight=fly($('src'),bucket,it).then(()=>{
-      bucket.classList.add('hit'); setTimeout(()=>bucket.classList.remove('hit'),180);
+  if(running||!items.length) return;
+  running=true; $('go').disabled=$('pick').disabled=true;
+  const list=plan(); renderCal();
+  const total={},got={}; list.forEach(i=>total[i.key]=(total[i.key]||0)+1);
+  const disk=$('disk').checked; let outDir=null,dirs={},chain=Promise.resolve(),saved=0,failed=0;
+  if(disk) outDir=await root.getDirectoryHandle(OUT,{create:true});
+  /* spin the globe up, then peel files off in calendar order */
+  for(let i=0;i<20;i++){ spin.v+=.35; await sleep(40); }
+  const gap=Math.max(30,Math.min(260,3200/list.length)); let left=list.length, flights=[];
+  for(const it of list){
+    const cell=document.querySelector(`.cell[data-k="${it.key}"]`); if(!cell) continue;
+    cell.scrollIntoView({block:'nearest'});
+    flights.push(fly(it,cell).then(()=>{
+      cell.classList.add('hit'); setTimeout(()=>cell.classList.remove('hit'),170);
+      const mini=cell.querySelector('.mini');
+      if(mini.children.length<6){const i2=document.createElement('i'); if(it.thumb) i2.style.backgroundImage=`url(${it.thumb})`; else i2.textContent=icon(it.kind); mini.appendChild(i2);}
       got[it.key]=(got[it.key]||0)+1;
-      bucket.querySelector('.n').textContent=got[it.key];
-      bucket.querySelector('.bar2').style.width=(got[it.key]/total[it.key]*100)+'%';
-      if(got[it.key]===total[it.key]) bucket.classList.add('full');
-    });
-    try{
-      dirs[it.key]??=await outDir.getDirectoryHandle(it.key,{create:true});
-      await copyOne(it,dirs[it.key]);
-    }catch(e){ failed++; console.error(it.name,e); }
+      let b=cell.querySelector('.badge'); if(!b){b=document.createElement('span');b.className='badge';cell.appendChild(b);} b.textContent=got[it.key];
+      const p=cell.querySelector('.plan'); if(p) p.remove();
+      if(got[it.key]===total[it.key]) cell.classList.add('full');
+    }));
+    if(disk) chain=chain.then(()=>writeOne(it,outDir,dirs)).then(()=>{saved++;$('log').textContent=`Saved ${saved}/${list.length} to “${OUT}”…`;},e=>{failed++;console.error(it.name,e);});
     $('left').textContent=--left;
-    pending.push(flight);
-    await sleep(Math.max(60,Math.min(350,2500/items.length)));
+    spin.v=Math.max(.6,spin.v*.97);
+    await sleep(gap);
   }
-  await Promise.all(pending);
-  $('src').classList.add('done2'); $('src').querySelector('small').textContent='all planned'; $('src').querySelector('.pile').textContent='🎉'; confetti();
-  $('log').textContent=`Done. ${items.length-failed} files planned into “${OUT}” inside “${root.name}”.`+(failed?` ${failed} failed (see console).`:'');
-  $('pick').disabled=false;
+  await Promise.all(flights); await chain;
+  spin.v=reduce?0:.12; confetti();
+  $('log').textContent=disk?`Done. ${saved} files placed into “${OUT}” inside “${root.name}”, one folder per day.`+(failed?` ${failed} failed (see console).`:''):'Done. Preview only, nothing was written to disk.';
+  running=false; $('pick').disabled=false;
 };
 </script>
 </body>
