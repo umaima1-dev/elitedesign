@@ -1,0 +1,57 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@900&family=Instrument+Serif:ital@1&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+.clone-this-wont-do-the-work-for-you{
+  --ink:#1c1412;--maroon:#7a1f2b;--peach:#ffb285;
+  width:100%;max-width:100%;box-sizing:border-box;overflow:hidden;
+  padding:78px 0;background:var(--peach);color:var(--ink);
+  font:400 16px/1.75 'Open Sans',sans-serif;-webkit-font-smoothing:antialiased;
+}
+.clone-this-wont-do-the-work-for-you *{box-sizing:border-box}
+.clone-this-wont-do-the-work-for-you .clone-band-wrap{
+  width:min(1240px,calc(100% - 96px));margin-inline:auto;
+  display:grid;grid-template-columns:1.05fr 1fr;gap:90px;align-items:center;
+}
+.clone-this-wont-do-the-work-for-you .clone-band-title{
+  margin:0;font-family:'Inter Tight',Inter,sans-serif;font-weight:900;
+  font-size:clamp(30px,3.3vw,47px);line-height:1.06;letter-spacing:-.035em;
+  text-transform:uppercase;text-wrap:balance;color:var(--ink);
+}
+.clone-this-wont-do-the-work-for-you .clone-it{
+  font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;
+  text-transform:none;letter-spacing:-.02em;font-size:1.22em;line-height:1.02;
+  display:inline-block;padding-right:.06em;margin-left:.05em;color:var(--maroon);
+}
+.clone-this-wont-do-the-work-for-you .clone-band-copy{border-left:1px solid #7a1f2b45;padding-left:46px}
+.clone-this-wont-do-the-work-for-you .clone-band-copy p{margin:0;font-size:15.5px;text-wrap:pretty}
+.clone-this-wont-do-the-work-for-you .clone-band-copy p+p{margin-top:20px}
+.clone-this-wont-do-the-work-for-you strong{font-weight:700}
+/* dashed "to be confirmed" marker, as on the page. Remove the class from the span once the time is final. */
+.clone-this-wont-do-the-work-for-you .clone-tbc{outline:1px dashed currentColor;outline-offset:1px;padding:0 .3em;margin:0 .25em;border-radius:3px;white-space:nowrap}
+
+@media(min-width:1600px){.clone-this-wont-do-the-work-for-you .clone-band-wrap{width:min(1320px,calc(100% - 160px))}}
+@media(max-width:1100px){
+  .clone-this-wont-do-the-work-for-you .clone-band-wrap{width:calc(100% - 64px);gap:50px}
+}
+@media(max-width:800px){
+  .clone-this-wont-do-the-work-for-you .clone-band-wrap{width:calc(100% - 48px);grid-template-columns:1fr;gap:34px}
+  .clone-this-wont-do-the-work-for-you .clone-band-title{font-size:clamp(29px,8.4vw,36px)}
+  .clone-this-wont-do-the-work-for-you .clone-band-copy{border-left:0;padding-left:0;border-top:1px solid #7a1f2b45;padding-top:28px}
+}
+@media(max-width:540px){
+  .clone-this-wont-do-the-work-for-you{padding:56px 0}
+  .clone-this-wont-do-the-work-for-you .clone-band-wrap{width:calc(100% - 40px)}
+}
+</style>
+
+<section class="clone-this-wont-do-the-work-for-you">
+  <div class="clone-band-wrap">
+    <h2 class="clone-band-title">This won't do the work <span class="clone-it">for you.</span></h2>
+    <div class="clone-band-copy">
+      <p>The lessons are short, but the builds take effort. Plan on <span class="clone-tbc">45 to 60 minutes</span> a day. Some features need a paid Claude plan, and each lesson tells you which one. Some days your agent will do something odd and you'll have to fix it. That's part of learning to operate it.</p>
+      <p><strong>What I can promise is that every day ends with something you made, and by Day 14 you'll know how to turn an idea into a finished thing without waiting on anyone.</strong></p>
+    </div>
+  </div>
+</section>
