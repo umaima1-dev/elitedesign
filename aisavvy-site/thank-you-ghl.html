@@ -1,19 +1,15 @@
-<!--
-  EDIT THESE THREE PLACEHOLDERS (find and replace in this block):
-  [COURSE_ACCESS_LINK]  [SLACK_INVITE_LINK]  [SUPPORT_EMAIL]
--->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Inter+Tight:wght@900&family=Instrument+Serif:ital@1&family=Manrope:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@800;900&family=Instrument+Serif:ital@1&family=Manrope:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 .clone-thanks{
-  --ink:#1c1412;--deep:#2a0e12;--maroon:#7a1f2b;--peach:#ffb285;--cream:#fdf6ee;--button:#d97757;--body:#ded3cc;--warm:#584940;--ease:cubic-bezier(.23,1,.32,1);
+  --ink:#1c1412;--deep:#2a0e12;--maroon:#7a1f2b;--peach:#ffb285;--cream:#fdf6ee;--body:#ded3cc;--warm:#584940;--line:#dfd0c5;
   width:100%;max-width:100%;box-sizing:border-box;overflow:hidden;
   color:var(--body);font:400 16px/1.75 'Open Sans',sans-serif;-webkit-font-smoothing:antialiased;
 }
 .clone-thanks *{box-sizing:border-box}
-.clone-thanks h1,.clone-thanks h2,.clone-thanks p{margin:0}
+.clone-thanks h1,.clone-thanks h2,.clone-thanks h3,.clone-thanks p{margin:0}
 .clone-thanks .wrap{width:min(1240px,calc(100% - 96px));margin-inline:auto}
 .clone-thanks .dark{position:relative;isolation:isolate;background-color:var(--deep);
   background-image:linear-gradient(rgba(253,246,238,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(253,246,238,.035) 1px,transparent 1px),radial-gradient(120% 90% at 30% 40%,#6a1a26 0%,#50131d 45%,#2a0e12 100%);
@@ -21,71 +17,58 @@
 .clone-thanks .dark::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='grain' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='.7'/%3E%3C/svg%3E") repeat;opacity:.19;mix-blend-mode:soft-light}
 .clone-thanks .light{background:var(--cream);color:var(--warm)}
 .clone-thanks .section{padding:110px 0}
-
 .clone-thanks h1,.clone-thanks h2{font-family:'Inter Tight',Inter,sans-serif;font-weight:900;line-height:1.06;letter-spacing:-.035em;text-transform:uppercase;text-wrap:balance}
-.clone-thanks h2{font-size:clamp(30px,3.3vw,47px)}
-.clone-thanks .dark h1,.clone-thanks .dark h2{color:var(--cream)}
-.clone-thanks .light h2{color:var(--ink)}
 .clone-thanks .it{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.02em;font-size:1.22em;line-height:1.02;display:inline-block;padding-right:.06em;margin-left:.05em}
 .clone-thanks .dark .it{color:var(--peach)}
 .clone-thanks .light .it{color:var(--maroon)}
 
-/* hero */
-.clone-thanks .hero{padding:96px 0 90px}
-.clone-thanks .hero .wrap{max-width:860px}
+/* confirmation */
+.clone-thanks .hero{padding:96px 0 100px}
+.clone-thanks .hero .wrap{max-width:900px}
 .clone-thanks .eyebrow{display:inline-flex;align-items:center;gap:10px;font:700 11px/1.5 Manrope,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--peach)}
 .clone-thanks .eyebrow i{width:8px;height:8px;border-radius:50%;background:#61c554;display:block}
-.clone-thanks .hero h1{margin-top:22px;font-size:clamp(40px,5.2vw,72px);line-height:1.02;letter-spacing:-.04em}
+.clone-thanks .hero h1{margin-top:22px;color:var(--cream);font-size:clamp(40px,5.2vw,72px);line-height:1.02;letter-spacing:-.04em}
 .clone-thanks .hero h1 .it{font-size:1.2em;line-height:1.06}
-.clone-thanks .intro{max-width:640px;margin-top:28px;font-size:18px;line-height:1.7;color:#fff;font-weight:600;text-wrap:pretty}
-.clone-thanks .actions{margin-top:34px}
-.clone-thanks .helper{max-width:560px;margin-top:18px;font-size:13.5px;line-height:1.7;font-style:italic;color:#d9c3ba}
+.clone-thanks .lead{max-width:660px;margin-top:30px;font-size:19px;font-weight:600;line-height:1.6;color:#fff;text-wrap:pretty}
+.clone-thanks .hero p+p{margin-top:16px;max-width:660px;font-size:15.5px;color:var(--body);font-weight:400;text-wrap:pretty}
 
-/* buttons */
-.clone-thanks .button{display:inline-flex;justify-content:center;align-items:center;gap:22px;min-height:60px;padding:17px 26px;border-radius:6px;font:700 16px/1.3 Inter,sans-serif;text-decoration:none;cursor:pointer;text-align:center;transition:background .18s ease,color .18s ease,transform .16s var(--ease)}
-.clone-thanks .button-primary{background:var(--button);color:var(--ink);border:0}
-.clone-thanks .button-secondary{background:transparent;color:var(--peach);border:1.5px solid rgba(255,178,133,.6)}
-.clone-thanks .button:active{transform:scale(.97)}
-.clone-thanks .button:focus-visible{outline:3px solid var(--peach);outline-offset:5px}
-.clone-thanks .button .icon{width:21px;height:21px;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;transition:transform .2s var(--ease)}
-@media(hover:hover) and (pointer:fine){
-  .clone-thanks .button-primary:hover{background:#e78b6c}
-  .clone-thanks .button-secondary:hover{background:var(--peach);color:var(--ink)}
-  .clone-thanks .button:hover .icon{transform:translateX(3px)}
-}
+/* three steps */
+.clone-thanks .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.clone-thanks .gcard{position:relative;isolation:isolate;overflow:hidden;border-radius:14px;color:var(--body);padding:34px 34px 38px;background:radial-gradient(120% 90% at 30% 30%,#6a1a26 0%,#50131d 45%,#2a0e12 100%);border:1px solid rgba(255,214,190,.16);box-shadow:0 24px 50px rgba(42,14,18,.28)}
+.clone-thanks .gcard::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='grain' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='.7'/%3E%3C/svg%3E") repeat;opacity:.19;mix-blend-mode:soft-light}
+.clone-thanks .step-num{display:block;font:700 10px/1.5 Manrope,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--peach)}
+.clone-thanks .gcard h2{margin-top:22px;font-size:clamp(24px,2.2vw,30px);line-height:1.08;letter-spacing:-.03em;color:var(--cream)}
+.clone-thanks .gcard p{margin-top:16px;font-size:15px;color:var(--body)}
+.clone-thanks .gcard p+p{margin-top:14px}
+.clone-thanks .gcard p.note{font-size:13.5px;color:#d9c3ba;font-style:italic}
 
-/* split sections */
-.clone-thanks .split{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:start}
-.clone-thanks .split p{font-size:15.5px;text-wrap:pretty}
-.clone-thanks .split p+p{margin-top:20px}
-.clone-thanks .light .split p{color:var(--warm)}
-.clone-thanks .dark .split p{color:var(--body)}
-.clone-thanks .split .button{margin-top:30px}
+/* sign-off */
+.clone-thanks .close{padding:90px 0 100px}
+.clone-thanks .close .wrap{max-width:900px}
+.clone-thanks .help{font-size:15px;color:var(--body)}
+.clone-thanks .help a{color:var(--peach);text-decoration:underline;text-underline-offset:3px;word-break:break-word}
+.clone-thanks .seeyou{margin-top:44px;padding-top:30px;border-top:1px solid #ffffff20}
+.clone-thanks .seeyou h2{font-size:clamp(30px,3.3vw,47px);color:var(--cream)}
+.clone-thanks .sign{margin-top:22px;font:800 25px/1.3 'Inter Tight',Inter,sans-serif;letter-spacing:-.035em;color:var(--peach)}
+.clone-thanks .sign span{display:block;margin-top:2px;font:600 13px/1.5 Manrope,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--body)}
 
-/* foot notes */
-.clone-thanks .foot{margin-top:64px;padding-top:30px;border-top:1px solid #ffffff20;display:grid;grid-template-columns:1fr 1fr;gap:96px}
-.clone-thanks .foot p{font-size:13.5px;line-height:1.7;color:#d9c3ba}
-.clone-thanks .foot a{color:var(--peach);text-decoration:underline;text-underline-offset:3px}
-
-@media(min-width:1600px){.clone-thanks .wrap{width:min(1320px,calc(100% - 160px))}}
+@media(min-width:1600px){.clone-thanks .wrap{width:min(1320px,calc(100% - 160px))}.clone-thanks .hero .wrap,.clone-thanks .close .wrap{max-width:900px}}
 @media(max-width:1100px){
   .clone-thanks .wrap{width:calc(100% - 64px)}
   .clone-thanks .section{padding:88px 0}
-  .clone-thanks .split,.clone-thanks .foot{gap:56px}
+  .clone-thanks .steps{grid-template-columns:1fr;gap:20px}
 }
 @media(max-width:800px){
   .clone-thanks .wrap{width:calc(100% - 48px)}
-  .clone-thanks .hero{padding:64px 0 64px}
-  .clone-thanks .split,.clone-thanks .foot{grid-template-columns:1fr;gap:34px}
-  .clone-thanks h2{font-size:clamp(29px,8.4vw,36px)}
-  .clone-thanks .foot{gap:18px;margin-top:44px}
+  .clone-thanks .hero{padding:64px 0 68px}
+  .clone-thanks .close{padding:64px 0 72px}
 }
 @media(max-width:540px){
   .clone-thanks .wrap{width:calc(100% - 40px)}
   .clone-thanks .section{padding:66px 0}
   .clone-thanks .hero h1{font-size:clamp(36px,11vw,52px)}
-  .clone-thanks .intro{font-size:16.5px}
-  .clone-thanks .button{width:100%}
+  .clone-thanks .lead{font-size:17px}
+  .clone-thanks .gcard{padding:28px 26px 30px}
 }
 </style>
 
@@ -95,39 +78,44 @@
   <section class="dark hero">
     <div class="wrap">
       <span class="eyebrow"><i aria-hidden="true"></i>Payment confirmed</span>
-      <h1>You're in. <span class="it">Welcome to AI Fluent.</span></h1>
-      <p class="intro">Think of one thing you've been meaning to finish. A report, a portfolio, a project you keep coming back to. Keep it in mind as you start. You'll have something real to work on while you learn.</p>
-      <div class="actions">
-        <a class="button button-primary" href="[COURSE_ACCESS_LINK]">Open AI Fluent <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
-      </div>
-      <p class="helper">Log in with the email you used at checkout. Your confirmation email has your course link too. If you can't find it, check Promotions or Spam.</p>
+      <h1>You&rsquo;re in! <span class="it">We start on 3 December.</span></h1>
+      <p class="lead">Welcome to AI Fluent. Your place is confirmed, and I&rsquo;m looking forward to building with you.</p>
+      <p>Over 14 days, we&rsquo;ll put Claude to work on your own projects, with one recorded lesson a day and support while you build.</p>
     </div>
   </section>
 
-  <!-- DAY 1 -->
+  <!-- WHAT HAPPENS NEXT -->
   <section class="light section">
-    <div class="wrap split">
-      <h2>Start with <span class="it">Day 1.</span></h2>
-      <div>
-        <p>Your first lesson gets you set up in Claude. You'll also look at where your time goes now, so you have something to compare with when you reach Day 14.</p>
-        <p>The lessons are recorded and you have lifetime access, so you can work at your own pace.</p>
-      </div>
+    <div class="wrap steps">
+      <article class="gcard">
+        <span class="step-num">01</span>
+        <h2>Check your inbox.</h2>
+        <p>Your confirmation email is on its way. We&rsquo;ll send your course access and joining instructions before 3 December.</p>
+        <p class="note">If you don&rsquo;t see the confirmation, check Promotions or Spam.</p>
+      </article>
+      <article class="gcard">
+        <span class="step-num">02</span>
+        <h2>What would you love to build?</h2>
+        <p>Think of something you&rsquo;ve been meaning to finish. A presentation for work, content for your business or a project you keep putting off because you don&rsquo;t know where to start.</p>
+        <p>Bring it with you. You&rsquo;ll use your own work as you follow the lessons.</p>
+      </article>
+      <article class="gcard">
+        <span class="step-num">03</span>
+        <h2>You&rsquo;ll have help along the way.</h2>
+        <p>Your place includes 21 days of Slack support, so you can ask questions and get help when you&rsquo;re stuck. We&rsquo;ll email the joining details before we begin.</p>
+        <p>You&rsquo;ll also keep lifetime access to the recorded lessons and course files.</p>
+        <p class="note">You&rsquo;ll need a paid Claude plan for the program, purchased separately.</p>
+      </article>
     </div>
   </section>
 
-  <!-- SLACK -->
-  <section class="dark section">
+  <!-- HELP + SIGN-OFF -->
+  <section class="dark close">
     <div class="wrap">
-      <div class="split">
-        <h2>Come and build <span class="it">with us.</span></h2>
-        <div>
-          <p>Your purchase includes 21 days of Slack support. Join the space and tell us what you're working on. When you get stuck, share what you tried and where it went wrong so we can help.</p>
-          <a class="button button-secondary" href="[SLACK_INVITE_LINK]">Join the Slack space <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
-        </div>
-      </div>
-      <div class="foot">
-        <p>You'll need a paid Claude plan for the course. Your Claude subscription is separate from your AI Fluent purchase.</p>
-        <p>Having trouble getting in? Email <a href="mailto:[SUPPORT_EMAIL]">[SUPPORT_EMAIL]</a> using the email you purchased with.</p>
+      <p class="help">Questions about your booking? Email <a href="mailto:hello@aisavvyfounders.com">hello@aisavvyfounders.com</a> using the email you purchased with.</p>
+      <div class="seeyou">
+        <h2>See you on <span class="it">3 December!</span></h2>
+        <div class="sign">Umaima<span>AI Savvy Founders</span></div>
       </div>
     </div>
   </section>
