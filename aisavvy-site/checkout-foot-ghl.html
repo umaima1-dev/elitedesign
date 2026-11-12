@@ -1,0 +1,71 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+.clone-checkout-foot{
+  --ink:#1c1412;--deep:#2a0e12;--peach:#ffb285;--cream:#fdf6ee;--body:#ded3cc;
+  width:100%;max-width:100%;box-sizing:border-box;overflow:hidden;
+  position:relative;isolation:isolate;
+  background-color:var(--deep);
+  background-image:radial-gradient(120% 90% at 30% 40%,#50131d 0%,#351016 60%,#2a0e12 100%);background-size:cover;
+  color:var(--body);font:400 16px/1.75 'Open Sans',sans-serif;-webkit-font-smoothing:antialiased;
+}
+.clone-checkout-foot *{box-sizing:border-box}
+.clone-checkout-foot::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='grain' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='.7'/%3E%3C/svg%3E") repeat;opacity:.19;mix-blend-mode:soft-light}
+.clone-checkout-foot .wrap{width:min(1240px,calc(100% - 96px));margin-inline:auto}
+.clone-checkout-foot p{margin:0}
+
+.clone-checkout-foot .notes{padding:56px 0 64px}
+.clone-checkout-foot .below-button{text-align:center;font-size:13px;font-style:italic;color:#d9c3ba}
+.clone-checkout-foot .before{max-width:760px;margin:36px auto 0;padding:30px 34px 32px;border-radius:14px;border:1px solid rgba(255,214,190,.16);background:rgba(253,246,238,.04)}
+.clone-checkout-foot .before-label{display:block;font:700 11px/1.5 Manrope,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--peach)}
+.clone-checkout-foot .before p{margin-top:12px;font-size:15.5px;color:var(--body);text-wrap:pretty}
+.clone-checkout-foot .before strong{color:#fff;font-weight:700}
+
+.clone-checkout-foot .bar{border-top:1px solid #ffffff18;padding:30px 0}
+.clone-checkout-foot .bar .wrap{display:flex;justify-content:space-between;align-items:center;gap:25px;font-size:12px}
+.clone-checkout-foot .brand{display:flex;flex-shrink:0;text-decoration:none}
+.clone-checkout-foot .brand img{display:block;width:147px;max-width:none;height:auto}
+.clone-checkout-foot .bar a.link{color:var(--peach);text-decoration:none}
+.clone-checkout-foot a:focus-visible{outline:3px solid var(--peach);outline-offset:5px}
+
+@media(min-width:1600px){.clone-checkout-foot .wrap{width:min(1320px,calc(100% - 160px))}}
+@media(max-width:1100px){.clone-checkout-foot .wrap{width:calc(100% - 64px)}}
+@media(max-width:800px){
+  .clone-checkout-foot .wrap{width:calc(100% - 48px)}
+  .clone-checkout-foot .bar .wrap{flex-wrap:wrap}
+}
+@media(max-width:540px){
+  .clone-checkout-foot .wrap{width:calc(100% - 40px)}
+  .clone-checkout-foot .notes{padding:44px 0 52px}
+  .clone-checkout-foot .before{padding:24px 22px 26px}
+  .clone-checkout-foot .brand{width:100%}
+}
+</style>
+
+<footer class="clone-checkout-foot">
+  <div class="notes">
+    <div class="wrap">
+      <p class="below-button">Recorded lessons. Start the day you join and work at your own pace.</p>
+      <div class="before">
+        <span class="before-label">Before you join</span>
+        <p>You'll need a paid Claude plan, purchased separately. You don't need to know how to code. Bring a computer and something from your own life you'd like to build.</p>
+      </div>
+    </div>
+  </div>
+  <div class="bar">
+    <div class="wrap">
+      <a class="brand" href="https://aisavvy-ai-fluent.netlify.app/#" aria-label="AI Savvy Founders home"><img src="https://storage.googleapis.com/funnel-ai-production/cloned/tyylNIwNc3D2J85BS0kS/Kz44HwqRbiwTJNVnYLHr/img_0" alt="AI Savvy Founders" width="147" height="32" loading="lazy"></a>
+      <span>&copy; <span data-cn-year>2026</span> AI Savvy Founders</span>
+      <a class="link" href="https://aisavvy-ai-fluent.netlify.app/#faqs">Questions? Start here <span aria-hidden="true">&nearr;</span></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var y = document.querySelector('[data-cn-year]');
+  if (y) y.textContent = String(new Date().getFullYear());
+})();
+</script>
