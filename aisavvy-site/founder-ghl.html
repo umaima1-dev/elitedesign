@@ -1,0 +1,66 @@
+<!-- EDIT: replace [UMAIMA_PHOTO_URL] with the link to Umaima's photo in your GoHighLevel media library. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@800;900&family=Instrument+Serif:ital@1&family=Manrope:wght@500&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+.clone-founder{
+  --ink:#1c1412;--maroon:#7a1f2b;--cream:#fdf6ee;--line:#dfd0c5;--warm:#584940;
+  width:100%;max-width:100%;box-sizing:border-box;overflow:hidden;
+  padding:110px 0;background:var(--cream);color:var(--warm);
+  font:400 16px/1.75 'Open Sans',sans-serif;-webkit-font-smoothing:antialiased;
+}
+.clone-founder *{box-sizing:border-box}
+.clone-founder h2,.clone-founder p,.clone-founder figure{margin:0}
+.clone-founder .wrap{width:min(1240px,calc(100% - 96px));margin-inline:auto}
+.clone-founder .founder-layout{display:grid;grid-template-columns:.86fr 1.05fr;gap:96px;align-items:center}
+.clone-founder .founder-photo{position:relative;border-radius:12px;height:580px;isolation:isolate;background:#e9dccf}
+.clone-founder .founder-photo img{display:block;width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 30%;border-radius:12px}
+.clone-founder .photo-tint{position:absolute;inset:0;border-radius:12px;background:linear-gradient(0deg,rgba(28,20,18,.85),transparent 42%);pointer-events:none}
+.clone-founder .founder-photo figcaption{position:absolute;bottom:27px;left:30px;color:#fff;display:flex;flex-direction:column;gap:4px}
+.clone-founder .founder-photo figcaption strong{font:800 24px/1.3 'Inter Tight',Inter,sans-serif;color:#fff}
+.clone-founder .founder-photo figcaption span{font:500 11px Manrope,sans-serif;letter-spacing:.05em}
+.clone-founder h2{font-family:'Inter Tight',Inter,sans-serif;font-weight:900;font-size:clamp(34px,3.9vw,52px);line-height:1.06;letter-spacing:-.035em;text-transform:uppercase;text-wrap:balance;color:var(--ink);margin-bottom:28px}
+.clone-founder .it{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.02em;font-size:1.22em;line-height:1.02;display:inline-block;padding-right:.06em;margin-left:.05em;color:var(--maroon)}
+.clone-founder .founder-copy p{font-size:15.5px;text-wrap:pretty}
+.clone-founder .founder-copy p+p{margin-top:20px}
+.clone-founder .founder-copy .founder-lead{font-size:18px;font-weight:600;color:var(--ink);line-height:1.6}
+.clone-founder .signoff{border-top:1px solid var(--line);padding-top:24px;margin-top:30px;font:800 25px/1.3 'Inter Tight',Inter,sans-serif;letter-spacing:-.035em;color:var(--maroon)}
+
+@media(min-width:1600px){.clone-founder .wrap{width:min(1320px,calc(100% - 160px))}}
+@media(max-width:1100px){
+  .clone-founder{padding:88px 0}
+  .clone-founder .wrap{width:calc(100% - 64px)}
+  .clone-founder .founder-layout{gap:60px}
+  .clone-founder .founder-photo{height:520px}
+}
+@media(max-width:800px){
+  .clone-founder .wrap{width:calc(100% - 48px)}
+  .clone-founder .founder-layout{grid-template-columns:1fr;gap:34px}
+  .clone-founder .founder-photo{width:min(480px,94%);height:540px}
+  .clone-founder h2{font-size:clamp(29px,8.4vw,36px)}
+}
+@media(max-width:540px){
+  .clone-founder{padding:66px 0}
+  .clone-founder .wrap{width:calc(100% - 40px)}
+  .clone-founder .founder-photo{height:440px;width:94%}
+}
+</style>
+
+<section class="clone-founder" id="umaima">
+  <div class="wrap founder-layout">
+    <figure class="founder-photo">
+      <img src="[UMAIMA_PHOTO_URL]" alt="Umaima, founder of AI Savvy Founders" width="1200" height="1600">
+      <div class="photo-tint"></div>
+      <figcaption><strong>Umaima</strong><span>Founder, AI Savvy Founders</span></figcaption>
+    </figure>
+    <div class="founder-copy">
+      <h2>Hi, I'm <span class="it">Umaima.</span></h2>
+      <p class="founder-lead">I studied engineering, worked in corporate, then built marketing systems for other people for years. Today I run a small agency in Dubai, and I'm a mum to two daughters.</p>
+      <p>When I started using Claude properly, I stopped thinking of it as a writing tool. It became the way I work, and my agency now takes on more clients with the same team and the same hours.</p>
+      <p>This year reminded me why that matters. There were weeks when I couldn't be at my desk, and things kept moving anyway, because the work that didn't need me was already handled. That gave me time back for what matters, and being a mum is at the top of that list.</p>
+      <p>That's what I want for you, wherever you're starting from. I don't mean a faster version of the same exhausting week. I mean a week where your ideas get done and some of your time comes back.</p>
+      <div class="signoff">Umaima</div>
+    </div>
+  </div>
+</section>

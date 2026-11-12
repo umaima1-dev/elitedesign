@@ -1,0 +1,59 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Inter+Tight:wght@900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+.clone-faqs{
+  --ink:#1c1412;--maroon:#7a1f2b;--cream:#fdf6ee;--line:#dfd0c5;--warm:#584940;--ease:cubic-bezier(.23,1,.32,1);
+  width:100%;max-width:100%;box-sizing:border-box;overflow:hidden;
+  padding:110px 0;background:var(--cream);color:var(--warm);
+  font:400 16px/1.75 'Open Sans',sans-serif;-webkit-font-smoothing:antialiased;
+}
+.clone-faqs *{box-sizing:border-box}
+.clone-faqs h2,.clone-faqs p{margin:0}
+.clone-faqs .wrap{width:min(1240px,calc(100% - 96px));margin-inline:auto}
+.clone-faqs .faq-layout{display:grid;grid-template-columns:.7fr 1.3fr;gap:90px}
+.clone-faqs h2{font-family:'Inter Tight',Inter,sans-serif;font-weight:900;font-size:clamp(30px,3.3vw,47px);line-height:1.06;letter-spacing:-.035em;text-transform:uppercase;text-wrap:balance;color:var(--ink)}
+.clone-faqs details{border-bottom:1px solid var(--line)}
+.clone-faqs details:first-child{border-top:1px solid var(--line)}
+.clone-faqs summary{padding:24px 0;display:flex;align-items:center;justify-content:space-between;gap:20px;cursor:pointer;list-style:none;font:700 17px/1.5 Inter,sans-serif;color:var(--ink)}
+.clone-faqs summary::-webkit-details-marker{display:none}
+.clone-faqs summary:focus-visible{outline:3px solid var(--maroon);outline-offset:5px}
+.clone-faqs summary .icon{width:20px;height:20px;flex-shrink:0;color:var(--maroon);stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s var(--ease)}
+.clone-faqs details[open] summary .icon{transform:rotate(45deg)}
+.clone-faqs .faq-answer{padding:0 40px 26px 0;font-size:15px;line-height:1.8}
+/* dashed "to be confirmed" marker, as on the page. Delete the span once the plan is confirmed. */
+.clone-faqs .clone-tbc{outline:1px dashed currentColor;outline-offset:1px;padding:0 .3em;margin:0 .25em;border-radius:3px;white-space:nowrap}
+@media(hover:hover) and (pointer:fine){.clone-faqs summary:hover{color:var(--maroon)}}
+
+@media(min-width:1600px){.clone-faqs .wrap{width:min(1320px,calc(100% - 160px))}}
+@media(max-width:1100px){
+  .clone-faqs{padding:88px 0}
+  .clone-faqs .wrap{width:calc(100% - 64px)}
+  .clone-faqs .faq-layout{gap:50px}
+}
+@media(max-width:800px){
+  .clone-faqs .wrap{width:calc(100% - 48px)}
+  .clone-faqs .faq-layout{grid-template-columns:1fr;gap:34px}
+  .clone-faqs h2{font-size:clamp(29px,8.4vw,36px)}
+}
+@media(max-width:540px){
+  .clone-faqs{padding:66px 0}
+  .clone-faqs .wrap{width:calc(100% - 40px)}
+  .clone-faqs summary{font-size:15.5px;padding:21px 0}
+  .clone-faqs .faq-answer{padding-right:10px}
+}
+</style>
+
+<section class="clone-faqs" id="faqs">
+  <div class="wrap faq-layout">
+    <div><h2>Questions</h2></div>
+    <div class="faq-list">
+      <details><summary>Do I need to know how to code?<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="faq-answer"><p>No. Even the agent days are taught in plain English. Claude writes the code and you tell it what you want.</p></div></details>
+      <details><summary>I'm not running a business. Is this for me?<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="faq-answer"><p>Yes. You choose a track on Day 1 (student, professional, business owner or creator), and every challenge is built around your real work, studies or projects.</p></div></details>
+      <details><summary>Which Claude plan do I need?<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="faq-answer"><p><span class="clone-tbc">[CONFIRM PLAN.]</span> Each lesson says which features need which plan.</p></div></details>
+      <details><summary>What if I fall behind?<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="faq-answer"><p>Everything is recorded and yours for life. You can take a weekend to catch up, and Slack is there when you get stuck.</p></div></details>
+      <details><summary>I already use Claude. Is this too basic?<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="faq-answer"><p>The basics take one day. From Day 2 you're building systems most daily users have never touched.</p></div></details>
+    </div>
+  </div>
+</section>
