@@ -90,13 +90,13 @@
 
   <header class="clone-navbar-header">
     <nav class="clone-navbar-wrap" aria-label="Main navigation">
-      <a class="clone-navbar-brand" href="https://aisavvyfounders.com/ai-fluent-page#" aria-label="AI Savvy Founders home">
+      <a class="clone-navbar-brand" href="https://aisavvyfounders.com/ai-fluent-page#" data-cn-target="top" aria-label="AI Savvy Founders home">
         <img src="https://storage.googleapis.com/funnel-ai-production/cloned/tyylNIwNc3D2J85BS0kS/Kz44HwqRbiwTJNVnYLHr/img_0" alt="AI Savvy Founders" width="172" height="37">
       </a>
       <div class="clone-navbar-links">
-        <a href="https://aisavvyfounders.com/ai-fluent-page#curriculum">What you build</a>
-        <a href="https://aisavvyfounders.com/ai-fluent-page#umaima">Meet Umaima</a>
-        <a href="https://aisavvyfounders.com/ai-fluent-page#faqs">Questions</a>
+        <a href="https://aisavvyfounders.com/ai-fluent-page#curriculum" data-cn-target="#curriculum, .clone-what-you-build">What you build</a>
+        <a href="https://aisavvyfounders.com/ai-fluent-page#umaima" data-cn-target="#umaima, .clone-umaima">Meet Umaima</a>
+        <a href="https://aisavvyfounders.com/ai-fluent-page#faqs" data-cn-target="#faqs, .clone-questions">Questions</a>
       </div>
       <a class="clone-navbar-btn" href="https://aisavvyfounders.com/ai-fluent-checkout-page">
         Become AI Fluent
@@ -130,5 +130,28 @@
   }
   tick();
   setInterval(tick, 30000);
+})();
+
+/* In-page links: smooth-scroll to the section if it is on this page (found by id or by its class),
+   otherwise follow the normal link to the full page URL. */
+(function () {
+  var header = document.querySelector('.clone-navbar-header');
+  document.querySelectorAll('[data-cn-target]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var sel = a.getAttribute('data-cn-target');
+      if (sel === 'top') {
+        if (window.location.pathname.indexOf('ai-fluent-page') === -1) return;
+        e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); return;
+      }
+      var el = null;
+      try { el = document.querySelector(sel); } catch (err) {}
+      if (!el) return;
+      e.preventDefault();
+      var offset = (header ? header.offsetHeight : 0) + 8;
+      var top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+      if (history.replaceState && el.id) history.replaceState(null, '', '#' + el.id);
+    });
+  });
 })();
 </script>
