@@ -22,6 +22,22 @@
 | 9 | Semrush | $139 | OpenSEO | Rank tracking, backlinks, site audits |
 | | **Total** | **$305.49** | **$0** | **$18,329 over 5 years** |
 
+## GitHub Links (all 9 repos)
+
+| # | Free twin | GitHub link | Stars |
+|---|-----------|-------------|-------|
+| 1 | AppFlowy | https://github.com/AppFlowy-IO/AppFlowy | 79.2k |
+| 2 | Cal.com | https://github.com/calcom/cal.com | 50.2k |
+| 3 | OpenProject | https://github.com/opf/openproject | 17.6k |
+| 4 | OpenWhispr | https://github.com/OpenWhispr/openwhispr | 11.9k |
+| 5 | Cap | https://github.com/CapSoftware/Cap | 25.3k |
+| 6 | VoiceStudio | https://github.com/debpalash/VoiceStudio | 115.3k |
+| 7 | Chatwoot | https://github.com/chatwoot/chatwoot | 40.2k |
+| 8 | Open Generative AI | https://github.com/Anil-matcha/Open-Generative-AI | 35.5k |
+| 9 | OpenSEO | https://github.com/every-app/open-seo | 28.4k |
+
+Star counts are as of the day this SOP was written. Check each repo's Releases or README for the current install steps.
+
 ---
 
 ## Phase 1: Audit (10 min, do once)
@@ -94,7 +110,7 @@ Example: Semrush $139 x 12 = **$1,668 a year** from one swap.
 ## Delivery Note (for the "Comment GITHUB" CTA)
 
 When someone comments **GITHUB**, send them:
-1. All 9 repo links (paste yours here)
+1. All 9 repo links (listed above)
 2. The one-line install for each
 3. The paid plan it replaces
 4. This SOP
