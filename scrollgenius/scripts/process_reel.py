@@ -13,6 +13,7 @@ Usage (one reel):  process_reel.py <url> [--work scrollgenius_work]
 Use run_batch.py for a whole saved.json.
 """
 import argparse
+import functools
 import json
 import re
 import shutil
@@ -67,12 +68,26 @@ class Transcriber:
         return res["text"].strip(), res.get("language")
 
 
-def probe(path, entries, stream=None):
-    cmd = ["ffprobe", "-v", "error"]
-    if stream:
-        cmd += ["-select_streams", stream]
-    cmd += ["-show_entries", entries, "-of", "csv=p=0", str(path)]
-    return run(cmd, 60).stdout.strip()
+@functools.lru_cache(maxsize=1)
+def ffmpeg_exe():
+    """System ffmpeg if present, else the copy bundled by imageio-ffmpeg (installs without admin rights)."""
+    exe = shutil.which("ffmpeg")
+    if exe:
+        return exe
+    try:
+        import imageio_ffmpeg
+
+        return imageio_ffmpeg.get_ffmpeg_exe()
+    except ImportError:
+        sys.exit("ffmpeg not found. Run: python scripts/bootstrap.py")
+
+
+def media_info(path):
+    """(duration_seconds, has_audio) read from `ffmpeg -i`, so ffprobe is not needed."""
+    err = run([ffmpeg_exe(), "-hide_banner", "-i", str(path)], 60).stderr
+    m = re.search(r"Duration:\s*(\d+):(\d+):([\d.]+)", err)
+    duration = int(m[1]) * 3600 + int(m[2]) * 60 + float(m[3]) if m else 0.0
+    return duration, bool(re.search(r"Stream #.*Audio:", err))
 
 
 def download(url, folder, cookies_from_browser=None, cookies_file=None):
@@ -80,7 +95,7 @@ def download(url, folder, cookies_from_browser=None, cookies_file=None):
     cmd = ytdlp_cmd() + [
         "--no-playlist", "--write-info-json", "--no-progress", "--no-warnings",
         "-S", "res:480", "-f", "bv*+ba/b",           # small file: transcript + frames do not need HD
-        "--retries", "3", "--socket-timeout", "30",
+        "--retries", "3", "--socket-timeout", "30", "--ffmpeg-location", ffmpeg_exe(),
         "-o", str(folder / "video.%(ext)s"),
     ]
     if cookies_from_browser:
@@ -95,10 +110,10 @@ def download(url, folder, cookies_from_browser=None, cookies_file=None):
     return videos[0], None
 
 
-def extract_audio(video, wav):
-    if not probe(video, "stream=index", "a"):
+def extract_audio(video, wav, has_audio):
+    if not has_audio:
         return False  # silent reel (music-only edits or screen recordings with no audio track)
-    res = run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(video), "-vn", "-ac", "1", "-ar", "16000", str(wav)])
+    res = run([ffmpeg_exe(), "-y", "-loglevel", "error", "-i", str(video), "-vn", "-ac", "1", "-ar", "16000", str(wav)])
     return res.returncode == 0 and wav.exists()
 
 
@@ -106,7 +121,7 @@ def extract_frames(video, frames_dir, duration, max_frames):
     frames_dir.mkdir(exist_ok=True)
     interval = max(1.5, (duration or 30) / max_frames)
     run([
-        "ffmpeg", "-y", "-loglevel", "error", "-i", str(video),
+        ffmpeg_exe(), "-y", "-loglevel", "error", "-i", str(video),
         "-vf", f"fps=1/{interval:.2f},scale='min(720,iw)':-2",
         "-frames:v", str(max_frames), "-q:v", "4", str(frames_dir / "f_%02d.jpg"),
     ])
@@ -160,7 +175,8 @@ def process(entry, work, transcriber, max_frames=8, keep_video=False,
     if info_file:
         info = json.loads(info_file.read_text(encoding="utf-8"))
         info_file.unlink()
-    duration = float(probe(video, "format=duration") or info.get("duration") or 0)
+    duration, has_audio = media_info(video)
+    duration = duration or float(info.get("duration") or 0)
     meta = {
         "shortcode": code, "url": url,
         "creator": info.get("uploader") or info.get("channel") or info.get("uploader_id") or entry.get("creator"),
@@ -172,7 +188,7 @@ def process(entry, work, transcriber, max_frames=8, keep_video=False,
 
     transcript, lang = "", None
     wav = folder / "audio.wav"
-    if extract_audio(video, wav):
+    if extract_audio(video, wav, has_audio):
         transcript, lang = transcriber.transcribe(str(wav))
         wav.unlink(missing_ok=True)
     (folder / "transcript.txt").write_text(transcript, encoding="utf-8")

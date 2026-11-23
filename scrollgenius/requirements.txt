@@ -1,0 +1,4 @@
+# ScrollGenius Python dependencies. Installed for you by scripts/bootstrap.py
+yt-dlp>=2025.1.1          # downloads the reels
+faster-whisper>=1.0.0     # small, CPU-friendly speech-to-text (models download on first run)
+imageio-ffmpeg>=0.5.1     # bundled ffmpeg, so no system install or admin rights are needed

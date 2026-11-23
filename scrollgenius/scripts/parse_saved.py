@@ -5,7 +5,9 @@ Accepts: Instagram's official export (.zip or unzipped folder), a .json file, a 
 an .html file, or a plain .txt with one URL per line. Anything else is scanned for
 Instagram links with a regex, so a pasted list of URLs works too.
 
-Usage:  parse_saved.py <file-or-folder> [-o saved.json]
+Usage:  parse_saved.py <file-or-folder-or-url> [more...] [-o saved.json]
+A bare reel URL works too. If the output file already exists, new links are merged into it
+(nothing is lost, duplicates are ignored), so you can keep adding reels over time.
 """
 import argparse
 import csv
@@ -120,6 +122,9 @@ def read_text(name, raw, out):
 
 
 def load(path, out):
+    if re.match(r"https?://", str(path)):
+        out.add(str(path))
+        return
     p = Path(path)
     members = []  # (name, bytes)
     if p.is_dir():
@@ -143,11 +148,17 @@ def load(path, out):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("source", nargs="+", help="export zip/folder, .json, .csv, .html or .txt")
+    ap.add_argument("source", nargs="+", help="export zip/folder, .json, .csv, .html, .txt, or a reel URL")
     ap.add_argument("-o", "--out", default="saved.json")
     args = ap.parse_args()
 
     out = Collector()
+    existing = Path(args.out)
+    before = 0
+    if existing.exists():
+        for e in json.loads(existing.read_text()):
+            out.items[e["shortcode"]] = e
+        before = len(out.items)
     for s in args.source:
         load(s, out)
     items = list(out.items.values())
@@ -155,7 +166,8 @@ def main():
         sys.exit("No Instagram post or reel links found in that file.")
     Path(args.out).write_text(json.dumps(items, indent=2, ensure_ascii=False))
     reels = sum(1 for i in items if i["kind"] == "reel")
-    print(f"Found {len(items)} saved items ({reels} reels, {len(items) - reels} posts/IGTV) -> {args.out}")
+    new = f", {len(items) - before} new" if before else ""
+    print(f"{len(items)} saved items ({reels} reels, {len(items) - reels} posts/IGTV{new}) -> {args.out}")
 
 
 if __name__ == "__main__":
