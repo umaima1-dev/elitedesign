@@ -1,16 +1,7 @@
 import { NextResponse } from "next/server";
+import { buildEmail } from "../../email-template";
 
 const GHL = "https://services.leadconnectorhq.com";
-
-const esc = (s) =>
-  String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-
-// ---- Edit the email wording here ----------------------------------------
-const buildEmail = (link) => ({
-  text: `Here is the resource as promised.\n\n${link}`,
-  html: `<p>Here is the resource as promised.</p><p><a href="${esc(link)}">${esc(link)}</a></p>`,
-});
-// -------------------------------------------------------------------------
 
 async function ghl(path, body) {
   const res = await fetch(GHL + path, {
@@ -51,7 +42,7 @@ export async function POST(request) {
     const contactId = up.contact?.id;
     if (!contactId) throw new Error("Could not find or create the contact");
 
-    const { text, html } = buildEmail(url);
+    const { text, html } = buildEmail(url, subj);
     const msg = { type: "Email", contactId, subject: subj, message: text, html };
     if (process.env.FROM_EMAIL) {
       msg.emailFrom = process.env.FROM_NAME ? `${process.env.FROM_NAME} <${process.env.FROM_EMAIL}>` : process.env.FROM_EMAIL;

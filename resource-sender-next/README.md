@@ -4,7 +4,7 @@ Type a contact email, a resource name and a resource link. The app finds or
 creates the contact in GoHighLevel and sends the standard email from your
 GoHighLevel account, so it appears in their conversation history.
 
-Email body: "Here is the resource as promised." followed by the link.
+Email: branded layout with the resource name as the title, "Here is the resource as promised", and a button linking to the resource.
 Subject: the resource name you type.
 
 ## 1. Get your GoHighLevel details
@@ -27,4 +27,4 @@ Open http://localhost:3000
 3. Deploy, open the URL, bookmark it. The browser remembers your password.
 
 ## Change the email wording
-Edit `buildEmail()` at the top of `app/api/send/route.js`.
+Edit the settings at the top of `app/email-template.js` (greeting, intro, button text, sign-off, colours).
