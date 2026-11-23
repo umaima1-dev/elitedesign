@@ -2,8 +2,8 @@
 """Process every reel in saved.json one by one. Safe to stop and rerun: finished reels are skipped.
 
 Usage:
-  run_batch.py saved.json --work scrollgenius_work              # everything
-  run_batch.py saved.json --work scrollgenius_work --limit 5    # trial run first
+  run_batch.py ~/ScrollGenius/saved.json              # everything (work folder defaults to ~/ScrollGenius)
+  run_batch.py ~/ScrollGenius/saved.json --limit 5    # trial run first
   run_batch.py saved.json --cookies-from-browser chrome         # if Instagram blocks anonymous downloads
 """
 import argparse
@@ -39,7 +39,7 @@ def write_index(items, work):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("saved", help="saved.json from parse_saved.py")
-    ap.add_argument("--work", default="scrollgenius_work")
+    ap.add_argument("--work", default=str(Path.home() / "ScrollGenius"))
     ap.add_argument("--model", default="base", help="whisper model: tiny (fastest), base (default), small")
     ap.add_argument("--language", default=None)
     ap.add_argument("--limit", type=int, default=0, help="only process this many pending reels")

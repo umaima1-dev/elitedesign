@@ -9,7 +9,7 @@ Per reel it creates  <work>/reels/<shortcode>/
     meta.json       creator, caption, duration, url
     status.json     done | failed (+ reason), so reruns skip finished reels
 
-Usage (one reel):  process_reel.py <url> [--work scrollgenius_work]
+Usage (one reel):  process_reel.py <url> [--work ~/ScrollGenius]
 Use run_batch.py for a whole saved.json.
 """
 import argparse
@@ -210,7 +210,7 @@ def process(entry, work, transcriber, max_frames=8, keep_video=False,
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("url")
-    ap.add_argument("--work", default="scrollgenius_work")
+    ap.add_argument("--work", default=str(Path.home() / "ScrollGenius"))
     ap.add_argument("--model", default="base", help="whisper model: tiny, base (default), small")
     ap.add_argument("--language", default=None, help="force a language code, e.g. en. Default: auto-detect")
     ap.add_argument("--max-frames", type=int, default=8)

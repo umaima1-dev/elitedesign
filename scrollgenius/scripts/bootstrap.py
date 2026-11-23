@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """One command that sets up everything ScrollGenius needs, and says exactly what is wrong if it cannot.
 
-Safe to run again and again. Works in Claude Code in the browser (cloud container) and in the desktop app.
+Safe to run again and again. Built for the Claude desktop app (Mac and Windows).
 
   bootstrap.py              install anything missing, pre-download the Whisper model, test the network
   bootstrap.py --check      only report, install nothing
@@ -10,7 +10,6 @@ Safe to run again and again. Works in Claude Code in the browser (cloud containe
 """
 import argparse
 import importlib.util
-import os
 import platform
 import subprocess
 import sys
@@ -25,10 +24,6 @@ MODULES = {"yt_dlp": "yt-dlp", "faster_whisper": "faster-whisper", "imageio_ffmp
 
 def say(ok, text):
     print(f"[{'ok' if ok else '!!'}] {text}", flush=True)
-
-
-def is_cloud():
-    return any(os.environ.get(k) for k in ("CLAUDE_CODE_REMOTE", "CCR_AGENT_PROXY_ENABLED"))
 
 
 def missing_modules():
@@ -62,10 +57,8 @@ def main():
     ap.add_argument("--no-model", action="store_true", help="skip the Whisper model download")
     a = ap.parse_args()
 
-    cloud = is_cloud()
     problems = []
-    say(sys.version_info >= (3, 9), f"Python {platform.python_version()} on {platform.system()} "
-        f"({'cloud session' if cloud else 'your computer'})")
+    say(sys.version_info >= (3, 9), f"Python {platform.python_version()} on {platform.system()}")
     if sys.version_info < (3, 9):
         sys.exit("Python 3.9 or newer is required.")
 
@@ -103,8 +96,8 @@ def main():
     say(hf_ok, "Can reach huggingface.co (Whisper model download)" + ("" if hf_ok else f" -> blocked: {hf_err}"))
     if not ig_ok or not hf_ok:
         problems.append("NETWORK: " + ("instagram.com " if not ig_ok else "") + ("huggingface.co " if not hf_ok else "") +
-                        "blocked. In a cloud session set the environment's Network access to Full (or add these hosts "
-                        "plus cdninstagram.com and fbcdn.net under Allowed domains), then start a new session.")
+                        "cannot be reached. Check your internet connection, turn off any VPN or firewall that blocks "
+                        "it, then run this again.")
 
     # 4. Whisper model (cached after the first download)
     if not a.check and not a.no_model and not still and hf_ok:
@@ -124,11 +117,7 @@ def main():
             print(f"  - {p}")
         sys.exit(1)
     print("READY.")
-    if cloud:
-        print("Note: this is a cloud container, so it is wiped when the session goes idle. "
-              "If Instagram blocks downloads, a cookies.txt export is the only login option here.")
-    else:
-        print("If Instagram blocks downloads, rerun with --cookies-from-browser <your browser>.")
+    print("If Instagram blocks downloads, rerun with --cookies-from-browser <your browser>.")
 
 
 if __name__ == "__main__":
