@@ -10,3 +10,7 @@ Thumbs.db
 # deploy / tooling
 .netlify/
 node_modules/
+
+# ScrollGenius runtime output
+scrollgenius_work/
+__pycache__/

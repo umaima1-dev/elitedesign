@@ -1,0 +1,45 @@
+# Template for each generated skill
+
+Copy this structure. Replace everything in <angle brackets>. Keep the finished SKILL.md under ~120 lines.
+
+````markdown
+---
+name: <topic>-workflow
+description: <One or two sentences: what this does, then the trigger phrases. Example: Runs a short-form video editing workflow with Claude. Use when the user says "edit my video", "cut my reel", "add captions to my video", or "clean up my footage".>
+---
+
+# <Topic title>
+
+<One sentence: the outcome this workflow produces.>
+
+## When to use
+- <situation 1>
+- <situation 2>
+
+## Tools you need
+| Tool | What it is for |
+|---|---|
+| <tool> | <use> |
+
+If a tool is missing, tell the user how to get it before starting.
+
+## Workflow
+1. <imperative step, specific enough to run>
+2. <step>
+3. <step>
+
+If creators disagree on a step, say so: "<Creator A> does X; <Creator B> prefers Y. Ask the user which."
+
+## Tips
+- <tip that came from a reel>
+
+## Before you finish
+- <check that the output meets the goal>
+
+## Credits
+Built from these creators' reels. Go follow them.
+- @<creator> - <reel URL>
+- @<creator> - <reel URL>
+````
+
+Quality bar: each step should be something Claude can act on without watching the reel. Cut filler, intros, hype and sales pitches. Keep the numbers (settings, durations, prompts) a creator gives; those are the valuable part.
