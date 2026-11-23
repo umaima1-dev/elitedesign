@@ -25,7 +25,7 @@ Paths (use the user's home folder; `~` is `%USERPROFILE%` on Windows):
 ## Mode A: First-time setup
 Triggered by "set up ScrollGenius" or the zip being dropped with the setup prompt.
 
-1. Unzip the dropped zip into `~/.claude/skills/` so `~/.claude/skills/scrollgenius/SKILL.md` exists.
+1. Unzip the dropped zip into `~/.claude/skills/` so `~/.claude/skills/scrollgenius/SKILL.md` exists (skip this if it is already there and the user is just rerunning setup).
 2. Check Python is installed (`python3 --version` / `python --version`, needs 3.9+). If missing, install it (Mac: `brew install python`, or python.org; Windows: `winget install Python.Python.3.12`) and carry on.
 3. Run `scripts/bootstrap.py`. It installs yt-dlp, faster-whisper and a bundled ffmpeg, downloads the Whisper model, and tests that Instagram and the model host are reachable.
 4. If it prints `NOT READY`, fix what it names and rerun. A failed package install: read the error, fix (older pip, permissions), retry. Blocked network: ask the user to check their internet, VPN or firewall.
@@ -42,6 +42,7 @@ Input is any of: an export zip/folder, `.json`, `.csv`, `.html`, `.txt`, or one 
    - For lists over 20 reels run it in the background and watch `~/ScrollGenius/index.json`.
    - **Blocked by Instagram** (it prints "login required" / "rate-limit" and stops after 3 in a row): this is the one time you ask. Ask which browser they are logged in to Instagram with, then rerun with `--cookies-from-browser <chrome|firefox|safari|edge>`. It reads that browser's login on their own computer; nothing is uploaded or stored. If it errors, have them fully close that browser and retry; if it still fails, try Firefox, which is the most reliable. On Mac, Safari may need Full Disk Access for the terminal.
    - Slow computer: `--model tiny`. Want accuracy: `--model small`.
+   - Many reels failing with extractor or HTTP errors (not login errors), or the user asks to "update the downloader": run `scripts/bootstrap.py --update`, then rerun with `--retry-failed`.
 4. **Analyse.** For each `done` reel, read `~/ScrollGenius/reels/<code>/digest.md`. If the transcript is under ~30 words or the caption says "look at this", view 3-4 of the listed frames. Skip reels that already have `~/ScrollGenius/analysis/<code>.json`. Write:
 ```json
 {"shortcode": "", "creator": "", "url": "", "is_tutorial": true,

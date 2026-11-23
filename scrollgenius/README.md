@@ -39,6 +39,7 @@ You get back finished skills, a summary of what was learned, and a list of reels
 
 | File | Job |
 |---|---|
+| `SOP.md` | Step-by-step setup guide for end users |
 | `SKILL.md` | The instructions Claude follows |
 | `requirements.txt` | Python packages (yt-dlp, faster-whisper, imageio-ffmpeg) |
 | `scripts/bootstrap.py` | One-command setup and self-repair |
