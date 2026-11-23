@@ -27,4 +27,4 @@ Open http://localhost:3000
 3. Deploy, open the URL, bookmark it. The browser remembers your password.
 
 ## Change the email wording
-Edit the settings at the top of `app/email-template.js` (greeting, intro, button text, sign-off, colours).
+Edit the settings at the top of `app/email-template.js` (greeting, intro, button text, follow line, custom-solutions line, sign-off, colours).

@@ -3,10 +3,12 @@ export const EMAIL = {
   brand: "AI Savvy Founders",
   signOff: "Umaima",
   greeting: "Hey there,",
-  intro: "Here is the resource as promised. Tap the button below to open it.",
-  introPlain: "Here is the resource as promised. Your link is below.",
+  intro: "Here is your resource, as promised. Tap the button below to open it.",
+  introPlain: "Here is your resource, as promised. Your link is below.",
   button: "Open the resource",
-  outro: "Hope it helps. Just reply to this email if you have any questions.",
+  follow: "We post things like this daily, so don't forget to follow along.",
+  questions: "If you have any questions, just reply to this email.",
+  custom: "We also offer custom solutions. If you want to implement anything, just reply to this email.",
   accent: "#b4451f", // button + top bar
   ink: "#1c1a17", // text
   paper: "#f6f4ef", // page background
@@ -27,7 +29,11 @@ export function buildEmail(link, resourceName) {
     "",
     `${resourceName}: ${link}`,
     "",
-    e.outro,
+    e.follow,
+    "",
+    e.questions,
+    "",
+    e.custom,
     "",
     `${e.signOff}`,
     e.brand,
@@ -53,12 +59,10 @@ export function buildEmail(link, resourceName) {
     <tr><td align="left" style="padding:24px 32px;">
       <a href="${url}" style="display:inline-block;background:${e.accent};color:#ffffff;font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:700;text-decoration:none;padding:14px 28px;border-radius:8px;">${esc(e.button)}</a>
     </td></tr>
-    <tr><td style="padding:0 32px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;color:#6b665e;">
-      Button not working? Copy this link into your browser:<br>
-      <a href="${url}" style="color:${e.accent};word-break:break-all;">${url}</a>
-    </td></tr>
     <tr><td style="padding:24px 32px 32px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;color:${e.ink};">
-      <p style="margin:0 0 14px;">${esc(e.outro)}</p>
+      <p style="margin:0 0 14px;">${esc(e.follow)}</p>
+      <p style="margin:0 0 14px;">${esc(e.questions)}</p>
+      <p style="margin:0 0 14px;">${esc(e.custom)}</p>
       <p style="margin:0;">${esc(e.signOff)}<br><span style="color:#6b665e;font-size:14px;">${esc(e.brand)}</span></p>
     </td></tr>
   </table>
