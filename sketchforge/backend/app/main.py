@@ -1,22 +1,32 @@
 """HTTP API. Everything heavy runs in a worker thread so the server stays responsive."""
 from __future__ import annotations
 
+import asyncio
 import base64
+import hmac
 import json
 import os
 import re
+from pathlib import Path
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import JSONResponse, Response
+from fastapi.staticfiles import StaticFiles
 from pydantic import ValidationError
 
 from . import service
 from .engine import ENGINE_VERSION, PBNParams, SketchParams
 from .presets import all_presets
 
-MAX_UPLOAD_BYTES = 30 * 1024 * 1024
+MAX_UPLOAD_BYTES = int(float(os.environ.get("MAX_UPLOAD_MB", 30)) * 1024 * 1024)
+# Renders are CPU and memory heavy: by default only one runs at a time, others queue.
+_render_slots = asyncio.Semaphore(max(1, int(os.environ.get("MAX_CONCURRENT_RENDERS", 1))))
+STATIC_DIR = Path(__file__).parent / "static"
+# Optional: set ACCESS_PASSWORD to require a password (browser login box, any username) for the
+# whole site. Recommended for any public URL, since renders use real CPU and customer photos.
+ACCESS_PASSWORD = os.environ.get("ACCESS_PASSWORD", "")
 
 app = FastAPI(title="SketchForge", version=ENGINE_VERSION)
 app.add_middleware(
@@ -27,6 +37,21 @@ app.add_middleware(
     allow_headers=["*"],
     expose_headers=["Content-Disposition"],
 )
+
+
+@app.middleware("http")
+async def password_gate(request, call_next):
+    if not ACCESS_PASSWORD or request.url.path == "/api/health" or request.method == "OPTIONS":
+        return await call_next(request)
+    header = request.headers.get("authorization", "")
+    if header.lower().startswith("basic "):
+        try:
+            _, _, given = base64.b64decode(header[6:]).decode("utf-8").partition(":")
+            if hmac.compare_digest(given.encode(), ACCESS_PASSWORD.encode()):
+                return await call_next(request)
+        except Exception:  # noqa: BLE001 - malformed header is just "not logged in"
+            pass
+    return Response("Password required", status_code=401, headers={"WWW-Authenticate": 'Basic realm="SketchForge"'})
 
 
 async def _read(file: UploadFile) -> bytes:
@@ -94,7 +119,8 @@ async def process(
     if quality not in ("preview", "full"):
         raise HTTPException(422, "quality must be 'preview' or 'full'.")
     data = await _read(file)
-    out = await run_in_threadpool(_execute, data, mode, params, quality, max_side)
+    async with _render_slots:
+        out = await run_in_threadpool(_execute, data, mode, params, quality, max_side)
     body = {
         "mode": out.mode,
         "quality": quality,
@@ -135,7 +161,8 @@ async def export(
         return service.run(data, mode, params, "full", max_side)
 
     try:
-        out = await run_in_threadpool(_go)
+        async with _render_slots:
+            out = await run_in_threadpool(_go)
     except ValidationError as exc:
         raise HTTPException(422, detail=json.loads(exc.json())) from exc
     except (ValueError, json.JSONDecodeError) as exc:
@@ -153,3 +180,8 @@ async def export(
         return Response(out.svg.encode(), media_type="image/svg+xml",
                         headers={"Content-Disposition": f'attachment; filename="{stem}-pbn-{label}.svg"'})
     raise HTTPException(400, f"Format '{format}' is not available for mode '{mode}'.")
+
+
+# The single-file web app. Mounted last so every /api route wins.
+if (STATIC_DIR / "index.html").exists():
+    app.mount("/", StaticFiles(directory=STATIC_DIR, html=True), name="web")

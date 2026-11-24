@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SketchForge — photo to sketch &amp; paint-by-numbers</title>
+<meta name="description" content="Turn a photo into a realistic pencil sketch, a traceable outline or an SVG paint-by-numbers. Same photo and settings always give the same result.">
+<style>
+:root{--bg:#f6f3ee;--panel:#fff;--ink:#23201c;--muted:#6f685f;--line:#e3ddd3;--accent:#b4532a;--accent-ink:#fff;--err:#b3261e;--radius:10px;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#17150f;--panel:#201d17;--ink:#efe9df;--muted:#a39a8c;--line:#3a352b;--accent:#e0824f;--accent-ink:#1b1209;--err:#ff8a80;color-scheme:dark}}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1{font-size:1.4rem;margin:0;letter-spacing:-.01em}h2{margin:0 0 6px}
+h3{margin:0 0 10px;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:650}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em}
+.shell{max-width:1320px;margin:0 auto;padding:20px 16px 48px}
+header{margin-bottom:18px}header p{margin:4px 0 0;color:var(--muted);max-width:70ch}
+.layout{display:grid;grid-template-columns:340px minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:860px){.layout{grid-template-columns:1fr}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:6px 16px 10px;position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto}
+@media (max-width:860px){.panel{position:static;max-height:none}}
+.section{padding:14px 0;border-bottom:1px solid var(--line)}.section:last-child{border-bottom:0}
+.hint{color:var(--muted);font-size:.82rem;margin:-4px 0 10px}
+.field{display:block;margin:0 0 12px}
+.field .row{display:flex;justify-content:space-between;gap:8px;font-size:.9rem;margin-bottom:4px}
+.field output{color:var(--muted);font-variant-numeric:tabular-nums}
+.field small{display:block;color:var(--muted);margin-top:2px;font-size:.78rem}
+input[type=range]{width:100%;accent-color:var(--accent)}
+select,input[type=number]{width:100%;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+.numwrap{display:flex;align-items:center;gap:8px}.numwrap em{color:var(--muted);font-style:normal}
+.toggle{display:flex;align-items:center;gap:8px;margin:0 0 10px;font-size:.9rem}
+.toggle input{accent-color:var(--accent);width:16px;height:16px}
+.segmented{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.segmented button{flex:1;border:0;border-radius:0;background:transparent;padding:8px 6px;border-right:1px solid var(--line)}
+.segmented button:last-child{border-right:0}
+.segmented button.on{background:var(--accent);color:var(--accent-ink);font-weight:600}
+button{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 12px;cursor:pointer}
+button:hover:not(:disabled){border-color:var(--accent)}
+button:focus-visible,.drop:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button:disabled{opacity:.5;cursor:not-allowed}
+button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
+.btnrow{display:flex;gap:8px}.btnrow.wrap{flex-wrap:wrap}
+.drop{border:2px dashed var(--line);border-radius:var(--radius);padding:18px 12px;text-align:center;cursor:pointer;display:grid;gap:2px}
+.drop span{color:var(--muted);font-size:.82rem}
+.drop.over,.drop:hover{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 6%,transparent)}
+.toolbar{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:10px}
+.toolbar .segmented{min-width:260px}
+.meta{color:var(--muted);font-size:.82rem;font-variant-numeric:tabular-nums}
+.empty{border:2px dashed var(--line);border-radius:var(--radius);padding:80px 24px;text-align:center;color:var(--muted);background:var(--panel)}
+.error{color:var(--err);margin:8px 0}.note{color:var(--muted);font-size:.82rem}
+.stage{position:relative;width:100%;max-height:82vh;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;user-select:none;touch-action:none}
+.stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none}
+.stage img.result{background:#fff}
+.stage.drawing{cursor:crosshair}.stage.splitting{cursor:ew-resize}
+.divider{position:absolute;top:0;bottom:0;width:2px;background:var(--accent);transform:translateX(-1px);pointer-events:none}
+.divider span{position:absolute;top:50%;left:50%;width:28px;height:28px;margin:-14px;border-radius:50%;background:var(--accent);box-shadow:0 1px 6px rgba(0,0,0,.35)}
+.focusbox{position:absolute;border:2px dashed var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent);pointer-events:none}
+.focusbox span{position:absolute;top:-1.5em;left:-2px;font-size:.72rem;background:var(--accent);color:var(--accent-ink);padding:1px 6px;border-radius:4px}
+.busy{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.65);color:#fff;padding:4px 10px;border-radius:999px;font-size:.8rem}
+.palette{margin-top:12px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px}
+.stats{display:flex;flex-wrap:wrap;gap:6px 18px;color:var(--muted);font-size:.88rem;margin-bottom:10px}.stats b{color:var(--ink)}
+.palette ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+.palette li{display:flex;align-items:center;gap:8px}
+.palette i{width:30px;height:30px;border-radius:6px;display:grid;place-items:center;font-style:normal;font-weight:700;font-size:.85rem;border:1px solid rgba(0,0,0,.25);flex:none}
+.palette small{color:var(--muted)}
+.center{min-height:60vh;display:grid;place-items:center;padding:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:24px;max-width:520px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="shell" id="app" hidden>
+  <header>
+    <h1>SketchForge</h1>
+    <p>Photo → pencil sketch, traceable outline, or SVG paint-by-numbers. Same photo + same settings = same result, every time.</p>
+  </header>
+  <div class="layout">
+    <aside class="panel" id="panel">
+      <section class="section">
+        <h3>1 · Photo</h3>
+        <div class="drop" id="drop" role="button" tabindex="0"><strong>Drop a photo here</strong><span>or click to browse · JPG, PNG, WebP</span></div>
+        <input type="file" id="file" accept="image/*" hidden>
+      </section>
+      <section class="section">
+        <h3>2 · What do you want?</h3>
+        <div class="segmented" id="modeSeg" role="group" aria-label="Mode">
+          <button type="button" data-mode="sketch" class="on">Sketch / trace</button>
+          <button type="button" data-mode="pbn">Paint by numbers</button>
+        </div>
+        <label class="field" style="margin-top:12px"><span class="row"><span>Start from a preset</span></span>
+          <select id="preset"><option value="">Choose…</option></select>
+        </label>
+      </section>
+      <div id="controls"></div>
+      <section class="section">
+        <h3>3 · Download</h3>
+        <p class="hint">Downloads are rendered at full resolution and can take a few seconds.</p>
+        <div class="btnrow wrap" id="downloads"></div>
+        <input type="file" id="recipeFile" accept="application/json,.json" hidden>
+      </section>
+    </aside>
+    <main id="main"></main>
+  </div>
+</div>
+<div class="center" id="boot"><p>Loading…</p></div>
+
+<script>
+"use strict";
+const API = (window.SKETCHFORGE_API || "").replace(/\/$/, "");
+
+/* ---------- tiny DOM helper ---------- */
+function h(tag, attrs, ...kids) {
+  const el = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (v === false || v == null) continue;
+    if (k === "class") el.className = v;
+    else if (k.startsWith("on")) el.addEventListener(k.slice(2), v);
+    else if (k === "style") el.style.cssText = v;
+    else el.setAttribute(k, v === true ? "" : v);
+  }
+  for (const kid of kids.flat()) if (kid != null && kid !== false) el.append(kid.nodeType ? kid : document.createTextNode(kid));
+  return el;
+}
+const $ = (id) => document.getElementById(id);
+
+/* ---------- state ---------- */
+const S = {
+  schema: null, presets: null, file: null, objectUrl: null, aspect: 1,
+  mode: "sketch", params: { sketch: null, pbn: null }, results: {},
+  view: "result", drawing: false, busy: false, error: null, dl: null,
+};
+const P = () => S.params[S.mode];
+const defaultsOf = (spec) => Object.fromEntries(Object.entries(spec).map(([k, v]) => [k, v.default ?? null]));
+const round3 = (n) => Math.round(n * 1000) / 1000;
+const lum = (c) => 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+
+/* ---------- which controls exist for each mode / style ---------- */
+const is = (...styles) => (p) => styles.includes(p.style);
+const SKETCH = [
+  { title: "Style", items: [{ t: "seg", k: "style", opts: [["pencil", "Pencil"], ["lineart", "Outline"], ["hatch", "Hatch"], ["value", "Tones"]] }] },
+  { title: "Look", items: [
+    { t: "range", k: "detail", label: "Detail", help: "Higher keeps finer features (eyes, hair, texture)." },
+    { t: "range", k: "contrast", label: "Contrast" },
+    { t: "range", k: "shadow", label: "Shadow depth", when: is("pencil", "hatch") },
+    { t: "range", k: "line_threshold", label: "Line sensitivity", help: "Higher picks up more lines.", when: is("lineart") },
+    { t: "range", k: "line_weight", label: "Line thickness", step: 0.1, when: is("lineart") },
+    { t: "range", k: "levels", label: (p) => (p.style === "value" ? "Number of tones" : "Hatch layers"), when: is("value", "hatch") },
+    { t: "range", k: "hatch_spacing", label: "Line spacing", step: 0.5, when: is("hatch") },
+    { t: "range", k: "hatch_angle", label: "Base angle", suffix: "°", when: is("hatch") },
+    { t: "toggle", k: "hatch_flow", label: "Lines follow the shape of the subject", when: is("hatch") },
+    { t: "range", k: "jitter", label: "Hand-drawn wobble", when: is("hatch") },
+    { t: "range", k: "grain", label: "Paper grain", when: is("pencil", "hatch") },
+    { t: "range", k: "outline", label: "Contour lines", help: "Mixes an outline into the drawing.", when: is("pencil", "hatch", "value") },
+  ] },
+  { title: "Paper & transfer", items: [
+    { t: "seg", k: "paper", label: "Paper", opts: [["white", "White"], ["cream", "Cream"]] },
+    { t: "range", k: "grid_cols", label: "Transfer grid (columns)", help: "0 turns the grid off." },
+  ] },
+  { title: "Extra detail on a face", hint: "Draw a box on the preview; that area is rendered with more detail.", items: [{ t: "focus" }] },
+  { title: "Print size", items: [{ t: "num", k: "print_width_cm", label: "Width of the final artwork", suffix: "cm", min: 5, max: 500 }] },
+];
+const PBN = [
+  { title: "Colours & shapes", items: [
+    { t: "range", k: "colors", label: "Number of colours" },
+    { t: "range", k: "min_shape_mm", label: "Smallest shape", step: 0.5, suffix: " mm", help: "Every shape is at least this wide at the print size, so each one fits a brush tip and a number." },
+  ] },
+  { title: "Smoothing", items: [
+    { t: "range", k: "pre_smooth", label: "Smooth out texture", help: "Stops skin, fabric and noise becoming speckles." },
+    { t: "range", k: "cleanup", label: "Tidy edges" },
+    { t: "range", k: "edge_smooth", label: "Curve smoothness" },
+  ] },
+  { title: "Output", items: [
+    { t: "seg", k: "view", label: "Preview view", opts: [["canvas", "Canvas"], ["guide", "Guide"], ["painted", "Painted"]] },
+    { t: "range", k: "line_weight", label: "Line thickness", step: 0.1 },
+    { t: "toggle", k: "numbers", label: "Show numbers" },
+    { t: "toggle", k: "legend", label: "Show colour key" },
+  ] },
+  { title: "Print size", items: [{ t: "num", k: "print_width_cm", label: "Width of the final artwork", suffix: "cm", min: 5, max: 500 }] },
+];
+
+/* ---------- controls ---------- */
+function setParam(k, v, rebuild) {
+  P()[k] = v;
+  if (rebuild) renderControls();
+  schedule();
+}
+function renderControls() {
+  const p = P(), spec = S.schema[S.mode], root = $("controls");
+  root.replaceChildren();
+  for (const sec of S.mode === "sketch" ? SKETCH : PBN) {
+    const body = [];
+    for (const it of sec.items) {
+      if (it.when && !it.when(p)) continue;
+      const label = typeof it.label === "function" ? it.label(p) : it.label;
+      if (it.t === "range") {
+        const sp = spec[it.k] || {};
+        const step = it.step ?? (sp.type === "integer" ? 1 : 0.1);
+        const out = h("output", {}, fmt(p[it.k]) + (it.suffix || ""));
+        const input = h("input", { type: "range", min: sp.minimum ?? 0, max: sp.maximum ?? 100, step, value: p[it.k],
+          oninput: (e) => { const v = Number(e.target.value); out.textContent = fmt(v) + (it.suffix || ""); setParam(it.k, v); } });
+        body.push(h("label", { class: "field" }, h("span", { class: "row" }, h("span", {}, label), out), input, it.help && h("small", {}, it.help)));
+      } else if (it.t === "seg") {
+        body.push(h("div", { class: "field" }, label && h("span", { class: "row" }, h("span", {}, label)),
+          h("div", { class: "segmented", role: "group" }, it.opts.map(([v, text]) =>
+            h("button", { type: "button", class: v === p[it.k] ? "on" : "", "aria-pressed": v === p[it.k], onclick: () => setParam(it.k, v, true) }, text)))));
+      } else if (it.t === "toggle") {
+        body.push(h("label", { class: "toggle" }, h("input", { type: "checkbox", checked: !!p[it.k], onchange: (e) => setParam(it.k, e.target.checked) }), h("span", {}, label)));
+      } else if (it.t === "num") {
+        body.push(h("label", { class: "field" }, h("span", { class: "row" }, h("span", {}, label)),
+          h("span", { class: "numwrap" }, h("input", { type: "number", value: p[it.k] ?? 30, min: it.min, max: it.max, step: 1,
+            onchange: (e) => { const v = Number(e.target.value); if (Number.isFinite(v)) setParam(it.k, Math.min(it.max, Math.max(1, v))); } }), h("em", {}, it.suffix))));
+      } else if (it.t === "focus") {
+        body.push(h("div", { class: "btnrow" },
+          h("button", { type: "button", id: "drawBtn", class: S.drawing ? "primary" : "", disabled: !S.file, onclick: () => { S.drawing = !S.drawing; renderControls(); renderStage(); } }, S.drawing ? "Drag on the picture…" : "Draw detail box"),
+          p.focus && h("button", { type: "button", onclick: () => setFocus(null) }, "Clear")));
+        if (p.focus) {
+          const sp = spec.focus_boost, out = h("output", {}, String(p.focus_boost));
+          body.push(h("label", { class: "field", style: "margin-top:12px" }, h("span", { class: "row" }, h("span", {}, "Extra detail"), out),
+            h("input", { type: "range", min: sp.minimum, max: sp.maximum, step: 1, value: p.focus_boost,
+              oninput: (e) => { p.focus_boost = Number(e.target.value); out.textContent = e.target.value; schedule(); } })));
+        }
+      }
+    }
+    if (body.length) root.append(h("section", { class: "section" }, h("h3", {}, sec.title), sec.hint && h("p", { class: "hint" }, sec.hint), body));
+  }
+  renderDownloads();
+}
+const fmt = (v) => (Number.isInteger(v) ? String(v) : Number(v).toFixed(1));
+
+function renderDownloads() {
+  const row = $("downloads"), off = !S.file || !!S.dl;
+  const btn = (fmtName, text, primary) => h("button", { type: "button", class: primary ? "primary" : "", disabled: off, onclick: () => doDownload(fmtName) }, S.dl === fmtName ? "Rendering…" : text);
+  row.replaceChildren(
+    ...(S.mode === "sketch"
+      ? [btn("png", "PNG (print size)", true)]
+      : [btn("svg_canvas", "SVG canvas to print", true), btn("svg_guide", "SVG colour guide"), btn("svg_painted", "SVG painted preview")]),
+    btn("recipe", "Settings (recipe)"),
+    h("button", { type: "button", onclick: () => $("recipeFile").click() }, "Load settings"),
+  );
+}
+
+function setFocus(f) {
+  S.drawing = false;
+  S.params.sketch.focus = f ? { x: round3(f.x), y: round3(f.y), w: round3(f.w), h: round3(f.h) } : null;
+  renderControls(); renderStage(); schedule();
+}
+
+/* ---------- stage (preview) ---------- */
+let split = 50, draft = null, dragStart = null, svgUrl = null;
+const result = () => S.results[S.mode] || null;
+
+function resultUrl() {
+  const r = result();
+  if (!r) return null;
+  if (r.image) return r.image;
+  if (r.svg) {
+    if (svgUrl && svgUrl.src === r.svg) return svgUrl.url;
+    if (svgUrl) URL.revokeObjectURL(svgUrl.url);
+    svgUrl = { src: r.svg, url: URL.createObjectURL(new Blob([r.svg], { type: "image/svg+xml" })) };
+    return svgUrl.url;
+  }
+  return null;
+}
+
+function renderStage() {
+  const main = $("main");
+  if (!S.file) {
+    main.replaceChildren(h("div", { class: "empty" }, h("h2", {}, "Start with a photo"), h("p", {}, "Upload a customer photo and pick a style. Adjust the sliders and the preview updates by itself.")));
+    return;
+  }
+  const r = result(), url = resultUrl();
+  const focus = S.mode === "sketch" ? draft || P().focus : null;
+  const stage = h("div", { class: "stage" + (S.drawing && S.mode === "sketch" ? " drawing" : S.view === "split" ? " splitting" : ""), style: `aspect-ratio:${S.aspect}` },
+    h("img", { src: S.objectUrl, alt: "Original photo", draggable: "false" }),
+    url && S.view !== "original" && h("img", { class: "result", src: url, alt: "Result", draggable: "false", style: S.view === "split" ? `clip-path:inset(0 0 0 ${split}%)` : "" }),
+    url && S.view === "split" && h("div", { class: "divider", style: `left:${split}%` }, h("span")),
+    focus && h("div", { class: "focusbox", style: `left:${focus.x * 100}%;top:${focus.y * 100}%;width:${focus.w * 100}%;height:${focus.h * 100}%` }, h("span", {}, "extra detail")),
+    S.busy && h("div", { class: "busy", "aria-live": "polite" }, "Rendering…"));
+  bindStage(stage);
+
+  const kids = [
+    h("div", { class: "toolbar" },
+      h("div", { class: "segmented" }, [["result", "Result"], ["split", "Compare"], ["original", "Photo"]].map(([v, t]) =>
+        h("button", { type: "button", class: S.view === v ? "on" : "", onclick: () => { S.view = v; renderStage(); } }, t))),
+      r && h("span", { class: "meta", title: "Same photo + same settings always gives the same fingerprint" }, `${r.ms} ms · fingerprint ${r.recipe.output_sha256.slice(0, 10)}`)),
+    S.error && h("p", { class: "error", role: "alert" }, S.error),
+    stage,
+  ];
+  if (S.mode === "pbn" && r && r.palette) {
+    kids.push(h("div", { class: "palette" },
+      h("div", { class: "stats" },
+        h("span", {}, h("b", {}, r.stats.colors), " colours"), h("span", {}, h("b", {}, r.stats.regions), " shapes"),
+        h("span", {}, "smallest ", h("b", {}, r.stats.smallest_shape_mm + " mm")),
+        h("span", {}, "prints at ", h("b", {}, `${r.stats.print_size_cm[0]} × ${r.stats.print_size_cm[1]} cm`))),
+      h("ul", {}, r.palette.map((c) => h("li", { title: `${c.coverage}% of the picture · ${c.regions} shapes` },
+        h("i", { style: `background:${c.hex};color:${lum(c.rgb) < 140 ? "#fff" : "#222"}` }, c.number), h("code", {}, c.hex), h("small", {}, c.coverage + "%"))))));
+  }
+  kids.push(h("p", { class: "note" }, "Preview is a fast low-resolution render. Downloads are full resolution and match the preview."));
+  main.replaceChildren(...kids);
+}
+
+function bindStage(stage) {
+  const rel = (e) => {
+    const r = stage.getBoundingClientRect();
+    return { x: Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)), y: Math.min(1, Math.max(0, (e.clientY - r.top) / r.height)) };
+  };
+  const drawing = () => S.drawing && S.mode === "sketch";
+  stage.addEventListener("pointerdown", (e) => {
+    stage.setPointerCapture(e.pointerId);
+    if (drawing()) { dragStart = rel(e); draft = null; }
+    else if (S.view === "split") { split = rel(e).x * 100; dragStart = { x: -1, y: -1 }; moveSplit(stage); }
+  });
+  stage.addEventListener("pointermove", (e) => {
+    if (!dragStart) return;
+    const p = rel(e);
+    if (drawing() && dragStart.x >= 0) {
+      draft = { x: Math.min(dragStart.x, p.x), y: Math.min(dragStart.y, p.y), w: Math.abs(p.x - dragStart.x), h: Math.abs(p.y - dragStart.y) };
+      let box = stage.querySelector(".focusbox");
+      if (!box) { box = h("div", { class: "focusbox" }, h("span", {}, "extra detail")); stage.append(box); }
+      box.style.cssText = `left:${draft.x * 100}%;top:${draft.y * 100}%;width:${draft.w * 100}%;height:${draft.h * 100}%`;
+    } else if (S.view === "split") { split = p.x * 100; moveSplit(stage); }
+  });
+  const up = () => {
+    if (drawing() && draft && draft.w > 0.03 && draft.h > 0.03) { const f = draft; draft = null; dragStart = null; setFocus(f); return; }
+    dragStart = null; draft = null;
+  };
+  stage.addEventListener("pointerup", up);
+  stage.addEventListener("pointercancel", up);
+}
+function moveSplit(stage) {
+  const img = stage.querySelector("img.result"), div = stage.querySelector(".divider");
+  if (img) img.style.clipPath = `inset(0 0 0 ${split}%)`;
+  if (div) div.style.left = split + "%";
+}
+
+/* ---------- live preview ---------- */
+let timer = null, ctl = null;
+function schedule() {
+  clearTimeout(timer);
+  if (ctl) ctl.abort();
+  if (!S.file) return;
+  timer = setTimeout(runPreview, 450);
+}
+function form(extra) {
+  const f = new FormData();
+  f.append("file", S.file); f.append("mode", S.mode); f.append("params", JSON.stringify(P()));
+  for (const [k, v] of Object.entries(extra)) f.append(k, v);
+  return f;
+}
+async function errText(r) {
+  try {
+    const b = await r.json();
+    if (typeof b.detail === "string") return b.detail;
+    if (Array.isArray(b.detail)) return b.detail.map((e) => `${(e.loc || []).slice(-1)[0]}: ${e.msg}`).join("; ");
+  } catch { /* ignore */ }
+  return `Request failed (${r.status})`;
+}
+function updateBusy() {
+  const stage = document.querySelector(".stage");
+  if (!stage) return;
+  stage.querySelector(".busy")?.remove();
+  if (S.busy) stage.append(h("div", { class: "busy", "aria-live": "polite" }, "Rendering…"));
+}
+async function runPreview() {
+  const mode = S.mode;
+  ctl = new AbortController();
+  const mine = ctl;
+  S.busy = true; S.error = null; updateBusy();
+  try {
+    const r = await fetch(API + "/api/process", { method: "POST", body: form({ quality: "preview" }), signal: mine.signal });
+    if (!r.ok) throw new Error(await errText(r));
+    S.results[mode] = await r.json();
+  } catch (e) {
+    if (e.name === "AbortError") return;
+    S.error = e.message;
+  }
+  if (mine.signal.aborted) return;
+  S.busy = false; renderStage();
+}
+
+/* ---------- actions ---------- */
+async function doDownload(format) {
+  if (!S.file) return;
+  S.dl = format; S.error = null; renderDownloads();
+  try {
+    const r = await fetch(API + "/api/export", { method: "POST", body: form({ format }) });
+    if (!r.ok) throw new Error(await errText(r));
+    const blob = await r.blob();
+    const name = /filename="([^"]+)"/.exec(r.headers.get("Content-Disposition") || "")?.[1] || "sketchforge." + (format.startsWith("svg") ? "svg" : format);
+    const a = h("a", { href: URL.createObjectURL(blob), download: name });
+    document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 10000);
+  } catch (e) { S.error = e.message; }
+  S.dl = null; renderDownloads(); renderStage();
+}
+
+function pick(f) {
+  if (!f) return;
+  if (!f.type.startsWith("image/")) { S.error = "Please choose an image file (JPG, PNG or WebP)."; renderStage(); return; }
+  S.error = null; S.results = {}; S.file = f;
+  if (S.objectUrl) URL.revokeObjectURL(S.objectUrl);
+  S.objectUrl = URL.createObjectURL(f);
+  $("drop").replaceChildren(h("strong", {}, f.name), h("span", {}, "Click or drop to replace"));
+  const img = new Image();
+  img.onload = () => { S.aspect = img.naturalWidth / img.naturalHeight; renderStage(); };
+  img.src = S.objectUrl;
+  renderStage(); renderControls(); schedule();
+}
+
+function applyPreset(name) {
+  const preset = S.presets[S.mode].find((p) => p.name === name);
+  if (!preset) return;
+  const cur = P(), base = defaultsOf(S.schema[S.mode]);
+  const keep = { print_width_cm: cur.print_width_cm };
+  if (S.mode === "sketch") Object.assign(keep, { focus: cur.focus, focus_boost: cur.focus_boost });
+  else keep.view = cur.view;
+  S.params[S.mode] = { ...base, ...preset.params, ...keep };
+  renderControls(); schedule();
+}
+
+async function loadRecipe(f) {
+  if (!f) return;
+  try {
+    const rec = JSON.parse(await f.text());
+    const m = rec.mode === "pbn" ? "pbn" : "sketch", p = rec.params || rec;
+    S.params[m] = { ...defaultsOf(S.schema[m]), ...Object.fromEntries(Object.entries(p).filter(([k]) => k in S.schema[m])) };
+    setMode(m);
+  } catch { S.error = "That file is not a SketchForge recipe."; renderStage(); }
+}
+
+function setMode(m) {
+  S.mode = m; S.drawing = false;
+  for (const b of $("modeSeg").children) b.classList.toggle("on", b.dataset.mode === m);
+  fillPresets(); renderControls(); renderStage(); schedule();
+}
+function fillPresets() {
+  const sel = $("preset");
+  sel.replaceChildren(h("option", { value: "" }, "Choose…"), ...S.presets[S.mode].map((p) => h("option", { value: p.name }, p.name)));
+}
+
+/* ---------- boot ---------- */
+async function boot() {
+  try {
+    const [s, p] = await Promise.all([fetch(API + "/api/schema").then((r) => r.json()), fetch(API + "/api/presets").then((r) => r.json())]);
+    S.schema = s; S.presets = p;
+    S.params.sketch = defaultsOf(s.sketch); S.params.pbn = defaultsOf(s.pbn);
+  } catch (e) {
+    $("boot").replaceChildren(h("div", { class: "card" }, h("h1", {}, "SketchForge"), h("p", { class: "error" }, "Can’t reach the engine."), h("small", {}, String(e))));
+    return;
+  }
+  $("boot").hidden = true; $("app").hidden = false;
+  const fileInput = $("file"), drop = $("drop");
+  drop.addEventListener("click", () => fileInput.click());
+  drop.addEventListener("keydown", (e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), fileInput.click()));
+  drop.addEventListener("dragover", (e) => { e.preventDefault(); drop.classList.add("over"); });
+  drop.addEventListener("dragleave", () => drop.classList.remove("over"));
+  drop.addEventListener("drop", (e) => { e.preventDefault(); drop.classList.remove("over"); pick(e.dataTransfer.files[0]); });
+  fileInput.addEventListener("change", () => pick(fileInput.files[0]));
+  $("recipeFile").addEventListener("change", (e) => { loadRecipe(e.target.files[0]); e.target.value = ""; });
+  $("modeSeg").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) setMode(b.dataset.mode); });
+  $("preset").addEventListener("change", (e) => { if (e.target.value) applyPreset(e.target.value); e.target.value = ""; });
+  fillPresets(); renderControls(); renderStage();
+}
+boot();
+</script>
+</body>
+</html>

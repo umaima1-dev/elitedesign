@@ -1,0 +1,28 @@
+# Render Blueprint: one free web service that serves both the API and the web page.
+# Dashboard: New + > Blueprint > pick this repo. You will be asked for ACCESS_PASSWORD.
+services:
+  - type: web
+    name: sketchforge
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      # Free instances have 512 MB of RAM. These caps keep a 24 MP phone photo at roughly 400 MB peak.
+      - key: MAX_SIDE_SKETCH      # longest side of a full-resolution sketch, px
+        value: "2000"
+      - key: MAX_SIDE_PBN         # longest side the paint-by-numbers engine works at, px
+        value: "1400"
+      - key: MAX_UPLOAD_MB
+        value: "12"
+      - key: MAX_INPUT_PIXELS
+        value: "40000000"
+      - key: MAX_CONCURRENT_RENDERS   # one at a time; extra requests wait in line
+        value: "1"
+      - key: ACCESS_PASSWORD      # login box password for the whole site (any username)
+        sync: false

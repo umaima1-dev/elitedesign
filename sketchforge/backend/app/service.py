@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import os
 import time
 from dataclasses import dataclass
 
@@ -11,8 +12,12 @@ from .engine import ENGINE_VERSION, PBNParams, SketchParams, render_pbn, render_
 from .engine.common import decode_image, dpi_for, encode_png, sha256_bytes
 
 PREVIEW_SIDE = 720
-FULL_SIDE = {"sketch": 3000, "pbn": 1800}
-MAX_SIDE_LIMIT = 4000
+# Longest side of a full-resolution render. Lower these on small servers (see render.yaml):
+# peak memory grows with the square of the size.
+FULL_SIDE = {
+    "sketch": int(os.environ.get("MAX_SIDE_SKETCH", 3000)),
+    "pbn": int(os.environ.get("MAX_SIDE_PBN", 1800)),
+}
 
 
 @dataclass
@@ -42,8 +47,8 @@ def parse_params(mode: str, raw: str | dict | None):
 def run(data: bytes, mode: str, params_raw, quality: str = "preview", max_side: int | None = None) -> Output:
     t0 = time.perf_counter()
     params = parse_params(mode, params_raw)
-    side = PREVIEW_SIDE if quality == "preview" else (max_side or FULL_SIDE[mode])
-    side = min(side, MAX_SIDE_LIMIT)
+    cap = FULL_SIDE.get(mode, 1800)
+    side = min(PREVIEW_SIDE, cap) if quality == "preview" else min(max_side or cap, cap)
     rgb = decode_image(data, side)
     h, w = rgb.shape[:2]
 

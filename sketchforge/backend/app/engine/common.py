@@ -7,13 +7,14 @@ from __future__ import annotations
 
 import hashlib
 import io
+import os
 
 import cv2
 import numpy as np
 from PIL import Image, ImageOps
 
 ENGINE_VERSION = "0.1.0"
-MAX_INPUT_PIXELS = 120_000_000
+MAX_INPUT_PIXELS = int(os.environ.get("MAX_INPUT_PIXELS", 120_000_000))
 MIN_SIDE = 32
 
 
@@ -31,6 +32,9 @@ def decode_image(data: bytes, max_side: int | None = None) -> np.ndarray:
     Image.MAX_IMAGE_PIXELS = MAX_INPUT_PIXELS
     try:
         im = Image.open(io.BytesIO(data))
+        if max_side and im.format == "JPEG":
+            # Let libjpeg decode at a reduced size: a 48 MP photo never has to sit in memory in full.
+            im.draft("RGB", (max_side * 2, max_side * 2))
         im.load()
     except Exception as exc:  # noqa: BLE001 - any decoder failure is a bad upload
         raise ValueError("Could not read this file as an image.") from exc

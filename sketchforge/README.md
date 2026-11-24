@@ -12,32 +12,63 @@ on every run, this does not.
 
 ```
 sketchforge/
-├── backend/    Python · FastAPI · OpenCV / NumPy / SciPy   (the engine + HTTP API + CLI)
-├── frontend/   Next.js 14 · React · TypeScript              (the web app)
+├── backend/    Python · FastAPI · OpenCV / NumPy / SciPy   (engine + HTTP API + CLI)
+│   └── app/static/index.html   the web app: one HTML file, no build step, served by the backend
+├── frontend/   optional Next.js 14 version of the same UI (for a later, larger product)
 ├── samples/    two test photos + example outputs and their recipes
-└── run.sh      starts both servers (bash run.sh)
+├── render.yaml deploy to Render's free plan in one go
+└── run.sh      starts the app locally (bash run.sh)
 ```
 
 ## Run it
 
-You need Python 3.10+ and Node 18+.
+You need Python 3.10+. The web page is served by the backend itself, so this is all it takes:
 
 ```bash
-# 1. backend (terminal 1)
+bash run.sh                 # creates a virtualenv, installs packages, starts http://localhost:8000
+```
+
+or by hand:
+
+```bash
 cd backend
 python3 -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-uvicorn app.main:app --port 8000
-
-# 2. frontend (terminal 2)
-cd frontend
-npm install
-npm run dev                                              # http://localhost:3000
+uvicorn app.main:app --port 8000                         # open http://localhost:8000
 ```
 
-`bash run.sh` does both on macOS / Linux (creates the virtualenv and installs packages the first time). If the backend runs somewhere else, copy
-`frontend/.env.local.example` to `frontend/.env.local` and set `NEXT_PUBLIC_API_URL`.
-When serving the frontend from another origin, set `ALLOWED_ORIGINS` (comma separated) for the backend.
+Optional: the Next.js version of the UI (`bash run.sh next`, then http://localhost:3000) needs Node 18+.
+It talks to the backend at `NEXT_PUBLIC_API_URL` (see `frontend/.env.local.example`); set `ALLOWED_ORIGINS`
+on the backend if you serve it from another address.
+
+## Deploy on Render (free plan)
+
+One service serves both the API and the page, so there is nothing else to host.
+
+1. Push this project to a GitHub repo. (`render.yaml` is at the project root. If you keep it inside a bigger
+   repo, use the `render.yaml` one level up, which points at `sketchforge/backend`.)
+2. Render dashboard → **New +** → **Blueprint** → pick the repo → it reads `render.yaml`.
+3. Enter a value for `ACCESS_PASSWORD` when asked, then deploy. Open the `onrender.com` URL; your browser
+   shows a login box (any username, that password).
+
+Settings (all environment variables, already set in `render.yaml`):
+
+| Variable | Default | Meaning |
+|---|---|---|
+| `ACCESS_PASSWORD` | none | Password for the whole site. **Set it on any public URL.** `/api/health` stays open for Render |
+| `MAX_SIDE_SKETCH` | 3000 (render.yaml: 2000) | Longest side of a full-resolution sketch, px |
+| `MAX_SIDE_PBN` | 1800 (render.yaml: 1400) | Longest side the paint-by-numbers engine works at, px |
+| `MAX_UPLOAD_MB` | 30 (render.yaml: 12) | Upload size limit |
+| `MAX_INPUT_PIXELS` | 120M (render.yaml: 40M) | Rejects absurdly large images |
+| `MAX_CONCURRENT_RENDERS` | 1 | Renders run one at a time; others wait |
+
+Free plan facts to expect (check Render's current terms, they change):
+- 512 MB RAM. With these caps a 24-megapixel phone photo peaked at about 410 MB in testing here.
+  Several people rendering at once is what a larger paid instance is for.
+- The service sleeps after about 15 minutes without traffic; the first visit afterwards takes up to a minute.
+- Sketches at 2000px are about 170 DPI at 30 cm. Fine for tracing and painting; raise `MAX_SIDE_SKETCH` on a paid plan for large prints.
+- Not tested on Render itself (it cannot be reached from where this was built). The build and start commands
+  were run in a clean environment with the same variables, and `PYTHON_VERSION` is set to 3.12.7.
 
 ## Using it
 
@@ -133,8 +164,9 @@ pip install -r requirements-dev.txt
 pytest
 ```
 
-32 tests: determinism for every style, seed behaviour, PBN colour count / numbering / minimum shape size,
-exact shape-area closure, SVG validity and layers, API formats and error handling, recipe replay.
+35 tests: determinism for every style, seed behaviour, PBN colour count / numbering / minimum shape size,
+exact shape-area closure, SVG validity and layers, API formats and error handling, recipe replay,
+resolution caps and the password gate.
 Tests use a generated image, so they need no downloads.
 
 ## What to know before you rely on it
@@ -148,7 +180,7 @@ Tests use a generated image, so they need no downloads.
   invent detail that isn't in the picture. A blur / resolution check on upload would be a good addition.
 - Full-resolution PBN takes roughly 5–15 s depending on size and colour count; sketches take under a second.
   The API runs renders in worker threads; for several users at once, run uvicorn with `--workers 2+` or add a job queue.
-- No accounts, storage or payments. Uploads are processed in memory and not saved.
+- No user accounts, storage or payments (one optional shared password). Uploads are processed in memory and not saved.
 
 ## Ideas for the next phase
 

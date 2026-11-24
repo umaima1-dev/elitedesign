@@ -12,6 +12,28 @@ def post(path, photo_bytes, **data):
     return client.post(path, files={"file": ("my photo.jpg", photo_bytes, "image/jpeg")}, data=data)
 
 
+def test_web_app_is_served_from_the_same_origin():
+    r = client.get("/")
+    assert r.status_code == 200 and "SketchForge" in r.text and "/api/schema" in r.text
+    assert client.get("/api/health").status_code == 200  # API routes still win over the static mount
+
+
+def test_render_size_is_capped_by_env_setting(monkeypatch):
+    from app import service
+    monkeypatch.setitem(service.FULL_SIDE, "sketch", 200)
+    out = service.run(_big_png(), "sketch", {}, "full", max_side=4000)
+    assert max(out.width, out.height) == 200  # a client cannot ask for more than the server allows
+
+
+def _big_png():
+    import io
+    import numpy as np
+    from PIL import Image
+    buf = io.BytesIO()
+    Image.fromarray(np.random.default_rng(0).integers(0, 255, (400, 500, 3), dtype=np.uint8)).save(buf, "PNG")
+    return buf.getvalue()
+
+
 def test_health_and_presets():
     assert client.get("/api/health").json()["status"] == "ok"
     p = client.get("/api/presets").json()
@@ -76,3 +98,22 @@ def test_errors(photo_bytes):
     assert post("/api/process", photo_bytes, mode="sketch", params="{oops").status_code == 422
     assert post("/api/process", photo_bytes, mode="banana").status_code == 400
     assert post("/api/export", photo_bytes, mode="sketch", params="{}", format="svg").status_code == 400
+
+
+def test_password_gate(monkeypatch, photo_bytes):
+    import base64
+    from app import main
+    monkeypatch.setattr(main, "ACCESS_PASSWORD", "s3cret")
+    assert client.get("/").status_code == 401
+    assert client.get("/").headers["www-authenticate"].startswith("Basic")
+    assert client.get("/api/health").status_code == 200  # the host's health check must work
+    assert client.get("/api/schema").status_code == 401
+    bad = {"Authorization": "Basic " + base64.b64encode(b"me:wrong").decode()}
+    good = {"Authorization": "Basic " + base64.b64encode(b"me:s3cret").decode()}
+    assert client.get("/api/schema", headers=bad).status_code == 401
+    assert client.get("/api/schema", headers={"Authorization": "Basic %%%"}).status_code == 401
+    assert client.get("/api/schema", headers=good).status_code == 200
+    assert client.get("/", headers=good).status_code == 200
+    r = client.post("/api/process", headers=good, data={"mode": "sketch"},
+                    files={"file": ("p.jpg", photo_bytes, "image/jpeg")})
+    assert r.status_code == 200
