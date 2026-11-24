@@ -1,0 +1,28 @@
+{
+  "engine_version": "0.1.0",
+  "mode": "sketch",
+  "params": {
+    "style": "pencil",
+    "detail": 55,
+    "contrast": 45,
+    "shadow": 40,
+    "line_weight": 1.5,
+    "line_threshold": 30,
+    "levels": 4,
+    "hatch_spacing": 8.0,
+    "hatch_flow": true,
+    "hatch_angle": 45,
+    "outline": 0,
+    "jitter": 30,
+    "grain": 40,
+    "paper": "white",
+    "grid_cols": 0,
+    "focus": null,
+    "focus_boost": 35,
+    "seed": 7,
+    "print_width_cm": 30.0
+  },
+  "input_sha256": "07c5a883d3ac0679d979dd166565360e82ecdfcfb2eb959f8b3df24681bbbc24",
+  "max_side": 3000,
+  "output_sha256": "b2acf6631a7b6c8afaf807993771981bb767c6ccd980cd74eee2c2216d7e8643"
+}
