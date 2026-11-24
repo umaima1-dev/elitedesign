@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Get Clip It: Download and Set Up in 3 Steps</title>
+<meta name="description" content="Download Clip It from GitHub, run one setup script, and turn your next episode into reels by tonight. Free, no account needed.">
+<meta name="theme-color" content="#1C1412">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800;900&family=Open+Sans:wght@400;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+.hero{padding:clamp(40px,6vw,72px) 0 clamp(72px,9vw,120px);overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(32px,5vw,80px);align-items:center}
+.hero .lede{margin-top:26px}
+.hero .cta{margin-top:34px;display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.hero .reel{max-width:360px;width:100%;margin-inline:auto}
+.hero .reelwrap{position:relative;max-width:380px;width:100%;margin-inline:auto}
+.hero .sticker{right:-5%;top:12%}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr}.hero .reelwrap{max-width:300px;margin-inline:0}}
+
+/* before */
+.before{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(24px,5vw,80px);align-items:center}
+.panel{border:1px solid var(--line-peach);border-radius:var(--r-sheet);padding:clamp(24px,3.4vw,40px);background:rgba(255,178,133,.06)}
+.panel p+p{margin-top:14px}
+@media (max-width:820px){.before{grid-template-columns:1fr}}
+
+/* steps */
+.steps{margin-top:56px;display:grid;gap:0}
+.step{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(20px,3vw,40px);padding:clamp(28px,4vw,48px) 0;border-top:1px solid var(--line)}
+.step:first-child{border-top:0;padding-top:0}
+.tile{width:clamp(72px,9vw,120px);aspect-ratio:1;border-radius:30px;background:var(--white);color:var(--rust);display:grid;place-items:center;font:900 clamp(2rem,4vw,3.4rem)/1 Inter;box-shadow:0 30px 60px rgba(0,0,0,.45)}
+.step h3{font-size:clamp(1.4rem,2.4vw,2rem)}
+.step .body>p{margin-top:12px;max-width:62ch}
+.cmds{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:14px;margin-top:22px}
+.cmd{background:var(--deep);border:1px solid var(--line);border-radius:var(--r-sheet);padding:18px 18px 18px 22px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.cmd .lab{font:700 .72rem/1 Manrope;letter-spacing:.16em;text-transform:uppercase;color:var(--peach)}
+.cmd .in{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.cmd code{font:500 .9rem/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--white);white-space:normal;overflow-wrap:anywhere;padding-bottom:2px}
+.copy{flex:none;font:700 .78rem/1 Manrope;letter-spacing:.08em;text-transform:uppercase;color:var(--peach);background:transparent;border:1px solid var(--line-peach);border-radius:var(--r-ui);padding:10px 14px;cursor:pointer;transition:background-color .2s,color .2s}
+.copy:hover{background:var(--peach);color:var(--ink)}
+.copy:active{transform:scale(.97)}
+.callout{margin-top:22px;border-left:3px solid var(--rust);padding-left:20px;max-width:66ch}
+.callout b{color:var(--white)}
+.k{font:500 .9em/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:rgba(255,255,255,.08);padding:2px 7px;border-radius:6px;color:var(--peach)}
+@media (max-width:760px){.step{grid-template-columns:1fr}.tile{width:64px;border-radius:20px}.cmds{grid-template-columns:1fr}}
+
+/* expect */
+.expect{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(24px,5vw,80px);align-items:center}
+.sheet .row.stat{grid-template-columns:1fr auto;padding:26px 0}
+.sheet .row.stat .n{font:900 clamp(1.5rem,3vw,2.3rem)/1 Inter;letter-spacing:-.02em;color:var(--maroon);text-align:right}
+.sheet .row.stat .l{font:700 1rem/1.3 Inter;color:var(--ink)}
+.sheet .row.stat .s{display:block;font:500 .82rem/1.4 Manrope;color:var(--mute);margin-top:4px}
+@media (max-width:820px){.expect{grid-template-columns:1fr}}
+
+/* stuck */
+.stuck{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(24px,5vw,72px);align-items:start;margin-top:48px}
+.fix{display:grid;gap:30px}
+.fix div{border-left:3px solid var(--rust);padding-left:24px}
+.fix h3{font-size:1.15rem;margin-bottom:10px;text-transform:none;letter-spacing:0}
+.dm{background:var(--peach);color:var(--ink);border-radius:var(--r-sheet);padding:clamp(24px,3vw,36px)}
+.dm h3{color:var(--ink);font-size:1.6rem;line-height:1.05}
+.dm p{margin-top:12px;color:rgba(28,20,18,.86)}
+.dm .btn{margin-top:22px;background:var(--ink);color:var(--peach)}
+.dm .btn:hover{background:var(--deep);color:var(--white);box-shadow:0 14px 30px rgba(0,0,0,.3)}
+@media (max-width:820px){.stuck{grid-template-columns:1fr}}
+
+/* rights */
+.rights{padding:clamp(40px,6vw,72px) 0}
+.rights .wrap{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-block:clamp(32px,4vw,52px)}
+.rights h2{font-size:clamp(1.4rem,2.6vw,2.2rem);max-width:12ch}
+@media (max-width:760px){.rights .wrap{grid-template-columns:1fr}}
+
+/* show */
+.show{text-align:center;padding:clamp(88px,12vw,160px) 0;background:url("assets/site-bg.png") 28% 50%/cover,var(--wine);overflow:hidden}
+.show h2{font-size:clamp(2.2rem,5.6vw,4.6rem);max-width:14ch;margin-inline:auto}
+.show p{margin:24px auto 0;font-size:clamp(1.1rem,1.7vw,1.35rem);color:var(--white);max-width:44ch}
+.show a.h{color:var(--peach);font-weight:600;text-underline-offset:4px}
+.show a.h:hover{color:var(--white)}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="bar">
+  <div class="wrap">
+    <a href="index.html" aria-label="AI Savvy Founders, back to Clip It"><img src="assets/logo.png" width="177" height="38" alt="AI Savvy Founders" translate="no"></a>
+    <a class="btn sm" href="https://github.com/TahaKhan192004/podcast-reels" rel="noopener">Open Clip It on GitHub <span class="ar" aria-hidden="true">→</span></a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero bg-grid">
+  <div class="wrap">
+    <div>
+      <h1>It’s yours. Go make some <span class="acc">reels.</span></h1>
+      <p class="lede">Everything you need is in one place. Grab <span translate="no">Clip It</span>, run one setup script, and your next episode can be reels by tonight.</p>
+      <div class="cta">
+        <a class="btn lg" href="https://github.com/TahaKhan192004/podcast-reels" rel="noopener">Open Clip It on GitHub <span class="ar" aria-hidden="true">→</span></a>
+        <p class="note">Free to use. No account, no credit card, nothing else to sign up for.</p>
+      </div>
+    </div>
+    <div class="reelwrap" role="img" aria-label="Example finished reel with word-by-word captions">
+      <div class="reel" aria-hidden="true">
+        <img src="assets/umaima-hotel-lobby.jpg" width="700" height="933" alt="" style="object-position:50% 42%">
+        <div class="hook">Your next episode</div>
+        <div class="cap" data-cap><span>Go</span> <span>make</span> <span>reels</span></div>
+      </div>
+      <div class="sticker" aria-hidden="true">Reels by tonight</div>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE YOU START -->
+<section class="pad bg-grid" style="padding-top:0" aria-labelledby="before">
+  <div class="wrap before">
+    <h2 id="before">Before you <span class="acc">start</span></h2>
+    <div class="panel rv">
+      <p>You need <strong>Claude Code</strong> installed and logged in on your computer. That’s the only thing <span translate="no">Clip It</span> leans on. If you already use Claude Code, you’re set.</p>
+      <p>Setup installs everything else for you (Python, Node.js, ffmpeg and a couple of small helpers) if they’re missing.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section class="pad bg-maroon" aria-labelledby="steps">
+  <div class="wrap">
+    <h2 id="steps">Get it running in <span class="acc">3 steps</span></h2>
+
+    <div class="steps">
+      <div class="step rv">
+        <div class="tile" aria-hidden="true">1</div>
+        <div class="body">
+          <h3>Download it</h3>
+          <p>On the GitHub page, click the green <strong>Code</strong> button, then <strong>Download ZIP</strong>. Unzip it somewhere you’ll find it again, like your Documents folder.</p>
+          <p>Comfortable with Git? Clone it instead.</p>
+          <p style="margin-top:22px"><a class="btn" href="https://github.com/TahaKhan192004/podcast-reels" rel="noopener">Open Clip It on GitHub <span class="ar" aria-hidden="true">→</span></a></p>
+        </div>
+      </div>
+
+      <div class="step rv">
+        <div class="tile" aria-hidden="true">2</div>
+        <div class="body">
+          <h3>Run setup once</h3>
+          <p>Open a terminal in the folder, then run the command for your computer.</p>
+          <div class="cmds">
+            <div class="cmd"><span class="lab">Mac or Linux: open Terminal in the folder</span><div class="in"><code translate="no">./setup.sh</code><button class="copy" type="button" data-copy="./setup.sh" aria-label="Copy Mac or Linux setup command">Copy</button></div></div>
+            <div class="cmd"><span class="lab">Windows: open PowerShell in the folder with setup.ps1</span><div class="in"><code translate="no">powershell -ExecutionPolicy Bypass -File .\setup.ps1</code><button class="copy" type="button" data-copy="powershell -ExecutionPolicy Bypass -File .\setup.ps1" aria-label="Copy Windows setup command">Copy</button></div></div>
+          </div>
+          <p class="callout">You’re ready when it says <b>All good ✔</b>. If Windows tells you a tool “is not on PATH yet”, close PowerShell, open a new one and run the same command again. That’s normal the first time.</p>
+        </div>
+      </div>
+
+      <div class="step rv">
+        <div class="tile" aria-hidden="true">3</div>
+        <div class="body">
+          <h3>Make your first reels</h3>
+          <p>Start the dashboard.</p>
+          <div class="cmds">
+            <div class="cmd"><span class="lab">Mac or Linux</span><div class="in"><code translate="no">./reels dashboard</code><button class="copy" type="button" data-copy="./reels dashboard" aria-label="Copy Mac or Linux dashboard command">Copy</button></div></div>
+            <div class="cmd"><span class="lab">Windows</span><div class="in"><code translate="no">Double-click dashboard.cmd</code></div></div>
+          </div>
+          <p class="callout">Your browser opens. Paste a YouTube link to an episode, choose how many reels you want, and press <b>Make reels</b>. They’ll appear as cards you can play, download and copy the caption from.</p>
+        </div>
+      </div>
+    </div>
+    <p class="sr-only" id="copied" role="status" aria-live="polite" style="position:absolute;left:-9999px"></p>
+  </div>
+</section>
+
+<!-- WHAT TO EXPECT -->
+<section class="pad bg-grid" aria-labelledby="expect">
+  <div class="wrap expect">
+    <div class="stack">
+      <h2 id="expect">What to expect on your <span class="acc">first run</span></h2>
+      <p class="lede">The first video takes longer because <span translate="no">Clip It</span> downloads its speech model once (about 0.5 to 1.6 GB, depending on your computer). After that it’s quicker.</p>
+      <p>A one-hour episode transcribes in roughly the times shown, and rendering adds a bit on top. Start it, go do something else, and come back to reels.</p>
+    </div>
+    <div class="sheet rv" role="table" aria-label="Typical first run times">
+      <div class="row stat" role="row"><div role="cell"><span class="l">One-hour episode, transcribed</span><span class="s">Newer Mac or a PC with an NVIDIA graphics card</span></div><span class="n" role="cell">2 to 8 min</span></div>
+      <div class="row stat" role="row"><div role="cell"><span class="l">One-hour episode, transcribed</span><span class="s">Ordinary laptop</span></div><span class="n" role="cell">15 to 40 min</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STUCK -->
+<section class="pad bg-maroon" aria-labelledby="stuck">
+  <div class="wrap">
+    <h2 id="stuck">If something gets <span class="acc">stuck</span></h2>
+    <div class="stuck">
+      <div class="fix">
+        <div class="rv"><h3>YouTube says “Sign in to confirm you’re not a bot”.</h3><p>Open <span class="k" translate="no">config.yaml</span> and set <span class="k" translate="no">cookies_from_browser</span> to the browser you use (<span translate="no">chrome, firefox, edge or safari</span>).</p></div>
+        <div class="rv" style="--i:1"><h3>Renders are slow or stall on a laptop.</h3><p>That’s usually too much running at once. The Troubleshooting section at the bottom of the <a href="https://github.com/TahaKhan192004/podcast-reels" rel="noopener" style="color:var(--peach);text-underline-offset:3px">GitHub page</a> walks you through it, along with the other common fixes.</p></div>
+      </div>
+      <div class="dm rv" style="--i:1">
+        <h3>Still stuck?</h3>
+        <p>Send us a DM on Instagram at <b translate="no">@aisavvyfounders</b>.</p>
+        <a class="btn" href="https://instagram.com/aisavvyfounders" rel="noopener">Send us a DM <span class="ar" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RIGHTS -->
+<section class="rights bg-grid" aria-labelledby="rights">
+  <div class="wrap">
+    <h2 id="rights">One thing before you go</h2>
+    <p class="lede">Use <span translate="no">Clip It</span> on episodes you own or have permission to repurpose. Your podcast, or a client’s with their OK.</p>
+  </div>
+</section>
+
+<!-- SHOW US -->
+<section class="show" aria-labelledby="show">
+  <div class="wrap">
+    <h2 id="show">Show us your first <span class="acc">reel</span></h2>
+    <p>Made something good with <span translate="no">Clip It</span>? Post it and tag <a class="h" href="https://instagram.com/aisavvyfounders" rel="noopener" translate="no">@aisavvyfounders</a>. We’d love to see what came out of your episode.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="assets/logo.png" width="140" height="30" alt="AI Savvy Founders" translate="no" loading="lazy">
+    <a href="index.html">Back to Clip It</a>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(e){io.observe(e)});
+  } else els.forEach(function(e){e.classList.add('in')});
+
+  var cap=document.querySelector('[data-cap]');
+  if(cap){
+    var w=cap.querySelectorAll('span'),i=0;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches){w[2].classList.add('on')}
+    else setInterval(function(){w.forEach(function(s,k){s.classList.toggle('on',k===i)});i=(i+1)%w.length},520);
+  }
+
+  var live=document.getElementById('copied');
+  document.querySelectorAll('.copy').forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=b.getAttribute('data-copy');
+      var done=function(){var o=b.textContent;b.textContent='Copied';live.textContent='Command copied';setTimeout(function(){b.textContent=o;live.textContent=''},1600)};
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,function(){})}
+    });
+  });
+})();
+</script>
+</body>
+</html>
