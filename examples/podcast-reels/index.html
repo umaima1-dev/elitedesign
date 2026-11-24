@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Podcast to Reels</title>
+<meta name="description" content="One podcast in the centre, a stream of short clips flowing out of it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+
+<!-- Written by make_clips.py. If it is missing the page runs in demo mode. -->
+<script src="clips.js" onerror="void 0"></script>
+
+<style>
+:root{
+  --ink:#0d0709;
+  --maroon:#3a0f17;
+  --maroon-2:#5b1a24;
+  --rust:#d9541e;
+  --peach:#f6cfb5;
+  --cream:#f4ead8;
+  --gold:#f2a93b;
+  --card-w:140px;
+  --hero-w:480px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--ink);overflow:hidden}
+body{
+  font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color:var(--cream);
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- ground: ink + maroon grid ---------- */
+.ground{position:fixed;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 60% 55% at 50% 50%, rgba(91,26,36,.75), rgba(58,15,23,.35) 55%, transparent 80%),
+    var(--ink);}
+.grid{position:fixed;inset:-40px;z-index:0;opacity:.5;
+  background-image:
+    linear-gradient(rgba(246,207,181,.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(246,207,181,.07) 1px,transparent 1px);
+  background-size:56px 56px;
+  -webkit-mask-image:radial-gradient(ellipse 75% 70% at 50% 50%,#000 20%,transparent 85%);
+          mask-image:radial-gradient(ellipse 75% 70% at 50% 50%,#000 20%,transparent 85%);
+  animation:drift 40s linear infinite;}
+@keyframes drift{to{background-position:56px 56px}}
+
+#stage{position:fixed;inset:0;z-index:1}
+#lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+
+/* ---------- top + bottom labels ---------- */
+.eyebrow{position:fixed;z-index:9;top:max(18px,env(safe-area-inset-top));left:0;right:0;
+  display:flex;justify-content:center;align-items:center;gap:12px;
+  font-weight:800;font-size:clamp(11px,1.1vw,14px);letter-spacing:.18em;text-transform:uppercase;color:var(--peach)}
+.eyebrow b{color:var(--rust);font-weight:900}
+.eyebrow .arrow{display:inline-block;width:34px;height:2px;background:linear-gradient(90deg,var(--peach),var(--rust));position:relative}
+.eyebrow .arrow::after{content:"";position:absolute;right:-1px;top:-3px;border:4px solid transparent;border-left:7px solid var(--rust)}
+.counter{position:fixed;z-index:9;bottom:max(18px,env(safe-area-inset-bottom));left:0;right:0;
+  display:flex;justify-content:center;align-items:baseline;gap:10px;
+  font-weight:900;text-transform:uppercase;letter-spacing:.14em;font-size:clamp(11px,1.05vw,13px);color:var(--peach)}
+.counter .n{font-size:clamp(22px,2.6vw,34px);letter-spacing:0;color:var(--cream);font-variant-numeric:tabular-nums}
+.counter .of{opacity:.55}
+.counter .ok{color:var(--rust);opacity:0;transition:opacity .4s}
+.counter.done .ok{opacity:1}
+.demo-note{position:fixed;z-index:9;left:16px;bottom:max(16px,env(safe-area-inset-bottom));font-size:11px;font-weight:700;
+  letter-spacing:.04em;color:rgba(246,207,181,.55);max-width:34ch;display:none}
+body.demo .demo-note{display:block}
+@media (max-width:700px){.demo-note{display:none!important}}
+
+/* ---------- hero (main podcast) ---------- */
+#hero{position:absolute;left:50%;top:50%;z-index:6;width:var(--hero-w);transform:translate(-50%,-50%)}
+.hero-frame{position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#1b0a0e;
+  box-shadow:0 0 0 1px rgba(246,207,181,.22),0 24px 80px rgba(0,0,0,.6),0 0 140px rgba(217,84,30,.28)}
+.hero-frame video,.hero-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-frame .fallback{position:absolute;inset:0;background:
+  radial-gradient(circle at 30% 30%,#7a2a30,transparent 55%),
+  radial-gradient(circle at 75% 70%,#d9541e55,transparent 60%),#2a0c12}
+.hero-frame::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(13,7,9,.35),transparent 30%,transparent 60%,rgba(13,7,9,.75))}
+.scan{position:absolute;top:0;bottom:0;width:2px;left:0;z-index:2;background:var(--rust);
+  box-shadow:0 0 22px 6px rgba(217,84,30,.7);animation:scan 4.8s cubic-bezier(.6,0,.4,1) infinite}
+@keyframes scan{0%{left:-2%;opacity:0}8%{opacity:1}92%{opacity:1}100%{left:102%;opacity:0}}
+.hero-chip{position:absolute;z-index:3;top:12px;left:12px;display:flex;align-items:center;gap:7px;
+  background:var(--cream);color:var(--ink);border-radius:999px;padding:5px 11px 5px 9px;
+  font-weight:900;font-size:clamp(9px,.85vw,11px);letter-spacing:.12em;text-transform:uppercase}
+.hero-chip i{width:7px;height:7px;border-radius:50%;background:var(--rust);animation:blink 1.2s infinite}
+@keyframes blink{50%{opacity:.25}}
+.hero-title{position:absolute;z-index:3;left:14px;right:14px;bottom:12px;
+  font-weight:900;font-size:clamp(11px,1.15vw,15px);text-transform:uppercase;letter-spacing:.04em;line-height:1.15;
+  color:var(--cream);text-shadow:0 2px 14px rgba(0,0,0,.7)}
+.hero-title span{display:block;margin-top:3px;font-weight:700;font-size:.78em;letter-spacing:.14em;color:var(--peach);opacity:.85}
+
+.timeline{position:relative;height:26px;margin-top:12px}
+.timeline::before{content:"";position:absolute;left:0;right:0;top:12px;height:2px;border-radius:2px;background:rgba(246,207,181,.2)}
+.tick{position:absolute;top:5px;width:2px;height:16px;border-radius:2px;background:rgba(246,207,181,.38);transform:translateX(-1px);transition:all .35s}
+.tick.on{background:var(--ac,var(--rust));height:24px;top:1px;width:4px;transform:translateX(-2px);box-shadow:0 0 14px var(--ac,var(--rust))}
+
+.ring{position:absolute;inset:0;border-radius:20px;border:1.5px solid var(--rust);opacity:0;pointer-events:none;
+  animation:ring 4.2s cubic-bezier(.2,.6,.3,1) infinite}
+.ring:nth-child(2){animation-delay:1.4s}.ring:nth-child(3){animation-delay:2.8s}
+@keyframes ring{0%{transform:scale(1);opacity:.55}100%{transform:scale(1.9,2.3);opacity:0}}
+.rings{position:absolute;left:0;right:0;top:0;aspect-ratio:16/9;z-index:-1}
+
+/* ---------- clip cards ---------- */
+.card{position:absolute;left:50%;top:50%;z-index:3;width:var(--card-w);aspect-ratio:9/16;border-radius:14px;overflow:hidden;
+  background:#1b0a0e;opacity:0;will-change:transform,opacity;
+  box-shadow:0 0 0 1px rgba(246,207,181,.2),0 18px 40px rgba(0,0,0,.55)}
+.card .media,.card video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card .ph{position:absolute;inset:0;background:
+   radial-gradient(circle at 25% 20%,var(--ac),transparent 62%),
+   linear-gradient(160deg,#6b1f2b,#1b0a0e 75%)}
+.card .ph::before{content:attr(data-n);position:absolute;right:-6%;top:6%;font-weight:900;font-size:calc(var(--card-w)*.95);
+  line-height:.8;color:rgba(255,255,255,.07)}
+.eq{position:absolute;left:12%;right:12%;top:38%;height:22%;display:flex;align-items:center;gap:3px}
+.eq i{flex:1;border-radius:3px;background:rgba(244,234,216,.75);height:30%;animation:eq 1s ease-in-out infinite}
+@keyframes eq{0%,100%{height:18%}50%{height:100%}}
+.card .shade{position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(13,7,9,.5),transparent 25%,transparent 50%,rgba(13,7,9,.88))}
+.card .num{position:absolute;top:8px;left:8px;background:var(--ac);color:var(--ink);border-radius:999px;
+  padding:3px 8px;font-weight:900;font-size:calc(var(--card-w)*.075);letter-spacing:.1em}
+.card .tag{position:absolute;top:8px;right:8px;max-width:56%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  background:rgba(13,7,9,.55);border:1px solid rgba(246,207,181,.35);color:var(--cream);border-radius:999px;
+  padding:3px 8px;font-weight:800;font-size:calc(var(--card-w)*.062);letter-spacing:.1em;text-transform:uppercase;backdrop-filter:blur(6px)}
+.card .tag:empty{display:none}
+.card .cap{position:absolute;left:9px;right:9px;bottom:22px;font-weight:900;text-transform:uppercase;
+  font-size:calc(var(--card-w)*.118);line-height:1.04;letter-spacing:.005em;color:var(--cream);
+  text-shadow:0 2px 12px rgba(0,0,0,.65)}
+.card .cap em{font-style:normal;color:var(--ac)}
+.card .time{position:absolute;left:9px;bottom:9px;font-weight:700;font-size:calc(var(--card-w)*.062);letter-spacing:.1em;color:var(--peach);opacity:.9}
+.card .bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(244,234,216,.2)}
+.card .bar b{display:block;height:100%;width:0;background:var(--ac)}
+
+@media (prefers-reduced-motion:reduce){.grid,.scan,.ring{animation:none}}
+</style>
+</head>
+<body>
+<div class="ground"></div><div class="grid"></div>
+
+<div class="eyebrow"><span>1 podcast</span><span class="arrow"></span><span><b id="total">12</b> clips</span></div>
+
+<div id="stage">
+  <canvas id="lines"></canvas>
+
+  <div id="hero">
+    <div class="rings"><div class="ring"></div><div class="ring"></div><div class="ring"></div></div>
+    <div class="hero-frame">
+      <div class="fallback"></div>
+      <img id="heroImg" alt="" hidden>
+      <video id="heroVid" muted loop playsinline autoplay preload="auto" hidden></video>
+      <div class="scan"></div>
+      <div class="hero-chip"><i></i>Full episode</div>
+      <div class="hero-title"><span id="heroTitleTxt">Your podcast</span><span id="heroDur"></span></div>
+    </div>
+    <div class="timeline" id="timeline"></div>
+  </div>
+</div>
+
+<div class="counter" id="counter"><span class="n" id="cutN">00</span><span class="of">/ <span id="cutTotal">12</span> clips cut</span><span class="ok">&bull; ready to post</span></div>
+<div class="demo-note">Demo mode. Run <b>make_clips.py</b> to swap these placeholders for real clips from your podcast.</div>
+
+<script>
+(() => {
+"use strict";
+
+/* ================= CONFIG ================= */
+const DEMO_CAPS = ["The hook","Biggest mistake","Hot take","Origin story","From $0 to $10k","What nobody says","The turning point",
+  "Pro tip","Live reaction","Behind the scenes","The framework","Key takeaway"];
+const hasReal = Array.isArray(window.CLIPS) && window.CLIPS.length > 0;
+const P = Object.assign({title:"Your podcast episode", youtubeId:"Kl-I7sUcAOY", main:"", poster:"", duration:"", durationSec:0}, window.PODCAST || {});
+const CLIPS = hasReal ? window.CLIPS : DEMO_CAPS.map((c,i) => ({src:"", caption:c, tag:"", start:0, end:0}));
+if (!hasReal) document.body.classList.add("demo");
+
+const PALETTE = ["#d9541e","#f6cfb5","#f2a93b","#f4ead8"];
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const LIFE = reduce ? 14 : 10;       // seconds each card lives in its slot
+const FLY = .17, EXIT = .13;         // fractions of LIFE
+
+/* ================= DOM ================= */
+const $ = id => document.getElementById(id);
+const stage = $("stage"), hero = $("hero"), canvas = $("lines"), ctx = canvas.getContext("2d");
+const root = document.documentElement.style;
+const fmt = s => { s = Math.max(0, Math.round(s)); return Math.floor(s/60) + ":" + String(s%60).padStart(2,"0"); };
+const pad = n => String(n).padStart(2,"0");
+
+$("total").textContent = CLIPS.length; $("cutTotal").textContent = CLIPS.length;
+$("heroTitleTxt").textContent = P.title; $("heroDur").textContent = P.duration ? "Runtime " + P.duration : "Source video";
+
+/* hero media: local preview video if present, else poster/thumbnail */
+const heroVid = $("heroVid"), heroImg = $("heroImg");
+const poster = P.poster || `https://i.ytimg.com/vi/${P.youtubeId}/maxresdefault.jpg`;
+heroImg.onload = () => { heroImg.hidden = false; };
+heroImg.src = poster;
+if (P.main) {
+  heroVid.src = P.main; if (P.poster) heroVid.poster = P.poster;
+  heroVid.onloadeddata = () => { heroVid.hidden = false; heroVid.play().catch(()=>{}); };
+}
+
+/* timeline ticks: where each clip was cut from the full episode */
+const timeline = $("timeline"), ticks = [];
+CLIPS.forEach((c,i) => {
+  const t = document.createElement("i"); t.className = "tick";
+  const pct = (P.durationSec && c.start != null && hasReal) ? c.start / P.durationSec : (((i * .618) % 1) * .9 + .05);
+  t.style.left = (pct * 100).toFixed(2) + "%";
+  t.style.setProperty("--ac", PALETTE[i % PALETTE.length]);
+  timeline.appendChild(t); ticks.push(t);
+});
+
+/* ================= SLOTS + CARDS ================= */
+const gcd = (a,b) => b ? gcd(b, a % b) : a;
+let N = Math.max(Math.min(innerWidth < 700 ? 8 : 10, CLIPS.length), Math.min(6, 6));
+if (N > CLIPS.length && CLIPS.length >= 3) N = CLIPS.length;
+const stride = [3,5,7,2,4,1].find(s => gcd(s, N) === 1);
+
+const slots = [];
+for (let i = 0; i < N; i++) {
+  const el = document.createElement("div");
+  el.className = "card";
+  el.innerHTML =
+    '<div class="media"></div><div class="shade"></div><span class="num"></span><span class="tag"></span>' +
+    '<div class="cap"></div><div class="time"></div><i class="bar"><b></b></i>';
+  stage.appendChild(el);
+  const order = (i * stride) % N;            // spread spawns around the ring instead of clockwise
+  slots.push({
+    i, el, order, t0: order * (LIFE / N) + .4, cycle: -1, clip: -1,
+    media: el.querySelector(".media"), num: el.querySelector(".num"), tag: el.querySelector(".tag"),
+    cap: el.querySelector(".cap"), time: el.querySelector(".time"), bar: el.querySelector(".bar b"),
+    vid: null, tx: 0, ty: 0, tilt: 0, spin: 0, curve: 0, jx: 0, jy: 0, last: 0
+  });
+}
+
+/* ================= GEOMETRY ================= */
+let W = 0, H = 0, DPR = 1, heroW = 0, heroH = 0, cardW = 0, cardH = 0;
+function layout() {
+  W = innerWidth; H = innerHeight; DPR = Math.min(devicePixelRatio || 1, 2);
+  const portrait = W < H * .95;
+  heroW = portrait ? Math.min(W * .78, 380) : Math.min(W * .34, 540, H * .42 * 16 / 9);
+  cardH = portrait ? Math.min(H * .17, 210) : Math.min(H * .27, 270);
+  cardW = cardH * 9 / 16;
+  root.setProperty("--hero-w", heroW + "px");
+  root.setProperty("--card-w", cardW + "px");
+  heroH = heroW * 9 / 16 + 38;              // frame + timeline
+
+  canvas.width = W * DPR; canvas.height = H * DPR;
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+
+  const padT = portrait ? 56 : 62, padB = portrait ? 66 : 74;
+  const maxX = W / 2 - cardW / 2 - 12;
+  const maxY = (H - padT - padB) / 2 - cardH / 2;
+  const cy0 = (padT - padB) / 2;            // centre of the free band relative to screen centre
+  // start on a ring, then relax: cards push each other and the hero apart until nothing overlaps
+  const minY = -H / 2 + padT + cardH / 2, maxYb = H / 2 - padB - cardH / 2;
+  const hx = heroW / 2 + cardW / 2 + 16, hy = heroH / 2 + cardH / 2 + 16, gap = 12;
+  slots.forEach(s => {
+    const a = -Math.PI / 2 + (s.i + .5) * 2 * Math.PI / N;
+    s.tx = Math.cos(a) * maxX; s.ty = Math.sin(a) * maxY + cy0;
+  });
+  for (let it = 0; it < 500; it++) {
+    for (let i = 0; i < N; i++) {
+      const A = slots[i];
+      if (Math.abs(A.tx) < hx && Math.abs(A.ty) < hy) {
+        const px = hx - Math.abs(A.tx), py = hy - Math.abs(A.ty);
+        if (px < py) A.tx += (A.tx < 0 ? -1 : 1) * px; else A.ty += (A.ty < 0 ? -1 : 1) * py;
+      }
+      for (let j = i + 1; j < N; j++) {
+        const B = slots[j], dx = B.tx - A.tx, dy = B.ty - A.ty;
+        const ox = cardW + gap - Math.abs(dx), oy = cardH + gap - Math.abs(dy);
+        if (ox > 0 && oy > 0) {
+          if (ox < oy) { const m = ox / 2 * (dx < 0 ? -1 : 1); A.tx -= m; B.tx += m; }
+          else { const m = oy / 2 * (dy < 0 ? -1 : 1); A.ty -= m; B.ty += m; }
+        }
+      }
+      A.tx = Math.max(-maxX, Math.min(maxX, A.tx)); A.ty = Math.max(minY, Math.min(maxYb, A.ty));
+    }
+  }
+}
+addEventListener("resize", layout); layout();
+
+/* ================= SPAWN ================= */
+const rnd = (a, b) => a + Math.random() * (b - a);
+let spawned = 0;
+const counter = $("counter"), cutN = $("cutN");
+
+function assign(s) {
+  const idx = spawned % CLIPS.length; spawned++;
+  const c = CLIPS[idx]; s.clip = idx;
+  const ac = PALETTE[idx % PALETTE.length];
+  s.el.style.setProperty("--ac", ac);
+  s.num.textContent = pad(idx + 1);
+  s.tag.textContent = c.tag || "";
+  const words = (c.caption || "").trim().split(/\s+/);
+  const last = words.pop() || "";
+  s.cap.innerHTML = (words.join(" ") + (words.length ? " " : "")).replace(/</g, "&lt;") + "<em>" + last.replace(/</g, "&lt;") + "</em>";
+  s.time.textContent = (c.start != null && c.end) ? fmt(c.start) + " – " + fmt(c.end) : "0:" + pad(5 + idx % 6) + " clip";
+
+  s.media.innerHTML = ""; s.vid = null;
+  if (c.src) {
+    const v = document.createElement("video");
+    v.muted = true; v.loop = true; v.playsInline = true; v.preload = "auto"; v.src = c.src;
+    s.media.appendChild(v); s.vid = v; v.play().catch(() => {});
+  } else {
+    const n = 14, bars = Array.from({length:n}, (_, k) => `<i style="animation-delay:${(-Math.random()*1.2).toFixed(2)}s;animation-duration:${rnd(.6,1.3).toFixed(2)}s"></i>`).join("");
+    s.media.innerHTML = `<div class="ph" data-n="${idx + 1}"></div><div class="eq">${bars}</div>`;
+  }
+
+  s.tilt = rnd(-6, 6); s.spin = rnd(-28, 28); s.curve = rnd(-90, 90) * (Math.random() < .5 ? -1 : 1);
+  s.jx = rnd(-10, 10); s.jy = rnd(-10, 10);
+  ticks[idx].classList.add("on"); s.tickIdx = idx;
+
+  const shown = Math.min(spawned, CLIPS.length);
+  cutN.textContent = pad(shown);
+  counter.classList.toggle("done", shown >= CLIPS.length);
+}
+function release(s) { if (s.tickIdx != null) ticks[s.tickIdx].classList.remove("on"); if (s.vid) { s.vid.pause(); s.vid.removeAttribute("src"); s.vid.load(); } }
+
+/* ================= ANIMATION ================= */
+const eo3 = t => 1 - Math.pow(1 - t, 3);
+const ei3 = t => t * t * t;
+const eob = t => { const c1 = 1.5, c3 = c1 + 1; return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); };
+
+let T = 0, prev = performance.now();
+function frame(now) {
+  const dt = Math.min(.05, (now - prev) / 1000); prev = now; T += dt;
+  ctx.clearRect(0, 0, W, H);
+  const cx = W / 2, cy = H / 2;
+  ctx.lineWidth = 1.5; ctx.lineCap = "round";
+
+  for (const s of slots) {
+    const local = T - s.t0;
+    if (local < 0) { s.el.style.opacity = 0; continue; }
+    const cyc = Math.floor(local / LIFE), p = (local % LIFE) / LIFE;
+    if (cyc !== s.cycle) { if (s.cycle >= 0) release(s); s.cycle = cyc; assign(s); }
+
+    const tx = s.tx + s.jx, ty = s.ty + s.jy, len = Math.hypot(tx, ty) || 1;
+    let x, y, sc, rot, op, la = 0, spark = -1;
+
+    if (p < FLY) {
+      const k = p / FLY, e = eo3(k), curve = Math.sin(Math.PI * k) * s.curve;
+      x = tx * e + (-ty / len) * curve; y = ty * e + (tx / len) * curve;
+      sc = .2 + .8 * Math.min(1.04, eob(k)); rot = s.tilt * e + s.spin * (1 - e);
+      op = Math.min(1, k * 5); la = .55; spark = e;
+    } else if (p < 1 - EXIT) {
+      const bob = reduce ? 0 : Math.sin(T * 1.15 + s.i * 1.7) * 6;
+      x = tx + (reduce ? 0 : Math.cos(T * .8 + s.i) * 3); y = ty + bob;
+      sc = 1 + (reduce ? 0 : Math.sin(T * 1.4 + s.i) * .012);
+      rot = s.tilt + (reduce ? 0 : Math.sin(T * .9 + s.i) * 1.6); op = 1; la = .2;
+      spark = (T * .45 + s.i * .23) % 1;
+    } else {
+      const k = (p - (1 - EXIT)) / EXIT, e = ei3(k);
+      x = tx * (1 + .16 * e); y = ty * (1 + .16 * e); sc = 1 - .14 * e; rot = s.tilt + e * s.tilt * .6; op = 1 - e; la = .2 * (1 - e);
+    }
+
+    s.el.style.opacity = op;
+    s.el.style.transform = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0) translate(-50%,-50%) rotate(${rot.toFixed(2)}deg) scale(${sc.toFixed(3)})`;
+    s.el.style.zIndex = p < FLY * .6 ? 2 : 4;
+
+    // progress bar follows the clip
+    if (s.vid && s.vid.duration) s.bar.style.width = (s.vid.currentTime / s.vid.duration * 100).toFixed(1) + "%";
+    else s.bar.style.width = (((T * .12 + s.i * .17) % 1) * 100).toFixed(1) + "%";
+
+    // thread from the hero to the card, with a spark of "data" travelling along it
+    if (la > 0) {
+      const ex = cx + x, ey = cy + y, ac = PALETTE[s.clip % PALETTE.length];
+      const g = ctx.createLinearGradient(cx, cy, ex, ey);
+      g.addColorStop(0, "rgba(217,84,30,0)"); g.addColorStop(1, ac);
+      ctx.globalAlpha = la; ctx.strokeStyle = g; ctx.setLineDash([2, 7]);
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(ex, ey); ctx.stroke(); ctx.setLineDash([]);
+      if (spark >= 0) {
+        const sx = cx + (ex - cx) * spark, sy = cy + (ey - cy) * spark;
+        ctx.globalAlpha = Math.min(1, la * 3); ctx.fillStyle = ac; ctx.shadowColor = ac; ctx.shadowBlur = 14;
+        ctx.beginPath(); ctx.arc(sx, sy, 3, 0, 6.2832); ctx.fill(); ctx.shadowBlur = 0;
+      }
+      ctx.globalAlpha = 1;
+    }
+  }
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(t => { prev = t; frame(t); });
+})();
+</script>
+</body>
+</html>
