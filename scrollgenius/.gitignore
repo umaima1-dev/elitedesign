@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# ScrollGenius runtime output (lives in ~/ScrollGenius by default)
+scrollgenius_work/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Never commit login material
+cookies.txt
+*.cookies

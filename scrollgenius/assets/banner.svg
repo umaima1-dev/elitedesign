@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320" role="img" aria-label="ScrollGenius: turn saved reels into Claude skills">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3a0d16"/>
+      <stop offset="1" stop-color="#14070b"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="320" fill="url(#bg)"/>
+  <rect width="1280" height="320" fill="url(#grid)"/>
+  <rect x="80" y="86" width="64" height="6" rx="3" fill="#d9633a"/>
+  <text x="80" y="170" fill="#ffffff" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="72" font-weight="900" letter-spacing="-1">SCROLL<tspan fill="#d9633a">GENIUS</tspan></text>
+  <text x="80" y="224" fill="#f1d9cf" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="28" font-weight="500">Your saved reels, turned into workflows Claude can run.</text>
+  <g transform="translate(940 70)" fill="none" stroke="#d9633a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="0" y="0" width="120" height="180" rx="18" stroke="#f1d9cf" stroke-opacity="0.9"/>
+    <path d="M44 62 L84 90 L44 118 Z" fill="#d9633a" stroke="none"/>
+    <path d="M150 90 H210" />
+    <path d="M196 74 L212 90 L196 106" />
+  </g>
+  <g transform="translate(1170 100)" fill="none" stroke="#f1d9cf" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="-40" y="0" width="90" height="120" rx="12"/>
+    <path d="M-22 34 H32 M-22 58 H32 M-22 82 H14"/>
+  </g>
+</svg>
