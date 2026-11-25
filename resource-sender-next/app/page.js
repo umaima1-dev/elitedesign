@@ -64,7 +64,7 @@ export default function Home() {
         <br />
         Subject: {subject || "(resource name)"}
         <br />
-        Here is the resource as promised.
+        Here is your resource, as promised.
         <br />
         {link || "(link)"}
         <br />
