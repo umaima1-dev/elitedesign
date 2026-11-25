@@ -7,6 +7,11 @@ GoHighLevel account, so it appears in their conversation history.
 Email: branded layout with the resource name as the title, "Here is the resource as promised", and a button linking to the resource.
 Subject: the resource name you type.
 
+## Tagging
+The contact is tagged with the first term after `https://resources.aisavvyfounders.com/`
+(for example `.../content` adds the tag `content`). Existing tags are kept. Links on other
+domains are sent without a tag. Change the domain in `lib/tag.js`.
+
 ## 1. Get your GoHighLevel details
 - **Token:** Settings > Private Integrations > Create new. Scopes:
   `contacts.write`, `contacts.readonly`, `conversations/message.write`.

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { tagFromLink } from "../lib/tag";
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -31,7 +32,8 @@ export default function Home() {
       try {
         localStorage.setItem("rs_pw", password);
       } catch {}
-      setMsg({ type: "ok", text: `Sent to ${email.trim()}${data.isNew ? " (new contact created)" : ""}` });
+      const extra = [data.isNew ? "new contact created" : "", data.tag ? `tagged "${data.tag}"` : ""].filter(Boolean).join(", ");
+      setMsg({ type: data.tagError ? "err" : "ok", text: `Sent to ${email.trim()}${extra ? ` (${extra})` : ""}${data.tagError ? `. Tag failed: ${data.tagError}` : ""}` });
       setEmail("");
     } catch (err) {
       setMsg({ type: "err", text: err.message });
@@ -65,6 +67,9 @@ export default function Home() {
         Here is the resource as promised.
         <br />
         {link || "(link)"}
+        <br />
+        <br />
+        <b>Tag added:</b> {tagFromLink(link) || "none (link is not on the resources site)"}
       </div>
     </main>
   );

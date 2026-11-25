@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { buildEmail } from "../../email-template";
+import { tagFromLink } from "../../../lib/tag";
 
 const GHL = "https://services.leadconnectorhq.com";
 
@@ -42,13 +43,26 @@ export async function POST(request) {
     const contactId = up.contact?.id;
     if (!contactId) throw new Error("Could not find or create the contact");
 
+    // Tag the contact with the term after the resource domain (adds, never replaces).
+    const tag = tagFromLink(url);
+    let tagged = null;
+    let tagError = null;
+    if (tag) {
+      try {
+        await ghl(`/contacts/${contactId}/tags`, { tags: [tag] });
+        tagged = tag;
+      } catch (e) {
+        tagError = e.message;
+      }
+    }
+
     const { text, html } = buildEmail(url, subj);
     const msg = { type: "Email", contactId, subject: subj, message: text, html };
     if (process.env.FROM_EMAIL) {
       msg.emailFrom = process.env.FROM_NAME ? `${process.env.FROM_NAME} <${process.env.FROM_EMAIL}>` : process.env.FROM_EMAIL;
     }
     await ghl("/conversations/messages", msg);
-    return NextResponse.json({ ok: true, isNew: !!up.new });
+    return NextResponse.json({ ok: true, isNew: !!up.new, tag: tagged, tagError });
   } catch (e) {
     return NextResponse.json({ error: e.message }, { status: 502 });
   }
