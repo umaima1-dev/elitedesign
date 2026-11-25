@@ -5,104 +5,119 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Get Clip It: Download and Set Up in 3 Steps</title>
 <meta name="description" content="Download Clip It from GitHub, run one setup script, and turn your next episode into reels by tonight. Free, no account needed.">
-<meta name="theme-color" content="#4C111A">
+<meta name="theme-color" content="#1C1412">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800;900&family=Inter:wght@750&family=Open+Sans:wght@400;600&family=Manrope:wght@500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800;900&family=Open+Sans:wght@400;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-.hero{padding-bottom:0}
-.hero .wrap{padding-bottom:80px}
-.hero h1{max-width:12ch}
-.hero .stage{position:relative;max-width:440px;width:100%;margin-inline:auto;aspect-ratio:1/1.02}
-.hero .stage .rl{position:absolute;width:44%}
-.hero .stage .a1{left:28%;top:2%;width:46%;z-index:3}
-.hero .stage .a2{left:0;top:22%;transform:rotate(-8deg);z-index:2}
-.hero .stage .a3{right:0;top:24%;transform:rotate(8deg);z-index:2}
-.hero .stage .tag{position:absolute;z-index:4;left:8%;bottom:6%;background:var(--peach);color:var(--ink);font:700 .85rem/1 var(--label);padding:12px 16px;border-radius:12px;transform:rotate(-4deg);box-shadow:0 12px 28px rgba(0,0,0,.4)}
-@media (max-width:900px){.hero .stage{max-width:340px;margin-inline:0}}
+.hero{padding:clamp(40px,6vw,72px) 0 clamp(72px,9vw,120px);overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(32px,5vw,80px);align-items:center}
+.hero .lede{margin-top:26px}
+.hero .cta{margin-top:34px;display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.hero .reel{max-width:360px;width:100%;margin-inline:auto}
+.hero .reelwrap{position:relative;max-width:380px;width:100%;margin-inline:auto}
+.hero .sticker{right:-5%;top:12%}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr}.hero .reelwrap{max-width:300px;margin-inline:0}}
 
-.before{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(24px,5vw,80px);align-items:center;text-align:left}
-.panel{background:#fff;border:1px solid var(--line);border-radius:var(--r-card);padding:clamp(24px,3.4vw,40px);box-shadow:0 24px 50px rgba(76,17,26,.08)}
+/* before */
+.before{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(24px,5vw,80px);align-items:center}
+.panel{border:1px solid var(--line-peach);border-radius:var(--r-sheet);padding:clamp(24px,3.4vw,40px);background:rgba(255,178,133,.06)}
 .panel p+p{margin-top:14px}
 @media (max-width:820px){.before{grid-template-columns:1fr}}
 
-.stepx{display:grid;gap:22px;margin-top:52px;text-align:left}
-.sx{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(18px,3vw,36px);background:#fff;border:1px solid var(--line);border-radius:var(--r-card);padding:clamp(24px,3.4vw,40px)}
-.sx .n{width:72px;height:72px;border-radius:22px;background:var(--maroon);color:var(--peach);display:grid;place-items:center;font:900 2.1rem/1 var(--display);box-shadow:0 18px 36px rgba(76,17,26,.25)}
-.sx h3{font-size:clamp(1.3rem,2.2vw,1.8rem)}
-.sx .bd>p{margin-top:10px;max-width:62ch}
+/* steps */
+.steps{margin-top:56px;display:grid;gap:0}
+.step{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(20px,3vw,40px);padding:clamp(28px,4vw,48px) 0;border-top:1px solid var(--line)}
+.step:first-child{border-top:0;padding-top:0}
+.tile{width:clamp(72px,9vw,120px);aspect-ratio:1;border-radius:30px;background:var(--white);color:var(--rust);display:grid;place-items:center;font:900 clamp(2rem,4vw,3.4rem)/1 Inter;box-shadow:0 30px 60px rgba(0,0,0,.45)}
+.step h3{font-size:clamp(1.4rem,2.4vw,2rem)}
+.step .body>p{margin-top:12px;max-width:62ch}
 .cmds{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:14px;margin-top:22px}
-.cmd{background:var(--deep);border-radius:var(--r-in);padding:18px 18px 18px 22px;display:flex;flex-direction:column;gap:12px;min-width:0}
-.cmd .lab{font:700 .7rem/1.3 var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--peach)}
+.cmd{background:var(--deep);border:1px solid var(--line);border-radius:var(--r-sheet);padding:18px 18px 18px 22px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.cmd .lab{font:700 .72rem/1 Manrope;letter-spacing:.16em;text-transform:uppercase;color:var(--peach)}
 .cmd .in{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.cmd code{font:500 .9rem/1.5 "JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#fff;white-space:normal;overflow-wrap:anywhere}
-.copy{flex:none;font:700 .74rem/1 var(--label);letter-spacing:.08em;text-transform:uppercase;color:var(--peach);background:transparent;border:1px solid rgba(255,178,133,.45);border-radius:999px;padding:10px 16px;cursor:pointer;transition:background-color .2s,color .2s}
+.cmd code{font:500 .9rem/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--white);white-space:normal;overflow-wrap:anywhere;padding-bottom:2px}
+.copy{flex:none;font:700 .78rem/1 Manrope;letter-spacing:.08em;text-transform:uppercase;color:var(--peach);background:transparent;border:1px solid var(--line-peach);border-radius:var(--r-ui);padding:10px 14px;cursor:pointer;transition:background-color .2s,color .2s}
 .copy:hover{background:var(--peach);color:var(--ink)}
 .copy:active{transform:scale(.97)}
-.callout{margin-top:22px;background:var(--tint);border-radius:var(--r-in);padding:16px 20px;max-width:66ch}
-.callout b{color:var(--ink)}
-@media (max-width:760px){.sx{grid-template-columns:1fr}.sx .n{width:56px;height:56px;border-radius:18px;font-size:1.6rem}.cmds{grid-template-columns:1fr}}
+.callout{margin-top:22px;border-left:3px solid var(--rust);padding-left:20px;max-width:66ch}
+.callout b{color:var(--white)}
+.k{font:500 .9em/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:rgba(255,255,255,.08);padding:2px 7px;border-radius:6px;color:var(--peach)}
+@media (max-width:760px){.step{grid-template-columns:1fr}.tile{width:64px;border-radius:20px}.cmds{grid-template-columns:1fr}}
 
-.expect{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:center;text-align:left}
-.pcard{margin:0;max-width:none}
-.pcard .prices{padding:8px 34px}
-.pcard .prices .r{align-items:center;padding:24px 0}
-.pcard .prices .l small{display:block;font:500 .82rem var(--label);color:var(--mute);margin-top:4px}
-.pcard .prices .n{font:900 clamp(1.4rem,2.6vw,2rem)/1 var(--display);letter-spacing:-.03em;color:var(--maroon)}
+/* expect */
+.expect{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(24px,5vw,80px);align-items:center}
+.sheet .row.stat{grid-template-columns:1fr auto;padding:26px 0}
+.sheet .row.stat .n{font:900 clamp(1.5rem,3vw,2.3rem)/1 Inter;letter-spacing:-.02em;color:var(--maroon);text-align:right}
+.sheet .row.stat .l{font:700 1rem/1.3 Inter;color:var(--ink)}
+.sheet .row.stat .s{display:block;font:500 .82rem/1.4 Manrope;color:var(--mute);margin-top:4px}
 @media (max-width:820px){.expect{grid-template-columns:1fr}}
 
-.stuck{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:22px;margin-top:48px;text-align:left}
-.fix{display:grid;gap:22px}
-.fix .pad-card h3{text-transform:none}
-.k{font:600 .88em/1 "JetBrains Mono",ui-monospace,Consolas,monospace;background:var(--tint);padding:3px 8px;border-radius:6px;color:var(--maroon)}
-.dm{background:var(--maroon);color:#fff;border-radius:var(--r-card);padding:clamp(26px,3vw,38px);display:flex;flex-direction:column;gap:12px;justify-content:center}
-.dm h3{color:#fff;font:900 1.8rem/1 var(--display);text-transform:uppercase;letter-spacing:-.03em}
-.dm p{color:rgba(255,255,255,.9)}
-.dm .btn{align-self:flex-start;margin-top:10px}
+/* stuck */
+.stuck{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(24px,5vw,72px);align-items:start;margin-top:48px}
+.fix{display:grid;gap:30px}
+.fix div{border-left:3px solid var(--rust);padding-left:24px}
+.fix h3{font-size:1.15rem;margin-bottom:10px;text-transform:none;letter-spacing:0}
+.dm{background:var(--peach);color:var(--ink);border-radius:var(--r-sheet);padding:clamp(24px,3vw,36px)}
+.dm h3{color:var(--ink);font-size:1.6rem;line-height:1.05}
+.dm p{margin-top:12px;color:rgba(28,20,18,.86)}
+.dm .btn{margin-top:22px;background:var(--ink);color:var(--peach)}
+.dm .btn:hover{background:var(--deep);color:var(--white);box-shadow:0 14px 30px rgba(0,0,0,.3)}
 @media (max-width:820px){.stuck{grid-template-columns:1fr}}
 
-.rights{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:center;text-align:left;max-width:960px;margin-inline:auto}
-.rights h2{font-size:clamp(1.5rem,2.8vw,2.3rem);max-width:12ch}
-@media (max-width:760px){.rights{grid-template-columns:1fr}}
+/* rights */
+.rights{padding:clamp(40px,6vw,72px) 0}
+.rights .wrap{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-block:clamp(32px,4vw,52px)}
+.rights h2{font-size:clamp(1.4rem,2.6vw,2.2rem);max-width:12ch}
+@media (max-width:760px){.rights .wrap{grid-template-columns:1fr}}
+
+/* show */
+.show{text-align:center;padding:clamp(88px,12vw,160px) 0;background:url("assets/site-bg.png") 28% 50%/cover,var(--wine);overflow:hidden}
+.show h2{font-size:clamp(2.2rem,5.6vw,4.6rem);max-width:14ch;margin-inline:auto}
+.show p{margin:24px auto 0;font-size:clamp(1.1rem,1.7vw,1.35rem);color:var(--white);max-width:44ch}
 .show a.h{color:var(--peach);font-weight:600;text-underline-offset:4px}
-.show a.h:hover{color:#fff}
+.show a.h:hover{color:var(--white)}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="nav">
+<header class="bar">
   <div class="wrap">
-    <a href="index.html" aria-label="AI Savvy Founders, back to Clip It"><img src="assets/logo.png" width="167" height="36" alt="AI Savvy Founders" translate="no"></a>
+    <a href="index.html" aria-label="AI Savvy Founders, back to Clip It"><img src="assets/logo.png" width="177" height="38" alt="AI Savvy Founders" translate="no"></a>
     <a class="btn sm" href="https://github.com/TahaKhan192004/podcast-reels" rel="noopener">Open Clip It on GitHub <span class="ar" aria-hidden="true">→</span></a>
   </div>
 </header>
 
 <main id="main">
 
-<section class="hero dark">
+<!-- HERO -->
+<section class="hero bg-grid">
   <div class="wrap">
     <div>
-      <h1>It’s yours. Go make some <span class="pk">reels.</span></h1>
+      <h1>It’s yours. Go make some <span class="acc">reels.</span></h1>
       <p class="lede">Everything you need is in one place. Grab <span translate="no">Clip It</span>, run one setup script, and your next episode can be reels by tonight.</p>
       <div class="cta">
         <a class="btn lg" href="https://github.com/TahaKhan192004/podcast-reels" rel="noopener">Open Clip It on GitHub <span class="ar" aria-hidden="true">→</span></a>
+        <p class="note">Free to use. No account, no credit card, nothing else to sign up for.</p>
       </div>
-      <p class="note">Free to use. No account, no credit card, nothing else to sign up for.</p>
     </div>
-    <div class="stage" role="img" aria-label="Three finished vertical reels with word-by-word captions">
-      <div class="rl a2 c3" aria-hidden="true"><div class="who"></div><div class="hk">Your next episode</div><div class="cp"><span class="on">Reels</span></div><div class="bar" style="--p:70%"></div></div>
-      <div class="rl a3 c4" aria-hidden="true"><div class="who"></div><div class="hk">By tonight</div><div class="cp"><span class="on">Done</span></div><div class="bar" style="--p:35%"></div></div>
-      <div class="rl a1" aria-hidden="true"><div class="who"></div><div class="hk">Go make some reels</div><div class="cp" data-cap><span>Go</span> <span>make</span> <span>reels</span></div><div class="bar" style="--p:50%"></div></div>
-      <div class="tag" aria-hidden="true">Reels by tonight</div>
+    <div class="reelwrap" role="img" aria-label="Example finished reel with word-by-word captions">
+      <div class="reel" aria-hidden="true">
+        <div class="who"></div>
+        <div class="hook">Your next episode</div>
+        <div class="cap" data-cap><span>Go</span> <span>make</span> <span>reels</span></div>
+      </div>
+      <div class="sticker" aria-hidden="true">Reels by tonight</div>
     </div>
   </div>
 </section>
 
-<section class="sec" aria-labelledby="before">
+<!-- BEFORE YOU START -->
+<section class="pad bg-grid" style="padding-top:0" aria-labelledby="before">
   <div class="wrap before">
-    <h2 id="before">Before you <span class="pu">start</span></h2>
+    <h2 id="before">Before you <span class="acc">start</span></h2>
     <div class="panel rv">
       <p>You need <strong>Claude Code</strong> installed and logged in on your computer. That’s the only thing <span translate="no">Clip It</span> leans on. If you already use Claude Code, you’re set.</p>
       <p>Setup installs everything else for you (Python, Node.js, ffmpeg and a couple of small helpers) if they’re missing.</p>
@@ -110,13 +125,15 @@
   </div>
 </section>
 
-<section class="sec grid" aria-labelledby="steps">
-  <div class="wrap center">
-    <h2 id="steps">Get it running in <span class="pu">3 steps</span></h2>
-    <div class="stepx">
-      <div class="sx rv">
-        <div class="n" aria-hidden="true">1</div>
-        <div class="bd">
+<!-- STEPS -->
+<section class="pad bg-maroon" aria-labelledby="steps">
+  <div class="wrap">
+    <h2 id="steps">Get it running in <span class="acc">3 steps</span></h2>
+
+    <div class="steps">
+      <div class="step rv">
+        <div class="tile" aria-hidden="true">1</div>
+        <div class="body">
           <h3>Download it</h3>
           <p>On the GitHub page, click the green <strong>Code</strong> button, then <strong>Download ZIP</strong>. Unzip it somewhere you’ll find it again, like your Documents folder.</p>
           <p>Comfortable with Git? Clone it instead.</p>
@@ -124,9 +141,9 @@
         </div>
       </div>
 
-      <div class="sx rv">
-        <div class="n" aria-hidden="true">2</div>
-        <div class="bd">
+      <div class="step rv">
+        <div class="tile" aria-hidden="true">2</div>
+        <div class="body">
           <h3>Run setup once</h3>
           <p>Open a terminal in the folder, then run the command for your computer.</p>
           <div class="cmds">
@@ -137,9 +154,9 @@
         </div>
       </div>
 
-      <div class="sx rv">
-        <div class="n" aria-hidden="true">3</div>
-        <div class="bd">
+      <div class="step rv">
+        <div class="tile" aria-hidden="true">3</div>
+        <div class="body">
           <h3>Make your first reels</h3>
           <p>Start the dashboard.</p>
           <div class="cmds">
@@ -150,33 +167,33 @@
         </div>
       </div>
     </div>
-    <p class="sr" id="copied" role="status" aria-live="polite"></p>
+    <p class="sr-only" id="copied" role="status" aria-live="polite" style="position:absolute;left:-9999px"></p>
   </div>
 </section>
 
-<section class="sec" aria-labelledby="expect">
+<!-- WHAT TO EXPECT -->
+<section class="pad bg-grid" aria-labelledby="expect">
   <div class="wrap expect">
-    <div>
-      <h2 id="expect">What to expect on your <span class="pu">first run</span></h2>
-      <p class="sub" style="margin-left:0">The first video takes longer because <span translate="no">Clip It</span> downloads its speech model once (about 0.5 to 1.6 GB, depending on your computer). After that it’s quicker.</p>
-      <p class="sub" style="margin-left:0;margin-top:12px">A one-hour episode transcribes in roughly the times shown, and rendering adds a bit on top. Start it, go do something else, and come back to reels.</p>
+    <div class="stack">
+      <h2 id="expect">What to expect on your <span class="acc">first run</span></h2>
+      <p class="lede">The first video takes longer because <span translate="no">Clip It</span> downloads its speech model once (about 0.5 to 1.6 GB, depending on your computer). After that it’s quicker.</p>
+      <p>A one-hour episode transcribes in roughly the times shown, and rendering adds a bit on top. Start it, go do something else, and come back to reels.</p>
     </div>
-    <div class="pcard rv">
-      <div class="prices">
-        <div class="r"><div class="l"><b>One-hour episode, transcribed</b><small>Newer Mac or a PC with an NVIDIA graphics card</small></div><span class="n">2 to 8 min</span></div>
-        <div class="r"><div class="l"><b>One-hour episode, transcribed</b><small>Ordinary laptop</small></div><span class="n">15 to 40 min</span></div>
-      </div>
+    <div class="sheet rv" role="table" aria-label="Typical first run times">
+      <div class="row stat" role="row"><div role="cell"><span class="l">One-hour episode, transcribed</span><span class="s">Newer Mac or a PC with an NVIDIA graphics card</span></div><span class="n" role="cell">2 to 8 min</span></div>
+      <div class="row stat" role="row"><div role="cell"><span class="l">One-hour episode, transcribed</span><span class="s">Ordinary laptop</span></div><span class="n" role="cell">15 to 40 min</span></div>
     </div>
   </div>
 </section>
 
-<section class="sec grid" aria-labelledby="stuck">
-  <div class="wrap center">
-    <h2 id="stuck">If something gets <span class="pu">stuck</span></h2>
+<!-- STUCK -->
+<section class="pad bg-maroon" aria-labelledby="stuck">
+  <div class="wrap">
+    <h2 id="stuck">If something gets <span class="acc">stuck</span></h2>
     <div class="stuck">
       <div class="fix">
-        <div class="pad-card rv"><h3>YouTube says “Sign in to confirm you’re not a bot”.</h3><p>Open <span class="k" translate="no">config.yaml</span> and set <span class="k" translate="no">cookies_from_browser</span> to the browser you use (<span translate="no">chrome, firefox, edge or safari</span>).</p></div>
-        <div class="pad-card rv" style="--i:1"><h3>Renders are slow or stall on a laptop.</h3><p>That’s usually too much running at once. The Troubleshooting section at the bottom of the <a href="https://github.com/TahaKhan192004/podcast-reels" rel="noopener">GitHub page</a> walks you through it, along with the other common fixes.</p></div>
+        <div class="rv"><h3>YouTube says “Sign in to confirm you’re not a bot”.</h3><p>Open <span class="k" translate="no">config.yaml</span> and set <span class="k" translate="no">cookies_from_browser</span> to the browser you use (<span translate="no">chrome, firefox, edge or safari</span>).</p></div>
+        <div class="rv" style="--i:1"><h3>Renders are slow or stall on a laptop.</h3><p>That’s usually too much running at once. The Troubleshooting section at the bottom of the <a href="https://github.com/TahaKhan192004/podcast-reels" rel="noopener" style="color:var(--peach);text-underline-offset:3px">GitHub page</a> walks you through it, along with the other common fixes.</p></div>
       </div>
       <div class="dm rv" style="--i:1">
         <h3>Still stuck?</h3>
@@ -187,17 +204,19 @@
   </div>
 </section>
 
-<section class="sec" style="padding:clamp(48px,6vw,80px) 0" aria-labelledby="rights">
-  <div class="wrap rights">
+<!-- RIGHTS -->
+<section class="rights bg-grid" aria-labelledby="rights">
+  <div class="wrap">
     <h2 id="rights">One thing before you go</h2>
-    <p style="font-size:1.15rem">Use <span translate="no">Clip It</span> on episodes you own or have permission to repurpose. Your podcast, or a client’s with their OK.</p>
+    <p class="lede">Use <span translate="no">Clip It</span> on episodes you own or have permission to repurpose. Your podcast, or a client’s with their OK.</p>
   </div>
 </section>
 
-<section class="final dark show" aria-labelledby="show">
+<!-- SHOW US -->
+<section class="show" aria-labelledby="show">
   <div class="wrap">
-    <h2 id="show">Show us your first <span class="pk">reel</span></h2>
-    <p>Made something good with <span translate="no">Clip It</span>? Post it and tag <a class="h" href="https://instagram.com/aisavvyfounders" rel="noopener" translate="no">@aisavvyfounders</a>.<br>We’d love to see what came out of your episode.</p>
+    <h2 id="show">Show us your first <span class="acc">reel</span></h2>
+    <p>Made something good with <span translate="no">Clip It</span>? Post it and tag <a class="h" href="https://instagram.com/aisavvyfounders" rel="noopener" translate="no">@aisavvyfounders</a>. We’d love to see what came out of your episode.</p>
   </div>
 </section>
 
@@ -218,10 +237,14 @@ document.documentElement.classList.add('js');
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
     els.forEach(function(e){io.observe(e)});
   } else els.forEach(function(e){e.classList.add('in')});
+
   var cap=document.querySelector('[data-cap]');
-  if(cap){var w=cap.querySelectorAll('span'),i=0;
+  if(cap){
+    var w=cap.querySelectorAll('span'),i=0;
     if(matchMedia('(prefers-reduced-motion: reduce)').matches){w[2].classList.add('on')}
-    else setInterval(function(){w.forEach(function(s,k){s.classList.toggle('on',k===i)});i=(i+1)%w.length},560)}
+    else setInterval(function(){w.forEach(function(s,k){s.classList.toggle('on',k===i)});i=(i+1)%w.length},520);
+  }
+
   var live=document.getElementById('copied');
   document.querySelectorAll('.copy').forEach(function(b){
     b.addEventListener('click',function(){
