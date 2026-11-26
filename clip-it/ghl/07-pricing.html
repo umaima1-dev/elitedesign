@@ -1,0 +1,82 @@
+<!-- GHL Custom Code element: Pricing and comparison -->
+<div class="clone-what-people-pay" style="width:100%;max-width:100%;overflow:hidden;overflow-x:clip;box-sizing:border-box;"><style>
+.clone-what-people-pay{
+  --ink:#1C1412; --deep:#120508; --maroon:#7A1F2B; --wine:#4C111A;
+  --rust:#D36B48; --btn:#D97757; --peach:#FFB285; --cream:#FDF6EE;
+  --white:#FFFFFF; --body:#DED3CC; --mute:#9B8D85;
+  --line:rgba(255,255,255,.1); --line-peach:rgba(255,178,133,.4);
+  --r-ui:6px; --r-sheet:14px; --r-card:26px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  color-scheme:dark;
+}
+.clone-what-people-pay *,.clone-what-people-pay *::before,.clone-what-people-pay *::after{box-sizing:border-box}
+.clone-what-people-pay{margin:0;background:var(--ink);color:var(--body);font:400 18px/1.65 "Open Sans",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;touch-action:manipulation}
+.clone-what-people-pay h2{font-family:Inter,system-ui,sans-serif;text-transform:uppercase;color:var(--white);margin:0;text-wrap:balance}
+.clone-what-people-pay h2{font-weight:900;font-size:clamp(2rem,4.4vw,3.6rem);line-height:1;letter-spacing:-.025em}
+.clone-what-people-pay p{margin:0;text-wrap:pretty}
+.clone-what-people-pay .acc{color:var(--rust);font-style:normal}
+.clone-what-people-pay :focus-visible{outline:3px solid var(--peach);outline-offset:3px;border-radius:var(--r-ui)}
+.clone-what-people-pay .wrap{width:min(1240px,100% - 48px);margin-inline:auto}
+.clone-what-people-pay section{position:relative}
+.clone-what-people-pay .pad{padding:clamp(72px,10vw,140px) 0}
+.clone-what-people-pay .eyebrow{font:600 clamp(.8rem,1.2vw,.95rem)/1.3 Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--peach);margin:0 0 20px}
+.clone-what-people-pay .bg-grid{background:
+  linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px) 0 0/120px 120px,
+  linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px) 0 0/120px 120px,
+  var(--ink)}
+.clone-what-people-pay .sheet{background:var(--cream);color:var(--ink);border-radius:var(--r-sheet);padding:0 clamp(20px,3vw,34px)}
+.clone-what-people-pay .sheet .row{display:grid;gap:12px 24px;align-items:center;padding:20px 0;border-top:1px solid #E6D4CB}
+.clone-what-people-pay .sheet .row:first-child{border-top:0}
+.clone-what-people-pay .sheet .head{font:700 .72rem/1 Manrope;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.clone-what-people-pay .sheet .tag{font:800 .8rem/1 Manrope;letter-spacing:.08em;text-transform:uppercase;color:var(--maroon)}
+@media (prefers-reduced-motion:reduce){.clone-what-people-pay *{animation:none!important;transition-duration:.01ms!important}}
+@media (max-width:640px){.clone-what-people-pay{font-size:17px}
+.clone-what-people-pay .wrap{width:calc(100% - 32px)}}
+.clone-what-people-pay p{font-size:inherit;line-height:inherit;font-family:inherit}
+.clone-what-people-pay .price{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:20px;margin-top:48px;align-items:start}
+.clone-what-people-pay .price .row{grid-template-columns:1fr auto}
+.clone-what-people-pay .price .row.us{background:var(--maroon);color:var(--white);margin:0 calc(-1*clamp(20px,3vw,34px));padding-inline:clamp(20px,3vw,34px);border-radius:10px;border-top-color:transparent}
+.clone-what-people-pay .price .row.us .tag{color:var(--peach);font-size:1rem}
+.clone-what-people-pay .price .row b{font:800 1rem/1.2 Inter}
+.clone-what-people-pay .cmp .row{grid-template-columns:.9fr 1fr 1fr;font-size:.92rem;line-height:1.45}
+.clone-what-people-pay .cmp .row .us{color:var(--maroon);font-weight:700}
+.clone-what-people-pay .cmp .head{padding-top:22px}
+.clone-what-people-pay .fair{margin-top:28px;max-width:78ch;border-left:3px solid var(--rust);padding-left:22px}
+@media (max-width:960px){.clone-what-people-pay .price{grid-template-columns:1fr}}
+@media (max-width:560px){.clone-what-people-pay .cmp .row{grid-template-columns:1fr;gap:6px}
+.clone-what-people-pay .cmp .head{display:none}
+.clone-what-people-pay .cmp .row>span:first-child{font:800 .78rem/1 Manrope;letter-spacing:.12em;text-transform:uppercase;color:var(--maroon)}
+.clone-what-people-pay .cmp .row>span:nth-child(2)::before{content:"Hosted: ";color:var(--mute)}
+.clone-what-people-pay .cmp .row>span:nth-child(3)::before{content:"Clip It: ";color:var(--mute)}}
+</style>
+<section class="pad bg-grid" aria-labelledby="price">
+  <div class="wrap">
+    <p class="eyebrow">Public pricing, monthly billing</p>
+    <h2 id="price">What people pay for this <span class="acc">right now</span></h2>
+
+    <div class="price">
+      <div class="sheet" role="table" aria-label="Monthly price of hosted clipping tools">
+        <div class="row head" role="row"><span role="columnheader">Tool</span><span role="columnheader">Monthly price</span></div>
+        <div class="row" role="row"><span role="cell"><b>OpusClip</b></span><span class="tag" role="cell">$15 to $29/mo</span></div>
+        <div class="row" role="row"><span role="cell"><b>Klap</b></span><span class="tag" role="cell">$29 to $189/mo</span></div>
+        <div class="row" role="row"><span role="cell"><b>Riverside</b></span><span class="tag" role="cell">Free to $99/mo</span></div>
+        <div class="row" role="row"><span role="cell"><b>Munch Studio</b> (Scale plan)</span><span class="tag" role="cell">$398/mo</span></div>
+        <div class="row us" role="row"><span role="cell"><b translate="no">Clip It</b></span><span class="tag" role="cell">Free</span></div>
+      </div>
+
+      <div class="sheet cmp" role="table" aria-label="Hosted clipping tools compared with Clip It">
+        <div class="row head" role="row"><span role="columnheader"></span><span role="columnheader">Hosted clipping tools</span><span role="columnheader" translate="no">Clip It</span></div>
+        <div class="row" role="row"><span role="rowheader"><b>How you pay</b></span><span role="cell">Monthly subscription</span><span class="us" role="cell">Free</span></div>
+        <div class="row" role="row"><span role="rowheader"><b>Usage limits</b></span><span role="cell">Credits or clip quotas per plan</span><span class="us" role="cell">No clip quota. Your computer’s speed is the limit</span></div>
+        <div class="row" role="row"><span role="rowheader"><b>Where your video goes</b></span><span role="cell">Uploaded to their cloud</span><span class="us" role="cell">Stays on your computer</span></div>
+        <div class="row" role="row"><span role="rowheader"><b>Transcription</b></span><span role="cell">Included in credits</span><span class="us" role="cell">Local Whisper, timed to the word</span></div>
+        <div class="row" role="row"><span role="rowheader"><b>Look and feel</b></span><span role="cell">Their templates</span><span class="us" role="cell">Fully customisable, per video if you want</span></div>
+        <div class="row" role="row"><span role="rowheader"><b>Editing changes</b></span><span role="cell">Their editor</span><span class="us" role="cell">Tell Claude in plain English</span></div>
+      </div>
+    </div>
+
+    <p class="fair">To be fair to them: tools like OpusClip and Riverside also do scheduling, team seats, cloud storage and recording. If you need those, they’re worth paying for. If you need finished reels from your episodes without another monthly bill, <span translate="no">Clip It</span> does that job.</p>
+  </div>
+</section>
+</div>

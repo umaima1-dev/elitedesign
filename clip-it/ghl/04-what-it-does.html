@@ -1,0 +1,143 @@
+<!-- GHL Custom Code element: What Clip It does -->
+<div class="clone-press-the-button" style="width:100%;max-width:100%;overflow:hidden;overflow-x:clip;box-sizing:border-box;"><style>
+.clone-press-the-button{
+  --ink:#1C1412; --deep:#120508; --maroon:#7A1F2B; --wine:#4C111A;
+  --rust:#D36B48; --btn:#D97757; --peach:#FFB285; --cream:#FDF6EE;
+  --white:#FFFFFF; --body:#DED3CC; --mute:#9B8D85;
+  --line:rgba(255,255,255,.1); --line-peach:rgba(255,178,133,.4);
+  --r-ui:6px; --r-sheet:14px; --r-card:26px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  color-scheme:dark;
+}
+.clone-press-the-button *,.clone-press-the-button *::before,.clone-press-the-button *::after{box-sizing:border-box}
+.clone-press-the-button{margin:0;background:var(--ink);color:var(--body);font:400 18px/1.65 "Open Sans",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;touch-action:manipulation}
+.clone-press-the-button img{display:block;max-width:100%;height:auto}
+.clone-press-the-button a{color:inherit}
+.clone-press-the-button h2,.clone-press-the-button h3{font-family:Inter,system-ui,sans-serif;text-transform:uppercase;color:var(--white);margin:0;text-wrap:balance}
+.clone-press-the-button h2{font-weight:900;font-size:clamp(2rem,4.4vw,3.6rem);line-height:1;letter-spacing:-.025em}
+.clone-press-the-button h3{font-weight:800;font-size:1.25rem;line-height:1.15;letter-spacing:-.01em}
+.clone-press-the-button p{margin:0;text-wrap:pretty}
+.clone-press-the-button .acc{color:var(--rust);font-style:normal}
+.clone-press-the-button :focus-visible{outline:3px solid var(--peach);outline-offset:3px;border-radius:var(--r-ui)}
+.clone-press-the-button .wrap{width:min(1240px,100% - 48px);margin-inline:auto}
+.clone-press-the-button section{position:relative}
+.clone-press-the-button .pad{padding:clamp(72px,10vw,140px) 0}
+.clone-press-the-button .eyebrow{font:600 clamp(.8rem,1.2vw,.95rem)/1.3 Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--peach);margin:0 0 20px}
+.clone-press-the-button .bg-maroon{background:url("{{site-bg.png}}") 28% 50%/cover,var(--wine)}
+.clone-press-the-button .chips{display:flex;flex-wrap:wrap;gap:10px;padding:0;margin:0;list-style:none}
+.clone-press-the-button .chip{border:1px solid var(--line-peach);border-radius:var(--r-ui);padding:10px 16px;color:var(--peach);font:600 .78rem/1.2 Manrope,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.clone-press-the-button .reel{position:relative;aspect-ratio:9/16;border-radius:var(--r-card);overflow:hidden;border:1px solid rgba(255,178,133,.18);
+  box-shadow:0 40px 80px rgba(0,0,0,.5);background:var(--deep);isolation:isolate}
+.clone-press-the-button .reel::before{content:"";position:absolute;inset:0;background:var(--wine);mix-blend-mode:multiply;opacity:.42;z-index:1}
+.clone-press-the-button .reel::after{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(28,20,18,.85) 0%,rgba(28,20,18,0) 34%,rgba(28,20,18,0) 52%,rgba(28,20,18,.92) 100%)}
+.clone-press-the-button .reel .tag{position:absolute;z-index:2;left:7%;bottom:3.5%;font:600 .62rem/1 Manrope;letter-spacing:.16em;text-transform:uppercase;color:var(--peach)}
+@media (prefers-reduced-motion:reduce){.clone-press-the-button *{animation:none!important;transition-duration:.01ms!important}}
+@media (max-width:640px){.clone-press-the-button{font-size:17px}
+.clone-press-the-button .wrap{width:calc(100% - 32px)}}
+.clone-press-the-button .reel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.clone-press-the-button .reel.raw::before,.clone-press-the-button .reel.raw::after{display:none}
+.clone-press-the-button .reel .tag{z-index:3;background:rgba(18,5,8,.7);padding:6px 9px;border-radius:6px;bottom:4%}
+.clone-press-the-button p{font-size:inherit;line-height:inherit;font-family:inherit}
+.clone-press-the-button .tile{width:84px;height:84px;border-radius:24px;background:var(--white);color:var(--rust);display:grid;place-items:center;font:900 2.4rem/1 Inter;box-shadow:0 24px 48px rgba(0,0,0,.45)}
+.clone-press-the-button .steps{list-style:none;margin:64px 0 0;padding:0;display:grid;gap:40px}
+.clone-press-the-button .flowstep{position:relative;display:grid;grid-template-columns:84px minmax(0,1fr);gap:clamp(20px,3vw,40px);align-items:start}
+.clone-press-the-button .flowstep:not(:last-child)::before{content:"";position:absolute;left:40px;width:3px;background:var(--peach);opacity:.45}
+.clone-press-the-button .flowstep>.tile{margin-top:24px}
+.clone-press-the-button .flowstep:not(:last-child)::before{top:108px;bottom:-64px}
+.clone-press-the-button .card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center;min-height:240px;padding:clamp(24px,3.5vw,44px);border-radius:var(--r-sheet);border:1px solid var(--line);background:rgba(18,5,8,.78)}
+.clone-press-the-button .card .txt{display:flex;flex-direction:column;gap:14px}
+.clone-press-the-button .card h3{font-size:clamp(1.25rem,2vw,1.7rem)}
+.clone-press-the-button .card .txt p{font-size:1rem}
+.clone-press-the-button .card .kicker{font:700 .74rem/1 Manrope;letter-spacing:.16em;text-transform:uppercase;color:var(--peach)}
+.clone-press-the-button .card .vis{min-width:0}
+.clone-press-the-button .shot{position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:var(--r-sheet)}
+.clone-press-the-button .shot img{width:100%;height:100%;object-fit:cover}
+.clone-press-the-button .shot .frame{position:absolute;left:58%;top:4%;height:92%;aspect-ratio:9/16;transform:translateX(-50%);border:2px solid var(--peach);border-radius:12px;box-shadow:0 0 0 999px rgba(18,5,8,.58)}
+.clone-press-the-button .dwrap{display:flex;gap:18px;align-items:stretch}
+.clone-press-the-button .dwrap .styles{flex:1}
+.clone-press-the-button .reel.mini{flex:none;width:140px;border-radius:18px}
+.clone-press-the-button .styles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.clone-press-the-button .sty{display:flex;flex-direction:column;justify-content:center;border-radius:var(--r-ui);background:var(--ink);border:1px solid var(--line);padding:16px 12px 12px;text-align:center}
+.clone-press-the-button .sty b{display:block;font:900 clamp(1.3rem,2.2vw,1.9rem)/1 Inter;text-transform:uppercase;letter-spacing:-.01em;color:var(--white)}
+.clone-press-the-button .sty small{display:block;margin-top:12px;font:600 .66rem/1.3 Manrope;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.clone-press-the-button .sty.s1 b{color:var(--peach);font-size:1.6rem}
+.clone-press-the-button .sty.s2 b span{background:var(--white);color:var(--ink);padding:2px 8px;border-radius:6px}
+.clone-press-the-button .sty.s3 b{font-size:clamp(1.05rem,1.5vw,1.35rem);background:linear-gradient(90deg,var(--peach) 0 58%,rgba(255,255,255,.5) 58% 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.clone-press-the-button .sty.s4 b{font:600 .95rem/1.2 "Open Sans";text-transform:none;letter-spacing:0}
+.clone-press-the-button .thumb{position:relative;width:160px;margin-inline:auto;aspect-ratio:4/5;border-radius:var(--r-ui);overflow:hidden;border:1px solid rgba(255,178,133,.3);box-shadow:0 24px 50px rgba(0,0,0,.45);transform:rotate(3deg)}
+.clone-press-the-button .thumb img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.clone-press-the-button .thumb::after{content:"";position:absolute;inset:0;background:var(--wine);mix-blend-mode:multiply;opacity:.4}
+@media (max-width:1000px){.clone-press-the-button .card{grid-template-columns:1fr}}
+@media (max-width:640px){.clone-press-the-button .steps{gap:28px}
+.clone-press-the-button .flowstep{grid-template-columns:44px minmax(0,1fr);gap:14px}
+.clone-press-the-button .flowstep>.tile{width:44px;height:44px;border-radius:12px;font-size:1.3rem}
+.clone-press-the-button .flowstep:not(:last-child)::before{left:21px;top:68px;bottom:-52px}
+.clone-press-the-button .dwrap{flex-direction:column}
+.clone-press-the-button .reel.mini{align-self:center}}
+</style>
+<section class="pad bg-maroon" aria-labelledby="does">
+  <div class="wrap">
+    <p class="eyebrow">What Clip It does</p>
+    <h2 id="does">Press the button. Here’s what <span class="acc">happens.</span></h2>
+
+    <ol class="steps">
+      <li class="flowstep">
+        <div class="tile" aria-hidden="true">1</div>
+        <article class="card">
+          <div class="txt"><p class="kicker">Step 1</p><h3>It finds the moments worth posting.</h3><p>Claude reads the whole transcript, start to finish, and picks the clips with a real hook. You can steer it:</p></div>
+          <div class="vis"><ul class="chips">
+          <li class="chip">“5 clips, focus on the money advice”</li>
+          <li class="chip">“Only the bits about relationships”</li>
+        </ul></div>
+        </article>
+      </li>
+      <li class="flowstep">
+        <div class="tile" aria-hidden="true">2</div>
+        <article class="card">
+          <div class="txt"><p class="kicker">Step 2</p><h3>It keeps the right person in frame.</h3><p>Face tracking and active-speaker detection follow whoever is talking and crop to 9:16 automatically. Two people on one camera is fine.</p></div>
+          <div class="vis"><div class="shot"><img src="{{main.jpg}}" width="1280" height="720" alt="Full episode frame with a vertical crop box on the speaker" loading="lazy"><div class="frame" aria-hidden="true"></div></div></div>
+        </article>
+      </li>
+      <li class="flowstep">
+        <div class="tile" aria-hidden="true">3</div>
+        <article class="card">
+          <div class="txt"><p class="kicker">Step 3</p><h3>It captions every word, on time.</h3><p>Transcription runs on your computer with Whisper, timed to the word. Pick from four caption styles:</p></div>
+          <div class="vis"><div class="dwrap"><div class="styles" aria-label="Caption styles">
+          <div class="sty s1"><b>Pop</b><small>Big pop words</small></div>
+          <div class="sty s2"><b><span>Box</span></b><small>TikTok-style word boxes</small></div>
+          <div class="sty s3"><b>Karaoke</b><small>Karaoke fill</small></div>
+          <div class="sty s4"><b>Clean subtitles</b><small>Clean subtitles</small></div>
+        </div><div class="reel mini raw" aria-hidden="true"><video src="{{clip_10.mp4}}" poster="{{clip_10.jpg}}" autoplay muted loop playsinline preload="none"></video><span class="tag">Clip 10</span></div></div></div>
+        </article>
+      </li>
+      <li class="flowstep">
+        <div class="tile" aria-hidden="true">4</div>
+        <article class="card">
+          <div class="txt"><p class="kicker">Step 4</p><h3>It adds the edit you’d normally pay an editor for.</h3><p>Text is placed away from the speaker’s face, so nothing covers anyone.</p></div>
+          <div class="vis"><ul class="chips">
+          <li class="chip">Punch zooms</li><li class="chip">Shake</li><li class="chip">Pop-up callouts</li><li class="chip">Counting stat cards</li><li class="chip">Name tags</li><li class="chip">Emoji bursts</li>
+        </ul></div>
+        </article>
+      </li>
+      <li class="flowstep">
+        <div class="tile" aria-hidden="true">5</div>
+        <article class="card">
+          <div class="txt"><p class="kicker">Step 5</p><h3>It writes the hook for each one.</h3><p>Every reel gets a hook title on screen, plus a ready-to-paste post caption and hashtags in a text file next to the video.</p></div>
+          <div class="vis"><ul class="chips"><li class="chip">Hook title on screen</li><li class="chip">Post caption</li><li class="chip">Hashtags</li></ul></div>
+        </article>
+      </li>
+      <li class="flowstep">
+        <div class="tile" aria-hidden="true">6</div>
+        <article class="card">
+          <div class="txt"><p class="kicker">Step 6</p><h3>It makes the cover too.</h3><p>Each reel comes with a cover image, so you’re not hunting for a frame where nobody is mid-blink.</p></div>
+          <div class="vis"><div class="thumb"><img src="{{clip_08.jpg}}" width="360" height="640" alt="Example reel cover image" loading="lazy"></div></div>
+        </article>
+      </li>
+    </ol>
+  </div>
+</section>
+<script>
+(function(){if(matchMedia('(prefers-reduced-motion: reduce)').matches){document.querySelectorAll('.clone-press-the-button video').forEach(function(v){v.removeAttribute('autoplay');v.pause()})}})();
+</script></div>

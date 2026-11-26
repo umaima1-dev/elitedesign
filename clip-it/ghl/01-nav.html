@@ -1,0 +1,45 @@
+<!-- GHL Custom Code element: Navigation bar (fixed). Skip it if you use the GHL header. -->
+<div class="clone-clip-it-nav" style="width:100%;max-width:100%;overflow:hidden;overflow-x:clip;box-sizing:border-box;"><style>
+.clone-clip-it-nav{
+  --ink:#1C1412; --deep:#120508; --maroon:#7A1F2B; --wine:#4C111A;
+  --rust:#D36B48; --btn:#D97757; --peach:#FFB285; --cream:#FDF6EE;
+  --white:#FFFFFF; --body:#DED3CC; --mute:#9B8D85;
+  --line:rgba(255,255,255,.1); --line-peach:rgba(255,178,133,.4);
+  --r-ui:6px; --r-sheet:14px; --r-card:26px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  color-scheme:dark;
+}
+.clone-clip-it-nav *,.clone-clip-it-nav *::before,.clone-clip-it-nav *::after{box-sizing:border-box}
+.clone-clip-it-nav{margin:0;background:var(--ink);color:var(--body);font:400 18px/1.65 "Open Sans",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;touch-action:manipulation}
+.clone-clip-it-nav img{display:block;max-width:100%;height:auto}
+.clone-clip-it-nav a{color:inherit}
+.clone-clip-it-nav :focus-visible{outline:3px solid var(--peach);outline-offset:3px;border-radius:var(--r-ui)}
+.clone-clip-it-nav .wrap{width:min(1240px,100% - 48px);margin-inline:auto}
+.clone-clip-it-nav .bar{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(28,20,18,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.clone-clip-it-nav .bar .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.clone-clip-it-nav .bar img{height:38px;width:auto}
+@media (prefers-reduced-transparency:reduce){.clone-clip-it-nav .bar{background:var(--ink)}}
+.clone-clip-it-nav .btn{display:inline-flex;align-items:center;gap:.6em;white-space:nowrap;background:var(--btn);color:var(--ink);
+  font:700 1rem/1 Inter,sans-serif;padding:18px 28px;border-radius:var(--r-ui);text-decoration:none;border:0;cursor:pointer;
+  transition:transform .25s var(--ease),background-color .25s var(--ease),box-shadow .25s var(--ease)}
+.clone-clip-it-nav .btn:hover{background:var(--peach);transform:translateY(-2px);box-shadow:0 14px 30px rgba(217,119,87,.28)}
+.clone-clip-it-nav .btn:active{transform:translateY(0) scale(.98)}
+.clone-clip-it-nav .btn.sm{padding:12px 18px;font-size:.9rem}
+.clone-clip-it-nav .btn .ar{transition:transform .25s var(--ease)}
+.clone-clip-it-nav .btn:hover .ar{transform:translateX(4px)}
+@media (prefers-reduced-motion:reduce){.clone-clip-it-nav *{animation:none!important;transition-duration:.01ms!important}}
+@media (max-width:640px){.clone-clip-it-nav{font-size:17px}
+.clone-clip-it-nav .wrap{width:calc(100% - 32px)}
+.clone-clip-it-nav .btn{white-space:normal}
+.clone-clip-it-nav .bar .btn{white-space:nowrap}}
+.clone-clip-it-nav .navspacer{height:68px;background:var(--ink)}
+</style>
+<div class="navspacer"></div>
+<header class="bar">
+  <div class="wrap">
+    <a href="#top" aria-label="AI Savvy Founders"><img src="{{logo.png}}" width="177" height="38" alt="AI Savvy Founders" translate="no"></a>
+    <a class="btn sm" href="/thanks">Get Clip It free <span class="ar" aria-hidden="true">→</span></a>
+  </div>
+</header>
+</div>

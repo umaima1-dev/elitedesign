@@ -1,0 +1,12 @@
+# After uploading each file to GHL (Media Library), paste its URL after the = sign.
+logo.png=
+site-bg.png=
+clip_05.mp4=
+clip_05.jpg=
+clip_08.mp4=
+clip_08.jpg=
+clip_10.mp4=
+clip_10.jpg=
+hero-loop.mp4=
+motion.jpg=
+main.jpg=
