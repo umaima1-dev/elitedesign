@@ -1,0 +1,66 @@
+<!-- GHL Custom Code element: Form popup. Add ONCE per page (e.g. in the last section). Every button/link with href="#get-access" or data-clipit-form opens it. -->
+<div class="clone-form-popup"><style>
+.clone-form-popup *{box-sizing:border-box}
+.clone-form-popup dialog{width:min(560px,calc(100vw - 32px));max-width:none;max-height:calc(100dvh - 32px);margin:auto;padding:0;border:0;border-radius:12px;background:#fff;color:#1C1412;overflow:hidden;font-family:'Open Sans',sans-serif}
+.clone-form-popup dialog::backdrop{background:rgba(18,5,8,.78);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.clone-form-popup .clone-form-popup-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 14px 14px 22px;background:#1C1412;color:#fff}
+.clone-form-popup .clone-form-popup-title{margin:0;font:900 1.05rem/1.1 Inter,sans-serif;letter-spacing:-.01em;text-transform:uppercase;color:#fff}
+.clone-form-popup .clone-form-popup-close{flex:none;width:40px;height:40px;border:1px solid rgba(255,178,133,.45);border-radius:6px;background:transparent;color:#FFB285;font:600 20px/1 Inter,sans-serif;cursor:pointer;transition:background-color .2s,color .2s}
+.clone-form-popup .clone-form-popup-close:hover{background:#FFB285;color:#1C1412}
+.clone-form-popup .clone-form-popup-close:focus-visible{outline:3px solid #FFB285;outline-offset:2px}
+.clone-form-popup .clone-form-popup-body{position:relative;overflow:auto;max-height:calc(100dvh - 32px - 68px);min-height:360px}
+.clone-form-popup .clone-form-popup-loading{position:absolute;inset:0;display:grid;place-items:center;color:#7a6a62;font-size:15px}
+.clone-form-popup iframe{position:relative;display:block;width:100%;min-height:420px;height:420px;border:none;border-radius:8px;background:transparent}
+@media (prefers-reduced-motion:no-preference){.clone-form-popup dialog[open]{animation:clone-form-popup-in .25s cubic-bezier(.16,1,.3,1)}@keyframes clone-form-popup-in{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}}
+</style>
+<dialog aria-labelledby="clone-form-popup-title">
+  <div class="clone-form-popup-head"><h2 class="clone-form-popup-title" id="clone-form-popup-title">Get Clip It free</h2><button type="button" class="clone-form-popup-close" aria-label="Close form">&#10005;</button></div>
+  <div class="clone-form-popup-body">
+    <p class="clone-form-popup-loading">Loading the form…</p>
+    <iframe
+      data-src="https://api.leadconnectorhq.com/widget/form/H0TFkRA4tFBLG8eZ1Bp1"
+      id="inline-H0TFkRA4tFBLG8eZ1Bp1"
+      data-layout="{'id':'INLINE'}"
+      data-trigger-type="alwaysShow"
+      data-trigger-value=""
+      data-activation-type="alwaysActivated"
+      data-activation-value=""
+      data-deactivation-type="neverDeactivate"
+      data-deactivation-value=""
+      data-form-name="clip it form"
+      data-height="400"
+      data-layout-iframe-id="inline-H0TFkRA4tFBLG8eZ1Bp1"
+      data-form-id="H0TFkRA4tFBLG8eZ1Bp1"
+      title="clip it form"></iframe>
+  </div>
+</dialog>
+<script>
+(function(){
+  var root=document.querySelector('.clone-form-popup');
+  if(!root||root.getAttribute('data-ready'))return;root.setAttribute('data-ready','1');
+  var dlg=root.querySelector('dialog'),frame=root.querySelector('iframe'),loading=root.querySelector('.clone-form-popup-loading'),last=null;
+  function lock(on){document.documentElement.style.overflow=on?'hidden':''}
+  function open(e){
+    if(e)e.preventDefault();
+    last=document.activeElement;
+    if(!frame.getAttribute('src')){frame.setAttribute('src',frame.getAttribute('data-src'))}
+    if(typeof dlg.showModal==='function'){if(!dlg.open)dlg.showModal()}else{dlg.setAttribute('open','')}
+    lock(true);
+  }
+  function shut(){
+    if(typeof dlg.close==='function'){if(dlg.open)dlg.close()}else{dlg.removeAttribute('open')}
+    lock(false);if(last&&last.focus)last.focus();
+  }
+  frame.addEventListener('load',function(){if(loading)loading.style.display='none'});
+  root.querySelector('.clone-form-popup-close').addEventListener('click',shut);
+  dlg.addEventListener('click',function(e){if(e.target===dlg)shut()});
+  dlg.addEventListener('close',function(){lock(false)});
+  document.addEventListener('click',function(e){
+    var t=e.target.closest&&e.target.closest('[data-clipit-form],a[href="#get-access"]');
+    if(t)open(e);
+  });
+  if(location.hash==='#get-access')open();
+})();
+</script>
+<script src="https://link.msgsndr.com/js/form_embed.js"></script>
+</div>

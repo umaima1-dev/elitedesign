@@ -13,7 +13,7 @@ Paste `00-fonts-header-code.html` (Inter, Open Sans, Manrope). Set the page back
 ## Build order (one Custom Code element per section)
 | File | Section | Needs |
 |---|---|---|
-| 01-nav.html | Fixed top bar (skip if you use the GHL header) | logo.png |
+| 01-nav.html | Your navbar (updated: opens the form popup) | uses your existing logo URL |
 | 02-hero.html | Hero with 3 playing reels | clip_05, clip_08, hero-loop, motion.jpg |
 | 03-problem.html | You recorded a great episode | none |
 | 04-what-it-does.html | Press the button: 6 numbered steps | main.jpg, clip_10, clip_08.jpg |
@@ -25,11 +25,12 @@ Paste `00-fonts-header-code.html` (Inter, Open Sans, Manrope). Set the page back
 | 10-faq.html | FAQ | none |
 | 11-final-cta.html | Final call to action | site-bg.png |
 | 12-footer.html | Footer | logo.png |
+| 13-form-popup.html | Form popup (add **once**, anywhere on the page, e.g. in the last section). Every "Get Clip It free" button opens it | none |
 
 For each: add a **full-width section**, set section and row padding/margin to **0**, one column, add a **Custom JS/HTML** element, paste the file.
 
 ## Notes
-- All "Get Clip It free" buttons point to `/thanks`. Change it if your thank-you page URL is different.
+- All "Get Clip It free" buttons use `href="#get-access" data-clipit-form` and open the form popup (`13-form-popup.html`). Any button or link you add later opens it too if it has either of those. Set the form's redirect or thank-you message inside GHL (the thanks page is `/thanks`).
 - The eyebrow "What Clip It does" now lives in `04-what-it-does.html` (it used to sit at the bottom of the problem section, which put it on the wrong background).
 - Each section already pauses its videos for visitors who prefer reduced motion. There is no shared JavaScript to install.
 - The scroll-reveal fade-ins were left out so each block works on its own.
