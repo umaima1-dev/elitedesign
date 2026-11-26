@@ -104,11 +104,7 @@
       </div>
     </div>
     <div class="reelwrap" role="img" aria-label="Example finished reel with word-by-word captions">
-      <div class="reel" aria-hidden="true">
-        <div class="who"></div>
-        <div class="hook">Your next episode</div>
-        <div class="cap" data-cap><span>Go</span> <span>make</span> <span>reels</span></div>
-      </div>
+      <div class="reel raw" aria-hidden="true"><video src="assets/media/hero-loop.mp4" poster="assets/media/motion.jpg" autoplay muted loop playsinline preload="metadata"></video></div>
       <div class="sticker" aria-hidden="true">Reels by tonight</div>
     </div>
   </div>
@@ -238,6 +234,7 @@ document.documentElement.classList.add('js');
     els.forEach(function(e){io.observe(e)});
   } else els.forEach(function(e){e.classList.add('in')});
 
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){document.querySelectorAll('video').forEach(function(v){v.removeAttribute('autoplay');v.pause()})}
   var cap=document.querySelector('[data-cap]');
   if(cap){
     var w=cap.querySelectorAll('span'),i=0;

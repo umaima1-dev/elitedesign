@@ -49,13 +49,14 @@
 .cell.peach h3{color:var(--ink)}
 .cell.peach p{color:rgba(28,20,18,.82)}
 .cell.deep{background:var(--deep)}
-.cell.photo{padding:0;min-height:520px;justify-content:flex-end}
+.cell.photo{padding:200px 0 0;justify-content:flex-end}
 .scene{position:absolute;inset:0;background:linear-gradient(120deg,#120508,#7A1F2B)}
-.cell.photo .scene{inset:0 0 50% 0}
+.cell.photo .bg{position:absolute;left:0;right:0;top:0;height:200px;width:100%;object-fit:cover;object-position:58% 30%}
 .cell.photo::before{content:"";position:absolute;inset:0;background:var(--wine);mix-blend-mode:multiply;opacity:.42;z-index:1}
-.cell.photo .frame{position:absolute;z-index:2;left:30%;top:5%;height:52%;aspect-ratio:9/16;transform:translateX(-50%);border:2px solid var(--peach);border-radius:12px;box-shadow:0 0 0 999px rgba(18,5,8,.58)}
+.cell.photo .frame{position:absolute;z-index:2;left:58%;top:10px;height:180px;aspect-ratio:9/16;transform:translateX(-50%);border:2px solid var(--peach);border-radius:12px;box-shadow:0 0 0 999px rgba(18,5,8,.58)}
 .cell.photo .txt{position:relative;z-index:3;padding:clamp(24px,3vw,36px);background:linear-gradient(0deg,rgba(28,20,18,.97) 0%,rgba(28,20,18,.86) 55%,rgba(28,20,18,0) 100%);padding-top:80px;display:flex;flex-direction:column;gap:10px}
-.cell.deep{padding-bottom:clamp(24px,3vw,36px)}.styles{flex:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:4px}
+.cell.deep{padding-bottom:clamp(24px,3vw,36px)}.dwrap{display:flex;gap:18px;align-items:stretch;margin-top:4px}.dwrap .styles{flex:1;margin-top:0}.reel.mini{flex:none;width:150px;border-radius:18px}
+.styles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:4px}
 .sty{display:flex;flex-direction:column;justify-content:center;border-radius:var(--r-ui);background:var(--ink);border:1px solid var(--line);padding:16px 12px 12px;text-align:center}
 .sty b{display:block;font:900 clamp(1.3rem,2.2vw,1.9rem)/1 Inter;text-transform:uppercase;letter-spacing:-.01em;color:var(--white)}
 .sty small{display:block;margin-top:12px;font:600 .66rem/1.3 Manrope;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
@@ -67,7 +68,7 @@
 .cell.cover{flex-direction:row;align-items:center;gap:clamp(20px,3vw,40px)}
 .cell.cover .t{flex:1;display:flex;flex-direction:column;gap:14px}
 .cell.cover .thumb{position:relative;width:min(36%,160px);flex:none;aspect-ratio:4/5;border-radius:var(--r-ui);overflow:hidden;border:1px solid rgba(255,178,133,.3);box-shadow:0 24px 50px rgba(0,0,0,.45);transform:rotate(3deg)}
-.cell.cover .thumb{background:linear-gradient(180deg,#D36B48,#4C111A)}
+.cell.cover .thumb img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
 .cell.cover .thumb::after{content:"";position:absolute;inset:0;background:var(--wine);mix-blend-mode:multiply;opacity:.4}
 @media (max-width:1000px){.styles{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:900px){.c4,.c3,.c2{grid-column:span 6}.cell.cover{flex-direction:column;align-items:flex-start}.cell.cover .thumb{width:160px}}
@@ -185,23 +186,10 @@
       </div>
     </div>
 
-    <!-- TODO: swap the stage for the 10 to 15 second screen recording (paste a link, press Make reels, cut to finished reel cards playing). -->
-    <div class="stage" role="img" aria-label="Three finished vertical reels with word-by-word captions and a hook title on screen">
-      <div class="reel r2 g2" aria-hidden="true">
-        <div class="who"></div>
-        <div class="hook">Why I stopped</div>
-        <div class="cap"><span class="on">Plain</span></div>
-      </div>
-      <div class="reel r3 g3" aria-hidden="true">
-        <div class="who"></div>
-        <div class="hook">The first client</div>
-        <div class="cap"><span class="on">Just</span> <span>ask</span></div>
-      </div>
-      <div class="reel r1" aria-hidden="true">
-        <div class="who"></div>
-        <div class="hook">The money mistake</div>
-        <div class="cap" data-cap><span>I</span> <span>was</span> <span>broke</span></div>
-      </div>
+    <div class="stage" role="img" aria-label="Three finished vertical reels playing: two clips cut from a podcast and one with captions and motion graphics">
+      <div class="reel r2" aria-hidden="true"><video src="assets/media/clip_05.mp4" poster="assets/media/clip_05.jpg" autoplay muted loop playsinline preload="metadata"></video><span class="tag">Clip 5</span></div>
+      <div class="reel r3" aria-hidden="true"><video src="assets/media/clip_08.mp4" poster="assets/media/clip_08.jpg" autoplay muted loop playsinline preload="metadata"></video><span class="tag">Clip 8</span></div>
+      <div class="reel r1 raw" aria-hidden="true"><video src="assets/media/hero-loop.mp4" poster="assets/media/motion.jpg" autoplay muted loop playsinline preload="metadata"></video></div>
       <div class="sticker" aria-hidden="true">Cover image included</div>
     </div>
   </div>
@@ -251,7 +239,7 @@
       </article>
 
       <article class="cell photo c2 rv">
-        <div class="scene"><div class="who" style="--w:26%;--l:30%"></div><div class="who" style="--w:26%;--l:68%"></div></div>
+        <img class="bg" src="assets/media/main.jpg" width="1280" height="720" alt="" loading="lazy">
         <div class="frame" aria-hidden="true"></div>
         <div class="txt">
           <h3>It keeps the right person in frame.</h3>
@@ -262,12 +250,12 @@
       <article class="cell deep c4 rv" style="--i:1">
         <h3>It captions every word, on time.</h3>
         <p>Transcription runs on your computer with Whisper, timed to the word. Pick from four caption styles:</p>
-        <div class="styles" aria-label="Caption styles">
+        <div class="dwrap"><div class="styles" aria-label="Caption styles">
           <div class="sty s1"><b>Pop</b><small>Big pop words</small></div>
           <div class="sty s2"><b><span>Box</span></b><small>TikTok-style word boxes</small></div>
           <div class="sty s3"><b>Karaoke</b><small>Karaoke fill</small></div>
           <div class="sty s4"><b>Clean subtitles</b><small>Clean subtitles</small></div>
-        </div>
+        </div><div class="reel mini raw" aria-hidden="true"><video src="assets/media/clip_10.mp4" poster="assets/media/clip_10.jpg" autoplay muted loop playsinline preload="none"></video><span class="tag">Clip 10</span></div></div>
       </article>
 
       <article class="cell glow c3 rv">
@@ -283,25 +271,12 @@
           <h3>It makes the cover too.</h3>
           <p>Each reel comes with a cover image, so you’re not hunting for a frame where nobody is mid-blink.</p>
         </div>
-        <div class="thumb" role="img" aria-label="Example reel cover image"><div class="who"></div></div>
+        <div class="thumb"><img src="assets/media/clip_08.jpg" width="360" height="640" alt="Example reel cover image" loading="lazy"></div>
       </article>
     </div>
 
-    <!-- TODO: swap for a real episode thumbnail on the left and 2 or 3 of the reels Clip It made from it on the right. -->
-    <figure class="flow rv" style="margin-top:72px" aria-label="One episode becomes several reels">
-      <div>
-        <div class="ep" role="img" aria-label="Example long-form episode frame"><div class="scene"><div class="who" style="--w:26%;--l:30%"></div><div class="who" style="--w:26%;--l:68%"></div></div></div>
-        <figcaption>Your episode</figcaption>
-      </div>
-      <div class="ar" aria-hidden="true">→</div>
-      <div>
-        <div class="three">
-          <div class="reel"><div class="who"></div><div class="hook">The money mistake</div><div class="cap"><span class="on">Broke</span></div></div>
-          <div class="reel g2"><div class="who"></div><div class="hook">The first client</div><div class="cap"><span class="on">Just ask</span></div></div>
-          <div class="reel g3"><div class="who"></div><div class="hook">Why I stopped</div><div class="cap"><span class="on">Plain</span></div></div>
-        </div>
-        <figcaption>Your reels</figcaption>
-      </div>
+    <figure class="wall rv" style="margin:72px auto 0">
+      <img src="assets/media/clips-wall.jpg" width="2160" height="1350" alt="One podcast episode in the centre with finished vertical clips arranged around it" loading="lazy">
     </figure>
   </div>
 </section>
@@ -312,6 +287,8 @@
     <div class="sticky">
       <h2 id="how">Three steps. <span class="acc">One coffee.</span></h2>
       <p class="lede" style="margin-top:22px">Prefer working in Claude Code? It does the same thing, then reports back with a table of everything it made.</p>
+      <div class="reel vid raw" aria-hidden="true"><video src="assets/media/caption-demo.mp4" poster="assets/media/captions.jpg" autoplay muted loop playsinline preload="none"></video></div>
+      <div class="reel vid raw" aria-hidden="true"><video src="assets/media/caption-demo.mp4" poster="assets/media/captions.jpg" autoplay muted loop playsinline preload="none"></video></div>
     </div>
     <div>
       <div class="step rv"><div class="tile" aria-hidden="true">1</div><div><h3>Paste a link</h3><p>Open the dashboard in your browser and paste a YouTube link, or point it at a video file on your computer.</p></div></div>
@@ -459,6 +436,7 @@ document.documentElement.classList.add('js');
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15,rootMargin:'0px 0px -6% 0px'});
   els.forEach(function(e){io.observe(e)});
   /* hero caption: moves the highlight word by word, the way a finished reel does */
+  if(rm){document.querySelectorAll('video').forEach(function(v){v.removeAttribute('autoplay');v.pause()})}
   var cap=document.querySelector('[data-cap]');
   if(cap&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
     var w=cap.querySelectorAll('span'),i=0;
