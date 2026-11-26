@@ -19,15 +19,10 @@
 }
 .clone-navbar-banner b{font:800 13px Inter,sans-serif}
 .clone-navbar-banner .sep{opacity:.45}
-.clone-navbar-code-btn{
-  display:inline-flex;align-items:center;gap:6px;
-  background:var(--ink);color:var(--peach);border:0;border-radius:5px;
-  padding:6px 12px;min-height:30px;
-  font:700 12px/1 Inter,sans-serif;letter-spacing:.04em;cursor:pointer;
-  transition:background .18s ease,transform .16s var(--ease);
+.clone-navbar-code{
+  display:inline-block;background:var(--ink);color:var(--peach);border-radius:5px;
+  padding:5px 11px;font:800 13px/1 Inter,sans-serif;letter-spacing:.12em;user-select:all;
 }
-.clone-navbar-code-btn:active{transform:scale(.97)}
-@media(hover:hover) and (pointer:fine){.clone-navbar-code-btn:hover{background:#3a1a1e}}
 
 /* header */
 .clone-navbar-header{
@@ -73,46 +68,6 @@
 .clone-navbar-root a:focus-visible,
 .clone-navbar-root button:focus-visible{outline:3px solid var(--peach);outline-offset:3px}
 
-/* black friday popup */
-.cn-modal{
-  position:fixed;inset:0;z-index:99999;display:none;
-  align-items:center;justify-content:center;padding:20px;
-  background:rgba(20,6,8,.72);backdrop-filter:blur(3px);
-}
-.cn-modal.is-open{display:flex;animation:cn-fade .22s ease both}
-.cn-modal-card{
-  position:relative;width:min(440px,100%);text-align:center;
-  background:var(--cream);color:var(--ink);border-radius:14px;
-  padding:38px 28px 30px;box-shadow:0 24px 60px rgba(0,0,0,.45);
-  animation:cn-pop .3s var(--ease) both;
-}
-.cn-modal-close{
-  position:absolute;top:10px;right:10px;width:36px;height:36px;border:0;border-radius:50%;
-  background:transparent;color:var(--ink);font:500 26px/1 Inter,sans-serif;cursor:pointer;
-}
-.cn-modal-tag{
-  display:inline-block;background:var(--deep);color:var(--peach);
-  font:800 11px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;
-  padding:7px 12px;border-radius:999px;
-}
-.cn-modal-title{font:900 30px/1.1 Inter,sans-serif;margin:16px 0 8px;letter-spacing:-.01em}
-.cn-modal-title span{color:var(--button)}
-.cn-modal-sub{font:400 14px/1.5 'Open Sans',sans-serif;color:#5a4a44;margin:0 0 20px}
-.cn-code-box{
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
-  border:2px dashed var(--button);border-radius:10px;background:#fff;padding:12px 12px 12px 18px;
-}
-.cn-code{font:800 26px/1 Inter,sans-serif;letter-spacing:.12em;user-select:all}
-.cn-copy{
-  min-height:40px;padding:0 16px;border:0;border-radius:6px;cursor:pointer;
-  background:var(--ink);color:var(--peach);font:700 12px/1 Inter,sans-serif;
-}
-.cn-modal-cta{margin-top:16px;width:100%}
-.cn-modal-note{font:500 12px/1.4 Manrope,sans-serif;color:#7a6a64;margin:14px 0 0}
-@keyframes cn-fade{from{opacity:0}to{opacity:1}}
-@keyframes cn-pop{from{opacity:0;transform:translateY(12px) scale(.96)}to{opacity:1;transform:none}}
-@media(prefers-reduced-motion:reduce){.cn-modal.is-open,.cn-modal-card{animation:none}}
-
 @media(min-width:1600px){.clone-navbar-wrap{width:min(1320px,calc(100% - 160px))}}
 @media(max-width:1100px){.clone-navbar-wrap{width:calc(100% - 64px)}.clone-navbar-links{gap:20px}}
 @media(max-width:800px){
@@ -128,17 +83,15 @@
   .clone-navbar-banner{font-size:11px;padding:9px 14px}
   .clone-navbar-banner b{font-size:12px}
   .clone-navbar-banner .sep{display:none}
-  .cn-modal-title{font-size:26px}
-  .cn-code{font-size:22px}
 }
 </style>
 
 <div class="clone-navbar-root">
   <div class="clone-navbar-banner" role="status">
-    <span><b>BLACK FRIDAY:</b> Get 25% off AI Fluent</span>
+    <span><b>BLACK FRIDAY:</b> Get 25% off AI Fluent with code</span>
+    <span class="clone-navbar-code">FRIDAY25</span>
     <span class="sep">&middot;</span>
     <span>Offer ends Monday, 30 November</span>
-    <button type="button" class="clone-navbar-code-btn" data-cn-open>Get code</button>
   </div>
 
   <header class="clone-navbar-header">
@@ -157,79 +110,9 @@
       </a>
     </nav>
   </header>
-
-  <!-- Black Friday code popup -->
-  <div class="cn-modal" id="cn-bf-modal" role="dialog" aria-modal="true" aria-labelledby="cn-bf-title" hidden>
-    <div class="cn-modal-card">
-      <button type="button" class="cn-modal-close" data-cn-close aria-label="Close">&times;</button>
-      <span class="cn-modal-tag">Black Friday</span>
-      <h2 class="cn-modal-title" id="cn-bf-title"><span>25% off</span> AI Fluent</h2>
-      <p class="cn-modal-sub">Use this code at checkout. Offer ends Monday, 30 November.</p>
-      <div class="cn-code-box">
-        <span class="cn-code" id="cn-bf-code">FRIDAY25</span>
-        <button type="button" class="cn-copy" data-cn-copy>Copy code</button>
-      </div>
-      <a class="clone-navbar-btn cn-modal-cta" href="https://aisavvyfounders.com/ai-fluent-checkout-page">Claim my 25% off</a>
-      <p class="cn-modal-note">Paste the code in the discount field at checkout.</p>
-    </div>
-  </div>
 </div>
 
 <script>
-/* Black Friday popup */
-(function () {
-  var modal = document.getElementById('cn-bf-modal');
-  if (!modal) return;
-  var openBtn = document.querySelector('[data-cn-open]');
-  var closeBtn = modal.querySelector('[data-cn-close]');
-  var copyBtn = modal.querySelector('[data-cn-copy]');
-  var codeEl = document.getElementById('cn-bf-code');
-  var lastFocus = null;
-
-  function open() {
-    lastFocus = document.activeElement;
-    modal.hidden = false;
-    modal.classList.add('is-open');
-    document.documentElement.style.overflow = 'hidden';
-    copyBtn.focus();
-  }
-  function close() {
-    modal.classList.remove('is-open');
-    modal.hidden = true;
-    document.documentElement.style.overflow = '';
-    if (lastFocus && lastFocus.focus) lastFocus.focus();
-  }
-  openBtn.addEventListener('click', open);
-  closeBtn.addEventListener('click', close);
-  modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
-  document.addEventListener('keydown', function (e) {
-    if (modal.hidden) return;
-    if (e.key === 'Escape') { close(); return; }
-    if (e.key === 'Tab') {
-      var f = modal.querySelectorAll('button, a[href]');
-      var first = f[0], last = f[f.length - 1];
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    }
-  });
-
-  copyBtn.addEventListener('click', function () {
-    var code = codeEl.textContent.trim();
-    function done() {
-      copyBtn.textContent = 'Copied!';
-      setTimeout(function () { copyBtn.textContent = 'Copy code'; }, 1800);
-    }
-    function fallback() {
-      var r = document.createRange(); r.selectNodeContents(codeEl);
-      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-      try { document.execCommand('copy'); done(); } catch (err) {}
-    }
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(code).then(done, fallback);
-    } else { fallback(); }
-  });
-})();
-
 /* In-page links: smooth-scroll to the section if it is on this page (found by id or by its class),
    otherwise follow the normal link to the full page URL. */
 (function () {
