@@ -1,86 +1,45 @@
-<!-- GHL Custom Code element: Hero -->
-<div class="clone-one-podcast-link-in" style="width:100%;max-width:100%;overflow:hidden;overflow-x:clip;box-sizing:border-box;"><style>
-.clone-one-podcast-link-in{
-  --ink:#1C1412; --deep:#120508; --maroon:#7A1F2B; --wine:#4C111A;
-  --rust:#D36B48; --btn:#D97757; --peach:#FFB285; --cream:#FDF6EE;
-  --white:#FFFFFF; --body:#DED3CC; --mute:#9B8D85;
-  --line:rgba(255,255,255,.1); --line-peach:rgba(255,178,133,.4);
-  --r-ui:6px; --r-sheet:14px; --r-card:26px;
-  --ease:cubic-bezier(.16,1,.3,1);
-  color-scheme:dark;
-}
-.clone-one-podcast-link-in *,.clone-one-podcast-link-in *::before,.clone-one-podcast-link-in *::after{box-sizing:border-box}
-.clone-one-podcast-link-in{margin:0;background:var(--ink);color:var(--body);font:400 18px/1.65 "Open Sans",system-ui,sans-serif;
-  -webkit-font-smoothing:antialiased;touch-action:manipulation}
-.clone-one-podcast-link-in a{color:inherit}
-.clone-one-podcast-link-in h1{font-family:Inter,system-ui,sans-serif;text-transform:uppercase;color:var(--white);margin:0;text-wrap:balance}
-.clone-one-podcast-link-in h1{font-weight:900;font-size:clamp(2.5rem,6.4vw,5.6rem);line-height:.98;letter-spacing:-.03em}
-.clone-one-podcast-link-in p{margin:0;text-wrap:pretty}
-.clone-one-podcast-link-in strong{color:var(--white);font-weight:600}
-.clone-one-podcast-link-in .acc{color:var(--rust);font-style:normal}
-.clone-one-podcast-link-in :focus-visible{outline:3px solid var(--peach);outline-offset:3px;border-radius:var(--r-ui)}
-.clone-one-podcast-link-in .wrap{width:min(1240px,100% - 48px);margin-inline:auto}
-.clone-one-podcast-link-in section{position:relative}
-.clone-one-podcast-link-in .eyebrow{font:600 clamp(.8rem,1.2vw,.95rem)/1.3 Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--peach);margin:0 0 20px}
-.clone-one-podcast-link-in .lede{font-size:clamp(1.05rem,1.6vw,1.3rem);line-height:1.6;max-width:62ch}
-.clone-one-podcast-link-in .bg-grid{background:
-  linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px) 0 0/120px 120px,
-  linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px) 0 0/120px 120px,
-  var(--ink)}
-.clone-one-podcast-link-in .btn{display:inline-flex;align-items:center;gap:.6em;white-space:nowrap;background:var(--btn);color:var(--ink);
-  font:700 1rem/1 Inter,sans-serif;padding:18px 28px;border-radius:var(--r-ui);text-decoration:none;border:0;cursor:pointer;
-  transition:transform .25s var(--ease),background-color .25s var(--ease),box-shadow .25s var(--ease)}
-.clone-one-podcast-link-in .btn:hover{background:var(--peach);transform:translateY(-2px);box-shadow:0 14px 30px rgba(217,119,87,.28)}
-.clone-one-podcast-link-in .btn:active{transform:translateY(0) scale(.98)}
-.clone-one-podcast-link-in .btn.lg{font-size:1.15rem;padding:22px 34px}
-.clone-one-podcast-link-in .btn .ar{transition:transform .25s var(--ease)}
-.clone-one-podcast-link-in .btn:hover .ar{transform:translateX(4px)}
-.clone-one-podcast-link-in .note{font:500 .85rem/1.5 Manrope,sans-serif;color:var(--mute)}
-.clone-one-podcast-link-in .reel{position:relative;aspect-ratio:9/16;border-radius:var(--r-card);overflow:hidden;border:1px solid rgba(255,178,133,.18);
-  box-shadow:0 40px 80px rgba(0,0,0,.5);background:var(--deep);isolation:isolate}
-.clone-one-podcast-link-in .reel::before{content:"";position:absolute;inset:0;background:var(--wine);mix-blend-mode:multiply;opacity:.42;z-index:1}
-.clone-one-podcast-link-in .reel::after{content:"";position:absolute;inset:0;z-index:1;
-  background:linear-gradient(180deg,rgba(28,20,18,.85) 0%,rgba(28,20,18,0) 34%,rgba(28,20,18,0) 52%,rgba(28,20,18,.92) 100%)}
-.clone-one-podcast-link-in .reel .tag{position:absolute;z-index:2;left:7%;bottom:3.5%;font:600 .62rem/1 Manrope;letter-spacing:.16em;text-transform:uppercase;color:var(--peach)}
-@media (prefers-reduced-motion:reduce){.clone-one-podcast-link-in *{animation:none!important;transition-duration:.01ms!important}}
-@media (max-width:640px){.clone-one-podcast-link-in{font-size:17px}
-.clone-one-podcast-link-in .wrap{width:calc(100% - 32px)}
-.clone-one-podcast-link-in .btn{white-space:normal}}
-.clone-one-podcast-link-in .reel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-.clone-one-podcast-link-in .reel.raw::before,.clone-one-podcast-link-in .reel.raw::after{display:none}
-.clone-one-podcast-link-in .reel .tag{z-index:3;background:rgba(18,5,8,.7);padding:6px 9px;border-radius:6px;bottom:4%}
-.clone-one-podcast-link-in p{font-size:inherit;line-height:inherit;font-family:inherit}
-.clone-one-podcast-link-in .hero{padding:clamp(40px,6vw,72px) 0 clamp(72px,9vw,120px);overflow:hidden}
-.clone-one-podcast-link-in .hero .wrap{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(32px,5vw,80px);align-items:center}
-.clone-one-podcast-link-in .hero h1{font-size:clamp(2.3rem,4.5vw,4.1rem)}
-.clone-one-podcast-link-in .hero .lede{margin-top:26px;font-size:clamp(1rem,1.35vw,1.15rem)}
-.clone-one-podcast-link-in .hero .cta{margin-top:32px;display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}
-.clone-one-podcast-link-in .stage{position:relative;aspect-ratio:1/1.12;max-width:560px;width:100%;margin-inline:auto}
-.clone-one-podcast-link-in .stage .reel{position:absolute;width:52%}
-.clone-one-podcast-link-in .stage .r1{left:24%;top:0;z-index:2}
-.clone-one-podcast-link-in .stage .r3{right:0;top:22%;width:40%;z-index:1;transform:rotate(5deg)}
-@media (max-width:900px){.clone-one-podcast-link-in .hero .wrap{grid-template-columns:1fr}
-.clone-one-podcast-link-in .stage{max-width:440px}}
-</style>
-<section class="hero bg-grid" id="top">
-  <div class="wrap">
-    <div>
-      <p class="eyebrow">For podcasters, YouTubers and the people who edit for them</p>
-      <h1>One podcast link in. A folder of <span class="acc">finished reels</span> out.</h1>
-      <p class="lede">Paste a YouTube link to your long episode. <strong translate="no">Clip It</strong> picks the best moments, cuts them to 9:16, keeps the camera on whoever is talking, adds captions and motion graphics, and writes the post caption for each one. It all runs on your own computer with Claude Code, and there’s no monthly clipping subscription.</p>
-      <div class="cta">
-        <a class="btn lg" href="#get-access" data-clipit-form>Get Clip It free <span class="ar" aria-hidden="true">→</span></a>
-        <p class="note">Works on Mac, Windows and Linux. You’ll need Claude Code installed.</p>
-      </div>
-    </div>
-
-    <div class="stage" role="img" aria-label="Three finished vertical reels playing: two clips cut from a podcast and one with captions and motion graphics">
-      <div class="reel r2" aria-hidden="true"><video src="{{clip_05.mp4}}" poster="{{clip_05.jpg}}" autoplay muted loop playsinline preload="metadata"></video><span class="tag">Clip 5</span></div>
-      <div class="reel r3" aria-hidden="true"><video src="{{clip_08.mp4}}" poster="{{clip_08.jpg}}" autoplay muted loop playsinline preload="metadata"></video><span class="tag">Clip 8</span></div>
-      <div class="reel r1 raw" aria-hidden="true"><video src="{{hero-loop.mp4}}" poster="{{motion.jpg}}" autoplay muted loop playsinline preload="metadata"></video></div>
-    </div>
-  </div>
-</section>
-<script>
-(function(){if(matchMedia('(prefers-reduced-motion: reduce)').matches){document.querySelectorAll('.clone-one-podcast-link-in video').forEach(function(v){v.removeAttribute('autoplay');v.pause()})}})();
+<div class="clone-hero" id="top" style="width:100%;max-width:100%;overflow:hidden;box-sizing:border-box;"><style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap');.clone-hero *{box-sizing:border-box}.clone-hero .clone-hero-wrap{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(32px,6vw,96px);align-items:start;max-width:1240px;margin:0 auto;padding:74px 0 190px}.clone-hero .clone-hero-copy{min-width:0}.clone-hero .clone-hero-eyebrow{margin:0 0 24px;color:#FFB285;font-family:'Open Sans',sans-serif;font-size:15px;font-weight:700;line-height:1.4;letter-spacing:2px;text-transform:uppercase}.clone-hero h1{margin:0;color:#FFFFFF;font-family:'Inter',sans-serif;font-size:clamp(48px,4.45vw,64px);font-weight:900;line-height:1;letter-spacing:-2.5px;text-transform:uppercase;text-wrap:balance}.clone-hero h1 span{color:#D36B48}.clone-hero .clone-hero-lede{margin:32px 0 0;color:#DED3CC;font-family:'Open Sans',sans-serif;font-size:18px;font-weight:400;line-height:1.65}.clone-hero .clone-hero-lede strong{color:#FFFFFF;font-weight:700}.clone-hero .clone-hero-cta{margin-top:32px}.clone-hero .clone-hero-button{display:inline-flex;align-items:center;gap:12px;min-height:62px;padding:0 34px;border-radius:6px;background:#D97757;color:#1C1412;text-decoration:none;font-family:'Inter',sans-serif;font-size:17px;font-weight:700;white-space:nowrap;transition:background-color .25s,transform .25s,box-shadow .25s}.clone-hero .clone-hero-button:hover{background:#FFB285;transform:translateY(-2px);box-shadow:0 14px 30px rgba(217,119,87,.28)}.clone-hero .clone-hero-button:focus-visible{outline:3px solid #FFB285;outline-offset:3px}.clone-hero .clone-hero-arrow{font-size:20px;transition:transform .25s}.clone-hero .clone-hero-button:hover .clone-hero-arrow{transform:translateX(4px)}.clone-hero .clone-hero-note{margin:14px 0 0;color:#DED3CC;opacity:.75;font-family:'Open Sans',sans-serif;font-size:13px;line-height:1.5}.clone-hero .clone-hero-stage{position:relative;width:100%;height:520px;margin-top:8px}.clone-hero .clone-hero-reel{position:absolute;overflow:hidden;border:1px solid #7A1F2B;border-radius:24px;background:#120508;box-shadow:0 24px 60px rgba(0,0,0,.3)}.clone-hero .clone-hero-reel video{display:block;width:100%;height:100%;object-fit:cover}.clone-hero .clone-hero-reel-left{width:42%;height:380px;left:0;top:96px;transform:rotate(-5deg);z-index:1}.clone-hero .clone-hero-reel-right{width:42%;height:380px;right:0;top:126px;transform:rotate(5deg);z-index:1}.clone-hero .clone-hero-reel-center{width:55%;height:494px;left:22.5%;top:0;z-index:2}.clone-hero .clone-hero-tag{position:absolute;bottom:14px;left:14px;padding:5px 8px;border-radius:4px;background:rgba(18,5,8,.75);color:#FFB285;font-family:'Open Sans',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase}@media(max-width:1024px){.clone-hero .clone-hero-wrap{gap:32px;padding:64px 20px 130px}.clone-hero h1{font-size:52px}.clone-hero .clone-hero-stage{height:470px}.clone-hero .clone-hero-reel-center{height:440px}.clone-hero .clone-hero-reel-left,.clone-hero .clone-hero-reel-right{height:340px}}@media(max-width:768px){.clone-hero .clone-hero-wrap{grid-template-columns:1fr;gap:40px;padding:52px 20px 80px}.clone-hero .clone-hero-eyebrow{font-size:12px;letter-spacing:1.5px;margin-bottom:20px}.clone-hero h1{font-size:clamp(40px,10vw,56px);letter-spacing:-1.5px}.clone-hero .clone-hero-lede{font-size:16px;line-height:1.65;margin-top:24px}.clone-hero .clone-hero-cta{margin-top:24px}.clone-hero .clone-hero-button{min-height:56px;padding:0 26px;font-size:16px;white-space:normal}.clone-hero .clone-hero-stage{width:100%;max-width:480px;height:430px;margin:0 auto}.clone-hero .clone-hero-reel-center{height:410px}.clone-hero .clone-hero-reel-left,.clone-hero .clone-hero-reel-right{height:300px;top:80px}.clone-hero .clone-hero-reel-right{top:100px}}</style><div class="clone-hero-wrap"><div class="clone-hero-copy"><p class="clone-hero-eyebrow">For podcasters, YouTubers and the people who edit for them</p><h1>One podcast link in. A folder of <span>finished reels</span> out.</h1><p class="clone-hero-lede">Paste a YouTube link to your long episode. <strong translate="no">Clip It</strong> picks the best moments, cuts them to 9:16, keeps the camera on whoever is talking, adds captions and motion graphics, and writes the post caption for each one. It all runs on your own computer with Claude Code, and there’s no monthly clipping subscription.</p><div class="clone-hero-cta"><a class="clone-hero-button" href="https://api.leadconnectorhq.com/widget/form/H0TFkRA4tFBLG8eZ1Bp1" target="_blank" rel="noopener" data-clipit-form>Get Clip It free <span class="clone-hero-arrow" aria-hidden="true">→</span></a><p class="clone-hero-note">Works on Mac, Windows and Linux. You’ll need Claude Code installed.</p></div></div><div class="clone-hero-stage" role="img" aria-label="Three finished vertical reels playing: two clips cut from a podcast and one with captions and motion graphics"><div class="clone-hero-reel clone-hero-reel-left" aria-hidden="true"><video src="https://peaceful-daifuku-5a40ba.netlify.app/assets/media/clip_05.mp4" poster="https://peaceful-daifuku-5a40ba.netlify.app/assets/media/clip_05.jpg" autoplay muted loop playsinline preload="metadata"></video><span class="clone-hero-tag">Clip 5</span></div><div class="clone-hero-reel clone-hero-reel-right" aria-hidden="true"><video src="https://peaceful-daifuku-5a40ba.netlify.app/assets/media/clip_08.mp4" poster="https://storage.googleapis.com/funnel-ai-production/cloned/RxVDIj2k3qixTFLmVlIE/NP4m5hM6O1cAKe03EXaU/img_2" autoplay muted loop playsinline preload="metadata"></video><span class="clone-hero-tag">Clip 8</span></div><div class="clone-hero-reel clone-hero-reel-center" aria-hidden="true"><video src="https://peaceful-daifuku-5a40ba.netlify.app/assets/media/hero-loop.mp4" poster="https://peaceful-daifuku-5a40ba.netlify.app/assets/media/motion.jpg" autoplay muted loop playsinline preload="metadata"></video></div></div></div><script>(function(){if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches){document.querySelectorAll('.clone-hero video').forEach(function(v){v.removeAttribute('autoplay');v.pause()})}})();</script><script>
+(function(){
+  if(window.__clipitForm)return;window.__clipitForm=true;
+  var FORM='H0TFkRA4tFBLG8eZ1Bp1',root=null,closeBtn=null,last=null;
+  var CSS='#clipit-form{position:fixed;top:0;right:0;bottom:0;left:0;z-index:2147483000;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(18,5,8,.78);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);font-family:"Open Sans",sans-serif}'
+  +'#clipit-form.is-open{display:flex}#clipit-form *{box-sizing:border-box}'
+  +'#clipit-form .cf-box{display:flex;flex-direction:column;width:100%;max-width:560px;max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.5)}'
+  +'#clipit-form .cf-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 14px 14px 22px;background:#1C1412}'
+  +'#clipit-form .cf-title{margin:0;font:900 17px/1.1 Inter,sans-serif;letter-spacing:-.01em;text-transform:uppercase;color:#fff}'
+  +'#clipit-form .cf-close{flex:none;width:40px;height:40px;border:1px solid rgba(255,178,133,.45);border-radius:6px;background:transparent;color:#FFB285;font:600 20px/1 Inter,sans-serif;cursor:pointer}'
+  +'#clipit-form .cf-close:hover{background:#FFB285;color:#1C1412}#clipit-form .cf-close:focus-visible{outline:3px solid #FFB285;outline-offset:2px}'
+  +'#clipit-form .cf-body{position:relative;flex:1;min-height:402px;overflow:auto;-webkit-overflow-scrolling:touch}'
+  +'#clipit-form .cf-load{position:absolute;top:0;right:0;bottom:0;left:0;display:flex;align-items:center;justify-content:center;color:#7a6a62;font-size:15px}'
+  +'#clipit-form iframe{position:relative;display:block;min-height:402px}';
+  function build(){
+    var st=document.createElement('style');st.textContent=CSS;document.head.appendChild(st);
+    root=document.createElement('div');root.id='clipit-form';
+    root.setAttribute('role','dialog');root.setAttribute('aria-modal','true');root.setAttribute('aria-label','Get Clip It free');
+    root.innerHTML='<div class="cf-box"><div class="cf-head"><h2 class="cf-title">Get Clip It free</h2><button type="button" class="cf-close" aria-label="Close form">&#10005;</button></div><div class="cf-body"><p class="cf-load">Loading the form…</p>'
+    +'<iframe src="https://api.leadconnectorhq.com/widget/form/'+FORM+'" style="width:100%;height:100%;border:none;border-radius:8px" id="inline-'+FORM+'" data-layout="{\'id\':\'INLINE\'}" data-trigger-type="alwaysShow" data-trigger-value="" data-activation-type="alwaysActivated" data-activation-value="" data-deactivation-type="neverDeactivate" data-deactivation-value="" data-form-name="clip it form" data-height="402" data-layout-iframe-id="inline-'+FORM+'" data-form-id="'+FORM+'" data-cookie-consent="true" data-cookie-consent-provider="auto" title="clip it form"></iframe></div></div>';
+    document.body.appendChild(root);
+    closeBtn=root.querySelector('.cf-close');
+    root.querySelector('iframe').addEventListener('load',function(){var l=root.querySelector('.cf-load');if(l)l.style.display='none'});
+    closeBtn.addEventListener('click',close);
+    root.addEventListener('click',function(e){if(e.target===root)close()});
+    var s=document.createElement('script');s.src='https://link.msgsndr.com/js/form_embed.js';document.body.appendChild(s);
+  }
+  function open(e){
+    if(e&&e.preventDefault)e.preventDefault();
+    if(!root)build();
+    last=document.activeElement;root.className='is-open';document.documentElement.style.overflow='hidden';
+    setTimeout(function(){closeBtn.focus()},50);
+  }
+  function close(){
+    if(!root)return;root.className='';document.documentElement.style.overflow='';
+    if(last&&last.focus)last.focus();
+  }
+  window.clipitOpenForm=open;
+  document.addEventListener('click',function(e){
+    var t=e.target&&e.target.closest?e.target.closest('[data-clipit-form],a[href$="#get-access"]'):null;
+    if(t){e.preventDefault();e.stopPropagation();open()}
+  },true);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&root&&root.className==='is-open')close()});
+})();
 </script></div>
