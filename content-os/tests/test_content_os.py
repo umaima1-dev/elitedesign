@@ -50,6 +50,25 @@ class Lint(unittest.TestCase):
             r = subprocess.run([sys.executable, os.path.join(ROOT, "scripts", "lint_voice.py"), f], capture_output=True, text=True, env=env)
             self.assertEqual(r.returncode, 0)
 
+class Snapshot(unittest.TestCase):
+    HTML = """<html><head><title>Acme Coaching</title>
+    <meta name="description" content="Coaching for busy founders">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400">
+    <style>body{font-family:'Playfair Display',serif;color:#112233} .b{background:#FF5500} .c{color:#ff5500}</style></head>
+    <body><h1>Grow without burnout</h1><p>We help founders build a calm, repeatable growth system that works every week.</p>
+    <a href="https://instagram.com/acme?x=1">IG</a><a href="/pricing">Pricing</a><button>Book a call</button></body></html>"""
+    def test_offline_snapshot(self):
+        sys.path.insert(0, os.path.join(ROOT, "scripts"))
+        import site_snapshot
+        md = site_snapshot.snapshot(html=self.HTML)
+        for needle in ("Acme Coaching", "Coaching for busy founders", "Grow without burnout", "#ff5500 (2)", "#112233",
+                       "Playfair Display", "Inter", "instagram.com/acme", "Book a call"):
+            self.assertIn(needle, md)
+    def test_rejects_non_http(self):
+        sys.path.insert(0, os.path.join(ROOT, "scripts"))
+        import site_snapshot
+        with self.assertRaises(ValueError): site_snapshot.fetch("file:///etc/passwd")
+
 class Repo(unittest.TestCase):
     def test_validate(self):
         r = subprocess.run([sys.executable, os.path.join(ROOT, "scripts", "validate.py")], capture_output=True, text=True)
