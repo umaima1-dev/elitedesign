@@ -1,0 +1,9 @@
+{
+  "brand_name": "YOUR BRAND NAME",
+  "platforms": ["instagram", "linkedin"],
+  "publishing_tool": "buffer",
+  "outlier_multiplier": 5,
+  "min_posts_for_baseline": 8,
+  "posts_per_week": { "reels": 3, "carousels": 2, "stories_daily": true },
+  "approval_required_for": ["publish", "message"]
+}

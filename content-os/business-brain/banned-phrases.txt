@@ -1,4 +1,6 @@
 # One phrase per line, case-insensitive. Lines starting with # are comments.
-# This file is the single source of truth for scripts/lint_voice.py.
-most people
-AI Savvy CEO
+# This is the single source of truth for scripts/lint_voice.py.
+# The setup skill asks you for yours. Examples (delete the # to enable):
+# game-changer
+# unlock your potential
+# in today's fast-paced world

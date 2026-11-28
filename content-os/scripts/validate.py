@@ -9,12 +9,12 @@ reg = json.load(open(os.path.join(ROOT, "agents.json")))
 if len(reg) != 16:
     errs.append(f"expected 16 agents, found {len(reg)}")
 for a in reg:
-    p = os.path.join(ROOT, a["department"], a["name"], "SKILL.md")
+    p = os.path.join(ROOT, ".claude", "skills", "content-os-" + a["name"], "SKILL.md")
     if not os.path.isfile(p):
         errs.append(f"missing {p}"); continue
     t = open(p, encoding="utf-8").read()
     m = re.match(r"---\nname: (.+)\ndescription: (.+)\n---\n", t)
-    if not m or m.group(1) != a["name"]:
+    if not m or m.group(1) != "content-os-" + a["name"]:
         errs.append(f"bad frontmatter: {p}")
     for sec in ("## Job", "## Inputs", "## Outputs", "## Process", "## Rules"):
         if sec not in t:
@@ -22,6 +22,9 @@ for a in reg:
     label = a["gate"].upper().replace("-", " ")
     if a["gate"] != "none" and "Gate: " + label not in t:
         errs.append(f"{p} does not declare its gate")
+for extra in ("content-os", "setup-content-os"):
+    if not os.path.isfile(os.path.join(ROOT, ".claude", "skills", extra, "SKILL.md")):
+        errs.append("missing skill " + extra)
 rc = subprocess.call([sys.executable, os.path.join(ROOT, "scripts", "lint_voice.py"), ROOT])
 if rc:
     errs.append("banned phrases found")

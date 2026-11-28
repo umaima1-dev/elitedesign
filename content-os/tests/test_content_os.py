@@ -38,6 +38,18 @@ class Gate(unittest.TestCase):
             open(f, "w").write("edited")
             self.assertNotEqual(self.run_cli(env, "check", f, "--action", "publish").returncode, 0)
 
+class Lint(unittest.TestCase):
+    def test_phrase_file_drives_lint(self):
+        with tempfile.TemporaryDirectory() as t:
+            b = os.path.join(t, "b.txt"); open(b, "w").write("# c\nforbidden thing\n")
+            f = os.path.join(t, "x.md"); open(f, "w").write("this has a Forbidden Thing in it\n")
+            env = dict(os.environ, CONTENT_OS_BANNED=b)
+            r = subprocess.run([sys.executable, os.path.join(ROOT, "scripts", "lint_voice.py"), f], capture_output=True, text=True, env=env)
+            self.assertEqual(r.returncode, 1)
+            open(f, "w").write("clean\n")
+            r = subprocess.run([sys.executable, os.path.join(ROOT, "scripts", "lint_voice.py"), f], capture_output=True, text=True, env=env)
+            self.assertEqual(r.returncode, 0)
+
 class Repo(unittest.TestCase):
     def test_validate(self):
         r = subprocess.run([sys.executable, os.path.join(ROOT, "scripts", "validate.py")], capture_output=True, text=True)

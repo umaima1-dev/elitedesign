@@ -5,7 +5,7 @@ import os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-PHRASES = os.path.join(ROOT, "business-brain", "banned-phrases.txt")
+PHRASES = os.environ.get("CONTENT_OS_BANNED", os.path.join(ROOT, "business-brain", "banned-phrases.txt"))
 EXTS = {".md", ".txt", ".json", ".py", ".yaml", ".yml"}
 
 def load():

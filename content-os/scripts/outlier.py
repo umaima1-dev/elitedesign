@@ -7,7 +7,7 @@ saves (optional), shares (optional), format (optional), posted (optional).
 Baseline = median views of the creator's OTHER posts (leave-one-out), so one
 viral post cannot inflate its own baseline.
 """
-import argparse, json, statistics, sys
+import argparse, json, os, statistics, sys
 from collections import defaultdict
 
 def score(posts, multiplier=5.0, min_posts=8):
@@ -33,11 +33,19 @@ def score(posts, multiplier=5.0, min_posts=8):
     out.sort(key=lambda r: (r["multiplier"], r["engagement_ratio"]), reverse=True)
     return out, skipped
 
+def cfg():
+    p = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "config.json")
+    try:
+        return json.load(open(p))
+    except (OSError, ValueError):
+        return {}
+
 def main(argv=None):
+    c = cfg()
     ap = argparse.ArgumentParser()
     ap.add_argument("data")
-    ap.add_argument("--multiplier", type=float, default=5.0, help="outlier threshold (default 5)")
-    ap.add_argument("--min-posts", type=int, default=8, help="posts needed for a reliable baseline")
+    ap.add_argument("--multiplier", type=float, default=c.get("outlier_multiplier", 5.0), help="outlier threshold (default from config.json)")
+    ap.add_argument("--min-posts", type=int, default=c.get("min_posts_for_baseline", 8), help="posts needed for a reliable baseline")
     ap.add_argument("--all", action="store_true", help="show non-outliers too")
     a = ap.parse_args(argv)
     posts = json.load(open(a.data))

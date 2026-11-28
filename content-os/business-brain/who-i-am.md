@@ -1,6 +1,6 @@
 # Who I am
 
-> Brand name: **AI Savvy Founders**. Always written exactly this way.
+> Brand name comes from `config.json`.
 
 <!-- Brain Keeper fills this by interview. Replace every TODO. Do not invent facts. -->
 

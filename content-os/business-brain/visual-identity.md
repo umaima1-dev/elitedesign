@@ -1,6 +1,6 @@
 # Visual identity
 
-- **Design skill to use for graphics:** `ai-savvy-carousel-pdf` / `aisavvy-cohort-design` (installed Claude skills), or your own `{brand}-design` skill
+- **Design skill to use for graphics (optional):** name of your own brand design skill, or leave blank to use `carousel-builder`
 - **Colours (hex):** TODO
 - **Fonts:** TODO
 - **Carousel size:** 1080 x 1350
