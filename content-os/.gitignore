@@ -1,0 +1,5 @@
+.env
+*.env
+__pycache__/
+research/data/*.json
+!research/data/.gitkeep

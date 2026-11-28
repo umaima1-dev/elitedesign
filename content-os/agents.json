@@ -1,0 +1,227 @@
+[
+  {
+    "name": "brain-keeper",
+    "title": "Brain Keeper",
+    "department": "business-brain",
+    "status": "modify",
+    "gate": "none",
+    "integrations": [],
+    "upstream": [
+      "https://github.com/social-media-skills/skills",
+      "https://github.com/jsath/claude-skills",
+      "https://github.com/kkoppenhaver/cc-skills",
+      "https://github.com/Ootto-AI/claude-content-skills"
+    ]
+  },
+  {
+    "name": "outlier-scout",
+    "title": "Outlier Scout",
+    "department": "research",
+    "status": "modify",
+    "gate": "none",
+    "integrations": [
+      "apify"
+    ],
+    "upstream": [
+      "https://github.com/shika-stuck/viral-analyzer",
+      "https://github.com/thejmvai/claude-viral-radar",
+      "https://github.com/w-avw/instagram-viral-reels-research-claude-skill",
+      "https://github.com/zayd28061-hub/viral-content-skill"
+    ]
+  },
+  {
+    "name": "hook-analyst",
+    "title": "Hook Analyst",
+    "department": "research",
+    "status": "modify",
+    "gate": "none",
+    "integrations": [
+      "apify"
+    ],
+    "upstream": [
+      "https://github.com/thejmvai/claude-viral-radar",
+      "https://github.com/Ootto-AI/claude-virality-skill",
+      "https://github.com/jdjf39/video-creator-skills",
+      "https://github.com/zayd28061-hub/viral-content-skill"
+    ]
+  },
+  {
+    "name": "competitor-research",
+    "title": "Competitor Research",
+    "department": "research",
+    "status": "reuse",
+    "gate": "none",
+    "integrations": [
+      "apify"
+    ],
+    "upstream": [
+      "https://github.com/zayd28061-hub/viral-content-skill",
+      "https://github.com/Bynor-S-R-L/bynor-mcp"
+    ]
+  },
+  {
+    "name": "content-strategist",
+    "title": "Content Strategist",
+    "department": "planning",
+    "status": "modify",
+    "gate": "none",
+    "integrations": [],
+    "upstream": [
+      "https://github.com/social-media-skills/skills",
+      "https://github.com/Ootto-AI/claude-content-skills",
+      "https://github.com/zayd28061-hub/viral-content-skill",
+      "https://github.com/kkoppenhaver/cc-skills"
+    ]
+  },
+  {
+    "name": "hook-writer",
+    "title": "Hook Writer",
+    "department": "studio",
+    "status": "modify",
+    "gate": "none",
+    "integrations": [],
+    "upstream": [
+      "https://github.com/MuhammadaliNazarov/claude-video-skills",
+      "https://github.com/social-media-skills/skills",
+      "https://github.com/Ootto-AI/claude-content-skills",
+      "https://github.com/jsath/claude-skills"
+    ]
+  },
+  {
+    "name": "scriptwriter",
+    "title": "Scriptwriter",
+    "department": "studio",
+    "status": "modify",
+    "gate": "none",
+    "integrations": [],
+    "upstream": [
+      "https://github.com/Ootto-AI/claude-content-skills",
+      "https://github.com/MuhammadaliNazarov/claude-video-skills",
+      "https://github.com/social-media-skills/skills"
+    ]
+  },
+  {
+    "name": "carousel-designer",
+    "title": "Carousel Designer",
+    "department": "studio",
+    "status": "reuse",
+    "gate": "none",
+    "integrations": [],
+    "upstream": [
+      "https://github.com/social-media-skills/instagram-carousel-skill",
+      "https://github.com/tenfoldmarc/carousel-suite-skill",
+      "https://github.com/cth9191/carousel-engine"
+    ]
+  },
+  {
+    "name": "video-editor",
+    "title": "Video Editor",
+    "department": "studio",
+    "status": "modify",
+    "gate": "none",
+    "integrations": [
+      "ffmpeg"
+    ],
+    "upstream": [
+      "https://github.com/jdjf39/video-creator-skills",
+      "https://github.com/Melvynx/video-agent-skills",
+      "https://github.com/sunithvs/video-agent-skill"
+    ]
+  },
+  {
+    "name": "repurposer",
+    "title": "Repurposer",
+    "department": "distribution",
+    "status": "reuse",
+    "gate": "none",
+    "integrations": [],
+    "upstream": [
+      "https://github.com/social-media-skills/skills",
+      "https://github.com/Ootto-AI/claude-content-skills",
+      "https://github.com/jsath/claude-skills",
+      "https://github.com/Schmedu/social-post-skill"
+    ]
+  },
+  {
+    "name": "scheduler",
+    "title": "Scheduler",
+    "department": "distribution",
+    "status": "modify",
+    "gate": "publish",
+    "integrations": [
+      "buffer"
+    ],
+    "upstream": [
+      "https://github.com/michaellady/claude-social-media-skills"
+    ]
+  },
+  {
+    "name": "stories-writer",
+    "title": "Stories Writer",
+    "department": "distribution",
+    "status": "build",
+    "gate": "none",
+    "integrations": [],
+    "upstream": [
+      "https://github.com/social-media-skills/skills",
+      "https://github.com/Ootto-AI/claude-content-skills"
+    ]
+  },
+  {
+    "name": "engagement-assistant",
+    "title": "Engagement Assistant",
+    "department": "distribution",
+    "status": "modify",
+    "gate": "outbound-message",
+    "integrations": [
+      "inbox-readonly"
+    ],
+    "upstream": [
+      "https://github.com/social-media-skills/skills",
+      "https://github.com/Bynor-S-R-L/bynor-mcp",
+      "https://github.com/schedulala/schedulala-agent"
+    ]
+  },
+  {
+    "name": "conversion-builder",
+    "title": "Conversion Builder",
+    "department": "conversion",
+    "status": "build",
+    "gate": "outbound-message",
+    "integrations": [
+      "manychat"
+    ],
+    "upstream": [
+      "https://github.com/AleemHaider/manychat-mcp"
+    ]
+  },
+  {
+    "name": "performance-tracker",
+    "title": "Performance Tracker",
+    "department": "analytics",
+    "status": "modify",
+    "gate": "none",
+    "integrations": [
+      "buffer",
+      "manychat"
+    ],
+    "upstream": [
+      "https://github.com/michaellady/claude-social-media-skills",
+      "https://github.com/Bynor-S-R-L/bynor-mcp",
+      "https://github.com/shika-stuck/viral-analyzer"
+    ]
+  },
+  {
+    "name": "analyst",
+    "title": "Analyst",
+    "department": "analytics",
+    "status": "modify",
+    "gate": "none",
+    "integrations": [],
+    "upstream": [
+      "https://github.com/shika-stuck/viral-analyzer",
+      "https://github.com/zayd28061-hub/viral-content-skill",
+      "https://github.com/Bynor-S-R-L/bynor-mcp"
+    ]
+  }
+]

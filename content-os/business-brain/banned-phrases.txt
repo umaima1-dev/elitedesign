@@ -1,0 +1,4 @@
+# One phrase per line, case-insensitive. Lines starting with # are comments.
+# This file is the single source of truth for scripts/lint_voice.py.
+most people
+AI Savvy CEO
