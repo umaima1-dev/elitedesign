@@ -20,7 +20,6 @@ You are onboarding a new user. Goal: by the end, `config.json` and every file in
 
 1. Confirm you are inside the Content OS folder (`config.json` and `.claude/skills/` exist). If the user just cloned it in an existing session, say so, work inside the cloned folder, and at the end tell them to open that folder as a project so slash commands load.
 2. Check Python 3.8+: `python --version` (try `python3` too). If missing, setup still works but the helper scripts will not. Tell the user how to install Python.
-3. Privacy: this repo is a public template. Ask the user whether to disconnect it from the template remote so their brand files are never pushed to the public repo: offer `git remote remove origin` and recommend they create a **private** repo if they want a backup. Only run it if they agree.
 
 ## Phase 1: Basics (writes `config.json`)
 
@@ -71,8 +70,9 @@ Explain briefly, then ask which they want now. Skipping is fine, everything stil
 1. Run `python scripts/validate.py` and `python tests/test_content_os.py`. Report plainly.
 2. Run `python scripts/lint_voice.py business-brain` to catch banned phrases in the brain files.
 3. Give a short summary: what was configured, what is still TODO, what is not connected.
-4. Tell them how to use it: `/content-os` then say what they want, for example "find what is working in my niche" or "plan my week". If slash commands are not showing, open this folder as a project in the Claude Code desktop app.
-5. Offer to run the first loop right now: `content-os-outlier-scout`, then `content-os-content-strategist`.
+4. **Show the cheat sheet.** Read `shared/cheatsheet.md` and present it in chat: first the short "how it works in one minute" lines (skills vs agents, the flow, the approval rule), then the full command table, then "a normal week". Keep it as given, do not pad it. Tell them they can reread it any time at `shared/cheatsheet.md`.
+5. Tell them where slash commands load: desktop app, open this folder as a project; web app, start the session on the repo. Typing `/content-os` and asking in plain words always works.
+6. Offer to run the first loop right now: `content-os-outlier-scout`, then `content-os-content-strategist`.
 
 ## Re-running
 

@@ -25,6 +25,11 @@ for a in reg:
 for extra in ("content-os", "setup-content-os"):
     if not os.path.isfile(os.path.join(ROOT, ".claude", "skills", extra, "SKILL.md")):
         errs.append("missing skill " + extra)
+cs = os.path.join(ROOT, "shared", "cheatsheet.md")
+cst = open(cs, encoding="utf-8").read() if os.path.isfile(cs) else ""
+for a in reg:
+    if "/content-os-" + a["name"] not in cst:
+        errs.append("cheatsheet missing /content-os-" + a["name"])
 rc = subprocess.call([sys.executable, os.path.join(ROOT, "scripts", "lint_voice.py"), ROOT])
 if rc:
     errs.append("banned phrases found")

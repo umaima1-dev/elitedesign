@@ -8,7 +8,7 @@ Read `config.json`. If `brand_name` is `YOUR BRAND NAME`, this copy is **not set
 
 ## After setup
 
-- Use `/content-os` for every request. It routes to the 16 agents in `.claude/skills/`.
+- Use `/content-os` for every request. Command list and how each agent works: `shared/cheatsheet.md`. It routes to the 16 agents in `.claude/skills/`.
 - Brand knowledge lives in `business-brain/`. Config lives in `config.json`.
 - Outputs go to `research/`, `planning/`, `studio/`, `distribution/`, `conversion/`, `analytics/`.
 
